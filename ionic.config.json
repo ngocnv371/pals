@@ -1,0 +1,7 @@
+{
+  "name": "pals",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
