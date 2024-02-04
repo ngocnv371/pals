@@ -1,0 +1,22 @@
+.pals-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pals-list {
+  > div {
+    display: flex;
+    position: relative;
+    padding: 0.3em;
+    :hover,
+    :active {
+      border: 3px solid white;
+    }
+  }
+
+  ion-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}

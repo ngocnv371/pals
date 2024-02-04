@@ -1,0 +1,968 @@
+[
+  {
+    "id": "938237",
+    "name": "Lamball",
+    "url": "https://game8.co/games/Palworld/archives/439909",
+    "imageUrl": "https://img.game8.jp/9396316/caa123d58f20146279f0cc70abb0ac07.png/show",
+    "sortNum": "100"
+  },
+  {
+    "id": "938238",
+    "name": "Cattiva",
+    "url": "https://game8.co/games/Palworld/archives/439910",
+    "imageUrl": "https://img.game8.jp/9396381/82b758754369f11e98c75df94e28e721.png/show",
+    "sortNum": "200"
+  },
+  {
+    "id": "938239",
+    "name": "Chikipi",
+    "url": "https://game8.co/games/Palworld/archives/439911",
+    "imageUrl": "https://img.game8.jp/9396421/2c23c6ce98a0ae08075baf7839ecb52c.png/show",
+    "sortNum": "300"
+  },
+  {
+    "id": "938240",
+    "name": "Lifmunk",
+    "url": "https://game8.co/games/Palworld/archives/439912",
+    "imageUrl": "https://img.game8.jp/9396379/36dcf00114dccd9e95e45ae79ed98f5e.png/show",
+    "sortNum": "400"
+  },
+  {
+    "id": "938241",
+    "name": "Foxparks",
+    "url": "https://game8.co/games/Palworld/archives/439913",
+    "imageUrl": "https://img.game8.jp/9396366/95f55a5e856dddad7d892b6d48a536e2.png/show",
+    "sortNum": "500"
+  },
+  {
+    "id": "938242",
+    "name": "Fuack",
+    "url": "https://game8.co/games/Palworld/archives/439914",
+    "imageUrl": "https://img.game8.jp/9396408/ceb345c202d4e7549ce69fc286b1f9ce.png/show",
+    "sortNum": "600"
+  },
+  {
+    "id": "938243",
+    "name": "Sparkit",
+    "url": "https://game8.co/games/Palworld/archives/439915",
+    "imageUrl": "https://img.game8.jp/9396380/0a6b6f959f39e3a8758b97aec9f6c1d3.png/show",
+    "sortNum": "700"
+  },
+  {
+    "id": "938244",
+    "name": "Tanzee",
+    "url": "https://game8.co/games/Palworld/archives/439916",
+    "imageUrl": "https://img.game8.jp/9396417/a4bdac2bcf52fe9df61ff9c9e8dd509d.png/show",
+    "sortNum": "800"
+  },
+  {
+    "id": "938245",
+    "name": "Rooby",
+    "url": "https://game8.co/games/Palworld/archives/439917",
+    "imageUrl": "https://img.game8.jp/9396389/0172d76c14d210c4092c92febaf842f4.png/show",
+    "sortNum": "900"
+  },
+  {
+    "id": "938246",
+    "name": "Pengullet",
+    "url": "https://game8.co/games/Palworld/archives/439918",
+    "imageUrl": "https://img.game8.jp/9396395/76a91bb8195d674676c88078d3b46fa6.png/show",
+    "sortNum": "1000"
+  },
+  {
+    "id": "938247",
+    "name": "Penking",
+    "url": "https://game8.co/games/Palworld/archives/439919",
+    "imageUrl": "https://img.game8.jp/9396396/28896fe1440a957e05ee160ac2bcbe76.png/show",
+    "sortNum": "1100"
+  },
+  {
+    "id": "938248",
+    "name": "Jolthog",
+    "url": "https://game8.co/games/Palworld/archives/439920",
+    "imageUrl": "https://img.game8.jp/9396802/69f59e3481996f81b61b74a01553dbe6.png/show",
+    "sortNum": "1200"
+  },
+  {
+    "id": "938249",
+    "name": "Jolthog Cryst",
+    "url": "https://game8.co/games/Palworld/archives/439921",
+    "imageUrl": "https://img.game8.jp/9396385/8c46417073f549fb7145e176ab80024f.png/show",
+    "sortNum": "1201"
+  },
+  {
+    "id": "938250",
+    "name": "Gumoss",
+    "url": "https://game8.co/games/Palworld/archives/439922",
+    "imageUrl": "https://img.game8.jp/9396803/daf13373953d5e76c358757b336e2c44.png/show",
+    "sortNum": "1300"
+  },
+  {
+    "id": "938251",
+    "name": "Vixy",
+    "url": "https://game8.co/games/Palworld/archives/439923",
+    "imageUrl": "https://img.game8.jp/9396801/3afcfc75366e1d29a76b361b3c02654d.png/show",
+    "sortNum": "1400"
+  },
+  {
+    "id": "938252",
+    "name": "Hoocrates",
+    "url": "https://game8.co/games/Palworld/archives/439924",
+    "imageUrl": "https://img.game8.jp/9396403/6343a42e60d4ef0d17a60cee0703a36f.png/show",
+    "sortNum": "1500"
+  },
+  {
+    "id": "938253",
+    "name": "Teafant",
+    "url": "https://game8.co/games/Palworld/archives/439925",
+    "imageUrl": "https://img.game8.jp/9396419/87ff2cd3387a5f8f49b83f295fb5604c.png/show",
+    "sortNum": "1600"
+  },
+  {
+    "id": "938254",
+    "name": "Depresso",
+    "url": "https://game8.co/games/Palworld/archives/439926",
+    "imageUrl": "https://img.game8.jp/9396398/a5ccd3ba4875e9f98d67a5c9c2a16827.png/show",
+    "sortNum": "1700"
+  },
+  {
+    "id": "938255",
+    "name": "Cremis",
+    "url": "https://game8.co/games/Palworld/archives/439927",
+    "imageUrl": "https://img.game8.jp/9396800/94a1dd10babf7e2b6efe9a53afbdcaa0.png/show",
+    "sortNum": "1800"
+  },
+  {
+    "id": "938256",
+    "name": "Daedream",
+    "url": "https://game8.co/games/Palworld/archives/439928",
+    "imageUrl": "https://img.game8.jp/9396401/9e876bef04d82a11401dab54b526aaa6.png/show",
+    "sortNum": "1900"
+  },
+  {
+    "id": "938257",
+    "name": "Rushoar",
+    "url": "https://game8.co/games/Palworld/archives/439929",
+    "imageUrl": "https://img.game8.jp/9396384/651ad35769b80ad96d10e007058a4836.png/show",
+    "sortNum": "2000"
+  },
+  {
+    "id": "938258",
+    "name": "Nox",
+    "url": "https://game8.co/games/Palworld/archives/439930",
+    "imageUrl": "https://img.game8.jp/9396845/515d6b9af2cbe756b2f3863795d12055.png/show",
+    "sortNum": "2100"
+  },
+  {
+    "id": "938259",
+    "name": "Fuddler",
+    "url": "https://game8.co/games/Palworld/archives/439931",
+    "imageUrl": "https://img.game8.jp/9396407/0d200784d067654585c0127291f65ac5.png/show",
+    "sortNum": "2200"
+  },
+  {
+    "id": "938260",
+    "name": "Killamari",
+    "url": "https://game8.co/games/Palworld/archives/439932",
+    "imageUrl": "https://img.game8.jp/9396339/c0125bc4012456f3d275c863a459fdb7.png/show",
+    "sortNum": "2300"
+  },
+  {
+    "id": "938261",
+    "name": "Mau",
+    "url": "https://game8.co/games/Palworld/archives/439933",
+    "imageUrl": "https://img.game8.jp/9396406/a53eed9ccc96d371acbe8cd4abceaeb4.png/show",
+    "sortNum": "2400"
+  },
+  {
+    "id": "938262",
+    "name": "Mau Cryst",
+    "url": "https://game8.co/games/Palworld/archives/439934",
+    "imageUrl": "https://img.game8.jp/9396413/895e0df56bd1fcf57cd2d4b4f661790b.png/show",
+    "sortNum": "2401"
+  },
+  {
+    "id": "938263",
+    "name": "Celaray",
+    "url": "https://game8.co/games/Palworld/archives/439935",
+    "imageUrl": "https://img.game8.jp/9396318/59f50e9abfca1fc75dddfeb0e339ac0b.png/show",
+    "sortNum": "2500"
+  },
+  {
+    "id": "938264",
+    "name": "Direhowl",
+    "url": "https://game8.co/games/Palworld/archives/439936",
+    "imageUrl": "https://img.game8.jp/9396301/5dfc0ca5b14afe28f89c1055cea1a3bc.png/show",
+    "sortNum": "2600"
+  },
+  {
+    "id": "938265",
+    "name": "Tocotoco",
+    "url": "https://game8.co/games/Palworld/archives/439937",
+    "imageUrl": "https://img.game8.jp/9396321/007542f4c82a2c2b19608441b3d1f0a1.png/show",
+    "sortNum": "2700"
+  },
+  {
+    "id": "938266",
+    "name": "Flopie",
+    "url": "https://game8.co/games/Palworld/archives/439938",
+    "imageUrl": "https://img.game8.jp/9396297/43e533902405229b26910189138b09a2.png/show",
+    "sortNum": "2800"
+  },
+  {
+    "id": "938267",
+    "name": "Mozzarina",
+    "url": "https://game8.co/games/Palworld/archives/439939",
+    "imageUrl": "https://img.game8.jp/9396302/c6dd36a7a9655606a919667c03e4c004.png/show",
+    "sortNum": "2900"
+  },
+  {
+    "id": "938268",
+    "name": "Bristla",
+    "url": "https://game8.co/games/Palworld/archives/439940",
+    "imageUrl": "https://img.game8.jp/9396331/a09cd52cdd548e63da8d908e14c2f106.png/show",
+    "sortNum": "3000"
+  },
+  {
+    "id": "938269",
+    "name": "Gobfin",
+    "url": "https://game8.co/games/Palworld/archives/439941",
+    "imageUrl": "https://img.game8.jp/9396296/764bfff628bdba89e73a944a6e53b4f8.png/show",
+    "sortNum": "3100"
+  },
+  {
+    "id": "938270",
+    "name": "Gobfin Ignis",
+    "url": "https://game8.co/games/Palworld/archives/439942",
+    "imageUrl": "https://img.game8.jp/9396307/619e497c386b1bdadbea014bb9711918.png/show",
+    "sortNum": "3101"
+  },
+  {
+    "id": "938271",
+    "name": "Hangyu",
+    "url": "https://game8.co/games/Palworld/archives/439943",
+    "imageUrl": "https://img.game8.jp/9396314/51ec0e24757abbc1e3a0afd1f6708a87.png/show",
+    "sortNum": "3200"
+  },
+  {
+    "id": "938272",
+    "name": "Hangyu Cryst",
+    "url": "https://game8.co/games/Palworld/archives/439944",
+    "imageUrl": "https://img.game8.jp/9396325/faa3a17c8add4b7bbc3e25a4632670e6.png/show",
+    "sortNum": "3201"
+  },
+  {
+    "id": "938273",
+    "name": "Mossanda",
+    "url": "https://game8.co/games/Palworld/archives/439945",
+    "imageUrl": "https://img.game8.jp/9396309/0e6f5c5b6b5d2e8fb88611daad68f52f.png/show",
+    "sortNum": "3300"
+  },
+  {
+    "id": "938274",
+    "name": "Mossanda Lux",
+    "url": "https://game8.co/games/Palworld/archives/439946",
+    "imageUrl": "https://img.game8.jp/9396332/e709d2d97c75cd69b7f8a01e07389e8d.png/show",
+    "sortNum": "3301"
+  },
+  {
+    "id": "938275",
+    "name": "Woolipop",
+    "url": "https://game8.co/games/Palworld/archives/439947",
+    "imageUrl": "https://img.game8.jp/9396317/1672fa08eaa81d23b0679236bb3b2e6e.png/show",
+    "sortNum": "3400"
+  },
+  {
+    "id": "938276",
+    "name": "Caprity",
+    "url": "https://game8.co/games/Palworld/archives/439948",
+    "imageUrl": "https://img.game8.jp/9396334/62c9546648dc0bc04b2f6a9c693c108c.png/show",
+    "sortNum": "3500"
+  },
+  {
+    "id": "938277",
+    "name": "Melpaca",
+    "url": "https://game8.co/games/Palworld/archives/439949",
+    "imageUrl": "https://img.game8.jp/9396329/c81d991fa1c87e6c0ce40f44f154e385.png/show",
+    "sortNum": "3600"
+  },
+  {
+    "id": "938278",
+    "name": "Eikthyrdeer",
+    "url": "https://game8.co/games/Palworld/archives/439950",
+    "imageUrl": "https://img.game8.jp/9396312/df90305b6ece725bc1b8fbf43a466ea3.png/show",
+    "sortNum": "3700"
+  },
+  {
+    "id": "938279",
+    "name": "Eikthyrdeer Terra",
+    "url": "https://game8.co/games/Palworld/archives/439951",
+    "imageUrl": "https://img.game8.jp/9396304/104e683ab5a87bcde820d7d082045d6c.png/show",
+    "sortNum": "3701"
+  },
+  {
+    "id": "938280",
+    "name": "Nitewing",
+    "url": "https://game8.co/games/Palworld/archives/439952",
+    "imageUrl": "https://img.game8.jp/9396328/8b0dc6cd604021dde0897c28fe2ab8cc.png/show",
+    "sortNum": "3800"
+  },
+  {
+    "id": "938281",
+    "name": "Ribbuny",
+    "url": "https://game8.co/games/Palworld/archives/439953",
+    "imageUrl": "https://img.game8.jp/9396374/822350a33484002fa7d4b0272aa496b3.png/show",
+    "sortNum": "3900"
+  },
+  {
+    "id": "938282",
+    "name": "Incineram",
+    "url": "https://game8.co/games/Palworld/archives/439954",
+    "imageUrl": "https://img.game8.jp/9396303/e2087f814d9eac4f394b4ce791d8b30f.png/show",
+    "sortNum": "4000"
+  },
+  {
+    "id": "938283",
+    "name": "Incineram Noct",
+    "url": "https://game8.co/games/Palworld/archives/439955",
+    "imageUrl": "https://img.game8.jp/9396333/8a2795ca74d3283f0162606fd0823640.png/show",
+    "sortNum": "4001"
+  },
+  {
+    "id": "938284",
+    "name": "Cinnamoth",
+    "url": "https://game8.co/games/Palworld/archives/439956",
+    "imageUrl": "https://img.game8.jp/9396305/283eaf96a39ac060b2bc7ff5fa5fea88.png/show",
+    "sortNum": "4100"
+  },
+  {
+    "id": "938285",
+    "name": "Arsox",
+    "url": "https://game8.co/games/Palworld/archives/439957",
+    "imageUrl": "https://img.game8.jp/9396327/932411e52eef39405f755593e03613c3.png/show",
+    "sortNum": "4200"
+  },
+  {
+    "id": "938286",
+    "name": "Dumud",
+    "url": "https://game8.co/games/Palworld/archives/439958",
+    "imageUrl": "https://img.game8.jp/9396294/153f93b3abe78cf17474244565562ca3.png/show",
+    "sortNum": "4300"
+  },
+  {
+    "id": "938287",
+    "name": "Cawgnito",
+    "url": "https://game8.co/games/Palworld/archives/439959",
+    "imageUrl": "https://img.game8.jp/9396300/27a665e0210a9cda62214021024b616c.png/show",
+    "sortNum": "4400"
+  },
+  {
+    "id": "938288",
+    "name": "Leezpunk",
+    "url": "https://game8.co/games/Palworld/archives/439960",
+    "imageUrl": "https://img.game8.jp/9396293/7cf30c9cf2f75112c1a434b9b5435b7c.png/show",
+    "sortNum": "4500"
+  },
+  {
+    "id": "938289",
+    "name": "Leezpunk Ignis",
+    "url": "https://game8.co/games/Palworld/archives/439961",
+    "imageUrl": "https://img.game8.jp/9396324/439962c7452fca95bb2e9118211766c1.png/show",
+    "sortNum": "4501"
+  },
+  {
+    "id": "938290",
+    "name": "Loupmoon",
+    "url": "https://game8.co/games/Palworld/archives/439962",
+    "imageUrl": "https://img.game8.jp/9396338/bb7c7229fc2c92577fa503749b34d33c.png/show",
+    "sortNum": "4600"
+  },
+  {
+    "id": "938291",
+    "name": "Galeclaw",
+    "url": "https://game8.co/games/Palworld/archives/439963",
+    "imageUrl": "https://img.game8.jp/9396298/50f8fe7164a58a1fe21129ce4e1ee99d.png/show",
+    "sortNum": "4700"
+  },
+  {
+    "id": "938292",
+    "name": "Robinquill",
+    "url": "https://game8.co/games/Palworld/archives/439964",
+    "imageUrl": "https://img.game8.jp/9396306/cf7b0dc40a29f621ed45162fd9a8c596.png/show",
+    "sortNum": "4800"
+  },
+  {
+    "id": "938293",
+    "name": "Robinquill Terra",
+    "url": "https://game8.co/games/Palworld/archives/439965",
+    "imageUrl": "https://img.game8.jp/9396323/b87c7050980fef6949f9f1a485a4a86d.png/show",
+    "sortNum": "4801"
+  },
+  {
+    "id": "938294",
+    "name": "Gorirat",
+    "url": "https://game8.co/games/Palworld/archives/439966",
+    "imageUrl": "https://img.game8.jp/9396295/8762e0c3dcf402d781b2f8e02662f7a4.png/show",
+    "sortNum": "4900"
+  },
+  {
+    "id": "938295",
+    "name": "Beegarde",
+    "url": "https://game8.co/games/Palworld/archives/439967",
+    "imageUrl": "https://img.game8.jp/9396308/f729ffe149942478c451866254477823.png/show",
+    "sortNum": "5000"
+  },
+  {
+    "id": "938296",
+    "name": "Elizabee",
+    "url": "https://game8.co/games/Palworld/archives/439968",
+    "imageUrl": "https://img.game8.jp/9396348/a331b0139f8e2e29405274e7eb812f0b.png/show",
+    "sortNum": "5100"
+  },
+  {
+    "id": "938297",
+    "name": "Grintale",
+    "url": "https://game8.co/games/Palworld/archives/439969",
+    "imageUrl": "https://img.game8.jp/9396311/a81d81727c631a6f90bcd1a6c91186ab.png/show",
+    "sortNum": "5200"
+  },
+  {
+    "id": "938298",
+    "name": "Swee",
+    "url": "https://game8.co/games/Palworld/archives/439970",
+    "imageUrl": "https://img.game8.jp/9396320/cff70bc35560df6c6ffed9f39824db79.png/show",
+    "sortNum": "5300"
+  },
+  {
+    "id": "938299",
+    "name": "Sweepa",
+    "url": "https://game8.co/games/Palworld/archives/439971",
+    "imageUrl": "https://img.game8.jp/9396313/93275ee0925ebe4e687ab226de9592e6.png/show",
+    "sortNum": "5400"
+  },
+  {
+    "id": "938300",
+    "name": "Chillet",
+    "url": "https://game8.co/games/Palworld/archives/439972",
+    "imageUrl": "https://img.game8.jp/9396347/68b3202b78cd568dea935f767c5d35d5.png/show",
+    "sortNum": "5500"
+  },
+  {
+    "id": "938301",
+    "name": "Univolt",
+    "url": "https://game8.co/games/Palworld/archives/439973",
+    "imageUrl": "https://img.game8.jp/9396351/171e9ba99eac5e1b9b95231fe2eccaab.png/show",
+    "sortNum": "5600"
+  },
+  {
+    "id": "938302",
+    "name": "Foxcicle",
+    "url": "https://game8.co/games/Palworld/archives/439974",
+    "imageUrl": "https://img.game8.jp/9396371/191b1a462cf8ed4ec33650391d938acd.png/show",
+    "sortNum": "5700"
+  },
+  {
+    "id": "938303",
+    "name": "Pyrin",
+    "url": "https://game8.co/games/Palworld/archives/439975",
+    "imageUrl": "https://img.game8.jp/9396370/9bdef8e5c379ff3c2266a009f8b02bb5.png/show",
+    "sortNum": "5800"
+  },
+  {
+    "id": "938304",
+    "name": "Pyrin Noct",
+    "url": "https://game8.co/games/Palworld/archives/439976",
+    "imageUrl": "https://img.game8.jp/9396378/76e8a678f8ec7c43dfa8193068c9ad22.png/show",
+    "sortNum": "5801"
+  },
+  {
+    "id": "938305",
+    "name": "Reindrix",
+    "url": "https://game8.co/games/Palworld/archives/439977",
+    "imageUrl": "https://img.game8.jp/9396368/7ac20fbc54f85c076f30fdb0940353d6.png/show",
+    "sortNum": "5900"
+  },
+  {
+    "id": "938306",
+    "name": "Rayhound",
+    "url": "https://game8.co/games/Palworld/archives/439978",
+    "imageUrl": "https://img.game8.jp/9396363/161bd75aecd2e205e6c302e639ccd988.png/show",
+    "sortNum": "6000"
+  },
+  {
+    "id": "938307",
+    "name": "Kitsun",
+    "url": "https://game8.co/games/Palworld/archives/439979",
+    "imageUrl": "https://img.game8.jp/9396344/d754a571b5aad59ffe8dd91a87d58dc4.png/show",
+    "sortNum": "6100"
+  },
+  {
+    "id": "938308",
+    "name": "Dazzi",
+    "url": "https://game8.co/games/Palworld/archives/439980",
+    "imageUrl": "https://img.game8.jp/9396362/2e1e5af08f9e9d0ac5c445d5df3f8c20.png/show",
+    "sortNum": "6200"
+  },
+  {
+    "id": "938309",
+    "name": "Lunaris",
+    "url": "https://game8.co/games/Palworld/archives/439981",
+    "imageUrl": "https://img.game8.jp/9396364/b9e4e850cee72d5c7366e052767bbb83.png/show",
+    "sortNum": "6300"
+  },
+  {
+    "id": "938310",
+    "name": "Dinossom",
+    "url": "https://game8.co/games/Palworld/archives/439982",
+    "imageUrl": "https://img.game8.jp/9396346/0ebc37b3bc8154c49eefd50bfb8d00e4.png/show",
+    "sortNum": "6400"
+  },
+  {
+    "id": "938311",
+    "name": "Dinossom Lux",
+    "url": "https://game8.co/games/Palworld/archives/439983",
+    "imageUrl": "https://img.game8.jp/9396319/b9b61c40ec2f1284958f5dc24a637516.png/show",
+    "sortNum": "6401"
+  },
+  {
+    "id": "938312",
+    "name": "Surfent",
+    "url": "https://game8.co/games/Palworld/archives/439984",
+    "imageUrl": "https://img.game8.jp/9396369/6b3a9298a0fa62bbffaaffe235becbd2.png/show",
+    "sortNum": "6500"
+  },
+  {
+    "id": "938313",
+    "name": "Surfent Terra",
+    "url": "https://game8.co/games/Palworld/archives/439985",
+    "imageUrl": "https://img.game8.jp/9396345/22e470c4560c0fff26b53e984aac78f9.png/show",
+    "sortNum": "6501"
+  },
+  {
+    "id": "938314",
+    "name": "Maraith",
+    "url": "https://game8.co/games/Palworld/archives/439986",
+    "imageUrl": "https://img.game8.jp/9396353/0f60b18dd5f90bec394c71e9d39bdd2f.png/show",
+    "sortNum": "6600"
+  },
+  {
+    "id": "938315",
+    "name": "Digtoise",
+    "url": "https://game8.co/games/Palworld/archives/439987",
+    "imageUrl": "https://img.game8.jp/9396372/95a5f6bf7011e8c37a6426a5a5707c20.png/show",
+    "sortNum": "6700"
+  },
+  {
+    "id": "938316",
+    "name": "Tombat",
+    "url": "https://game8.co/games/Palworld/archives/439988",
+    "imageUrl": "https://img.game8.jp/9396343/6b3e2bf3f7680c9fc73c250f94d679a3.png/show",
+    "sortNum": "6800"
+  },
+  {
+    "id": "938317",
+    "name": "Lovander",
+    "url": "https://game8.co/games/Palworld/archives/439989",
+    "imageUrl": "https://img.game8.jp/9396383/db190d47a4b98e70c074f4f2c6c715c6.png/show",
+    "sortNum": "6900"
+  },
+  {
+    "id": "938318",
+    "name": "Flambelle",
+    "url": "https://game8.co/games/Palworld/archives/439990",
+    "imageUrl": "https://img.game8.jp/9396336/d5c8e8c5846357f51e6e15c6faa510f6.png/show",
+    "sortNum": "7000"
+  },
+  {
+    "id": "938319",
+    "name": "Vanwyrm",
+    "url": "https://game8.co/games/Palworld/archives/439991",
+    "imageUrl": "https://img.game8.jp/9396349/f676ff76b81ac7e097b46f3c8bb4ba18.png/show",
+    "sortNum": "7100"
+  },
+  {
+    "id": "938320",
+    "name": "Vanwyrm Cryst",
+    "url": "https://game8.co/games/Palworld/archives/439992",
+    "imageUrl": "https://img.game8.jp/9396359/2fdb0b4d7e01039e26276f969d35644c.png/show",
+    "sortNum": "7101"
+  },
+  {
+    "id": "938321",
+    "name": "Bushi",
+    "url": "https://game8.co/games/Palworld/archives/439993",
+    "imageUrl": "https://img.game8.jp/9396356/bb998f957b6b0d9a8d764b412141281e.png/show",
+    "sortNum": "7200"
+  },
+  {
+    "id": "938322",
+    "name": "Beakon",
+    "url": "https://game8.co/games/Palworld/archives/439994",
+    "imageUrl": "https://img.game8.jp/9396382/240125a8f008ce1267b1503ea44fe267.png/show",
+    "sortNum": "7300"
+  },
+  {
+    "id": "938323",
+    "name": "Ragnahawk",
+    "url": "https://game8.co/games/Palworld/archives/439995",
+    "imageUrl": "https://img.game8.jp/9396354/7fff0c0bcbcab22b9f956b37147d2af9.png/show",
+    "sortNum": "7400"
+  },
+  {
+    "id": "938324",
+    "name": "Katress",
+    "url": "https://game8.co/games/Palworld/archives/439996",
+    "imageUrl": "https://img.game8.jp/9396365/b218e5c8322062dd0c91874775a81082.png/show",
+    "sortNum": "7500"
+  },
+  {
+    "id": "938325",
+    "name": "Wixen",
+    "url": "https://game8.co/games/Palworld/archives/439997",
+    "imageUrl": "https://img.game8.jp/9396337/20d2fbe9fdb658e3132304ac3e4827ab.png/show",
+    "sortNum": "7600"
+  },
+  {
+    "id": "938326",
+    "name": "Verdash",
+    "url": "https://game8.co/games/Palworld/archives/439998",
+    "imageUrl": "https://img.game8.jp/9396360/aee7bbf5f205f593d4558fc2f92c8f18.png/show",
+    "sortNum": "7700"
+  },
+  {
+    "id": "938327",
+    "name": "Vaelet",
+    "url": "https://game8.co/games/Palworld/archives/439999",
+    "imageUrl": "https://img.game8.jp/9396377/da5ce81124b2721c29695e2c3f839bf0.png/show",
+    "sortNum": "7800"
+  },
+  {
+    "id": "938328",
+    "name": "Sibelyx",
+    "url": "https://game8.co/games/Palworld/archives/440000",
+    "imageUrl": "https://img.game8.jp/9396350/ed6c6da19f6c665fe5872fad042dfb6d.png/show",
+    "sortNum": "7900"
+  },
+  {
+    "id": "938329",
+    "name": "Elphidran",
+    "url": "https://game8.co/games/Palworld/archives/440001",
+    "imageUrl": "https://img.game8.jp/9396330/1572f24b26fedb8de2d4d162302fe813.png/show",
+    "sortNum": "8000"
+  },
+  {
+    "id": "938330",
+    "name": "Kelpsea",
+    "url": "https://game8.co/games/Palworld/archives/440002",
+    "imageUrl": "https://img.game8.jp/9396376/690e59056352b411df5c9aec7efea729.png/show",
+    "sortNum": "8100"
+  },
+  {
+    "id": "938331",
+    "name": "Kelpsea Ignis",
+    "url": "https://game8.co/games/Palworld/archives/440003",
+    "imageUrl": "https://img.game8.jp/9396392/bbd2cc414f9695f83cd76704e48d00d2.png/show",
+    "sortNum": "8101"
+  },
+  {
+    "id": "938332",
+    "name": "Azurobe",
+    "url": "https://game8.co/games/Palworld/archives/440004",
+    "imageUrl": "https://img.game8.jp/9396361/24beb8342beb8446dcb97ceec65e3c1a.png/show",
+    "sortNum": "8200"
+  },
+  {
+    "id": "938333",
+    "name": "Cryolinx",
+    "url": "https://game8.co/games/Palworld/archives/440005",
+    "imageUrl": "https://img.game8.jp/9396409/7cf7a0c3e106f6da36cbc590b8ba3bcb.png/show",
+    "sortNum": "8300"
+  },
+  {
+    "id": "938334",
+    "name": "Blazehowl",
+    "url": "https://game8.co/games/Palworld/archives/440006",
+    "imageUrl": "https://img.game8.jp/9396386/a17c5fea5cd71288c9561c54eff1734b.png/show",
+    "sortNum": "8400"
+  },
+  {
+    "id": "938335",
+    "name": "Blazehowl Noct",
+    "url": "https://game8.co/games/Palworld/archives/440007",
+    "imageUrl": "https://img.game8.jp/9396391/47824822a8b9e297768d065f7b90a417.png/show",
+    "sortNum": "8401"
+  },
+  {
+    "id": "938336",
+    "name": "Relaxaurus",
+    "url": "https://game8.co/games/Palworld/archives/440008",
+    "imageUrl": "https://img.game8.jp/9396357/c008ad46fc00465027f586ac6ced9f03.png/show",
+    "sortNum": "8500"
+  },
+  {
+    "id": "938337",
+    "name": "Relaxaurus Lux",
+    "url": "https://game8.co/games/Palworld/archives/440009",
+    "imageUrl": "https://img.game8.jp/9396394/866ad64c76c48dc9df962de900fdf7a4.png/show",
+    "sortNum": "8501"
+  },
+  {
+    "id": "938338",
+    "name": "Broncherry",
+    "url": "https://game8.co/games/Palworld/archives/440010",
+    "imageUrl": "https://img.game8.jp/9396326/dcac1f70fcc21671b379508c922b0d25.png/show",
+    "sortNum": "8600"
+  },
+  {
+    "id": "938339",
+    "name": "Broncherry Aqua",
+    "url": "https://game8.co/games/Palworld/archives/440011",
+    "imageUrl": "https://img.game8.jp/9396340/dca6a55b45e17ca9efe227b98812dc65.png/show",
+    "sortNum": "8601"
+  },
+  {
+    "id": "938340",
+    "name": "Petallia",
+    "url": "https://game8.co/games/Palworld/archives/440012",
+    "imageUrl": "https://img.game8.jp/9396367/624fa97f7adc334b5d0b80389897d06f.png/show",
+    "sortNum": "8700"
+  },
+  {
+    "id": "938341",
+    "name": "Reptyro",
+    "url": "https://game8.co/games/Palworld/archives/440013",
+    "imageUrl": "https://img.game8.jp/9396335/5b79a2340bedc75cf1ce0978160b187f.png/show",
+    "sortNum": "8800"
+  },
+  {
+    "id": "938342",
+    "name": "Ice Reptyro",
+    "url": "https://game8.co/games/Palworld/archives/440014",
+    "imageUrl": "https://img.game8.jp/9396352/36d9807f4de5c993652352c047020ace.png/show",
+    "sortNum": "8801"
+  },
+  {
+    "id": "938343",
+    "name": "Kingpaca",
+    "url": "https://game8.co/games/Palworld/archives/440015",
+    "imageUrl": "https://img.game8.jp/9396355/1ebd5cfc6f10b185e5d8fac365a2d904.png/show",
+    "sortNum": "8900"
+  },
+  {
+    "id": "938344",
+    "name": "Ice Kingpaca",
+    "url": "https://game8.co/games/Palworld/archives/440016",
+    "imageUrl": "https://img.game8.jp/9396399/a58c099d734a82131ff132526b19870e.png/show",
+    "sortNum": "8901"
+  },
+  {
+    "id": "938345",
+    "name": "Mammorest",
+    "url": "https://game8.co/games/Palworld/archives/440017",
+    "imageUrl": "https://img.game8.jp/9396388/6559df7df8af776dcbce0ce7b7190303.png/show",
+    "sortNum": "9000"
+  },
+  {
+    "id": "938346",
+    "name": "Mammorest Cryst",
+    "url": "https://game8.co/games/Palworld/archives/440018",
+    "imageUrl": "https://img.game8.jp/9396375/c41aebf51d4e7eb7a03c6672884ac26d.png/show",
+    "sortNum": "9001"
+  },
+  {
+    "id": "938347",
+    "name": "Wumpo",
+    "url": "https://game8.co/games/Palworld/archives/440019",
+    "imageUrl": "https://img.game8.jp/9396315/b9604d9a876862d7d056eb71efc07e0d.png/show",
+    "sortNum": "9100"
+  },
+  {
+    "id": "938348",
+    "name": "Wumpo Botan",
+    "url": "https://game8.co/games/Palworld/archives/440020",
+    "imageUrl": "https://img.game8.jp/9396373/ee001fabfb9a9bf433ff04915b33e489.png/show",
+    "sortNum": "9101"
+  },
+  {
+    "id": "938349",
+    "name": "Warsect",
+    "url": "https://game8.co/games/Palworld/archives/440021",
+    "imageUrl": "https://img.game8.jp/9396402/db542463a5f1e456339dcff2f919e176.png/show",
+    "sortNum": "9200"
+  },
+  {
+    "id": "938350",
+    "name": "Fenglope",
+    "url": "https://game8.co/games/Palworld/archives/440022",
+    "imageUrl": "https://img.game8.jp/9396342/8d41b93537f23dc0ca2bfac6f4fe51ce.png/show",
+    "sortNum": "9300"
+  },
+  {
+    "id": "938351",
+    "name": "Felbat",
+    "url": "https://game8.co/games/Palworld/archives/440023",
+    "imageUrl": "https://img.game8.jp/9396322/0b8d340533aaf041036df517051292f6.png/show",
+    "sortNum": "9400"
+  },
+  {
+    "id": "938352",
+    "name": "Quivern",
+    "url": "https://game8.co/games/Palworld/archives/440024",
+    "imageUrl": "https://img.game8.jp/9396299/254960f74d00f68a11791c1f9e1dd8a2.png/show",
+    "sortNum": "9500"
+  },
+  {
+    "id": "938353",
+    "name": "Blazamut",
+    "url": "https://game8.co/games/Palworld/archives/440025",
+    "imageUrl": "https://img.game8.jp/9396423/760533e3a109aaf35294f1c470161b6e.png/show",
+    "sortNum": "9600"
+  },
+  {
+    "id": "938354",
+    "name": "Helzephyr",
+    "url": "https://game8.co/games/Palworld/archives/440026",
+    "imageUrl": "https://img.game8.jp/9396341/73525b425830a1ae19ecd42193e96c2a.png/show",
+    "sortNum": "9700"
+  },
+  {
+    "id": "938355",
+    "name": "Astegon",
+    "url": "https://game8.co/games/Palworld/archives/440027",
+    "imageUrl": "https://img.game8.jp/9396414/a1514448a32966cc2cbb60768343f844.png/show",
+    "sortNum": "9800"
+  },
+  {
+    "id": "938356",
+    "name": "Menasting",
+    "url": "https://game8.co/games/Palworld/archives/440028",
+    "imageUrl": "https://img.game8.jp/9396400/350f090c6fa6eea4813db7f9cf364eff.png/show",
+    "sortNum": "9900"
+  },
+  {
+    "id": "938357",
+    "name": "Anubis",
+    "url": "https://game8.co/games/Palworld/archives/440029",
+    "imageUrl": "https://img.game8.jp/9396390/e3d5d5665a478272ecaf6c2129d349c8.png/show",
+    "sortNum": "10000"
+  },
+  {
+    "id": "938358",
+    "name": "Jormuntide",
+    "url": "https://game8.co/games/Palworld/archives/440030",
+    "imageUrl": "https://img.game8.jp/9396411/6043cf88135f6b66ea0a55df0c6c9267.png/show",
+    "sortNum": "10100"
+  },
+  {
+    "id": "938359",
+    "name": "Jormuntide Ignis",
+    "url": "https://game8.co/games/Palworld/archives/440031",
+    "imageUrl": "https://img.game8.jp/9396420/a6e7d4a083e47affe811c450ba16187a.png/show",
+    "sortNum": "10101"
+  },
+  {
+    "id": "938360",
+    "name": "Suzaku",
+    "url": "https://game8.co/games/Palworld/archives/440032",
+    "imageUrl": "https://img.game8.jp/9396410/ea8382ed4562f8699ed4c15f98f58022.png/show",
+    "sortNum": "10200"
+  },
+  {
+    "id": "938361",
+    "name": "Grizzbolt",
+    "url": "https://game8.co/games/Palworld/archives/440033",
+    "imageUrl": "https://img.game8.jp/9396422/64c2d80a5c89b7d3e922a588df0d6545.png/show",
+    "sortNum": "10300"
+  },
+  {
+    "id": "938362",
+    "name": "Lyleen",
+    "url": "https://game8.co/games/Palworld/archives/440034",
+    "imageUrl": "https://img.game8.jp/9396404/882b1318a51aee2761a908b619433df7.png/show",
+    "sortNum": "10400"
+  },
+  {
+    "id": "938363",
+    "name": "Faleris",
+    "url": "https://game8.co/games/Palworld/archives/440035",
+    "imageUrl": "https://img.game8.jp/9396412/2136bb18fd24eb9c478e8320226594c3.png/show",
+    "sortNum": "10500"
+  },
+  {
+    "id": "938364",
+    "name": "Orserk",
+    "url": "https://game8.co/games/Palworld/archives/440036",
+    "imageUrl": "https://img.game8.jp/9396387/189167fb000e31c873284cc025470e5f.png/show",
+    "sortNum": "10600"
+  },
+  {
+    "id": "938365",
+    "name": "Shadowbeak",
+    "url": "https://game8.co/games/Palworld/archives/440037",
+    "imageUrl": "https://img.game8.jp/9396397/5d1a05d47328d8408d13c93cdd0166db.png/show",
+    "sortNum": "10700"
+  },
+  {
+    "id": "938366",
+    "name": "Paladius",
+    "url": "https://game8.co/games/Palworld/archives/440038",
+    "imageUrl": "https://img.game8.jp/9403618/f9dab629232d57d74bcf5d4aae9a0f73.png/show",
+    "sortNum": "10800"
+  },
+  {
+    "id": "938367",
+    "name": "Necromus",
+    "url": "https://game8.co/games/Palworld/archives/440039",
+    "imageUrl": "https://img.game8.jp/9402087/3e8b7fc28acddc74b6673a545d034ef9.png/show",
+    "sortNum": "10900"
+  },
+  {
+    "id": "938368",
+    "name": "Frostallion",
+    "url": "https://game8.co/games/Palworld/archives/440040",
+    "imageUrl": "https://img.game8.jp/9396415/066db890edbb8888c99b0d881e88345b.png/show",
+    "sortNum": "11000"
+  },
+  {
+    "id": "938369",
+    "name": "Jetragon",
+    "url": "https://game8.co/games/Palworld/archives/440041",
+    "imageUrl": "https://img.game8.jp/9396405/b06903264f368411023d6ab15d9b2c15.png/show",
+    "sortNum": "11100"
+  },
+  {
+    "id": "938372",
+    "name": "Suzaku Aqua",
+    "url": "https://game8.co/games/Palworld/archives/440044",
+    "imageUrl": "https://img.game8.jp/9396418/24c678a6eb5a1f1613d24bdf57780e58.png/show",
+    "sortNum": "10201"
+  },
+  {
+    "id": "938824",
+    "name": "Lyleen Noct",
+    "url": "https://game8.co/games/Palworld/archives/440045",
+    "imageUrl": "https://img.game8.jp/9396393/2e06cf246a53a39083dadd938a3fbb48.png/show",
+    "sortNum": "10401"
+  },
+  {
+    "id": "941563",
+    "name": "Frostallion Noct",
+    "url": "https://game8.co/games/Palworld/archives/440389",
+    "imageUrl": "https://img.game8.jp/9396416/d2f8488505bbcb7610cce4175c2d8207.png/show",
+    "sortNum": "11001"
+  },
+  {
+    "id": "941639",
+    "name": "Elphidran Aqua",
+    "url": "https://game8.co/games/Palworld/archives/440419",
+    "imageUrl": "https://img.game8.jp/9396358/c6eb796d724f7c53c31e1583e8c604b1.png/show",
+    "sortNum": "8001"
+  },
+  {
+    "id": "941874",
+    "name": "Special Flower Gumoss",
+    "url": "https://game8.co/games/Palworld/archives/439922",
+    "imageUrl": "https://img.game8.co/3825796/4701be3c805a4b7a6d0e05a88b91f9b0.png/show",
+    "sortNum": "1301"
+  }
+]
