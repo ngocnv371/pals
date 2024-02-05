@@ -7,7 +7,7 @@ import {
 } from "@ionic/react";
 import { useContext } from "react";
 import AppContext from "../AppContext/Context";
-import getMetadata from "../AppContext/meta";
+import { getPalMetadata } from "../AppContext/meta";
 
 const PalPreview: React.FC<{ palId: string }> = ({ palId }) => {
   const { pals } = useContext(AppContext)!;
@@ -16,7 +16,7 @@ const PalPreview: React.FC<{ palId: string }> = ({ palId }) => {
     return null;
   }
 
-  const meta = getMetadata(pal.specieId);
+  const meta = getPalMetadata(pal.specieId);
   if (!meta) {
     return null;
   }

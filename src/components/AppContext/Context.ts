@@ -8,7 +8,7 @@ interface AppContextData {
   selectedBaseId: string;
   addBase: (base: Omit<Base, "id">) => void;
   selectBase: (id: string) => void;
-  breed?: (palId1: string, palId2: string) => void
+  breed: (palId1: string, palId2: string) => Pal
 }
 
 const AppContext = React.createContext<AppContextData | null>(null);
