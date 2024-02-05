@@ -29,6 +29,7 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 import AppProvider from "./components/AppContext";
 import BasePage from "./pages/Base";
+import MyPalsPage from "./pages/MyPals";
 
 setupIonicReact();
 
@@ -45,6 +46,9 @@ const App: React.FC = () => {
               </Route>
               <Route path="/bases/:id" exact={true}>
                 <BasePage />
+              </Route>
+              <Route path="/my-pals" exact={true}>
+                <MyPalsPage />
               </Route>
             </IonRouterOutlet>
           </IonSplitPane>
