@@ -14,45 +14,5 @@
   {
     "id": "facility_lumber",
     "name": "Lumber Mill"
-  },
-  {
-    "id": "cat",
-    "name": "Cat"
-  },
-  {
-    "id": "cow",
-    "name": "Cow"
-  },
-  {
-    "id": "dog",
-    "name": "Dog"
-  },
-  {
-    "id": "chicken",
-    "name": "chicken"
-  },
-  {
-    "id": "wolf",
-    "name": "wolf"
-  },
-  {
-    "id": "bee",
-    "name": "bee"
-  },
-  {
-    "id": "fish",
-    "name": "fish"
-  },
-  {
-    "id": "bird",
-    "name": "bird"
-  },
-  {
-    "id": "snake",
-    "name": "snake"
-  },
-  {
-    "id": "tiger",
-    "name": "tiger"
   }
 ]

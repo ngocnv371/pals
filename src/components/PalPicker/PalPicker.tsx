@@ -79,7 +79,7 @@ const PalPicker: React.FC<{
         </IonHeader>
         <IonContent className="ion-padding">
           <PalsList onSelect={handleSelect} gender={gender} selected={temp} />
-          <PalPreview palId={selected} />
+          <PalPreview palId={temp} />
         </IonContent>
       </IonModal>
     </>

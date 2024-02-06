@@ -1,13 +1,19 @@
 import {
+  IonAvatar,
   IonCard,
   IonCardContent,
   IonCardHeader,
   IonCardTitle,
+  IonIcon,
+  IonImg,
+  IonItem,
   IonList,
 } from "@ionic/react";
 import { useContext } from "react";
 import AppContext from "../AppContext/Context";
-import { getPalMetadata } from "../AppContext/meta";
+import { getPalMetadata, getPalMetadataEx } from "../AppContext/meta";
+import { female, male } from "ionicons/icons";
+import WorkSkillsList from "../WorkSkillsList";
 
 const PalPreview: React.FC<{ palId: string }> = ({ palId }) => {
   const { pals } = useContext(AppContext)!;
@@ -21,14 +27,23 @@ const PalPreview: React.FC<{ palId: string }> = ({ palId }) => {
     return null;
   }
 
+  const metaEx = getPalMetadataEx(meta.name);
+  if (!metaEx) {
+    return null;
+  }
+
   return (
     <IonCard className="pal-preview">
       <IonCardHeader>
         <IonCardTitle>
-          {meta.name} Lv{pal.level} {pal.gender}
+          <IonIcon icon={pal.gender == "male" ? male : female} /> {meta.name} Lv
+          {pal.level}
         </IonCardTitle>
       </IonCardHeader>
-      <IonCardContent>Detail {palId}</IonCardContent>
+      <IonCardContent>
+        <p>{metaEx.content.description}</p>
+      </IonCardContent>
+      <WorkSkillsList skills={metaEx.content.workSkills}/>
     </IonCard>
   );
 };
