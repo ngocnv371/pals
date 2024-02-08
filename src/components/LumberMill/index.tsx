@@ -1,12 +1,24 @@
-import { IonButton, IonCard, IonCardTitle } from "@ionic/react"
+import { IonButton, IonCard, IonCardHeader, IonCardTitle } from "@ionic/react";
+import { useAppDispatch } from "../../store/hooks";
+import { worked } from "../../store/facilitiesSlice";
 
 const LumberMillCard: React.FC = () => {
-    return <IonCard>
-        <IonCardTitle>
-            Lumber Mill
-        </IonCardTitle>
-        <IonButton fill="clear" >Work</IonButton>
-    </IonCard>
-}
+  const dispatch = useAppDispatch();
 
-export default LumberMillCard
+  function handleWork() {
+    dispatch(worked(""));
+  }
+
+  return (
+    <IonCard>
+      <IonCardHeader>
+        <IonCardTitle>Lumber Mill</IonCardTitle>
+      </IonCardHeader>
+      <IonButton fill="clear" onClick={handleWork}>
+        Work
+      </IonButton>
+    </IonCard>
+  );
+};
+
+export default LumberMillCard;

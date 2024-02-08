@@ -1,6 +1,3 @@
-import { IonList, IonListHeader } from "@ionic/react";
-
-import { useParams } from "react-router";
 import FacilityItem from "./FacilityItem";
 import BreedingPenItem from "./BreedingPen/BreedingPenItem";
 import { useAppSelector } from "../store/hooks";
@@ -13,14 +10,13 @@ const FacilitiesList: React.FC<{ baseId: string }> = ({ baseId }) => {
   );
 
   return (
-    <IonList id="facilities-list">
-      <IonListHeader>Facilities</IonListHeader>
+    <div id="facilities-list">
       {facilities.map((fac) => (
         <FacilityItem facilityId={fac.id} key={fac.id} />
       ))}
       <LumberMillCard />
       <BreedingPenItem />
-    </IonList>
+    </div>
   );
 };
 

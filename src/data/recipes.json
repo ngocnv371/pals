@@ -1,8 +1,8 @@
 [
   {
-    "id": "lumber_mill_lumber",
+    "id": "lumber_mill_wood",
     "ingredients": { "work": 100 },
-    "produce": { "lumber": 1 }
+    "produce": { "wood": 1 }
   },
   {
     "id": "stone_pit_stone",

@@ -1,0 +1,18 @@
+.item-icon {
+  display: flex;
+  position: relative;
+  padding: 0.3em;
+  :hover,
+  :active {
+    border: 3px solid white;
+  }
+  ion-avatar {
+    --border-radius: none;
+  }
+}
+
+ion-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

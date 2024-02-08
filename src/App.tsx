@@ -31,6 +31,7 @@ import BasePage from "./pages/Base";
 import MyPalsPage from "./pages/MyPals";
 import { Provider } from "react-redux";
 import { store } from "./store";
+import InventoryPage from "./pages/Inventory";
 
 setupIonicReact();
 
@@ -50,6 +51,9 @@ const App: React.FC = () => {
               </Route>
               <Route path="/my-pals" exact={true}>
                 <MyPalsPage />
+              </Route>
+              <Route path="/inventory" exact={true}>
+                <InventoryPage />
               </Route>
             </IonRouterOutlet>
           </IonSplitPane>
