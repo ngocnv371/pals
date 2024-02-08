@@ -1,0 +1,12 @@
+[
+  {
+    "id": "lumber_mill_lumber",
+    "ingredients": { "work": 100 },
+    "produce": { "lumber": 1 }
+  },
+  {
+    "id": "stone_pit_stone",
+    "ingredients": { "work": 100 },
+    "produce": { "stone": 1 }
+  }
+]

@@ -27,15 +27,16 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
-import AppProvider from "./components/AppContext";
 import BasePage from "./pages/Base";
 import MyPalsPage from "./pages/MyPals";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 setupIonicReact();
 
 const App: React.FC = () => {
   return (
-    <AppProvider>
+    <Provider store={store}>
       <IonApp>
         <IonReactRouter>
           <IonSplitPane contentId="main">
@@ -54,7 +55,7 @@ const App: React.FC = () => {
           </IonSplitPane>
         </IonReactRouter>
       </IonApp>
-    </AppProvider>
+    </Provider>
   );
 };
 

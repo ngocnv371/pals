@@ -1,23 +1,21 @@
-import { useCallback, useContext } from "react";
-import AppContext from "./AppContext/Context";
-import { getPalMetadata } from "./AppContext/meta";
-import { IonAvatar, IonImg, useIonToast } from "@ionic/react";
+import { useIonToast } from "@ionic/react";
 import Pal from "../models/pal";
-import { hourglass, egg, } from "ionicons/icons";
+import { egg } from "ionicons/icons";
+import getPalMetadata from "../data/palMetadata";
 
 function useNewPalNotification() {
   const [toast, dismiss] = useIonToast();
-  const { pals } = useContext(AppContext)!;
 
-  const present = useCallback(async (pal: Pal) => {
-    const meta = getPalMetadata(pal.specieId)!;
+  const present = async (pal: Pal) => {
+    console.debug('present', pal)
+    const meta = getPalMetadata(pal.type)!;
 
     await toast({
-      message: `${meta?.name} Lv${pal.level} acquired`,
+      message: `${meta?.title} Lv${pal.level} acquired`,
       icon: egg,
       duration: 3000,
     });
-  }, [pals])
+  };
 
   return { present, dismiss };
 }

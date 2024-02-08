@@ -9,24 +9,23 @@ import {
 
 import { home } from "ionicons/icons";
 import "./Menu.css";
-import { useContext } from "react";
-import AppContext from "./AppContext/Context";
+import { useAppSelector } from "../store/hooks";
+import { selectAllBases } from "../store/basesSlice";
+import { selectActiveBaseId } from "../store/uiSlice";
+import CreateBaseButton from "./CreateBaseButton";
 
 const BasesList: React.FC = () => {
-  const data = useContext(AppContext)!;
-  const hasBases = data && data.bases.length > 0;
-  if (!hasBases) {
-    return null;
-  }
+  const bases = useAppSelector((state) => selectAllBases(state.bases));
+  const activeBaseId = useAppSelector((state) => selectActiveBaseId(state));
 
   return (
     <IonList id="base-list">
       <IonListHeader>Bases</IonListHeader>
-      {data.bases.map((base) => {
+      {bases.map((base) => {
         return (
           <IonMenuToggle key={base.id} autoHide={true}>
             <IonItem
-              className={data.selectedBaseId == base.id ? "selected" : ""}
+              className={activeBaseId == base.id ? "selected" : ""}
               routerLink={`/bases/${base.id}`}
               routerDirection="none"
               lines="none"
@@ -38,6 +37,7 @@ const BasesList: React.FC = () => {
           </IonMenuToggle>
         );
       })}
+      <CreateBaseButton />
     </IonList>
   );
 };

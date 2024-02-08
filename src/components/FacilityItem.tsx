@@ -1,16 +1,12 @@
 import { IonIcon, IonItem, IonLabel } from "@ionic/react";
 import { hammer, home } from "ionicons/icons";
-import { useContext, useMemo } from "react";
-import { useParams } from "react-router";
-import AppContext from "./AppContext/Context";
-import { getBaseById, getFacilityById } from "./AppContext/getters";
-import getMetadata from "./AppContext/meta";
+import { useMemo } from "react";
+import { useAppSelector } from "../store/hooks";
+import { selectFacilityById } from "../store/facilitiesSlice";
+import getMetadata from "../data/metadata";
 
 const FacilityItem: React.FC<{ facilityId: string }> = ({ facilityId }) => {
-  const { id } = useParams<{ id: string }>();
-  const { bases } = useContext(AppContext)!;
-
-  const facility = getFacilityById(bases, id, facilityId);
+  const facility = useAppSelector(state => selectFacilityById(state.facilities, facilityId))
   if (!facility) {
     return null;
   }

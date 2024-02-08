@@ -1,25 +1,25 @@
-import { useContext } from "react";
 import PalAvatar from "./PalAvatar";
 import "./PalsList.css";
-import AppContext from "../AppContext/Context";
 import { IonIcon, IonItem, IonLabel } from "@ionic/react";
 import { checkmarkCircle } from "ionicons/icons";
+import { useAppSelector } from "../../store/hooks";
+import { selectAllPals, selectPalsByGender } from "../../store/palsSlice";
 
 const PalsList: React.FC<{
   gender?: string;
   selected: string;
   onSelect?: (id: string) => void;
 }> = ({ onSelect, gender, selected }) => {
-  const { pals } = useContext(AppContext)!;
-  const filtered = pals.filter((p) => !gender || p.gender == gender);
+  const filtered = useAppSelector((state) => gender ?
+    selectPalsByGender(state.pals, gender) : selectAllPals(state.pals)
+  );
+
+  if (filtered.length == 0) {
+    return <p>No result</p>;
+  }
 
   return (
     <div className="pals-list">
-      {filtered.length == 0 && (
-        <IonItem>
-          <IonLabel>No result</IonLabel>
-        </IonItem>
-      )}
       {filtered.map((p, idx) => (
         <div
           itemType="pal"

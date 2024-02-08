@@ -8,15 +8,13 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { useParams } from "react-router";
-import { useContext } from "react";
-import AppContext from "../../components/AppContext/Context";
-import { getBaseById } from "../../components/AppContext/getters";
+import { useAppSelector } from "../../store/hooks";
+import { selectBaseById } from "../../store/basesSlice";
 import FacilitiesList from "../../components/FacilitiesList";
 
 const BasePage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { bases } = useContext(AppContext)!;
-  const base = getBaseById(bases, id);
+  const base = useAppSelector(state => selectBaseById(state.bases, id))
 
   if (!base) {
     return null;
@@ -39,7 +37,7 @@ const BasePage: React.FC = () => {
             <IonTitle size="large">{base.name}</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <FacilitiesList />
+        <FacilitiesList baseId={id} />
       </IonContent>
     </IonPage>
   );

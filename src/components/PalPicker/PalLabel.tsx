@@ -1,25 +1,24 @@
 import { IonLabel } from "@ionic/react";
-import { useContext } from "react";
-import AppContext from "../AppContext/Context";
-import getMetadata, { getPalMetadata } from "../AppContext/meta";
+import { useAppSelector } from "../../store/hooks";
+import { selectPalById } from "../../store/palsSlice";
+import getPalMetadata from "../../data/palMetadata";
 
 const PalLabel: React.FC<
   { palId: string } & React.HTMLAttributes<HTMLIonLabelElement>
 > = ({ palId, ...rest }) => {
-  const { pals } = useContext(AppContext)!;
-  const pal = pals.find((p) => p.id == palId);
+  const pal = useAppSelector((state) => selectPalById(state.pals, palId));
   if (!pal) {
     return null;
   }
 
-  const meta = getPalMetadata(pal.specieId);
+  const meta = getPalMetadata(pal.type);
   if (!meta) {
     return null;
   }
 
   return (
     <IonLabel {...rest}>
-      {meta.name} Lv{pal.level}
+      {meta.title} Lv{pal.level}
     </IonLabel>
   );
 };
