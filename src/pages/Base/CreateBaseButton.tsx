@@ -1,6 +1,6 @@
 import { IonAlert, IonItem, IonLabel } from "@ionic/react";
-import { useAppDispatch } from "../store/hooks";
-import { baseCreated } from "../store/basesSlice";
+import { useAppDispatch } from "../../store/hooks";
+import { baseCreated } from "../../store/basesSlice";
 
 const CreateBaseButton: React.FC = () => {
   const dispatch = useAppDispatch();

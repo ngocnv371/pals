@@ -10,8 +10,9 @@ import {
 import { useParams } from "react-router";
 import { useAppSelector } from "../../store/hooks";
 import { selectBaseById } from "../../store/basesSlice";
-import FacilitiesList from "../../components/FacilitiesList";
-import RenameBaseButton from "../../components/RenameBaseButton";
+import FacilitiesList from "./FacilitiesList";
+import RenameBaseButton from "./RenameBaseButton";
+import AddFacilityButton from "./BuildMenu/AddFacilityButton";
 
 const BasePage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -30,6 +31,7 @@ const BasePage: React.FC = () => {
           </IonButtons>
           <IonTitle>{base.name}</IonTitle>
           <IonButtons slot="end">
+            <AddFacilityButton baseId={id} />
             <RenameBaseButton baseId={id} />
           </IonButtons>
         </IonToolbar>

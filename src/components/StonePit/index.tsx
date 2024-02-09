@@ -2,7 +2,7 @@ import { IonButton, IonCard, IonCardHeader, IonCardTitle } from "@ionic/react";
 import { useAppDispatch } from "../../store/hooks";
 import { worked } from "../../store/facilitiesSlice";
 
-const LumberMillCard: React.FC<{ facilityId: string }> = ({ facilityId }) => {
+const StonePitCard: React.FC<{ facilityId: string }> = ({ facilityId }) => {
   const dispatch = useAppDispatch();
 
   function handleWork() {
@@ -12,7 +12,7 @@ const LumberMillCard: React.FC<{ facilityId: string }> = ({ facilityId }) => {
   return (
     <IonCard>
       <IonCardHeader>
-        <IonCardTitle>Lumber Mill</IonCardTitle>
+        <IonCardTitle>Stone Pit</IonCardTitle>
       </IonCardHeader>
       <IonButton fill="clear" onClick={handleWork}>
         Work
@@ -21,4 +21,4 @@ const LumberMillCard: React.FC<{ facilityId: string }> = ({ facilityId }) => {
   );
 };
 
-export default LumberMillCard;
+export default StonePitCard;

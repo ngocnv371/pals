@@ -2,7 +2,7 @@ import {
   createSlice,
   createEntityAdapter,
   createSelector,
-  PayloadAction,
+  nanoid,
 } from "@reduxjs/toolkit";
 import Facility from "../models/facility";
 import { AppDispatch } from "./store";
@@ -16,9 +16,7 @@ export const facilitiesSlice = createSlice({
   name: "facilities",
   initialState,
   reducers: {
-    worked(state, action: PayloadAction<string>) {
-      const fac = selectFacilityById(state, action.payload);
-    },
+     added: facilitiesAdapter.addOne
   },
 });
 
@@ -29,8 +27,19 @@ export const {
 
 export const selectFacilitiesByBaseId = createSelector(
   [selectAllFacilities, (_, baseId: string) => baseId],
-  (facilities, baseId) => facilities.filter((f) => f.baseId == baseId)
+  (facilities, baseId) => {
+    return facilities.filter((f) => f.baseId === baseId)
+  }
 );
+
+export const facilityCreated = (type: string, baseId: string) => (dispatch: AppDispatch) => {
+  dispatch(
+    facilitiesSlice.actions.added({
+      id: nanoid(),
+      type, baseId
+    })
+  );
+};
 
 export const worked = (facilityId: string) => (dispatch: AppDispatch) => {
   dispatch(itemAdded({ id: "stone", quantity: 1 }));

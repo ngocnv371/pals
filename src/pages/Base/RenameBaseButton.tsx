@@ -1,6 +1,6 @@
-import { IonAlert, IonButton, IonIcon, IonItem, IonLabel } from "@ionic/react";
-import { useAppDispatch } from "../store/hooks";
-import { baseRenamed } from "../store/basesSlice";
+import { IonAlert, IonButton, IonIcon } from "@ionic/react";
+import { useAppDispatch } from "../../store/hooks";
+import { baseRenamed } from "../../store/basesSlice";
 import { pencil } from "ionicons/icons";
 
 const RenameBaseButton: React.FC<{ baseId: string }> = ({ baseId }) => {

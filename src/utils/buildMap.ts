@@ -4,7 +4,7 @@ export default function buildMap<T extends { id: string }>(arr: T[]) {
   return bag;
 }
 
-export function buildMapByKey<T extends { id: string; [k: string]: any }>(
+export function buildMapByKey<T extends { [k: string]: any }>(
   arr: T[],
   key: string
 ) {

@@ -12,7 +12,7 @@ import "./Menu.css";
 import { useAppSelector } from "../store/hooks";
 import { selectAllBases } from "../store/basesSlice";
 import { selectActiveBaseId } from "../store/uiSlice";
-import CreateBaseButton from "./CreateBaseButton";
+import CreateBaseButton from "../pages/Base/CreateBaseButton";
 
 const BasesList: React.FC = () => {
   const bases = useAppSelector((state) => selectAllBases(state.bases));
