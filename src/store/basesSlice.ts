@@ -1,4 +1,9 @@
-import { createSlice, createEntityAdapter, nanoid } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createEntityAdapter,
+  nanoid,
+  PayloadAction,
+} from "@reduxjs/toolkit";
 import { Base } from "../models/base";
 import { AppDispatch } from "./store";
 
@@ -19,6 +24,12 @@ export const basesSlice = createSlice({
   initialState,
   reducers: {
     added: basesAdapter.addOne,
+    renamed(state, action: PayloadAction<Base>) {
+      basesAdapter.updateOne(state, {
+        id: action.payload.id,
+        changes: { name: action.payload.name },
+      });
+    },
   },
 });
 
@@ -32,6 +43,10 @@ export const baseCreated = (name: string) => (dispatch: AppDispatch) => {
       name,
     })
   );
+};
+
+export const baseRenamed = (base: Base) => (dispatch: AppDispatch) => {
+  dispatch(basesSlice.actions.renamed(base));
 };
 
 export default basesSlice.reducer;
