@@ -1,11 +1,13 @@
 [
   {
     "id": "lumber_mill_wood",
+    "facility": "Logging Site",
     "ingredients": { "work": 100 },
     "produce": { "wood": 1 }
   },
   {
     "id": "stone_pit_stone",
+    "facility": "Stone Pit",
     "ingredients": { "work": 100 },
     "produce": { "stone": 1 }
   }

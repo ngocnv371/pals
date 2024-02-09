@@ -7,7 +7,6 @@ function useNewPalNotification() {
   const [toast, dismiss] = useIonToast();
 
   const present = async (pal: Pal) => {
-    console.debug('present', pal)
     const meta = getPalMetadata(pal.type)!;
 
     await toast({
