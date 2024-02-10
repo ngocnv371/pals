@@ -8,7 +8,8 @@ import {
 import Facility from "../models/facility";
 import { AppDispatch, RootState } from "./store";
 import { itemAdded } from "./inventorySlice";
-import { getRecipeById, getRecipes } from "../data/recipes";
+import { getRecipeById, getRecipes, getRecipesByFacility } from "../data/recipes";
+import { getFacilityType } from "../data/facilities";
 
 const facilitiesAdapter = createEntityAdapter<Facility>();
 
@@ -61,11 +62,13 @@ export const { recipeSelected } = facilitiesSlice.actions;
 
 export const facilityCreated =
   (type: string, baseId: string) => (dispatch: AppDispatch) => {
+    const recipes = getRecipesByFacility(type)
     dispatch(
       facilitiesSlice.actions.added({
         id: nanoid(),
         type,
         baseId,
+        activeRecipeId: recipes.length == 1 ? recipes[0].id : undefined
       })
     );
   };
