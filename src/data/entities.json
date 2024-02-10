@@ -8,11 +8,7 @@
     "name": "Wood"
   },
   {
-    "id": "facility_stone",
-    "name": "Stone Pit"
-  },
-  {
-    "id": "facility_lumber",
-    "name": "Lumber Mill"
+    "id": "ore",
+    "name": "Ore"
   }
 ]

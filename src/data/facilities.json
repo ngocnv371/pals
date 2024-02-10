@@ -6,5 +6,9 @@
   {
     "name": "Stone Pit",
     "description": "Where you make stone"
+  },
+  {
+    "name": "Mine",
+    "description": "Where you dig ore"
   }
 ]

@@ -10,5 +10,11 @@
     "facility": "Stone Pit",
     "ingredients": { "work": 100 },
     "produce": { "stone": 1 }
+  },
+  {
+    "id": "mine_ore",
+    "facility": "Mine",
+    "ingredients": { "work": 200 },
+    "produce": { "ore": 1 }
   }
 ]
