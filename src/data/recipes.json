@@ -16,5 +16,17 @@
     "facility": "Mine",
     "ingredients": { "work": 200 },
     "produce": { "ore": 1 }
+  },
+  {
+    "id": "smelter_ingot",
+    "facility": "Smelter",
+    "ingredients": { "work": 200, "ore": 10 },
+    "produce": { "ingot": 1 }
+  },
+  {
+    "id": "smelter_charcoal",
+    "facility": "Smelter",
+    "ingredients": { "work": 200, "wood": 1 },
+    "produce": { "charcoal": 1 }
   }
 ]

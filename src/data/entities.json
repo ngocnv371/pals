@@ -10,5 +10,13 @@
   {
     "id": "ore",
     "name": "Ore"
+  },
+  {
+    "id": "charcoal",
+    "name": "Charcoal"
+  },
+  {
+    "id": "ingot",
+    "name": "Ingot"
   }
 ]

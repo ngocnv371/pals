@@ -10,5 +10,9 @@
   {
     "name": "Mine",
     "description": "Where you dig ore"
+  },
+  {
+    "name": "Smelter",
+    "description": "Where you burn stuff down"
   }
 ]
