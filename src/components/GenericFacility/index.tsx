@@ -6,10 +6,15 @@ import {
   IonCardTitle,
 } from "@ionic/react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { selectFacilityById, worked } from "../../store/facilitiesSlice";
+import {
+  recipeSelected,
+  selectFacilityById,
+  worked,
+} from "../../store/facilitiesSlice";
 import useNewItemNotification from "../NewItemNotification";
 import { getFacilityType } from "../../data/facilities";
 import RecipeIcon from "../RecipeIcon";
+import RecipePicker from "./RecipePicker";
 
 const GenericFacilityCard: React.FC<{ facilityId: string }> = ({
   facilityId,
@@ -46,9 +51,13 @@ const GenericFacilityCard: React.FC<{ facilityId: string }> = ({
           display: "flex",
         }}
       >
-        {facility.activeRecipeId && (
-          <RecipeIcon recipeId={facility.activeRecipeId} />
-        )}
+        <RecipePicker
+          facility={facility.type}
+          value={facility.activeRecipeId}
+          onChange={(id) =>
+            dispatch(recipeSelected({ facilityId, recipeId: id }))
+          }
+        />
         <IonButton
           fill="clear"
           size="large"
