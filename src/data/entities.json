@@ -18,5 +18,17 @@
   {
     "id": "ingot",
     "name": "Ingot"
+  },
+  {
+    "id": "nails",
+    "name": "Nails"
+  },
+  {
+    "id": "bow",
+    "name": "Bow"
+  },
+  {
+    "id": "stone spear",
+    "name": "Stone Spear"
   }
 ]

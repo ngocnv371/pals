@@ -12,7 +12,34 @@
     "description": "Where you dig ore"
   },
   {
+    "name": "Forge",
+    "description": "Where you use the fire to make things",
+    "requirements": {
+      "stone": 50
+    }
+  },
+  {
+    "name": "Workbench",
+    "description": "Where you craft make things",
+    "requirements": {
+      "stone": 5,
+      "wood": 5
+    }
+  },
+  {
     "name": "Smelter",
-    "description": "Where you burn stuff down"
+    "description": "Where you burn stuff down",
+    "requirements": {
+      "wood": 50,
+      "stone": 50
+    }
+  },
+  {
+    "name": "Shop",
+    "description": "Where merchants come and go",
+    "requirements": {
+      "wood": 50,
+      "stone": 50
+    }
   }
 ]
