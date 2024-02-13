@@ -25,6 +25,10 @@ const RecipePicker: React.FC<{
 
   const recipes = useMemo(() => getRecipesByFacility(facility), [facility]);
 
+  if (!recipes?.length) {
+    return null;
+  }
+
   function handleConfirm() {
     onChange && onChange(selected);
     modal.current?.dismiss();
