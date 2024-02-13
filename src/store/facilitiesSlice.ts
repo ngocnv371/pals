@@ -68,7 +68,7 @@ export const facilityCreated =
         id: nanoid(),
         type,
         baseId,
-        activeRecipeId: recipes.length == 1 ? recipes[0].id : undefined
+        activeRecipeId: recipes?.length == 1 ? recipes[0].id : undefined
       })
     );
   };
