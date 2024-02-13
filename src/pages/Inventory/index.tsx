@@ -6,10 +6,15 @@ import {
   IonMenuButton,
   IonTitle,
   IonContent,
+  IonFooter,
 } from "@ionic/react";
 import InventoryList from "../../components/InventoryList";
+import ItemPreview from "./ItemPreview";
+import { useState } from "react";
 
 const InventoryPage: React.FC = () => {
+  const [selected, setSelected] = useState("");
+
   return (
     <IonPage>
       <IonHeader>
@@ -27,8 +32,13 @@ const InventoryPage: React.FC = () => {
             <IonTitle size="large">Inventory</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <InventoryList />
+        <InventoryList onSelect={setSelected} />
       </IonContent>
+      {Boolean(selected) && (
+        <IonFooter>
+          <ItemPreview itemId={selected} />
+        </IonFooter>
+      )}
     </IonPage>
   );
 };

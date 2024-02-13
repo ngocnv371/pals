@@ -4,7 +4,9 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 import Item from "../models/item";
-import { RootState } from "./store";
+import { AppDispatch, RootState } from "./store";
+import Pal from "../models/pal";
+import { nanoid } from "nanoid";
 
 const inventoryAdapter = createEntityAdapter<Item>();
 

@@ -35,3 +35,26 @@ export function buildMapByField<T extends { [k: string]: any }>(
   });
   return bag;
 }
+
+/**
+ * build a quick lookup map, each field returns a list of items
+ * this function is dedicated for fields which is array
+ * example: `{a: 1, b: 2, c: ['t', 'z']}`, we will index by `c`
+ * @param arr
+ * @param field non-unique field
+ * @returns
+ */
+export function buildMapByFieldMany<T extends { [k: string]: any }>(
+  arr: T[],
+  getKeys: (v:T) => string[]
+) {
+  const bag: { [k: string]: T[] } = {};
+  arr.forEach((a) => {
+    const keys = getKeys(a)
+    keys.forEach(key => {
+      const existed = bag[key] || [];
+      bag[key] = existed.concat(a);
+    })
+  });
+  return bag;
+}
