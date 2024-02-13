@@ -1,5 +1,4 @@
 import {
-  IonButton,
   IonCard,
   IonCardContent,
   IonCardHeader,
@@ -9,28 +8,28 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
   recipeSelected,
   selectFacilityById,
-  worked,
 } from "../../store/facilitiesSlice";
-import useNewItemNotification from "../NewItemNotification";
 import { getFacilityType } from "../../data/facilities";
-import RecipeIcon from "../RecipeIcon";
 import RecipePicker from "./RecipePicker";
+import WorkButton from "./WorkButton";
+import Progress from "./Progress";
+import { useCallback, useMemo } from "react";
 
 const GenericFacilityCard: React.FC<{ facilityId: string }> = ({
   facilityId,
 }) => {
   const dispatch = useAppDispatch();
-  const { present, dismiss } = useNewItemNotification();
   const facility = useAppSelector((state) =>
     selectFacilityById(state.facilities, facilityId)
   );
-  const meta = getFacilityType(facility.type);
+  const meta = useMemo(() => getFacilityType(facility.type), [facility.type]);
 
-  async function handleWork() {
-    const items = dispatch(worked(facilityId));
-    await dismiss();
-    items?.forEach((i) => present(i));
-  }
+  const handleRecipeChanged = useCallback(
+    (id: string) => {
+      dispatch(recipeSelected({ facilityId, recipeId: id }));
+    },
+    [facilityId]
+  );
 
   if (!facility || !meta) {
     return null;
@@ -54,19 +53,11 @@ const GenericFacilityCard: React.FC<{ facilityId: string }> = ({
         <RecipePicker
           facility={facility.type}
           value={facility.activeRecipeId}
-          onChange={(id) =>
-            dispatch(recipeSelected({ facilityId, recipeId: id }))
-          }
+          onChange={handleRecipeChanged}
         />
-        <IonButton
-          fill="clear"
-          size="large"
-          onClick={handleWork}
-          disabled={!facility.activeRecipeId}
-        >
-          Work
-        </IonButton>
+        <WorkButton facilityId={facilityId} />
       </div>
+      <Progress facilityId={facilityId} />
     </IonCard>
   );
 };
