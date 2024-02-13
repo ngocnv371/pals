@@ -14,8 +14,16 @@ const initialState = inventoryAdapter.getInitialState({
       id: "gold",
       quantity: 400,
     },
+    ["rocky egg"]: {
+      id: "rocky egg",
+      quantity: 3,
+    },
+    ["electric egg"]: {
+      id: "electric egg",
+      quantity: 2,
+    },
   },
-  ids: ["gold"],
+  ids: ["gold", "rocky egg", "electric egg"],
 });
 
 export const inventorySlice = createSlice({
