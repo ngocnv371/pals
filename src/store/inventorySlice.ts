@@ -4,23 +4,46 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 import Item from "../models/item";
+import { RootState } from "./store";
 
 const inventoryAdapter = createEntityAdapter<Item>();
 
-const initialState = inventoryAdapter.getInitialState();
+const initialState = inventoryAdapter.getInitialState({
+  entities: {
+    gold: {
+      id: "gold",
+      quantity: 400,
+    },
+  },
+  ids: ["gold"],
+});
 
 export const inventorySlice = createSlice({
   name: "inventory",
   initialState,
   reducers: {
     itemAdded(state, action: PayloadAction<Item>) {
-      const existed = state.entities[action.payload.id]
+      const existed = state.entities[action.payload.id];
       if (!existed) {
-        inventoryAdapter.addOne(state, action.payload)
-        return
+        inventoryAdapter.addOne(state, action.payload);
+        return;
       }
 
-      existed.quantity += action.payload.quantity
+      existed.quantity += action.payload.quantity;
+    },
+    itemDeducted(state, action: PayloadAction<Item>) {
+      const updatedQuantity =
+        state.entities[action.payload.id].quantity - action.payload.quantity;
+      if (updatedQuantity > 0) {
+        inventoryAdapter.updateOne(state, {
+          id: action.payload.id,
+          changes: {
+            quantity: updatedQuantity,
+          },
+        });
+      } else {
+        inventoryAdapter.removeOne(state, action.payload.id);
+      }
     },
   },
 });
@@ -28,6 +51,9 @@ export const inventorySlice = createSlice({
 export const { selectAll: selectAllItems, selectById: selectItemById } =
   inventoryAdapter.getSelectors();
 
-export const { itemAdded } = inventorySlice.actions;
+export const selectGold = (state: RootState) =>
+  state.inventory.entities.gold?.quantity || 0;
+
+export const { itemAdded, itemDeducted } = inventorySlice.actions;
 
 export default inventorySlice.reducer;

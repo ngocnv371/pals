@@ -2,6 +2,7 @@ import {
   IonButton,
   IonButtons,
   IonContent,
+  IonFooter,
   IonHeader,
   IonIcon,
   IonItem,
@@ -79,8 +80,10 @@ const PalPicker: React.FC<{
         </IonHeader>
         <IonContent className="ion-padding">
           <PalsList onSelect={handleSelect} gender={gender} selected={temp} />
-          <PalPreview palId={temp} />
         </IonContent>
+        <IonFooter>
+          <PalPreview palId={temp} />
+        </IonFooter>
       </IonModal>
     </>
   );

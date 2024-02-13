@@ -30,5 +30,33 @@
   {
     "id": "stone spear",
     "name": "Stone Spear"
+  },
+  {
+    "id": "common egg",
+    "name": "common egg"
+  },
+  {
+    "id": "verdant egg",
+    "name": "verdant egg"
+  },
+  {
+    "id": "damp egg",
+    "name": "damp egg"
+  },
+  {
+    "id": "rocky egg",
+    "name": "rocky egg"
+  },
+  {
+    "id": "electric egg",
+    "name": "electric egg"
+  },
+  {
+    "id": "dragon egg",
+    "name": "dragon egg"
+  },
+  {
+    "id": "dark egg",
+    "name": "dark egg"
   }
 ]

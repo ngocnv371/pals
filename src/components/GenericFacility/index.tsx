@@ -42,15 +42,7 @@ const GenericFacilityCard: React.FC<{ facilityId: string }> = ({
         <IonCardTitle>{meta.name}</IonCardTitle>
       </IonCardHeader>
       <IonCardContent>{meta.description}</IonCardContent>
-      <div
-        style={{
-          position: "absolute",
-          right: 0,
-          top: "50%",
-          transform: "translateY(-50%)",
-          display: "flex",
-        }}
-      >
+      <div className="card-end-actions flex">
         <RecipePicker
           facility={facility.type}
           value={facility.activeRecipeId}

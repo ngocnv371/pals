@@ -4,6 +4,7 @@ import basesSlice from "./basesSlice";
 import facilitiesSlice from "./facilitiesSlice";
 import palsSlice from "./palsSlice";
 import uiSlice from "./uiSlice";
+import shopSlice from "./shopSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     bases: basesSlice,
     facilities: facilitiesSlice,
     pals: palsSlice,
+    shop: shopSlice,
   },
   devTools: process.env.NODE_ENV !== 'production',
 });
