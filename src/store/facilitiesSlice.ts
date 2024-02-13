@@ -8,7 +8,11 @@ import {
 import Facility from "../models/facility";
 import { AppDispatch, RootState } from "./store";
 import { itemAdded } from "./inventorySlice";
-import { getRecipeById, getRecipes, getRecipesByFacility } from "../data/recipes";
+import {
+  getRecipeById,
+  getRecipes,
+  getRecipesByFacility,
+} from "../data/recipes";
 import { getFacilityType } from "../data/facilities";
 
 const facilitiesAdapter = createEntityAdapter<Facility>();
@@ -43,6 +47,17 @@ export const facilitiesSlice = createSlice({
         },
       });
     },
+    worked(
+      state,
+      action: PayloadAction<{ facilityId: string; work?: number }>
+    ) {
+      facilitiesAdapter.updateOne(state, {
+        id: action.payload.facilityId,
+        changes: {
+          work: action.payload.work,
+        },
+      });
+    },
   },
 });
 
@@ -62,13 +77,13 @@ export const { recipeSelected } = facilitiesSlice.actions;
 
 export const facilityCreated =
   (type: string, baseId: string) => (dispatch: AppDispatch) => {
-    const recipes = getRecipesByFacility(type)
+    const recipes = getRecipesByFacility(type);
     dispatch(
       facilitiesSlice.actions.added({
         id: nanoid(),
         type,
         baseId,
-        activeRecipeId: recipes?.length == 1 ? recipes[0].id : undefined
+        activeRecipeId: recipes?.length == 1 ? recipes[0].id : undefined,
       })
     );
   };
@@ -81,14 +96,32 @@ export const worked =
       return;
     }
 
+    const workPerTap = 12;
     const recipe = getRecipeById(facility.activeRecipeId);
-    const produce = recipe.produce as any;
-    const products = Object.keys(produce).map((k) => ({
-      id: k,
-      quantity: +produce[k],
-    }));
-    products.forEach((p) => dispatch(itemAdded(p)));
-    return products;
+    const requiredWork = recipe.ingredients.work;
+    const updatedWork = (facility.work || 0) + workPerTap;
+    if (updatedWork > requiredWork) {
+      const produce = recipe.produce as any;
+      const products = Object.keys(produce).map((k) => ({
+        id: k,
+        quantity: +produce[k],
+      }));
+      // reset work to 0, no carry over
+      dispatch(
+        facilitiesSlice.actions.worked({
+          facilityId: id,
+          work: 0,
+        })
+      );
+      products.forEach((p) => dispatch(itemAdded(p)));
+      return products;
+    }
+
+    dispatch(
+      facilitiesSlice.actions.worked({ facilityId: id, work: updatedWork })
+    );
+
+    return [];
   };
 
 export default facilitiesSlice.reducer;

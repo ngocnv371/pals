@@ -3,4 +3,5 @@ export default interface Facility {
   type: string;
   baseId: string;
   activeRecipeId?: string;
+  work?: number;
 }
