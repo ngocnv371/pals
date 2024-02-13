@@ -8,12 +8,7 @@ import {
 import Facility from "../models/facility";
 import { AppDispatch, RootState } from "./store";
 import { itemAdded } from "./inventorySlice";
-import {
-  getRecipeById,
-  getRecipes,
-  getRecipesByFacility,
-} from "../data/recipes";
-import { getFacilityType } from "../data/facilities";
+import { getRecipeById, getRecipesByFacility } from "../data/recipes";
 
 const facilitiesAdapter = createEntityAdapter<Facility>();
 
@@ -23,12 +18,18 @@ const fa0: Facility = {
   baseId: "default",
   activeRecipeId: "lumber_mill_wood",
 };
+const fa1: Facility = {
+  id: nanoid(),
+  type: "Shop",
+  baseId: "default",
+};
 
 const initialState = facilitiesAdapter.getInitialState({
   entities: {
     [fa0.id]: fa0,
+    [fa1.id]: fa1,
   },
-  ids: [fa0.id],
+  ids: [fa0.id, fa1.id],
 });
 
 export const facilitiesSlice = createSlice({
