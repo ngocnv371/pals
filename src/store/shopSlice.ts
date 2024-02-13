@@ -10,7 +10,11 @@ import Item from "../models/item";
 import { Chance } from "chance";
 import { entities } from "../data/metadata";
 import ShopItem from "../models/ShopItem";
-import inventorySlice, { itemAdded, itemDeducted, selectGold } from "./inventorySlice";
+import inventorySlice, {
+  itemAdded,
+  itemDeducted,
+  selectGold,
+} from "./inventorySlice";
 
 const shopAdapter = createEntityAdapter<ShopItem>();
 
@@ -21,8 +25,8 @@ export const basesSlice = createSlice({
   initialState,
   reducers: {
     set(state, action: PayloadAction<ShopItem[]>) {
-        shopAdapter.removeAll(state)
-        shopAdapter.addMany(state, action.payload)
+      shopAdapter.removeAll(state);
+      shopAdapter.addMany(state, action.payload);
     },
     update: shopAdapter.updateOne,
     remove: shopAdapter.removeOne,
@@ -68,8 +72,10 @@ export const buy =
       dispatch(basesSlice.actions.remove(shopItem.id));
     }
 
-    dispatch(itemAdded({id: shopItem.id, quantity: 1}))
-    dispatch(itemDeducted({ id: 'gold', quantity: shopItem.price }));
+    const item: Item = { id: shopItem.id, quantity: 1 };
+    dispatch(itemAdded(item));
+    dispatch(itemDeducted({ id: "gold", quantity: shopItem.price }));
+    return item;
   };
 
 export default basesSlice.reducer;
