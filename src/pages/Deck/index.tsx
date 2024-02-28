@@ -12,10 +12,11 @@ import {
   IonCardHeader,
   IonCardTitle,
 } from "@ionic/react";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import "./styles.css";
 import { Chance } from "chance";
 import pals from "../../data/pals.json";
+import Pal from "../../models/pal";
 
 const Board: React.FC = () => {
   return (
@@ -106,12 +107,37 @@ const handCards = chance.pickset(pals, 5);
 
 const Hand: React.FC = () => {
   const [cards] = useState(handCards);
+  const [selectedCards, setSelectedCards] = useState<string[]>([]);
+
+  const handleSelectCard = useCallback(
+    (cardId: string) => {
+      if (selectedCards.includes(cardId)) {
+        // unselect
+        setSelectedCards((items) => items.filter((i) => i != cardId));
+      } else {
+        // add select
+        setSelectedCards((items) => items.concat(cardId));
+      }
+    },
+    [selectedCards]
+  );
 
   return (
     <div className="hand">
-      {cards.map((c) => (
-        <HandCard key={c.id} cardId={c.id} />
-      ))}
+      {cards.map((c) => {
+        const idx = selectedCards.indexOf(c.id);
+        const selected = idx >= 0;
+        const index = selected ? idx + 1 : undefined;
+        return (
+          <HandCard
+            key={c.id}
+            cardId={c.id}
+            selected={selected}
+            index={index}
+            onClick={() => handleSelectCard(c.id)}
+          />
+        );
+      })}
     </div>
   );
 };
@@ -120,7 +146,8 @@ const HandCard: React.FC<{
   cardId: string;
   selected?: boolean;
   index?: number;
-}> = ({ cardId, selected, index }) => {
+  onClick?: () => void;
+}> = ({ cardId, selected, index, onClick }) => {
   const card = useMemo(() => pals.find((f) => f.id == cardId), [cardId]);
 
   if (!card) {
@@ -128,7 +155,10 @@ const HandCard: React.FC<{
   }
 
   return (
-    <div className={`hand-card ${selected ? "selected" : ""}`}>
+    <div
+      className={`hand-card ${selected ? "selected" : ""}`}
+      onClick={onClick}
+    >
       {selected && <IonBadge>{index}</IonBadge>}
       <IonCard style={{ width: "80px", height: "120px" }}>
         <IonImg src={`/pals/${card.content.image}`}></IonImg>
