@@ -1,7 +1,42 @@
 .cell {
   display: flex;
+  width: 130px;
+  height: 130px;
+  border: 1px dashed grey;
+  align-items: center;
   ion-card {
     margin: 2px;
+  }
+}
+.card {
+  display: flex;
+  position: relative;
+  margin: auto;
+  p {
+    text-align: center;
+    color: grey;
+    span.atk {
+      color: red;
+    }
+  }
+  ion-badge {
+    z-index: 99;
+  }
+  ion-card {
+    margin: 2px;
+    width: 80px;
+    height: 120px;
+  }
+  &.defensive {
+    transform: rotateZ(-90deg);
+    p {
+      span.atk {
+        color: inherit;
+      }
+      span.def {
+        color: red;
+      }
+    }
   }
 }
 .row {
@@ -11,25 +46,7 @@
 .hand {
   display: flex;
   flex-wrap: nowrap;
-  > div.hand-card {
-    display: flex;
-    position: relative;
-    p {
-      text-align: center;
-      span.atk {
-        color: orange;
-      }
-      span.def {
-        color: coral;
-      }
-    }
-    ion-badge {
-      z-index: 99;
-    }
-    ion-card {
-      margin: 2px;
-    }
-  }
+  background-color: darkgrey;
   > div.hand-card.selected {
     margin-top: -10px;
   }

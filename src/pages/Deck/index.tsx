@@ -57,20 +57,23 @@ const Board: React.FC = () => {
           <Card cardId="yeti" />
         </Cell>
         <Cell>
-          <Card cardId="swwetssheep" />
+          <Card cardId="sweetssheep" defensive />
         </Cell>
         <Cell>
           <Card cardId="queenbee" />
         </Cell>
         <Cell>
-          <Card cardId="ronin" />
+          <Card cardId="ronin" defensive />
         </Cell>
       </Row>
     </div>
   );
 };
 
-const Card: React.FC<{ cardId: string }> = ({ cardId }) => {
+const Card: React.FC<{ cardId: string; defensive?: boolean }> = ({
+  cardId,
+  defensive,
+}) => {
   const card = useMemo(() => pals.find((f) => f.id == cardId), [cardId]);
 
   if (!card) {
@@ -78,8 +81,8 @@ const Card: React.FC<{ cardId: string }> = ({ cardId }) => {
   }
 
   return (
-    <div className="card">
-      <IonCard style={{ width: "80px", height: "120px" }}>
+    <div className={`card ${defensive ? "defensive" : ""}`}>
+      <IonCard>
         <IonImg src={`/pals/${card.content.image}`}></IonImg>
         <p>
           <span className="atk">{card.content.baseAttack}</span>/
@@ -156,11 +159,11 @@ const HandCard: React.FC<{
 
   return (
     <div
-      className={`hand-card ${selected ? "selected" : ""}`}
+      className={`card hand-card ${selected ? "selected" : ""}`}
       onClick={onClick}
     >
       {selected && <IonBadge>{index}</IonBadge>}
-      <IonCard style={{ width: "80px", height: "120px" }}>
+      <IonCard>
         <IonImg src={`/pals/${card.content.image}`}></IonImg>
         <p>
           <span className="atk">{card.content.baseAttack}</span>/
