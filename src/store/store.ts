@@ -5,6 +5,7 @@ import facilitiesSlice from "./facilitiesSlice";
 import palsSlice from "./palsSlice";
 import uiSlice from "./uiSlice";
 import shopSlice from "./shopSlice";
+import duelSlice from "./duelSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,8 +15,9 @@ export const store = configureStore({
     facilities: facilitiesSlice,
     pals: palsSlice,
     shop: shopSlice,
+    duel: duelSlice,
   },
-  devTools: process.env.NODE_ENV !== 'production',
+  devTools: process.env.NODE_ENV !== "production",
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

@@ -9,62 +9,85 @@ import {
   IonCard,
   IonImg,
   IonBadge,
-  IonCardHeader,
-  IonCardTitle,
+  IonIcon,
+  IonFabButton,
+  IonFabList,
+  IonFab,
 } from "@ionic/react";
-import { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import "./styles.css";
 import { Chance } from "chance";
 import pals from "../../data/pals.json";
 import Pal from "../../models/pal";
+import { chevronForward } from "ionicons/icons";
+import { useAppSelector } from "../../store/hooks";
+import {
+  CardStance,
+  Formation,
+  selectMyDeployed,
+  selectMySupports,
+  selectTheirDeployed,
+  selectTheirHand,
+  selectTheirSupports,
+} from "../../store/duelSlice";
+import { RootState } from "../../store";
+
+const FormationLine: React.FC<{ formation: Formation }> = ({ formation }) => {
+  return formation.map((d, idx) => (
+    <Cell key={idx}>
+      {d && (
+        <Card cardId={d.cardId} defensive={d.stance == CardStance.Defensive} />
+      )}
+    </Cell>
+  ));
+};
+
+function withFormationSelector(
+  selector: (state: RootState) => Formation,
+  name?: string
+) {
+  function WrappedComponent() {
+    const value = useAppSelector(selector);
+    return <FormationLine formation={value} />;
+  }
+  if (name) {
+    WrappedComponent.displayName = name;
+  }
+  return WrappedComponent;
+}
+
+const TheirDeployedFormation = withFormationSelector(
+  selectTheirDeployed,
+  "TheirDeployedFormation"
+);
+const MyDeployedFormation = withFormationSelector(
+  selectMyDeployed,
+  "MyDeployedFormation"
+);
+const TheirSupportsFormation = withFormationSelector(
+  selectTheirSupports,
+  "TheirSupportsFormation"
+);
+const MySupportsFormation = withFormationSelector(
+  selectMySupports,
+  "MySupportsFormation"
+);
 
 const Board: React.FC = () => {
   return (
     <div className="board">
       <Row>
-        <Cell></Cell>
-        <Cell>
-          <Card cardId="pinkcat" />
-        </Cell>
-        <Cell></Cell>
-        <Cell></Cell>
-        <Cell></Cell>
+        <TheirSupportsFormation />
       </Row>
       <Row>
-        <Cell></Cell>
-        <Cell>
-          <Card cardId="negativekoala" />
-        </Cell>
-        <Cell></Cell>
-        <Cell></Cell>
-        <Cell></Cell>
+        <TheirDeployedFormation />
       </Row>
       <EmptyRow></EmptyRow>
       <Row>
-        <Cell></Cell>
-        <Cell></Cell>
-        <Cell>
-          <Card cardId="suzaku" />
-        </Cell>
-        <Cell></Cell>
-        <Cell></Cell>
+        <MyDeployedFormation />
       </Row>
       <Row>
-        <Cell>
-          <Card cardId="woolfox" />
-        </Cell>
-        <Cell>
-          <Card cardId="yeti" />
-        </Cell>
-        <Cell>
-          <Card cardId="sweetssheep" defensive />
-        </Cell>
-        <Cell>
-          <Card cardId="queenbee" />
-        </Cell>
-        <Cell>
-          <Card cardId="ronin" defensive />
-        </Cell>
+        <MySupportsFormation />
       </Row>
     </div>
   );
@@ -108,6 +131,14 @@ const EmptyRow: React.FC = () => {
 const chance = new Chance();
 const handCards = chance.pickset(pals, 5);
 
+const PlaceCardsButton: React.FC = () => {
+  return (
+    <IonFabButton>
+      <IonIcon icon={chevronForward} />
+    </IonFabButton>
+  );
+};
+
 const Hand: React.FC = () => {
   const [cards] = useState(handCards);
   const [selectedCards, setSelectedCards] = useState<string[]>([]);
@@ -127,6 +158,9 @@ const Hand: React.FC = () => {
 
   return (
     <div className="hand">
+      <IonFab slot="fixed" horizontal="end" vertical="bottom">
+        {selectedCards.length > 0 && <PlaceCardsButton />}
+      </IonFab>
       {cards.map((c) => {
         const idx = selectedCards.indexOf(c.id);
         const selected = idx >= 0;

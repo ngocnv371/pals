@@ -48,6 +48,6 @@
   flex-wrap: nowrap;
   background-color: darkgrey;
   > div.hand-card.selected {
-    margin-top: -10px;
+    margin-top: -20px;
   }
 }
