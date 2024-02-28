@@ -1,0 +1,36 @@
+.cell {
+  display: flex;
+  ion-card {
+    margin: 2px;
+  }
+}
+.row {
+  display: flex;
+  flex-wrap: nowrap;
+}
+.hand {
+  display: flex;
+  flex-wrap: nowrap;
+  > div.hand-card {
+    display: flex;
+    position: relative;
+    p {
+      text-align: center;
+      span.atk {
+        color: orange;
+      }
+      span.def {
+        color: coral;
+      }
+    }
+    ion-badge {
+      z-index: 99;
+    }
+    ion-card {
+      margin: 2px;
+    }
+  }
+  > div.hand-card.selected {
+    margin-top: -10px;
+  }
+}

@@ -32,6 +32,7 @@ import MyPalsPage from "./pages/MyPals";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import InventoryPage from "./pages/Inventory";
+import DeckPage from "./pages/Deck";
 
 setupIonicReact();
 
@@ -44,7 +45,7 @@ const App: React.FC = () => {
             <Menu />
             <IonRouterOutlet id="main">
               <Route path="/" exact={true}>
-                <Redirect to="/bases/default" />
+                <Redirect to="/deck" />
               </Route>
               <Route path="/bases/:id" exact={true}>
                 <BasePage />
@@ -54,6 +55,9 @@ const App: React.FC = () => {
               </Route>
               <Route path="/inventory" exact={true}>
                 <InventoryPage />
+              </Route>
+              <Route path="/deck" exact={true}>
+                <DeckPage />
               </Route>
             </IonRouterOutlet>
           </IonSplitPane>
