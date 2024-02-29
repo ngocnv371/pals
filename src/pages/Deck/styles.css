@@ -71,15 +71,6 @@
   }
 }
 
-.hand {
-  display: flex;
-  flex-wrap: nowrap;
-  background-color: darkgrey;
-  > div.hand-card.selected {
-    margin-top: -20px;
-  }
-}
-
 .card-stack {
   position: relative;
   .card {

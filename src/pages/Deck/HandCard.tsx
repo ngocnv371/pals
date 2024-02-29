@@ -7,10 +7,11 @@ export const HandCard: React.FC<{
   selected?: boolean;
   index?: number;
   onClick?: () => void;
-}> = ({ cardId, selected, index, onClick }) => {
+  className?: string;
+}> = ({ cardId, selected, index, onClick, className }) => {
   return (
     <div
-      className={`card hand-card ${selected ? "selected" : ""}`}
+      className={`card hand-card ${className} ${selected ? "selected" : ""}`}
       onClick={onClick}
     >
       {selected && <IonBadge>{index}</IonBadge>}

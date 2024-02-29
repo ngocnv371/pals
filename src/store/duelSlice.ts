@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Chance } from "chance";
 import pals from "../data/pals.json";
 import { RootState } from "./store";
@@ -22,9 +22,20 @@ export interface Side {
   supports: Formation;
 }
 
+export enum DuelStage {
+  MyDrawing = "MyDrawing",
+  MyPlacing = "MyPlacing",
+  MyAttack = "MyAttack",
+  TheirDrawing = "TheirDrawing",
+  TheirPlacing = "TheirPlacing",
+  TheirAttack = "TheirAttack",
+  End = "End",
+}
+
 interface State {
   their: Side;
   my: Side;
+  stage: DuelStage;
 }
 
 const chance = new Chance();
@@ -63,12 +74,38 @@ const initialState: State = {
     ),
     supports: [null, null, null, null, null],
   },
+  stage: DuelStage.MyDrawing,
 };
 
 export const duelSlice = createSlice({
   name: "duel",
   initialState,
-  reducers: {},
+  reducers: {
+    myDrawed(state, action: PayloadAction<number>) {
+      const bag = [];
+      for (let i = 0; i < action.payload; i++) {
+        const item = state.my.deck.pop();
+        if (!item) {
+          break;
+        }
+
+        bag.push(item);
+      }
+      state.my.hand = state.my.hand.concat(bag);
+    },
+    theirDrawed(state, action: PayloadAction<number>) {
+      const bag = [];
+      for (let i = 0; i < action.payload; i++) {
+        const item = state.their.deck.pop();
+        if (!item) {
+          break;
+        }
+
+        bag.push(item);
+      }
+      state.their.hand = state.their.hand.concat(bag);
+    },
+  },
 });
 
 export const selectTheirHand = (state: RootState) => state.duel.their.hand;
@@ -85,6 +122,8 @@ export const selectTheirSupports = (state: RootState) =>
 
 export const selectMySupports = (state: RootState) => state.duel.my.supports;
 
-export const {} = duelSlice.actions;
+export const selectStage = (state: RootState) => state.duel.stage;
+
+export const { myDrawed, theirDrawed } = duelSlice.actions;
 
 export default duelSlice.reducer;

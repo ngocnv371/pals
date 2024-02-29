@@ -4,6 +4,7 @@ import { PlaceCardsButton } from "./PlaceCardsButton";
 import { HandCard } from "./HandCard";
 import { useAppSelector } from "../../store/hooks";
 import { getPalMetadataById } from "../../data/palMetadata";
+import "./Hand.css";
 
 export const Hand: React.FC = () => {
   const hand = useAppSelector((state) => state.duel.my.hand);
@@ -28,7 +29,7 @@ export const Hand: React.FC = () => {
       <IonFab slot="fixed" horizontal="end" vertical="bottom">
         {selectedCards.length > 0 && <PlaceCardsButton />}
       </IonFab>
-      {cards.map((c) => {
+      {cards.map((c, cidx) => {
         const idx = selectedCards.indexOf(c.id);
         const selected = idx >= 0;
         const index = selected ? idx + 1 : undefined;
@@ -39,6 +40,7 @@ export const Hand: React.FC = () => {
             selected={selected}
             index={index}
             onClick={() => handleSelectCard(c.id)}
+            className={`animate__animated animate__slideInRight animate__delay-${cidx}`}
           />
         );
       })}

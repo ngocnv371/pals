@@ -9,10 +9,7 @@ import {
 } from "@ionic/react";
 import React from "react";
 import "./styles.css";
-import { Hand } from "./Hand";
-import { Board } from "./Board";
-import CardStack from "./CardStack";
-import CardFusion from "./CardFusion";
+import DuelContainer from "./DuelContainer";
 
 const DeckPage: React.FC = () => {
   return (
@@ -32,10 +29,7 @@ const DeckPage: React.FC = () => {
             <IonTitle size="large">Deck</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <Board />
-        <CardFusion />
-        <Hand />
-        <CardStack />
+        <DuelContainer />
       </IonContent>
     </IonPage>
   );

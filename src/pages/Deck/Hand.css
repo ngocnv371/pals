@@ -1,0 +1,61 @@
+.hand {
+  display: flex;
+  flex-wrap: nowrap;
+  > div.hand-card.selected {
+    margin-top: -20px;
+  }
+}
+.animate__animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@keyframes slideInRight {
+  0% {
+    -webkit-transform: translate3d(600%, 0, 0);
+    transform: translate3d(600%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+
+.animate__slideInRight {
+  -webkit-animation-name: slideInRight;
+  animation-name: slideInRight;
+}
+
+.animate__animated.animate__delay-1 {
+  -webkit-animation-delay: 0.25s;
+  animation-delay: 0.25s;
+  -webkit-animation-delay: 0.25;
+  animation-delay: 0.25;
+}
+
+.animate__animated.animate__delay-2 {
+  -webkit-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+  -webkit-animation-delay: 0.5;
+  animation-delay: 0.5;
+}
+
+.animate__animated.animate__delay-3 {
+  -webkit-animation-delay: 0.75s;
+  animation-delay: 0.75s;
+  -webkit-animation-delay: 0.75;
+  animation-delay: 0.75;
+}
+
+.animate__animated.animate__delay-4 {
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
+  -webkit-animation-delay: 1;
+  animation-delay: 1;
+}
