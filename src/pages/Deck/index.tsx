@@ -12,6 +12,7 @@ import "./styles.css";
 import { Hand } from "./Hand";
 import { Board } from "./Board";
 import CardStack from "./CardStack";
+import CardFusion from "./CardFusion";
 
 const DeckPage: React.FC = () => {
   return (
@@ -32,6 +33,7 @@ const DeckPage: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <Board />
+        <CardFusion />
         <Hand />
         <CardStack />
       </IonContent>
