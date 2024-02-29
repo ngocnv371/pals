@@ -28,20 +28,22 @@ const MySupportsFormation = withFormationSelector(
 
 export const Board: React.FC = () => {
   return (
-    <div className="board">
-      <Row>
-        <TheirSupportsFormation />
-      </Row>
-      <Row>
-        <TheirDeployedFormation />
-      </Row>
-      <EmptyRow></EmptyRow>
-      <Row>
-        <MyDeployedFormation />
-      </Row>
-      <Row>
-        <MySupportsFormation />
-      </Row>
+    <div className="board-container">
+      <div className="board rest">
+        <Row>
+          <TheirSupportsFormation />
+        </Row>
+        <Row>
+          <TheirDeployedFormation />
+        </Row>
+        <EmptyRow></EmptyRow>
+        <Row>
+          <MyDeployedFormation />
+        </Row>
+        <Row>
+          <MySupportsFormation />
+        </Row>
+      </div>
     </div>
   );
 };

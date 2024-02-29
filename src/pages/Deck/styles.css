@@ -1,3 +1,19 @@
+.board-container {
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  perspective: 333px;
+  .board {
+    transform-style: preserve-3d;
+    transition: all 200ms;
+    transform: rotateX(0deg) translateY(0px);
+    &.rest {
+      transform: rotateX(30deg) translateY(-160px);
+    }
+  }
+}
+
 .cell {
   display: flex;
   width: 130px;
@@ -23,6 +39,8 @@
   }
   ion-badge {
     z-index: 99;
+    margin-top: -7px;
+    margin-right: -2px;
   }
   ion-card {
     margin: 2px;
