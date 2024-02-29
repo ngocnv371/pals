@@ -1,6 +1,6 @@
-import { IonCard, IonImg, IonBadge } from "@ionic/react";
-import React, { useMemo } from "react";
-import { getPalMetadataById } from "../../data/palMetadata";
+import { IonBadge } from "@ionic/react";
+import React from "react";
+import { CardInfo } from "./CardInfo";
 
 export const HandCard: React.FC<{
   cardId: string;
@@ -8,25 +8,13 @@ export const HandCard: React.FC<{
   index?: number;
   onClick?: () => void;
 }> = ({ cardId, selected, index, onClick }) => {
-  const card = useMemo(() => getPalMetadataById(cardId), [cardId]);
-
-  if (!card) {
-    return null;
-  }
-
   return (
     <div
       className={`card hand-card ${selected ? "selected" : ""}`}
       onClick={onClick}
     >
       {selected && <IonBadge>{index}</IonBadge>}
-      <IonCard>
-        <IonImg src={`/pals/${card.content.image}`}></IonImg>
-        <p>
-          <span className="atk">{card.content.baseAttack}</span>/
-          <span className="def">{card.content.defense}</span>
-        </p>
-      </IonCard>
+      <CardInfo cardId={cardId} />
     </div>
   );
 };
