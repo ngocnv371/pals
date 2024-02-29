@@ -12,6 +12,8 @@
   display: flex;
   position: relative;
   margin: auto;
+  transition: all 200ms;
+  margin-top: 0;
   p {
     text-align: center;
     color: grey;
@@ -26,6 +28,7 @@
     margin: 2px;
     width: 80px;
     height: 120px;
+    transition: all 200ms;
   }
   &.defensive {
     transform: rotateZ(-90deg);
