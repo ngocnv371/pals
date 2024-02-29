@@ -77,33 +77,31 @@ const initialState: State = {
   stage: DuelStage.MyDrawing,
 };
 
+function draw(side: Side, qty: number) {
+  const bag = [];
+  for (let i = 0; i < qty; i++) {
+    const item = side.deck.pop();
+    if (!item) {
+      break;
+    }
+
+    bag.push(item);
+  }
+  side.hand = side.hand.concat(bag);
+}
+
 export const duelSlice = createSlice({
   name: "duel",
   initialState,
   reducers: {
-    myDrawed(state, action: PayloadAction<number>) {
-      const bag = [];
-      for (let i = 0; i < action.payload; i++) {
-        const item = state.my.deck.pop();
-        if (!item) {
-          break;
-        }
-
-        bag.push(item);
-      }
-      state.my.hand = state.my.hand.concat(bag);
+    myCardsDrawed(state, action: PayloadAction<number>) {
+      draw(state.my, action.payload);
     },
-    theirDrawed(state, action: PayloadAction<number>) {
-      const bag = [];
-      for (let i = 0; i < action.payload; i++) {
-        const item = state.their.deck.pop();
-        if (!item) {
-          break;
-        }
-
-        bag.push(item);
-      }
-      state.their.hand = state.their.hand.concat(bag);
+    theirCardsDrawed(state, action: PayloadAction<number>) {
+      draw(state.their, action.payload);
+    },
+    myHandCardsSelected(state, action: PayloadAction<string[]>) {
+      state.stage = DuelStage.MyPlacing;
     },
   },
 });
@@ -124,6 +122,7 @@ export const selectMySupports = (state: RootState) => state.duel.my.supports;
 
 export const selectStage = (state: RootState) => state.duel.stage;
 
-export const { myDrawed, theirDrawed } = duelSlice.actions;
+export const { myCardsDrawed, theirCardsDrawed, myHandCardsSelected } =
+  duelSlice.actions;
 
 export default duelSlice.reducer;

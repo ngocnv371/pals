@@ -27,7 +27,9 @@ export const Hand: React.FC = () => {
   return (
     <div className="hand">
       <IonFab slot="fixed" horizontal="end" vertical="bottom">
-        {selectedCards.length > 0 && <PlaceCardsButton />}
+        {selectedCards.length > 0 && (
+          <PlaceCardsButton cardIds={selectedCards} />
+        )}
       </IonFab>
       {cards.map((c, cidx) => {
         const idx = selectedCards.indexOf(c.id);

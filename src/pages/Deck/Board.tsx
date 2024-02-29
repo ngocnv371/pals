@@ -8,6 +8,7 @@ import {
   selectMySupports,
 } from "../../store/duelSlice";
 import { withFormationSelector } from "./withFormationSelector";
+import "./Board.css";
 
 const TheirDeployedFormation = withFormationSelector(
   selectTheirDeployed,
