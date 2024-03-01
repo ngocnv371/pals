@@ -92,3 +92,9 @@
     z-index: 4;
   }
 }
+
+.stage-banner {
+  position: absolute;
+  top: 4em;
+  left: 2em;
+}

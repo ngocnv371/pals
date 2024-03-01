@@ -170,6 +170,7 @@ export const duelSlice = createSlice({
         return;
       }
       placeCard(state.my);
+      state.stage = DuelStage.MyAttack;
     },
   },
 });

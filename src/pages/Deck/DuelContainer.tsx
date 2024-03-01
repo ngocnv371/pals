@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Board } from "./Board";
 import { Hand } from "./Hand";
 import FusionVisualizer from "./FusionVisualizer";
+import StageBanner from "./StageBanner";
 const DuelContainer: React.FC = () => {
   const stage = useAppSelector(selectStage);
   const dispatch = useAppDispatch();
@@ -18,6 +19,7 @@ const DuelContainer: React.FC = () => {
   return (
     <div className={`duel-container ${stage}`}>
       <Board />
+      <StageBanner />
       {stage == DuelStage.MyDrawing && <Hand />}
       {stage == DuelStage.MyFusion && <FusionVisualizer />}
     </div>
