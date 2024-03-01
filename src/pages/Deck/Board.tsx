@@ -14,7 +14,7 @@ import {
   myStanceChangedToDefensive,
   myOffensiveCardSelected,
   myTargetCardSelected,
-  myAttack,
+  myBattle,
 } from "../../store/duelSlice";
 import { withFormationSelector } from "./withFormationSelector";
 import "./Board.css";
@@ -69,7 +69,7 @@ export const Board: React.FC = () => {
             <TheirTargettingFormation
               onSelected={(index) => {
                 dispatch(myTargetCardSelected({ index }));
-                dispatch(myAttack());
+                dispatch(myBattle());
               }}
             />
           ) : (

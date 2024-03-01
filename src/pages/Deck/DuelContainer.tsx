@@ -5,6 +5,8 @@ import { Board } from "./Board";
 import { Hand } from "./Hand";
 import FusionVisualizer from "./FusionVisualizer";
 import StageBanner from "./StageBanner";
+import { MyBattleVisualizer } from "./BattleVisualizer";
+
 const DuelContainer: React.FC = () => {
   const stage = useAppSelector(selectStage);
   const dispatch = useAppDispatch();
@@ -12,7 +14,7 @@ const DuelContainer: React.FC = () => {
   // start duel
   useEffect(() => {
     if (stage === DuelStage.Start) {
-      dispatch(myCardsDrawed(5));
+      dispatch(myCardsDrawed());
     }
   }, [stage]);
 
@@ -22,6 +24,7 @@ const DuelContainer: React.FC = () => {
       <StageBanner />
       {stage == DuelStage.MyDrawing && <Hand />}
       {stage == DuelStage.MyFusion && <FusionVisualizer />}
+      {stage == DuelStage.MyBattle && <MyBattleVisualizer />}
     </div>
   );
 };
