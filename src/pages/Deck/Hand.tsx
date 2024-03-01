@@ -37,7 +37,7 @@ export const Hand: React.FC = () => {
         const index = selected ? idx + 1 : undefined;
         return (
           <HandCard
-            key={c.id}
+            key={cidx}
             cardId={c.id}
             selected={selected}
             index={index}

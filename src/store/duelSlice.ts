@@ -135,6 +135,10 @@ function placeCard(side: Side) {
   side.fusionQueue = [];
 }
 
+function changeStanceToDefensive(side: Side, index: number) {
+  side.deployed[index]!.stance = CardStance.Defensive;
+}
+
 export const duelSlice = createSlice({
   name: "duel",
   initialState,
@@ -172,6 +176,12 @@ export const duelSlice = createSlice({
       placeCard(state.my);
       state.stage = DuelStage.MyAttack;
     },
+    myStanceChangedToDefensive(
+      state,
+      action: PayloadAction<{ index: number }>
+    ) {
+      changeStanceToDefensive(state.my, action.payload.index);
+    },
   },
 });
 
@@ -191,8 +201,12 @@ export const selectMySupports = (state: RootState) => state.duel.my.supports;
 
 export const selectStage = (state: RootState) => state.duel.stage;
 
-export const { myCardsDrawed, myHandCardsSelected, mySpotSelected } =
-  duelSlice.actions;
+export const {
+  myCardsDrawed,
+  myHandCardsSelected,
+  mySpotSelected,
+  myStanceChangedToDefensive,
+} = duelSlice.actions;
 
 function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));

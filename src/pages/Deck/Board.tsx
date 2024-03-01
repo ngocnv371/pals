@@ -10,8 +10,13 @@ import {
   DuelStage,
   mySpotSelected,
   myFuseAndPlace,
+  CardStance,
+  myStanceChangedToDefensive,
 } from "../../store/duelSlice";
-import { withFormationSelector } from "./withFormationSelector";
+import {
+  withAttackingFormationSelector,
+  withFormationSelector,
+} from "./withFormationSelector";
 import "./Board.css";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
@@ -22,6 +27,10 @@ const TheirDeployedFormation = withFormationSelector(
 const MyDeployedFormation = withFormationSelector(
   selectMyDeployed,
   "MyDeployedFormation"
+);
+const MyAttackingDeployedFormation = withAttackingFormationSelector(
+  selectMyDeployed,
+  "MyAttackingDeployedFormation"
 );
 const TheirSupportsFormation = withFormationSelector(
   selectTheirSupports,
@@ -47,13 +56,24 @@ export const Board: React.FC = () => {
         </Row>
         <EmptyRow></EmptyRow>
         <Row>
-          <MyDeployedFormation
-            canSelect={stage == DuelStage.MyPlacing}
-            onSelect={(idx) => {
-              dispatch(mySpotSelected(idx));
-              dispatch(myFuseAndPlace());
-            }}
-          />
+          {stage == DuelStage.MyAttack ? (
+            <MyAttackingDeployedFormation
+              showStance
+              onStanceChanged={(idx, stance) => {
+                if (stance == CardStance.Defensive) {
+                  dispatch(myStanceChangedToDefensive({ index: idx }));
+                }
+              }}
+            />
+          ) : (
+            <MyDeployedFormation
+              canSelect={stage == DuelStage.MyPlacing}
+              onSelect={(idx) => {
+                dispatch(mySpotSelected(idx));
+                dispatch(myFuseAndPlace());
+              }}
+            />
+          )}
         </Row>
         <Row>
           <MySupportsFormation />
