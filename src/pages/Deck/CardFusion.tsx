@@ -27,13 +27,13 @@ const CardFusion: React.FC<{ card1: string; card2: string; card3: string }> = ({
       ref.current?.classList.remove("presentingResult");
       ref.current?.classList.remove("presentingBoth");
       ref.current?.classList.add("playing");
-    }, 2050);
+    }, 1050);
     setTimeout(() => {
       ref.current?.classList.remove("playing");
       ref.current?.classList.remove("presentingResult");
       ref.current?.classList.remove("presentingBoth");
       ref.current?.classList.add("presentingResult");
-    }, 4050);
+    }, 3050);
   }, [card1, card2, card3]);
 
   return (

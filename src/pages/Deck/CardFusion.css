@@ -28,14 +28,12 @@
   &.presentingBoth {
     .card:nth-child(1) {
       left: 20%;
-      animation-delay: 0s;
-      animation: tada 2s linear;
+      animation: tada 1s linear;
       opacity: 1;
     }
     .card:nth-child(2) {
       right: 20%;
-      animation-delay: 1s;
-      animation: tada 2s linear;
+      animation: tada 1s linear;
       opacity: 1;
     }
     .card:nth-child(3) {
@@ -50,7 +48,7 @@
     .card:nth-child(3) {
       left: 45%;
       animation-delay: 1s;
-      animation: bounce 2s linear;
+      animation: bounce 1s linear;
       opacity: 1;
     }
   }

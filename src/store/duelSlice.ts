@@ -204,7 +204,7 @@ function withSide(selector: SideSelector, fuseAction: any, placeAction: any) {
       while (selector(getState().duel).fusionQueue.length >= 2) {
         dispatch(fuseAction);
         console.debug("delay, wait for animation");
-        await delay(6000);
+        await delay(4000);
       }
       console.debug("done fusing, now place");
       dispatch(placeAction);
