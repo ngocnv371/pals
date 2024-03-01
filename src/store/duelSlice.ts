@@ -115,6 +115,7 @@ function fuseTop(side: Side) {
 
   const [c1, c2, ...rest] = side.fusionCards;
   const c = fuse(c1, c2);
+  console.debug(`fusing ${c1} and ${c2} into ${c}`);
   side.fusionCards = [c, ...rest];
 }
 
@@ -183,13 +184,17 @@ export const selectStage = (state: RootState) => state.duel.stage;
 export const { myCardsDrawed, myHandCardsSelected, mySpotSelected } =
   duelSlice.actions;
 
+function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 type SideSelector = (state: State) => Side;
 function withSide(selector: SideSelector, fuseAction: any, placeAction: any) {
   const fuseAllAndPlace =
-    () => (dispatch: AppDispatch, getState: () => RootState) => {
-      while (selector(getState().duel).fusionCards.length > 2) {
-        console.debug("fuse");
+    () => async (dispatch: AppDispatch, getState: () => RootState) => {
+      while (selector(getState().duel).fusionCards.length >= 2) {
         dispatch(fuseAction);
+        await delay(2000);
       }
       dispatch(placeAction);
     };
