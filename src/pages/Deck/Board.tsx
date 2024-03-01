@@ -6,9 +6,12 @@ import {
   selectMyDeployed,
   selectTheirSupports,
   selectMySupports,
+  selectStage,
+  DuelStage,
 } from "../../store/duelSlice";
 import { withFormationSelector } from "./withFormationSelector";
 import "./Board.css";
+import { useAppSelector } from "../../store/hooks";
 
 const TheirDeployedFormation = withFormationSelector(
   selectTheirDeployed,
@@ -28,6 +31,8 @@ const MySupportsFormation = withFormationSelector(
 );
 
 export const Board: React.FC = () => {
+  const stage = useAppSelector(selectStage);
+
   return (
     <div className="board-container">
       <div className="board rest">
@@ -39,7 +44,12 @@ export const Board: React.FC = () => {
         </Row>
         <EmptyRow></EmptyRow>
         <Row>
-          <MyDeployedFormation />
+          <MyDeployedFormation
+            canSelect={stage == DuelStage.MyPlacing}
+            onSelect={() => {
+              console.log("sel");
+            }}
+          />
         </Row>
         <Row>
           <MySupportsFormation />
