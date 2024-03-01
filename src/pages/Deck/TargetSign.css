@@ -1,0 +1,14 @@
+.target-sign {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 160%;
+  z-index: 9;
+
+  div {
+    display: flex;
+    justify-content: center;
+  }
+}

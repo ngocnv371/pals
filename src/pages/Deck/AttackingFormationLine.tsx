@@ -6,25 +6,15 @@ import StanceSwitcher from "./StanceSwitcher";
 
 export interface AttackingFormationLineProps {
   formation: Formation;
-  showStance?: boolean;
   onStanceChanged?: (index: number, stance: CardStance) => void;
   onCardClick?: (id: string) => void;
 }
 
 export const AttackingFormationLine: React.FC<AttackingFormationLineProps> = ({
   formation,
-  showStance,
   onStanceChanged,
   onCardClick,
 }) => {
-  function handleClick(idx: number, stance: CardStance) {
-    if (!showStance) {
-      return;
-    }
-
-    onStanceChanged && onStanceChanged(idx, stance);
-  }
-
   return formation.map((d, idx) => (
     <Cell key={idx}>
       {d && (
@@ -34,8 +24,10 @@ export const AttackingFormationLine: React.FC<AttackingFormationLineProps> = ({
           onClick={() => onCardClick && onCardClick(d.cardId)}
         />
       )}
-      {showStance && d && (
-        <StanceSwitcher onClick={(stance) => handleClick(idx, stance)} />
+      {d && !d.attacked && (
+        <StanceSwitcher
+          onClick={(stance) => onStanceChanged && onStanceChanged(idx, stance)}
+        />
       )}
     </Cell>
   ));

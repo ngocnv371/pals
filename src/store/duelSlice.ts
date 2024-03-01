@@ -13,6 +13,7 @@ export enum CardStance {
 export interface Cell {
   cardId: string;
   stance: CardStance;
+  attacked: boolean;
 }
 
 export type Formation = (Cell | null)[];
@@ -25,6 +26,10 @@ export interface Side {
   spotIndex?: number;
   fusionQueue: string[];
   fusingCards: string[];
+  attacking?: {
+    offensiveIndex?: number;
+    targetIndex?: number;
+  };
 }
 
 export enum DuelStage {
@@ -33,6 +38,7 @@ export enum DuelStage {
   MyPlacing = "MyPlacing",
   MyFusion = "MyFusion",
   MyAttack = "MyAttack",
+  MyTargetting = "MyTargetting",
   TheirDrawing = "TheirDrawing",
   TheirPlacing = "TheirPlacing",
   TheirFusion = "TheirFusion",
@@ -65,6 +71,7 @@ function generateSide(): Side {
               stance: chance.bool()
                 ? CardStance.Offensive
                 : CardStance.Defensive,
+              attacked: false,
             }
           : null,
       5
@@ -130,13 +137,23 @@ function placeCard(side: Side) {
   side.deployed[side.spotIndex!] = {
     cardId: side.fusionQueue[0],
     stance: CardStance.Offensive,
+    attacked: false,
   };
   side.fusingCards = [];
   side.fusionQueue = [];
+  side.attacking = {};
 }
 
 function changeStanceToDefensive(side: Side, index: number) {
   side.deployed[index]!.stance = CardStance.Defensive;
+}
+
+function selectOffensiveCard(side: Side, index: number) {
+  side.attacking!.offensiveIndex = index;
+}
+
+function selectTargetCard(side: Side, index: number) {
+  side.attacking!.targetIndex = index;
 }
 
 export const duelSlice = createSlice({
@@ -182,6 +199,16 @@ export const duelSlice = createSlice({
     ) {
       changeStanceToDefensive(state.my, action.payload.index);
     },
+    myOffensiveCardSelected(state, action: PayloadAction<{ index: number }>) {
+      selectOffensiveCard(state.my, action.payload.index);
+      state.stage = DuelStage.MyTargetting;
+    },
+    myTargetCardSelected(state, action: PayloadAction<{ index: number }>) {
+      selectTargetCard(state.my, action.payload.index);
+    },
+    myAttacked(state) {
+      //
+    },
   },
 });
 
@@ -206,6 +233,8 @@ export const {
   myHandCardsSelected,
   mySpotSelected,
   myStanceChangedToDefensive,
+  myOffensiveCardSelected,
+  myTargetCardSelected,
 } = duelSlice.actions;
 
 function delay(ms: number) {
@@ -213,7 +242,11 @@ function delay(ms: number) {
 }
 
 type SideSelector = (state: State) => Side;
-function withSide(selector: SideSelector, fuseAction: any, placeAction: any) {
+function fuseAndPlace(
+  selector: SideSelector,
+  fuseAction: any,
+  placeAction: any
+) {
   const fuseAllAndPlace =
     () => async (dispatch: AppDispatch, getState: () => RootState) => {
       while (selector(getState().duel).fusionQueue.length >= 2) {
@@ -227,10 +260,24 @@ function withSide(selector: SideSelector, fuseAction: any, placeAction: any) {
   return fuseAllAndPlace;
 }
 
-export const myFuseAndPlace = withSide(
+export const myFuseAndPlace = fuseAndPlace(
   (state) => state.my,
   duelSlice.actions.myFused(),
   duelSlice.actions.myPlaced()
+);
+
+function attack(selector: SideSelector, fuseAction: any, placeAction: any) {
+  const fuseAllAndPlace =
+    () => async (dispatch: AppDispatch, getState: () => RootState) => {
+      console.debug("attack!!");
+    };
+  return fuseAllAndPlace;
+}
+
+export const myAttack = attack(
+  (state) => state.my,
+  duelSlice.actions.myFused(),
+  duelSlice.actions.myAttacked()
 );
 
 export default duelSlice.reducer;
