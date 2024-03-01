@@ -11,7 +11,9 @@
   }
 }
 .MyDrawing,
-.TheirDrawing {
+.TheirDrawing,
+.MyFusion,
+.TheirFusion {
   .board {
     transform: rotateX(30deg) translateY(-160px);
   }
