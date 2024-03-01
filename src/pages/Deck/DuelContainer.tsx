@@ -6,6 +6,7 @@ import { Hand } from "./Hand";
 import FusionVisualizer from "./FusionVisualizer";
 import StageBanner from "./StageBanner";
 import { MyBattleVisualizer } from "./BattleVisualizer";
+import { MyLifeLabel, TheirLifeLabel } from "./LifeLabel";
 
 const DuelContainer: React.FC = () => {
   const stage = useAppSelector(selectStage);
@@ -20,6 +21,8 @@ const DuelContainer: React.FC = () => {
 
   return (
     <div className={`duel-container ${stage}`}>
+      <MyLifeLabel />
+      <TheirLifeLabel />
       <Board />
       <StageBanner />
       {stage == DuelStage.MyDrawing && <Hand />}

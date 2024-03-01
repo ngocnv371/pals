@@ -1,0 +1,10 @@
+.my-life-label {
+  position: absolute;
+  right: 0;
+  bottom: 5em;
+}
+.their-life-label {
+  position: absolute;
+  right: 0;
+  top: 5em;
+}
