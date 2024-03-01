@@ -100,6 +100,10 @@ function selectHandCards(side: Side, cards: string[]) {
 
 function selectSpot(side: Side, index: number) {
   side.spotIndex = index;
+  if (side.deployed[index]?.cardId) {
+    side.fusionQueue = side.fusionQueue.concat(side.deployed[index]!.cardId);
+    side.deployed[index] = null;
+  }
 }
 
 function fuse(id1: string, id2: string): string {
