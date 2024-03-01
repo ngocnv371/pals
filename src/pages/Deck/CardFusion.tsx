@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Card } from "./Card";
+import "./CardFusion.css";
 
 const CardFusion: React.FC<{ card1: string; card2: string }> = ({
   card1,
