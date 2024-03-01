@@ -116,8 +116,8 @@ function fuseTop(side: Side) {
   }
 
   const [c1, c2, ...rest] = side.fusionQueue;
-  side.fusingCards = [c1, c2];
   const c = fuse(c1, c2);
+  side.fusingCards = [c1, c2, c];
   console.debug(`fusing ${c1} and ${c2} into ${c}`);
   side.fusionQueue = [c, ...rest];
 }
@@ -197,11 +197,10 @@ type SideSelector = (state: State) => Side;
 function withSide(selector: SideSelector, fuseAction: any, placeAction: any) {
   const fuseAllAndPlace =
     () => async (dispatch: AppDispatch, getState: () => RootState) => {
-      await delay(500);
       while (selector(getState().duel).fusionQueue.length >= 2) {
         dispatch(fuseAction);
         console.debug("delay, wait for animation");
-        await delay(2000);
+        await delay(6000);
       }
       console.debug("done fusing, now place");
       dispatch(placeAction);

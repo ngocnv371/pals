@@ -21,6 +21,38 @@
       animation-delay: 1s;
       animation: spiralFromRight 2s linear;
     }
+    .card:nth-child(3) {
+      opacity: 0;
+    }
+  }
+  &.presentingBoth {
+    .card:nth-child(1) {
+      left: 20%;
+      animation-delay: 0s;
+      animation: tada 2s linear;
+      opacity: 1;
+    }
+    .card:nth-child(2) {
+      right: 20%;
+      animation-delay: 1s;
+      animation: tada 2s linear;
+      opacity: 1;
+    }
+    .card:nth-child(3) {
+      opacity: 0;
+    }
+  }
+  &.presentingResult {
+    .card:nth-child(1),
+    .card:nth-child(2) {
+      opacity: 0;
+    }
+    .card:nth-child(3) {
+      left: 45%;
+      animation-delay: 1s;
+      animation: bounce 2s linear;
+      opacity: 1;
+    }
   }
 }
 

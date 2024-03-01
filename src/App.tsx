@@ -27,6 +27,8 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
+import "animate.css/animate.css";
+
 import BasePage from "./pages/Base";
 import MyPalsPage from "./pages/MyPals";
 import { Provider } from "react-redux";

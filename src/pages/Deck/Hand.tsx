@@ -42,7 +42,7 @@ export const Hand: React.FC = () => {
             selected={selected}
             index={index}
             onClick={() => handleSelectCard(c.id)}
-            className={`animate__animated animate__slideInRight animate__delay-${cidx}`}
+            className={`animate__animated animate__slideInRight6 animate__faster animate__delay-${cidx}`}
           />
         );
       })}

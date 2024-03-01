@@ -5,19 +5,11 @@
     margin-top: -20px;
   }
 }
-.animate__animated {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
 
-@keyframes slideInRight {
+@keyframes slideInRight6 {
   0% {
-    -webkit-transform: translate3d(600%, 0, 0);
-    transform: translate3d(600%, 0, 0);
+    -webkit-transform: translate3d(900%, 0, 0);
+    transform: translate3d(900%, 0, 0);
     visibility: visible;
   }
 
@@ -27,9 +19,9 @@
   }
 }
 
-.animate__slideInRight {
-  -webkit-animation-name: slideInRight;
-  animation-name: slideInRight;
+.animate__slideInRight6 {
+  -webkit-animation-name: slideInRight6;
+  animation-name: slideInRight6;
 }
 
 .animate__animated.animate__delay-1 {
