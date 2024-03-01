@@ -103,25 +103,30 @@
   .card {
     position: absolute;
     top: 50vh;
+    opacity: 0;
   }
-  .card:nth-child(1) {
-    left: 50%;
-    animation-delay: 0s;
-    animation: spiralFromLeft 2s linear infinite;
-  }
-  .card:nth-child(2) {
-    right: 50%;
-    animation-delay: 1s;
-    animation: spiralFromRight 2s linear infinite;
+  &.playing {
+    .card:nth-child(1) {
+      left: 50%;
+      animation-delay: 0s;
+      animation: spiralFromLeft 2s linear;
+    }
+    .card:nth-child(2) {
+      right: 50%;
+      animation-delay: 1s;
+      animation: spiralFromRight 2s linear;
+    }
   }
 }
 
 @keyframes spiralFromRight {
   100% {
     transform: rotate(720deg) translate(0) rotate(-360deg);
+    opacity: 0;
   }
   90% {
     transform: rotate(calc(720deg - 72deg)) translate(25px) rotate(-270deg);
+    opacity: 1;
   }
   80% {
     transform: rotate(calc(720deg - 2 * 72deg)) translate(50px) rotate(-180deg);
@@ -149,15 +154,18 @@
   }
   0% {
     transform: rotate(calc(720deg - 10 * 72deg)) translate(250px) rotate(0deg);
+    opacity: 1;
   }
 }
 
 @keyframes spiralFromLeft {
   100% {
     transform: rotate(720deg) translate(0) rotate(-360deg);
+    opacity: 0;
   }
   90% {
     transform: rotate(calc(720deg - 72deg)) translate(-25px) rotate(-270deg);
+    opacity: 1;
   }
   80% {
     transform: rotate(calc(720deg - 2 * 72deg)) translate(-50px) rotate(-180deg);
@@ -185,5 +193,6 @@
   }
   0% {
     transform: rotate(calc(720deg - 10 * 72deg)) translate(-250px) rotate(0deg);
+    opacity: 1;
   }
 }

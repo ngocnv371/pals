@@ -3,6 +3,7 @@ import { DuelStage, myCardsDrawed, selectStage } from "../../store/duelSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Board } from "./Board";
 import { Hand } from "./Hand";
+import FusionVisualizer from "./FusionVisualizer";
 const DuelContainer: React.FC = () => {
   const stage = useAppSelector(selectStage);
   const dispatch = useAppDispatch();
@@ -18,6 +19,7 @@ const DuelContainer: React.FC = () => {
     <div className={`duel-container ${stage}`}>
       <Board />
       {stage == DuelStage.MyDrawing && <Hand />}
+      {stage == DuelStage.MyFusion && <FusionVisualizer />}
     </div>
   );
 };

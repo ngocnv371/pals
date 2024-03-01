@@ -23,7 +23,8 @@ export interface Side {
   deployed: Formation;
   supports: Formation;
   spotIndex?: number;
-  fusionCards: string[];
+  fusionQueue: string[];
+  fusingCards: string[];
 }
 
 export enum DuelStage {
@@ -69,7 +70,8 @@ function generateSide(): Side {
       5
     ),
     supports: [null, null, null, null, null],
-    fusionCards: [],
+    fusionQueue: [],
+    fusingCards: [],
   };
 }
 
@@ -87,7 +89,7 @@ function draw(side: Side, qty: number) {
 }
 
 function selectHandCards(side: Side, cards: string[]) {
-  side.fusionCards = cards;
+  side.fusionQueue = cards;
   cards.forEach((c) => {
     const idx = side.hand.indexOf(c);
     if (idx >= 0) {
@@ -104,26 +106,29 @@ function fuse(id1: string, id2: string): string {
   const c1 = getPalMetadataById(id1);
   const c2 = getPalMetadataById(id2);
   const title = breed(c1.title, c2.title);
-  const c3 = getPalMetadata(title!);
+  const c3 = getPalMetadata(title || "Rooby");
   return c3.id;
 }
 
 function fuseTop(side: Side) {
-  if (side.fusionCards.length < 2) {
+  if (side.fusionQueue.length < 2) {
     return;
   }
 
-  const [c1, c2, ...rest] = side.fusionCards;
+  const [c1, c2, ...rest] = side.fusionQueue;
+  side.fusingCards = [c1, c2];
   const c = fuse(c1, c2);
   console.debug(`fusing ${c1} and ${c2} into ${c}`);
-  side.fusionCards = [c, ...rest];
+  side.fusionQueue = [c, ...rest];
 }
 
 function placeCard(side: Side) {
   side.deployed[side.spotIndex!] = {
-    cardId: side.fusionCards[0],
+    cardId: side.fusionQueue[0],
     stance: CardStance.Offensive,
   };
+  side.fusingCards = [];
+  side.fusionQueue = [];
 }
 
 export const duelSlice = createSlice({
@@ -192,10 +197,13 @@ type SideSelector = (state: State) => Side;
 function withSide(selector: SideSelector, fuseAction: any, placeAction: any) {
   const fuseAllAndPlace =
     () => async (dispatch: AppDispatch, getState: () => RootState) => {
-      while (selector(getState().duel).fusionCards.length >= 2) {
+      await delay(500);
+      while (selector(getState().duel).fusionQueue.length >= 2) {
         dispatch(fuseAction);
+        console.debug("delay, wait for animation");
         await delay(2000);
       }
+      console.debug("done fusing, now place");
       dispatch(placeAction);
     };
   return fuseAllAndPlace;
