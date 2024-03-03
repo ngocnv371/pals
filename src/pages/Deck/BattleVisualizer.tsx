@@ -1,5 +1,4 @@
 import { useMemo, useRef } from "react";
-import { selectMyAttack } from "../../store/duelSlice";
 import { useAppSelector } from "../../store/hooks";
 import "./BattleVisualizer.css";
 import { Card } from "./Card";
@@ -7,14 +6,15 @@ import { useClassSequence } from "./useClassSequence";
 import { simulateBattle } from "./service";
 import { CardStance } from "./model";
 
-export const BattleVisualizer: React.FC<{ card1: string; card2: string }> = ({
-  card1,
-  card2,
-}) => {
+const _BattleVisualizer: React.FC<{
+  card1: string;
+  card2: string;
+  card2Stance: CardStance;
+}> = ({ card1, card2, card2Stance }) => {
   const ref = useRef<HTMLDivElement>();
   const result = useMemo(
-    () => simulateBattle(card1, card2, CardStance.Offensive),
-    [card1, card2]
+    () => simulateBattle(card1, card2, card2Stance),
+    [card1, card2, card2Stance]
   );
   const winSequence = [
     { className: "presenting", duration: 1000 },
@@ -46,12 +46,14 @@ export const BattleVisualizer: React.FC<{ card1: string; card2: string }> = ({
   );
 };
 
-export const MyBattleVisualizer: React.FC = () => {
-  const data = useAppSelector(selectMyAttack);
+export const BattleVisualizer: React.FC = () => {
+  const data = useAppSelector((state) => state.duel.battle);
   if (!data) {
     return null;
   }
 
-  const { card1, card2 } = data;
-  return <BattleVisualizer card1={card1} card2={card2} />;
+  const { card1, card2, card2Stance } = data;
+  return (
+    <_BattleVisualizer card1={card1} card2={card2} card2Stance={card2Stance} />
+  );
 };

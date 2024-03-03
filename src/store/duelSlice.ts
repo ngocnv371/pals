@@ -1,13 +1,12 @@
 import { PayloadAction, createSelector, createSlice } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "./store";
-import { DuelStage, Formation, Side } from "../pages/Deck/model";
+import { CardStance, DuelStage, Formation, Side } from "../pages/Deck/model";
 import {
   changeStanceToDefensive,
   deploy,
   endBattle,
   fuseOne,
   generateSide,
-  getBattle,
   prepareDeployment,
   refillReserves,
   selectDeploymentTarget,
@@ -32,6 +31,7 @@ interface State {
   battle?: {
     card1: string;
     card2: string;
+    card2Stance: CardStance;
     /**
      * calculated outcome of the attack:
      *
@@ -196,18 +196,6 @@ export const selectMySupports = (state: RootState) => state.duel.my.support;
 
 export const selectSelectedReservesIndices = (state: RootState) =>
   state.duel.my.deploymentPlan?.selectedReservesIndices;
-
-export const selectMyAttack = createSelector(
-  (state: RootState) => state.duel.my,
-  (state: RootState) => state.duel.their,
-  (my, their) => getBattle(my, their)
-);
-
-export const selectTheirAttack = createSelector(
-  (state: RootState) => state.duel.my,
-  (state: RootState) => state.duel.their,
-  (my, their) => getBattle(their, my)
-);
 
 export const selectStage = (state: RootState) => state.duel.stage;
 

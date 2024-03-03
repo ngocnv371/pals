@@ -5,7 +5,7 @@ import { Board } from "./Board";
 import { Hand } from "./Hand";
 import FusionVisualizer from "./FusionVisualizer";
 import StageBanner from "./StageBanner";
-import { MyBattleVisualizer } from "./BattleVisualizer";
+import { BattleVisualizer } from "./BattleVisualizer";
 import { MyLifeLabel, TheirLifeLabel } from "./LifeLabel";
 import EndTurnButton from "./EndTurnButton";
 import PlaceCardsButton from "./PlaceCardsButton";
@@ -29,12 +29,12 @@ const DuelContainer: React.FC = () => {
       <TheirLifeLabel />
       <Board />
       <StageBanner />
+      <BattleVisualizer />
+      <FusionVisualizer />
+
       {stage == DuelStage.MyDrawing && <Hand />}
       {stage == DuelStage.MyDrawing && <PlaceCardsButton />}
-      {[DuelStage.MyFusion, DuelStage.TheirFusion].includes(stage) && (
-        <FusionVisualizer />
-      )}
-      {stage == DuelStage.MyBattle && <MyBattleVisualizer />}
+
       {stage == DuelStage.MyAttack && <EndTurnButton />}
       {stage == DuelStage.TheirDrawing && <TheirHand />}
     </div>
