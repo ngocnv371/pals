@@ -60,10 +60,10 @@ export const Board: React.FC = () => {
   return (
     <div className="board-container">
       <div className={`board ${stage}`}>
-        <Row>
+        <Row className="their-row">
           <TheirSupportsFormation />
         </Row>
-        <Row>
+        <Row className="their-row">
           {stage == DuelStage.MyTargetting ? (
             <TheirTargettingFormation
               onSelected={(index) => {

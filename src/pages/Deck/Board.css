@@ -8,6 +8,11 @@
     transform-style: preserve-3d;
     transition: all 200ms;
     transform: rotateX(0deg) translateY(0px);
+    .their-row {
+      .card {
+        transform: rotateZ(180deg);
+      }
+    }
   }
 }
 .MyDrawing,
