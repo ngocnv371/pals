@@ -7,7 +7,8 @@ interface Segment {
 
 export function useClassSequence<T extends HTMLElement>(
   ref: React.MutableRefObject<T | undefined>,
-  segments: Segment[]
+  segments: Segment[],
+  onCompleted?: () => void
 ) {
   useEffect(() => {
     if (!ref.current) {
@@ -26,6 +27,11 @@ export function useClassSequence<T extends HTMLElement>(
       timeout += segments[i].duration;
       handles.push(+handle);
     }
+
+    const completedHandle = setTimeout(() => {
+      onCompleted && onCompleted();
+    }, timeout);
+    handles.push(+completedHandle);
 
     return () => {
       handles.forEach((h) => clearTimeout(h));

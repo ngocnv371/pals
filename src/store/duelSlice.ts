@@ -20,6 +20,27 @@ interface State {
   their: Side;
   my: Side;
   stage: DuelStage;
+
+  fusion?: {
+    card1: string;
+    card2: string;
+    result: string;
+  };
+
+  battle?: {
+    card1: string;
+    card2: string;
+    /**
+     * calculated outcome of the attack:
+     *
+     * 0        - tie: both units destroyed
+     *
+     * positive - win: offensive unit wins, the target unit is destroyed
+     *
+     * negative - win: offensive unit loose, the offensive unit is destroyed
+     */
+    result: number;
+  };
 }
 
 const initialState: State = {
@@ -57,6 +78,9 @@ export const duelSlice = createSlice({
     myPlacingStarted(state) {
       state.stage = DuelStage.MyPlacing;
     },
+    theirPlacingStarted(state) {
+      state.stage = DuelStage.TheirPlacing;
+    },
     myDeploymentTargetSelected(state, action: PayloadAction<number>) {
       if (state.stage !== DuelStage.MyPlacing) {
         return;
@@ -92,14 +116,17 @@ export const duelSlice = createSlice({
         return;
       }
 
-      fuseOne(state.my);
+      state.fusion = fuseOne(state.my);
     },
     theirFused(state) {
       if (state.stage !== DuelStage.TheirFusion) {
         return;
       }
 
-      fuseOne(state.their);
+      state.fusion = fuseOne(state.their);
+    },
+    fusionCompleted(state) {
+      state.fusion = undefined;
     },
     myAttackStarted(state) {
       state.stage = DuelStage.MyAttack;
@@ -191,6 +218,7 @@ export const {
   myTargetCardSelected,
   theirCardsDrawed,
   myPlacingStarted,
+  fusionCompleted,
 } = duelSlice.actions;
 
 function delay(ms: number) {
@@ -228,6 +256,8 @@ export const drawTheirCards =
     dispatch(duelSlice.actions.theirReservesSelected([0, 3]));
     await delay(1000);
     // TODO: select a target
+    dispatch(duelSlice.actions.theirPlacingStarted());
+    await delay(500);
     dispatch(duelSlice.actions.theirDeploymentTargetSelected(0));
     await delay(500);
     dispatch(theirFuseAndPlace());
@@ -254,19 +284,17 @@ function battle(
   attackAction: any,
   doneAction: any
 ) {
-  const fuseAllAndPlace =
-    () => async (dispatch: AppDispatch, getState: () => RootState) => {
-      console.debug("attack!!");
-      dispatch(startAction);
-      await delay(4000);
-      dispatch(endAction);
-      if (selector(getState().duel).forward.some((d) => !d?.acted)) {
-        dispatch(attackAction);
-      } else {
-        dispatch(doneAction);
-      }
-    };
-  return fuseAllAndPlace;
+  return () => async (dispatch: AppDispatch, getState: () => RootState) => {
+    console.debug("attack!!");
+    dispatch(startAction);
+    await delay(4000);
+    dispatch(endAction);
+    if (selector(getState().duel).forward.some((d) => !d?.acted)) {
+      dispatch(attackAction);
+    } else {
+      dispatch(doneAction);
+    }
+  };
 }
 
 export const myBattle = battle(

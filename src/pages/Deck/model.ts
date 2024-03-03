@@ -66,15 +66,6 @@ export interface Side {
   };
 
   /**
-   * fusion data
-   */
-  fusion?: {
-    card1: string;
-    card2: string;
-    result: string;
-  };
-
-  /**
    * phase 2 data
    */
   offensivePlan?: {
@@ -86,16 +77,6 @@ export interface Side {
      * index of unit in enemy's `forward` formation to receive the attack
      */
     targetIndex?: number;
-    /**
-     * calculated outcome of the attack:
-     *
-     * 0        - tie: both units destroyed
-     *
-     * positive - win: offensive unit wins, the target unit is destroyed
-     *
-     * negative - win: offensive unit loose, the offensive unit is destroyed
-     */
-    result?: number;
   };
 }
 

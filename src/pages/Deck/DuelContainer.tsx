@@ -31,7 +31,9 @@ const DuelContainer: React.FC = () => {
       <StageBanner />
       {stage == DuelStage.MyDrawing && <Hand />}
       {stage == DuelStage.MyDrawing && <PlaceCardsButton />}
-      {stage == DuelStage.MyFusion && <FusionVisualizer />}
+      {[DuelStage.MyFusion, DuelStage.TheirFusion].includes(stage) && (
+        <FusionVisualizer />
+      )}
       {stage == DuelStage.MyBattle && <MyBattleVisualizer />}
       {stage == DuelStage.MyAttack && <EndTurnButton />}
       {stage == DuelStage.TheirDrawing && <TheirHand />}
