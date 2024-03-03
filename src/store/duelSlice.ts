@@ -1,6 +1,6 @@
 import { PayloadAction, createSelector, createSlice } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "./store";
-import { DuelStage, Side } from "../pages/Deck/model";
+import { DuelStage, Formation, Side } from "../pages/Deck/model";
 import {
   changeStanceToDefensive,
   deploy,
@@ -14,7 +14,9 @@ import {
   selectReserves,
   selectTargetForOffensive,
   selectUnitForOffensive,
+  simulateBattle,
 } from "../pages/Deck/service";
+import { getPalMetadataById } from "../data/palMetadata";
 
 interface State {
   their: Side;
@@ -173,7 +175,7 @@ export const duelSlice = createSlice({
       endBattle(state.my, state.their);
     },
     theirBattleEnded(state) {
-      endBattle(state.their, state.their);
+      endBattle(state.their, state.my);
     },
   },
 });
@@ -260,7 +262,62 @@ export const drawTheirCards =
     await delay(500);
     dispatch(duelSlice.actions.theirDeploymentTargetSelected(0));
     await delay(500);
-    dispatch(theirFuseAndPlace());
+    await dispatch(theirFuseAndPlace());
+    await delay(500);
+    dispatch(duelSlice.actions.theirAttackStarted());
+    // TODO: better attacks
+
+    function inflateFormation(formation: Formation) {
+      // sort by desc
+      return formation
+        .map((f, index) => ({ unit: f, index }))
+        .filter((f) => Boolean(f.unit))
+        .map((f) => ({
+          ...getPalMetadataById(f.unit!.cardId),
+          index: f.index,
+          stance: f.unit!.stance,
+        }))
+        .sort((a, b) => b.content.baseAttack - a.content.baseAttack);
+    }
+
+    const theirInflatedUnits = inflateFormation(getState().duel.their.forward);
+    if (!theirInflatedUnits.length) {
+      return;
+    }
+
+    const myInflatedUnits = inflateFormation(getState().duel.my.forward);
+
+    while (theirInflatedUnits.length > 0) {
+      if (!myInflatedUnits.length) {
+        // TODO: direct damage
+        break;
+      }
+
+      const unit = theirInflatedUnits.pop();
+
+      const target = myInflatedUnits[myInflatedUnits.length - 1];
+      const result = simulateBattle(unit!.id, target!.id, target.stance);
+      if (result > 0) {
+        // attack if winning
+        dispatch(
+          duelSlice.actions.theirOffensiveCardSelected({ index: unit!.index })
+        );
+        dispatch(
+          duelSlice.actions.theirTargetCardSelected({ index: target.index })
+        );
+        dispatch(duelSlice.actions.theirBattleStarted());
+        dispatch(theirBattle());
+        // remove target
+        myInflatedUnits.pop();
+      } else {
+        // if not, set to defensive
+        dispatch(
+          duelSlice.actions.theirStanceChangedToDefensive({
+            index: unit!.index,
+          })
+        );
+      }
+    }
   };
 
 export const myFuseAndPlace = fuseAndPlace(
