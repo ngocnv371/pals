@@ -4,4 +4,73 @@
   height: 100vh;
   top: 0;
   left: 0;
+
+  .card {
+    position: absolute;
+    top: 50vh;
+    opacity: 1;
+  }
+  &.presenting {
+    .card:nth-child(1) {
+      left: 20%;
+      animation: zoomInUp 1s linear;
+      opacity: 1;
+    }
+    .card:nth-child(2) {
+      right: 20%;
+      animation: zoomInUp 1s linear;
+      opacity: 1;
+    }
+  }
+  &.damage1 {
+    .card:nth-child(1) {
+      left: 50%;
+      animation-delay: 0s;
+      animation: spiralFromLeft 2s linear;
+    }
+    .card:nth-child(2) {
+      right: 50%;
+      animation-delay: 1s;
+      animation: spiralFromRight 2s linear;
+    }
+  }
+  &.damage2 {
+    .card:nth-child(1) {
+      left: 50%;
+      animation-delay: 0s;
+      animation: spiralFromLeft 2s linear;
+    }
+    .card:nth-child(2) {
+      right: 50%;
+      animation-delay: 1s;
+      animation: spiralFromRight 2s linear;
+    }
+    .card:nth-child(3) {
+      opacity: 0;
+    }
+  }
+  &.dead1 {
+    .card:nth-child(1) {
+      left: 50%;
+      animation-delay: 0s;
+      animation: spiralFromLeft 2s linear;
+    }
+    .card:nth-child(2) {
+      right: 50%;
+      animation-delay: 1s;
+      animation: spiralFromRight 2s linear;
+    }
+  }
+  &.dead2 {
+    .card:nth-child(1) {
+      left: 50%;
+      animation-delay: 0s;
+      animation: spiralFromLeft 2s linear;
+    }
+    .card:nth-child(2) {
+      right: 50%;
+      animation-delay: 1s;
+      animation: spiralFromRight 2s linear;
+    }
+  }
 }
