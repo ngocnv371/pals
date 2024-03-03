@@ -28,10 +28,8 @@ const _BattleVisualizer: React.FC<{
   ];
   const tieSequence = [
     { className: "presenting", duration: 1000 },
-    { className: "damage1", duration: 1000 },
-    { className: "damage2", duration: 1000 },
-    { className: "dead1", duration: 1000 },
-    { className: "dead2", duration: 1000 },
+    { className: "damage-both", duration: 1000 },
+    { className: "dead-both", duration: 1000 },
   ];
   const sequence =
     result == 0 ? tieSequence : result > 0 ? winSequence : looseSequence;
