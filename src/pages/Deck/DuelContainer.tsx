@@ -7,6 +7,7 @@ import FusionVisualizer from "./FusionVisualizer";
 import StageBanner from "./StageBanner";
 import { MyBattleVisualizer } from "./BattleVisualizer";
 import { MyLifeLabel, TheirLifeLabel } from "./LifeLabel";
+import EndTurnButton from "./EndTurnButton";
 
 const DuelContainer: React.FC = () => {
   const stage = useAppSelector(selectStage);
@@ -28,6 +29,7 @@ const DuelContainer: React.FC = () => {
       {stage == DuelStage.MyDrawing && <Hand />}
       {stage == DuelStage.MyFusion && <FusionVisualizer />}
       {stage == DuelStage.MyBattle && <MyBattleVisualizer />}
+      {stage == DuelStage.MyAttack && <EndTurnButton />}
     </div>
   );
 };
