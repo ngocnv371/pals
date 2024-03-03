@@ -10,6 +10,7 @@ import { MyLifeLabel, TheirLifeLabel } from "./LifeLabel";
 import EndTurnButton from "./EndTurnButton";
 import PlaceCardsButton from "./PlaceCardsButton";
 import { DuelStage } from "./model";
+import { TheirHand } from "./TheirDrawing/TheirHand";
 
 const DuelContainer: React.FC = () => {
   const stage = useAppSelector(selectStage);
@@ -33,6 +34,7 @@ const DuelContainer: React.FC = () => {
       {stage == DuelStage.MyFusion && <FusionVisualizer />}
       {stage == DuelStage.MyBattle && <MyBattleVisualizer />}
       {stage == DuelStage.MyAttack && <EndTurnButton />}
+      {stage == DuelStage.TheirDrawing && <TheirHand />}
     </div>
   );
 };

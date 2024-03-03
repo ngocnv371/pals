@@ -47,6 +47,13 @@ export const duelSlice = createSlice({
 
       selectReserves(state.my, action.payload);
     },
+    theirReservesSelected(state, action: PayloadAction<number[]>) {
+      if (state.stage !== DuelStage.TheirDrawing) {
+        return;
+      }
+
+      selectReserves(state.their, action.payload);
+    },
     myPlacingStarted(state) {
       state.stage = DuelStage.MyPlacing;
     },
@@ -59,11 +66,26 @@ export const duelSlice = createSlice({
       prepareDeployment(state.my);
       state.stage = DuelStage.MyFusion;
     },
+    theirDeploymentTargetSelected(state, action: PayloadAction<number>) {
+      if (state.stage !== DuelStage.TheirPlacing) {
+        return;
+      }
+
+      selectDeploymentTarget(state.their, action.payload);
+      prepareDeployment(state.their);
+      state.stage = DuelStage.TheirFusion;
+    },
     myPlaced(state) {
       if (state.stage !== DuelStage.MyFusion) {
         return;
       }
       deploy(state.my);
+    },
+    theirPlaced(state) {
+      if (state.stage !== DuelStage.TheirFusion) {
+        return;
+      }
+      deploy(state.their);
     },
     myFused(state) {
       if (state.stage !== DuelStage.MyFusion) {
@@ -72,8 +94,18 @@ export const duelSlice = createSlice({
 
       fuseOne(state.my);
     },
+    theirFused(state) {
+      if (state.stage !== DuelStage.TheirFusion) {
+        return;
+      }
+
+      fuseOne(state.their);
+    },
     myAttackStarted(state) {
       state.stage = DuelStage.MyAttack;
+    },
+    theirAttackStarted(state) {
+      state.stage = DuelStage.TheirAttack;
     },
     myStanceChangedToDefensive(
       state,
@@ -81,18 +113,40 @@ export const duelSlice = createSlice({
     ) {
       changeStanceToDefensive(state.my, action.payload.index);
     },
+    theirStanceChangedToDefensive(
+      state,
+      action: PayloadAction<{ index: number }>
+    ) {
+      changeStanceToDefensive(state.their, action.payload.index);
+    },
     myOffensiveCardSelected(state, action: PayloadAction<{ index: number }>) {
       selectUnitForOffensive(state.my, action.payload.index);
       state.stage = DuelStage.MyTargetting;
     },
+    theirOffensiveCardSelected(
+      state,
+      action: PayloadAction<{ index: number }>
+    ) {
+      selectUnitForOffensive(state.their, action.payload.index);
+      state.stage = DuelStage.TheirTargetting;
+    },
     myTargetCardSelected(state, action: PayloadAction<{ index: number }>) {
       selectTargetForOffensive(state.my, action.payload.index);
+    },
+    theirTargetCardSelected(state, action: PayloadAction<{ index: number }>) {
+      selectTargetForOffensive(state.their, action.payload.index);
     },
     myBattleStarted(state) {
       state.stage = DuelStage.MyBattle;
     },
+    theirBattleStarted(state) {
+      state.stage = DuelStage.TheirBattle;
+    },
     myBattleEnded(state) {
       endBattle(state.my, state.their);
+    },
+    theirBattleEnded(state) {
+      endBattle(state.their, state.their);
     },
   },
 });
@@ -164,11 +218,33 @@ function fuseAndPlace(
   return fuseAllAndPlace;
 }
 
+export const drawTheirCards =
+  () => async (dispatch: AppDispatch, getState: () => RootState) => {
+    dispatch(duelSlice.actions.theirCardsDrawed());
+    // TODO: calculate optimal fusing
+    await delay(500);
+    dispatch(duelSlice.actions.theirReservesSelected([0]));
+    await delay(1000);
+    dispatch(duelSlice.actions.theirReservesSelected([0, 3]));
+    await delay(1000);
+    // TODO: select a target
+    dispatch(duelSlice.actions.theirDeploymentTargetSelected(0));
+    await delay(500);
+    dispatch(theirFuseAndPlace());
+  };
+
 export const myFuseAndPlace = fuseAndPlace(
   (state) => state.my,
   duelSlice.actions.myFused(),
   duelSlice.actions.myPlaced(),
   duelSlice.actions.myAttackStarted()
+);
+
+export const theirFuseAndPlace = fuseAndPlace(
+  (state) => state.their,
+  duelSlice.actions.theirFused(),
+  duelSlice.actions.theirPlaced(),
+  duelSlice.actions.theirAttackStarted()
 );
 
 function battle(
@@ -198,7 +274,15 @@ export const myBattle = battle(
   duelSlice.actions.myBattleStarted(),
   duelSlice.actions.myBattleEnded(),
   duelSlice.actions.myAttackStarted(),
-  duelSlice.actions.theirCardsDrawed()
+  drawTheirCards()
+);
+
+export const theirBattle = battle(
+  (state) => state.their,
+  duelSlice.actions.theirBattleStarted(),
+  duelSlice.actions.theirBattleEnded(),
+  duelSlice.actions.theirAttackStarted(),
+  myCardsDrawed()
 );
 
 export default duelSlice.reducer;

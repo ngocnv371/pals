@@ -111,5 +111,7 @@ export enum DuelStage {
   TheirPlacing = "TheirPlacing",
   TheirFusion = "TheirFusion",
   TheirAttack = "TheirAttack",
+  TheirTargetting = "TheirTargetting",
+  TheirBattle = "TheirBattle",
   End = "End",
 }

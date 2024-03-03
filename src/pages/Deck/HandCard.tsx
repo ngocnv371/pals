@@ -5,13 +5,16 @@ import { CardInfo } from "./CardInfo";
 export const HandCard: React.FC<{
   cardId: string;
   selected?: boolean;
+  hidden?: boolean;
   index?: number;
   onClick?: () => void;
   className?: string;
-}> = ({ cardId, selected, index, onClick, className }) => {
+}> = ({ cardId, selected, index, onClick, className, hidden }) => {
   return (
     <div
-      className={`card hand-card ${className} ${selected ? "selected" : ""}`}
+      className={`card hand-card ${className} ${selected ? "selected" : ""} ${
+        hidden ? "hidden" : ""
+      }`}
       onClick={onClick}
     >
       {selected && <IonBadge>{index}</IonBadge>}
