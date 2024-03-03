@@ -176,10 +176,7 @@ export const duelSlice = createSlice({
       state.stage = DuelStage.TheirBattle;
       state.battle = endBattle(state.their, state.my);
     },
-    myBattleEnded(state) {
-      state.battle = undefined;
-    },
-    theirBattleEnded(state) {
+    battleEnded(state) {
       state.battle = undefined;
     },
   },
@@ -255,8 +252,6 @@ export const drawTheirCards =
     dispatch(duelSlice.actions.theirDeploymentTargetSelected(0));
     await delay(500);
     await dispatch(theirFuseAndPlace());
-    await delay(500);
-    dispatch(duelSlice.actions.theirAttackStarted());
     // TODO: better attacks
 
     dispatch(leadTheirOffensive());
@@ -283,7 +278,7 @@ export const leadTheirOffensive =
     ).filter((f) => !f!.acted);
 
     if (!theirInflatedUnits.length) {
-      dispatch(duelSlice.actions.theirBattleEnded());
+      dispatch(duelSlice.actions.battleEnded());
       dispatch(duelSlice.actions.myCardsDrawed());
       return;
     }
@@ -309,9 +304,7 @@ export const leadTheirOffensive =
         duelSlice.actions.theirTargetCardSelected({ index: target.index })
       );
       await delay(10);
-      dispatch(duelSlice.actions.theirBattleStarted());
-      await delay(10);
-      dispatch(theirBattle());
+      await dispatch(theirBattle());
       await delay(4000);
     } else {
       // if not, set to defensive
@@ -352,6 +345,7 @@ function battle(
     dispatch(startAction);
     await delay(4000);
     dispatch(endAction);
+    await delay(50);
     if (selector(getState().duel).forward.some((d) => !d?.acted)) {
       dispatch(attackAction);
     } else {
@@ -363,7 +357,7 @@ function battle(
 export const myBattle = battle(
   (state) => state.my,
   duelSlice.actions.myBattleStarted(),
-  duelSlice.actions.myBattleEnded(),
+  duelSlice.actions.battleEnded(),
   duelSlice.actions.myAttackStarted(),
   drawTheirCards()
 );
@@ -371,7 +365,7 @@ export const myBattle = battle(
 export const theirBattle = battle(
   (state) => state.their,
   duelSlice.actions.theirBattleStarted(),
-  duelSlice.actions.theirBattleEnded(),
+  duelSlice.actions.battleEnded(),
   duelSlice.actions.theirAttackStarted(),
   myCardsDrawed()
 );
