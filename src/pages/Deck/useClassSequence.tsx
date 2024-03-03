@@ -15,6 +15,8 @@ export function useClassSequence<T extends HTMLElement>(
       return;
     }
 
+    console.debug("setup sequence", segments);
+
     // remove all class names
     ref.current.classList.remove(...segments.map((s) => s.className));
     let timeout = 50;
@@ -28,13 +30,15 @@ export function useClassSequence<T extends HTMLElement>(
       handles.push(+handle);
     }
 
+    console.debug(`complete in ${timeout}ms`);
     const completedHandle = setTimeout(() => {
       onCompleted && onCompleted();
     }, timeout);
     handles.push(+completedHandle);
 
     return () => {
+      console.debug("cleanup sequence");
       handles.forEach((h) => clearTimeout(h));
     };
-  }, [ref.current]);
+  }, [segments]);
 }

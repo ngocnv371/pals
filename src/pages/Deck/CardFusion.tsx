@@ -3,6 +3,13 @@ import { Card } from "./Card";
 import "./CardFusion.css";
 import { useClassSequence } from "./useClassSequence";
 
+const segments = [
+  { className: "presentingBoth", duration: 1000 },
+  { className: "playing", duration: 2000 },
+  { className: "presentingResult", duration: 1000 },
+  { className: "gone", duration: 10 },
+];
+
 const CardFusion: React.FC<{
   card1: string;
   card2: string;
@@ -10,15 +17,7 @@ const CardFusion: React.FC<{
   onCompleted?: () => void;
 }> = ({ card1, card2, card3, onCompleted }) => {
   const ref = useRef<HTMLDivElement>();
-  useClassSequence(
-    ref,
-    [
-      { className: "presentingBoth", duration: 1000 },
-      { className: "playing", duration: 2000 },
-      { className: "presentingResult", duration: 1000 },
-    ],
-    onCompleted
-  );
+  useClassSequence(ref, segments, onCompleted);
 
   return (
     <div className="card-fusion" ref={ref as any}>

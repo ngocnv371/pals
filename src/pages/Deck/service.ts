@@ -77,6 +77,16 @@ export function prepareDeployment(side: Side) {
   side.forward[index] = null;
 }
 
+export function resetAction(side: Side) {
+  side.forward.forEach((f) => {
+    if (!f) {
+      return;
+    }
+
+    f.acted = false;
+  });
+}
+
 export function fuseOne(side: Side) {
   if (!side.deploymentPlan) {
     console.error("deployment plan not initiated");
@@ -121,6 +131,7 @@ export function changeStanceToDefensive(side: Side, index: number) {
   }
 
   side.forward[index]!.stance = CardStance.Defensive;
+  side.forward[index]!.acted = true;
 }
 
 export function selectUnitForOffensive(side: Side, index: number) {
@@ -163,10 +174,10 @@ export function simulateBattle(
   return result;
 }
 
-export function getBattle(side: Side, otherSide: Side): Battle | null {
+export function getBattle(side: Side, otherSide: Side): Battle | undefined {
   if (!side.offensivePlan) {
     console.error("offensive plan not initiated");
-    return null;
+    return undefined;
   }
 
   const { targetIndex, unitIndex } = side.offensivePlan;
@@ -215,6 +226,6 @@ export function endBattle(side: Side, other: Side) {
     }
   }
 
-  side.offensivePlan = {};
+  side.offensivePlan = undefined;
   return { ...battle, result };
 }

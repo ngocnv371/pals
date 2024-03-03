@@ -9,6 +9,7 @@ import {
   generateSide,
   prepareDeployment,
   refillReserves,
+  resetAction,
   selectDeploymentTarget,
   selectReserves,
   selectTargetForOffensive,
@@ -119,6 +120,7 @@ export const duelSlice = createSlice({
       }
 
       state.fusion = fuseOne(state.my);
+      resetAction(state.my);
     },
     theirFused(state) {
       if (state.stage !== DuelStage.TheirFusion) {
@@ -126,6 +128,7 @@ export const duelSlice = createSlice({
       }
 
       state.fusion = fuseOne(state.their);
+      resetAction(state.their);
     },
     fusionCompleted(state) {
       state.fusion = undefined;
@@ -210,7 +213,6 @@ export const {
   myTargetCardSelected,
   theirCardsDrawed,
   myPlacingStarted,
-  fusionCompleted,
 } = duelSlice.actions;
 
 function delay(ms: number) {
@@ -224,18 +226,18 @@ function fuseAndPlace(
   placeAction: any,
   attackAction: any
 ) {
-  const fuseAllAndPlace =
-    () => async (dispatch: AppDispatch, getState: () => RootState) => {
-      while (selector(getState().duel).deploymentPlan?.queue?.length! >= 2) {
-        dispatch(fuseAction);
-        console.debug("delay, wait for animation");
-        await delay(4000);
-      }
-      console.debug("done fusing, now place");
-      dispatch(placeAction);
-      dispatch(attackAction);
-    };
-  return fuseAllAndPlace;
+  return () => async (dispatch: AppDispatch, getState: () => RootState) => {
+    while (selector(getState().duel).deploymentPlan?.queue?.length! >= 2) {
+      dispatch(fuseAction);
+      console.debug("delay, wait for animation");
+      await delay(4000);
+      dispatch(duelSlice.actions.fusionCompleted());
+      await delay(10);
+    }
+    console.debug("done fusing, now place");
+    dispatch(placeAction);
+    dispatch(attackAction);
+  };
 }
 
 export const drawTheirCards =
@@ -257,6 +259,11 @@ export const drawTheirCards =
     dispatch(duelSlice.actions.theirAttackStarted());
     // TODO: better attacks
 
+    dispatch(leadTheirOffensive());
+  };
+
+export const leadTheirOffensive =
+  () => async (dispatch: AppDispatch, getState: () => RootState) => {
     function inflateFormation(formation: Formation) {
       // sort by desc
       return formation
@@ -266,48 +273,57 @@ export const drawTheirCards =
           ...getPalMetadataById(f.unit!.cardId),
           index: f.index,
           stance: f.unit!.stance,
+          acted: f.unit!.acted,
         }))
         .sort((a, b) => b.content.baseAttack - a.content.baseAttack);
     }
 
-    const theirInflatedUnits = inflateFormation(getState().duel.their.forward);
+    const theirInflatedUnits = inflateFormation(
+      getState().duel.their.forward
+    ).filter((f) => !f!.acted);
+
     if (!theirInflatedUnits.length) {
+      dispatch(duelSlice.actions.theirBattleEnded());
+      dispatch(duelSlice.actions.myCardsDrawed());
       return;
     }
 
     const myInflatedUnits = inflateFormation(getState().duel.my.forward);
 
-    while (theirInflatedUnits.length > 0) {
-      if (!myInflatedUnits.length) {
-        // TODO: direct damage
-        break;
-      }
-
-      const unit = theirInflatedUnits.pop();
-
-      const target = myInflatedUnits[myInflatedUnits.length - 1];
-      const result = simulateBattle(unit!.id, target!.id, target.stance);
-      if (result > 0) {
-        // attack if winning
-        dispatch(
-          duelSlice.actions.theirOffensiveCardSelected({ index: unit!.index })
-        );
-        dispatch(
-          duelSlice.actions.theirTargetCardSelected({ index: target.index })
-        );
-        dispatch(duelSlice.actions.theirBattleStarted());
-        dispatch(theirBattle());
-        // remove target
-        myInflatedUnits.pop();
-      } else {
-        // if not, set to defensive
-        dispatch(
-          duelSlice.actions.theirStanceChangedToDefensive({
-            index: unit!.index,
-          })
-        );
-      }
+    const unit = theirInflatedUnits.pop()!;
+    const target = myInflatedUnits.pop();
+    if (!target) {
+      // TODO: direct attack
+      return;
     }
+
+    const result = simulateBattle(unit.id, target.id, target.stance);
+    if (result > 0) {
+      // attack if winning
+      console.debug("since we are winning, let us attack");
+      dispatch(
+        duelSlice.actions.theirOffensiveCardSelected({ index: unit.index })
+      );
+      await delay(10);
+      dispatch(
+        duelSlice.actions.theirTargetCardSelected({ index: target.index })
+      );
+      await delay(10);
+      dispatch(duelSlice.actions.theirBattleStarted());
+      await delay(10);
+      dispatch(theirBattle());
+      await delay(4000);
+    } else {
+      // if not, set to defensive
+      dispatch(
+        duelSlice.actions.theirStanceChangedToDefensive({
+          index: unit.index,
+        })
+      );
+      await delay(1000);
+    }
+
+    dispatch(leadTheirOffensive());
   };
 
 export const myFuseAndPlace = fuseAndPlace(

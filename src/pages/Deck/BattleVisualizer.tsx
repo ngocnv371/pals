@@ -6,6 +6,22 @@ import { useClassSequence } from "./useClassSequence";
 import { simulateBattle } from "./service";
 import { CardStance } from "./model";
 
+const winSequence = [
+  { className: "presenting", duration: 1000 },
+  { className: "damage2", duration: 1000 },
+  { className: "dead2", duration: 1000 },
+];
+const looseSequence = [
+  { className: "presenting", duration: 1000 },
+  { className: "damage1", duration: 1000 },
+  { className: "dead1", duration: 1000 },
+];
+const tieSequence = [
+  { className: "presenting", duration: 1000 },
+  { className: "damage-both", duration: 1000 },
+  { className: "dead-both", duration: 1000 },
+];
+
 const _BattleVisualizer: React.FC<{
   card1: string;
   card2: string;
@@ -16,21 +32,7 @@ const _BattleVisualizer: React.FC<{
     () => simulateBattle(card1, card2, card2Stance),
     [card1, card2, card2Stance]
   );
-  const winSequence = [
-    { className: "presenting", duration: 1000 },
-    { className: "damage2", duration: 1000 },
-    { className: "dead2", duration: 1000 },
-  ];
-  const looseSequence = [
-    { className: "presenting", duration: 1000 },
-    { className: "damage1", duration: 1000 },
-    { className: "dead1", duration: 1000 },
-  ];
-  const tieSequence = [
-    { className: "presenting", duration: 1000 },
-    { className: "damage-both", duration: 1000 },
-    { className: "dead-both", duration: 1000 },
-  ];
+
   const sequence =
     result == 0 ? tieSequence : result > 0 ? winSequence : looseSequence;
 

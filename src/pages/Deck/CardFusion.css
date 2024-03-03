@@ -52,6 +52,13 @@
       opacity: 1;
     }
   }
+  &.gone {
+    .card:nth-child(1),
+    .card:nth-child(2),
+    .card:nth-child(3) {
+      opacity: 0;
+    }
+  }
 }
 
 @keyframes spiralFromRight {
