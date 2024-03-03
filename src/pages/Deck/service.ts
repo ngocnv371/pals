@@ -176,7 +176,8 @@ export function getBattle(side: Side, otherSide: Side): Battle | null {
 }
 
 export function endBattle(side: Side, other: Side) {
-  const { card1, card2, card2Stance } = getBattle(side, other)!;
+  const battle = getBattle(side, other)!;
+  const { card1, card2, card2Stance } = battle;
   const result = simulateBattle(card1, card2, card2Stance);
   const damage = Math.abs(result);
   const won = result > 0;
@@ -215,4 +216,5 @@ export function endBattle(side: Side, other: Side) {
   }
 
   side.offensivePlan = {};
+  return { ...battle, result };
 }

@@ -167,15 +167,17 @@ export const duelSlice = createSlice({
     },
     myBattleStarted(state) {
       state.stage = DuelStage.MyBattle;
+      state.battle = endBattle(state.my, state.their);
     },
     theirBattleStarted(state) {
       state.stage = DuelStage.TheirBattle;
+      state.battle = endBattle(state.their, state.my);
     },
     myBattleEnded(state) {
-      endBattle(state.my, state.their);
+      state.battle = undefined;
     },
     theirBattleEnded(state) {
-      endBattle(state.their, state.my);
+      state.battle = undefined;
     },
   },
 });
