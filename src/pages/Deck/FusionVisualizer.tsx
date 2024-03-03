@@ -2,13 +2,15 @@ import { useAppSelector } from "../../store/hooks";
 import CardFusion from "./CardFusion";
 
 const FusionVisualizer: React.FC = () => {
-  const [c1, c2, c3] = useAppSelector((state) => state.duel.my.fusingCards);
+  const data = useAppSelector((state) => state.duel.my.fusion);
 
-  if (!c1 || !c2 || !c3) {
+  if (!data) {
     return null;
   }
 
-  return <CardFusion card1={c1} card2={c2} card3={c3} />;
+  const { card1, card2, result } = data;
+
+  return <CardFusion card1={card1} card2={card2} card3={result} />;
 };
 
 export default FusionVisualizer;

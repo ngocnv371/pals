@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppSelector } from "../../store/hooks";
-import { Formation } from "../../store/duelSlice";
+import { Formation } from "./model";
 import { RootState } from "../../store";
 
 export function withFormationSelector<T extends { formation: Formation }>(

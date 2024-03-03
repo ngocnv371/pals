@@ -1,13 +1,11 @@
 import { useMemo, useRef } from "react";
-import {
-  CardStance,
-  selectMyAttack,
-  simulateBattle,
-} from "../../store/duelSlice";
+import { selectMyAttack } from "../../store/duelSlice";
 import { useAppSelector } from "../../store/hooks";
 import "./BattleVisualizer.css";
 import { Card } from "./Card";
 import { useClassSequence } from "./useClassSequence";
+import { simulateBattle } from "./service";
+import { CardStance } from "./model";
 
 export const BattleVisualizer: React.FC<{ card1: string; card2: string }> = ({
   card1,
@@ -54,6 +52,6 @@ export const MyBattleVisualizer: React.FC = () => {
     return null;
   }
 
-  const [card1, card2] = data;
+  const { card1, card2 } = data;
   return <BattleVisualizer card1={card1} card2={card2} />;
 };

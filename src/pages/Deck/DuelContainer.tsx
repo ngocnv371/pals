@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { DuelStage, myCardsDrawed, selectStage } from "../../store/duelSlice";
+import { myCardsDrawed, selectStage } from "../../store/duelSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Board } from "./Board";
 import { Hand } from "./Hand";
@@ -8,6 +8,8 @@ import StageBanner from "./StageBanner";
 import { MyBattleVisualizer } from "./BattleVisualizer";
 import { MyLifeLabel, TheirLifeLabel } from "./LifeLabel";
 import EndTurnButton from "./EndTurnButton";
+import PlaceCardsButton from "./PlaceCardsButton";
+import { DuelStage } from "./model";
 
 const DuelContainer: React.FC = () => {
   const stage = useAppSelector(selectStage);
@@ -27,6 +29,7 @@ const DuelContainer: React.FC = () => {
       <Board />
       <StageBanner />
       {stage == DuelStage.MyDrawing && <Hand />}
+      {stage == DuelStage.MyDrawing && <PlaceCardsButton />}
       {stage == DuelStage.MyFusion && <FusionVisualizer />}
       {stage == DuelStage.MyBattle && <MyBattleVisualizer />}
       {stage == DuelStage.MyAttack && <EndTurnButton />}

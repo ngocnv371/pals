@@ -1,6 +1,6 @@
 import { IonButton, IonIcon } from "@ionic/react";
 import { eyedrop, rocket, shield } from "ionicons/icons";
-import { CardStance } from "../../store/duelSlice";
+import { CardStance } from "./model";
 import "./StanceSwitcher.css";
 
 interface StanceSwitcherProps {

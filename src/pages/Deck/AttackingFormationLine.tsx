@@ -1,5 +1,5 @@
 import React from "react";
-import { CardStance, Formation } from "../../store/duelSlice";
+import { CardStance, Formation } from "./model";
 import { Cell } from "./Cell";
 import { Card } from "./Card";
 import StanceSwitcher from "./StanceSwitcher";
@@ -24,7 +24,7 @@ export const AttackingFormationLine: React.FC<AttackingFormationLineProps> = ({
           onClick={() => onCardClick && onCardClick(d.cardId)}
         />
       )}
-      {d && !d.attacked && (
+      {d && !d.acted && (
         <StanceSwitcher
           onClick={(stance) => onStanceChanged && onStanceChanged(idx, stance)}
         />

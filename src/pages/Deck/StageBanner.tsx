@@ -1,5 +1,6 @@
-import { DuelStage, selectStage } from "../../store/duelSlice";
+import { selectStage } from "../../store/duelSlice";
 import { useAppSelector } from "../../store/hooks";
+import { DuelStage } from "./model";
 
 const StageBanner: React.FC = () => {
   const stage = useAppSelector(selectStage);

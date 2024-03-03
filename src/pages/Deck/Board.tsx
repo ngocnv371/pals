@@ -7,14 +7,12 @@ import {
   selectTheirSupports,
   selectMySupports,
   selectStage,
-  DuelStage,
-  mySpotSelected,
   myFuseAndPlace,
-  CardStance,
   myStanceChangedToDefensive,
   myOffensiveCardSelected,
   myTargetCardSelected,
   myBattle,
+  myDeploymentTargetSelected,
 } from "../../store/duelSlice";
 import { withFormationSelector } from "./withFormationSelector";
 import "./Board.css";
@@ -22,6 +20,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { FormationLine } from "./FormationLine";
 import { AttackingFormationLine } from "./AttackingFormationLine";
 import { TargettingFormationLine } from "./TargettingFormationLine";
+import { CardStance, DuelStage } from "./model";
 
 const TheirDeployedFormation = withFormationSelector(
   FormationLine,
@@ -92,7 +91,7 @@ export const Board: React.FC = () => {
             <MyDeployedFormation
               canSelect={stage == DuelStage.MyPlacing}
               onSelect={(idx) => {
-                dispatch(mySpotSelected(idx));
+                dispatch(myDeploymentTargetSelected(idx));
                 dispatch(myFuseAndPlace());
               }}
             />

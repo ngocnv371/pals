@@ -1,5 +1,5 @@
 import React from "react";
-import { CardStance, Formation } from "../../store/duelSlice";
+import { CardStance, Formation } from "./model";
 import { Cell } from "./Cell";
 import { Card } from "./Card";
 import Spot from "./Spot";

@@ -1,20 +1,18 @@
-import { IonIcon, IonFabButton } from "@ionic/react";
-import React from "react";
+import { IonFab, IonFabButton, IonIcon } from "@ionic/react";
 import { chevronForward } from "ionicons/icons";
 import { useAppDispatch } from "../../store/hooks";
-import { myHandCardsSelected } from "../../store/duelSlice";
+import { myPlacingStarted } from "../../store/duelSlice";
 
-export const PlaceCardsButton: React.FC<{ cardIds: string[] }> = ({
-  cardIds,
-}) => {
+const PlaceCardsButton: React.FC = () => {
   const dispatch = useAppDispatch();
-  function handleClick() {
-    dispatch(myHandCardsSelected(cardIds));
-  }
 
   return (
-    <IonFabButton onClick={handleClick}>
-      <IonIcon icon={chevronForward} />
-    </IonFabButton>
+    <IonFab horizontal="end" vertical="bottom">
+      <IonFabButton onClick={() => dispatch(myPlacingStarted())}>
+        <IonIcon icon={chevronForward} />
+      </IonFabButton>
+    </IonFab>
   );
 };
+
+export default PlaceCardsButton;

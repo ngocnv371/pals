@@ -1,24 +1,29 @@
-import { IonFab } from "@ionic/react";
 import React, { useCallback, useMemo, useState } from "react";
-import { PlaceCardsButton } from "./PlaceCardsButton";
 import { HandCard } from "./HandCard";
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { getPalMetadataById } from "../../data/palMetadata";
 import "./Hand.css";
+import {
+  myReservesSelected,
+  selectMyHand,
+  selectSelectedReservesIndices,
+} from "../../store/duelSlice";
 
 export const Hand: React.FC = () => {
-  const hand = useAppSelector((state) => state.duel.my.hand);
+  const hand = useAppSelector(selectMyHand);
+  const dispatch = useAppDispatch();
   const cards = useMemo(() => hand.map(getPalMetadataById), [hand]);
-  const [selectedCards, setSelectedCards] = useState<string[]>([]);
+  const selectedCards = useAppSelector(selectSelectedReservesIndices) || [];
+  const setSelectedCards = (ids: number[]) => dispatch(myReservesSelected(ids));
 
   const handleSelectCard = useCallback(
-    (cardId: string) => {
-      if (selectedCards.includes(cardId)) {
+    (index: number) => {
+      if (selectedCards.includes(index)) {
         // unselect
-        setSelectedCards((items) => items.filter((i) => i != cardId));
+        setSelectedCards(selectedCards.filter((i) => i != index));
       } else {
         // add select
-        setSelectedCards((items) => items.concat(cardId));
+        setSelectedCards(selectedCards.concat(index));
       }
     },
     [selectedCards]
@@ -26,13 +31,8 @@ export const Hand: React.FC = () => {
 
   return (
     <div className="hand">
-      <IonFab slot="fixed" horizontal="end" vertical="bottom">
-        {selectedCards.length > 0 && (
-          <PlaceCardsButton cardIds={selectedCards} />
-        )}
-      </IonFab>
       {cards.map((c, cidx) => {
-        const idx = selectedCards.indexOf(c.id);
+        const idx = selectedCards.indexOf(cidx);
         const selected = idx >= 0;
         const index = selected ? idx + 1 : undefined;
         return (
@@ -41,7 +41,7 @@ export const Hand: React.FC = () => {
             cardId={c.id}
             selected={selected}
             index={index}
-            onClick={() => handleSelectCard(c.id)}
+            onClick={() => handleSelectCard(cidx)}
             className={`animate__animated animate__slideInRight6 animate__faster animate__delay-${cidx}`}
           />
         );
