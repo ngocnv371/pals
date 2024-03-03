@@ -214,13 +214,6 @@ function endBattle(side: Side, other: Side) {
   side.attacking = {};
 }
 
-function endTurn(side: Side) {
-  side.attacking = {};
-  side.fusingCards = [];
-  side.fusionQueue = [];
-  side.spotIndex = undefined;
-}
-
 export const duelSlice = createSlice({
   name: "duel",
   initialState,
@@ -291,10 +284,6 @@ export const duelSlice = createSlice({
     myBattleEnded(state) {
       endBattle(state.my, state.their);
     },
-    myTurnEnded(state) {
-      endTurn(state.my);
-      state.stage = DuelStage.TheirDrawing;
-    },
   },
 });
 
@@ -344,7 +333,7 @@ export const {
   myStanceChangedToDefensive,
   myOffensiveCardSelected,
   myTargetCardSelected,
-  myTurnEnded,
+  theirCardsDrawed,
 } = duelSlice.actions;
 
 function delay(ms: number) {
