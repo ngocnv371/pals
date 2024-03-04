@@ -1,5 +1,5 @@
 import { IonButton, IonIcon } from "@ionic/react";
-import { downloadOutline } from "ionicons/icons";
+import { locateOutline } from "ionicons/icons";
 import "./TargetSign.css";
 
 const TargetSign: React.FC<React.HtmlHTMLAttributes<HTMLIonButtonElement>> = (
@@ -8,8 +8,8 @@ const TargetSign: React.FC<React.HtmlHTMLAttributes<HTMLIonButtonElement>> = (
   return (
     <div className="target-sign">
       <div>
-        <IonButton {...props}>
-          <IonIcon icon={downloadOutline} />
+        <IonButton {...props} fill="clear">
+          <IonIcon icon={locateOutline} size="large" />
         </IonButton>
       </div>
     </div>

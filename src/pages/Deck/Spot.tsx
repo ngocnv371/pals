@@ -1,11 +1,11 @@
 import { IonIcon } from "@ionic/react";
-import { addCircleOutline } from "ionicons/icons";
+import { caretDown } from "ionicons/icons";
 import "./Spot.css";
 
 const Spot: React.FC = () => {
   return (
-    <div className="spot">
-      <IonIcon icon={addCircleOutline} color="primary" size="large" />
+    <div className="spot animate__animated animate__shakeY animate__repeat-2">
+      <IonIcon icon={caretDown} color="primary" size="large" />
     </div>
   );
 };

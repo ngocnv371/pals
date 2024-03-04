@@ -1,9 +1,14 @@
-import { IonLabel } from "@ionic/react";
+import { IonIcon, IonLabel } from "@ionic/react";
 import { useAppSelector } from "../../store/hooks";
 import "./LifeLabel.css";
+import { heart } from "ionicons/icons";
 
 const LifeLabel: React.FC<{ life: number }> = ({ life }) => {
-  return <IonLabel className="life-label">{life}</IonLabel>;
+  return (
+    <IonLabel className="life-label">
+      <IonIcon icon={heart} color="danger" /> {life}
+    </IonLabel>
+  );
 };
 
 export const MyLifeLabel: React.FC = () => {
