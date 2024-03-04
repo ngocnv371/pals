@@ -1,6 +1,4 @@
 import React from "react";
-import { Row } from "./Row";
-import { EmptyRow } from "./EmptyRow";
 import {
   selectTheirDeployed,
   selectMyDeployed,
@@ -13,14 +11,14 @@ import {
   myTargetCardSelected,
   myBattle,
   myDeploymentTargetSelected,
-} from "../../store/duelSlice";
+} from "../../../store/duelSlice";
 import { withFormationSelector } from "./withFormationSelector";
 import "./Board.css";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { FormationLine } from "./FormationLine";
 import { AttackingFormationLine } from "./AttackingFormationLine";
 import { TargettingFormationLine } from "./TargettingFormationLine";
-import { CardStance, DuelStage } from "./model";
+import { CardStance, DuelStage } from "../model";
 
 const TheirDeployedFormation = withFormationSelector(
   FormationLine,
@@ -60,10 +58,10 @@ export const Board: React.FC = () => {
   return (
     <div className="board-container">
       <div className={`board ${stage}`}>
-        <Row className="their-row">
+        <div className="row their-row">
           <TheirSupportsFormation />
-        </Row>
-        <Row className="their-row">
+        </div>
+        <div className="row their-row">
           {stage == DuelStage.MyTargetting ? (
             <TheirTargettingFormation
               onSelected={(index) => {
@@ -74,9 +72,9 @@ export const Board: React.FC = () => {
           ) : (
             <TheirDeployedFormation />
           )}
-        </Row>
-        <EmptyRow></EmptyRow>
-        <Row>
+        </div>
+        <div className="row empty"></div>
+        <div className="row">
           {stage == DuelStage.MyAttack ? (
             <MyAttackingDeployedFormation
               onStanceChanged={(index, stance) => {
@@ -96,10 +94,10 @@ export const Board: React.FC = () => {
               }}
             />
           )}
-        </Row>
-        <Row>
+        </div>
+        <div className="row">
           <MySupportsFormation />
-        </Row>
+        </div>
       </div>
     </div>
   );

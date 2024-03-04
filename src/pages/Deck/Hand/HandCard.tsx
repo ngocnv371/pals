@@ -1,6 +1,6 @@
 import { IonBadge } from "@ionic/react";
 import React from "react";
-import { CardInfo } from "./CardInfo";
+import { CardInfo } from "../Card/CardInfo";
 
 export const HandCard: React.FC<{
   cardId: string;

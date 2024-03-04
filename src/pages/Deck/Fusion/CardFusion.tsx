@@ -1,7 +1,7 @@
 import { useRef } from "react";
-import { Card } from "./Card";
+import { Card } from "../Card/Card";
 import "./CardFusion.css";
-import { useClassSequence } from "./useClassSequence";
+import { useClassSequence } from "../utils/useClassSequence";
 
 const segments = [
   { className: "presentingBoth", duration: 1000 },

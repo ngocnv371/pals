@@ -1,8 +1,7 @@
 import React from "react";
-import { CardStance, Formation } from "./model";
-import { Cell } from "./Cell";
-import { Card } from "./Card";
-import TargetSign from "./TargetSign";
+import { CardStance, Formation } from "../model";
+import { Card } from "../Card/Card";
+import TargetSign from "../stages/attacking/TargetSign";
 
 export interface TargettingFormationLineProps {
   formation: Formation;
@@ -13,11 +12,11 @@ export const TargettingFormationLine: React.FC<
   TargettingFormationLineProps
 > = ({ formation, onSelected }) => {
   return formation.map((d, idx) => (
-    <Cell key={idx}>
+    <div className="cell" key={idx}>
       {d && (
         <Card cardId={d.cardId} defensive={d.stance == CardStance.Defensive} />
       )}
       {d && <TargetSign onClick={() => onSelected && onSelected(idx)} />}
-    </Cell>
+    </div>
   ));
 };

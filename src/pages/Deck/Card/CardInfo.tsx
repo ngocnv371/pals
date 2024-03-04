@@ -1,6 +1,6 @@
 import { IonCard, IonImg } from "@ionic/react";
 import React, { useMemo } from "react";
-import { getPalMetadataById } from "../../data/palMetadata";
+import { getPalMetadataById } from "../../../data/palMetadata";
 
 export const CardInfo: React.FC<{ cardId: string }> = ({ cardId }) => {
   const card = useMemo(() => getPalMetadataById(cardId), [cardId]);

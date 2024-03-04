@@ -1,6 +1,6 @@
 import { IonButton, IonIcon } from "@ionic/react";
 import { shield } from "ionicons/icons";
-import { CardStance } from "./model";
+import { CardStance } from "../../model";
 import "./StanceSwitcher.css";
 
 interface StanceSwitcherProps {

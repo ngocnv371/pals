@@ -1,8 +1,7 @@
 import React from "react";
-import { CardStance, Formation } from "./model";
-import { Cell } from "./Cell";
-import { Card } from "./Card";
-import Spot from "./Spot";
+import { CardStance, Formation } from "../model";
+import { Card } from "../Card/Card";
+import Spot from "../stages/placing/Spot";
 
 export interface FormationLineProps {
   formation: Formation;
@@ -26,7 +25,7 @@ export const FormationLine: React.FC<FormationLineProps> = ({
   }
 
   return formation.map((d, idx) => (
-    <Cell key={idx} onClick={() => handleClick(idx)}>
+    <div className="cell" key={idx} onClick={() => handleClick(idx)}>
       {d && (
         <Card
           cardId={d.cardId}
@@ -35,6 +34,6 @@ export const FormationLine: React.FC<FormationLineProps> = ({
         />
       )}
       {canSelect && <Spot />}
-    </Cell>
+    </div>
   ));
 };

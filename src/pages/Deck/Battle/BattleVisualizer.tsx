@@ -1,10 +1,10 @@
 import { useMemo, useRef } from "react";
-import { useAppSelector } from "../../store/hooks";
+import { useAppSelector } from "../../../store/hooks";
 import "./BattleVisualizer.css";
-import { Card } from "./Card";
-import { useClassSequence } from "./useClassSequence";
-import { simulateBattle } from "./service";
-import { CardStance } from "./model";
+import { Card } from "../Card/Card";
+import { useClassSequence } from "../utils/useClassSequence";
+import { simulateBattle } from "../service";
+import { CardStance } from "../model";
 
 const winSequence = [
   { className: "presenting", duration: 1000 },

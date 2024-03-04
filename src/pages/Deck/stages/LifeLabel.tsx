@@ -6,7 +6,7 @@ import {
   IonIcon,
   IonLabel,
 } from "@ionic/react";
-import { useAppSelector } from "../../store/hooks";
+import { useAppSelector } from "../../../store/hooks";
 import "./LifeLabel.css";
 import { heart } from "ionicons/icons";
 

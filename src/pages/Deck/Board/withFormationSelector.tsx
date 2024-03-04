@@ -1,7 +1,7 @@
 import React from "react";
-import { useAppSelector } from "../../store/hooks";
-import { Formation } from "./model";
-import { RootState } from "../../store";
+import { useAppSelector } from "../../../store/hooks";
+import { Formation } from "../model";
+import { RootState } from "../../../store";
 
 export function withFormationSelector<T extends { formation: Formation }>(
   Component: React.FC<T>,

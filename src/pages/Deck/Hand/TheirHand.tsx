@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
-import { HandCard } from "../HandCard";
+import { HandCard } from "./HandCard";
 import { useAppSelector } from "../../../store/hooks";
 import { getPalMetadataById } from "../../../data/palMetadata";
-import "../Hand.css";
+import "./Hand.css";
 import { selectTheirHand } from "../../../store/duelSlice";
 
 export const TheirHand: React.FC = () => {

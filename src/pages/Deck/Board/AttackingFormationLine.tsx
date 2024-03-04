@@ -1,8 +1,7 @@
 import React from "react";
-import { CardStance, Formation } from "./model";
-import { Cell } from "./Cell";
-import { Card } from "./Card";
-import StanceSwitcher from "./StanceSwitcher";
+import { CardStance, Formation } from "../model";
+import { Card } from "../Card/Card";
+import StanceSwitcher from "../stages/attacking/StanceSwitcher";
 
 export interface AttackingFormationLineProps {
   formation: Formation;
@@ -16,7 +15,7 @@ export const AttackingFormationLine: React.FC<AttackingFormationLineProps> = ({
   onCardClick,
 }) => {
   return formation.map((d, idx) => (
-    <Cell key={idx}>
+    <div className="cell" key={idx}>
       {d && (
         <Card
           cardId={d.cardId}
@@ -29,6 +28,6 @@ export const AttackingFormationLine: React.FC<AttackingFormationLineProps> = ({
           onClick={(stance) => onStanceChanged && onStanceChanged(idx, stance)}
         />
       )}
-    </Cell>
+    </div>
   ));
 };

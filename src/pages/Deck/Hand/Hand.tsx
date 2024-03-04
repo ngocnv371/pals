@@ -1,13 +1,13 @@
 import React, { useCallback, useMemo, useState } from "react";
 import { HandCard } from "./HandCard";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { getPalMetadataById } from "../../data/palMetadata";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { getPalMetadataById } from "../../../data/palMetadata";
 import "./Hand.css";
 import {
   myReservesSelected,
   selectMyHand,
   selectSelectedReservesIndices,
-} from "../../store/duelSlice";
+} from "../../../store/duelSlice";
 
 export const Hand: React.FC = () => {
   const hand = useAppSelector(selectMyHand);
