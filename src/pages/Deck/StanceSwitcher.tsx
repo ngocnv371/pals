@@ -1,5 +1,5 @@
 import { IonButton, IonIcon } from "@ionic/react";
-import { eyedrop, rocket, shield } from "ionicons/icons";
+import { shield } from "ionicons/icons";
 import { CardStance } from "./model";
 import "./StanceSwitcher.css";
 
@@ -12,7 +12,7 @@ const StanceSwitcher: React.FC<StanceSwitcherProps> = ({ onClick }) => {
     <div className="stance-switcher">
       <div>
         <IonButton onClick={() => onClick && onClick(CardStance.Offensive)}>
-          <IonIcon icon={rocket} />
+          <IonIcon icon={"/icons/sword.svg"} />
         </IonButton>
       </div>
       <div>
