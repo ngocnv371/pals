@@ -49,6 +49,7 @@ That was our starting point, nowaday generating new cards are not that difficult
 - direct damage when opponent board is empty
 - match reward
 - deck management
+- ⬜ fusion preview (helper)
 - ⬜ improve fusion animation
 - ⬜ improve battle animation
 - ❌ add COM actions indicator (select card, select target)
