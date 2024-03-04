@@ -7,19 +7,19 @@ import { simulateBattle } from "../service";
 import { CardStance } from "../model";
 
 const winSequence = [
-  { className: "presenting", duration: 1000 },
-  { className: "damage2", duration: 1000 },
-  { className: "dead2", duration: 1000 },
+  { className: "battle-visualizer--intro", duration: 1000 },
+  { className: "battle-visualizer--damage2", duration: 1000 },
+  { className: "battle-visualizer--dead2", duration: 1000 },
 ];
 const looseSequence = [
-  { className: "presenting", duration: 1000 },
-  { className: "damage1", duration: 1000 },
-  { className: "dead1", duration: 1000 },
+  { className: "battle-visualizer--intro", duration: 1000 },
+  { className: "battle-visualizer--damage1", duration: 1000 },
+  { className: "battle-visualizer--dead1", duration: 1000 },
 ];
 const tieSequence = [
-  { className: "presenting", duration: 1000 },
-  { className: "damage-both", duration: 1000 },
-  { className: "dead-both", duration: 1000 },
+  { className: "battle-visualizer--intro", duration: 1000 },
+  { className: "battle-visualizer--damage-both", duration: 1000 },
+  { className: "battle-visualizer--dead-both", duration: 1000 },
 ];
 
 const _BattleVisualizer: React.FC<{

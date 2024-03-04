@@ -1,4 +1,4 @@
-.card-fusion {
+.fusion-visualizer {
   position: absolute;
   width: 100vw;
   height: 100vh;
@@ -9,23 +9,11 @@
     position: absolute;
     top: 50vh;
     opacity: 0;
-  }
-  &.playing {
-    .card:nth-child(1) {
-      left: 50%;
-      animation-delay: 0s;
-      animation: spiralFromLeft 2s linear;
-    }
-    .card:nth-child(2) {
-      right: 50%;
-      animation-delay: 1s;
-      animation: spiralFromRight 2s linear;
-    }
-    .card:nth-child(3) {
-      opacity: 0;
+    ion-card {
+      scale: 2;
     }
   }
-  &.presentingBoth {
+  &.fusion-visualizer--intro {
     .card:nth-child(1) {
       left: 20%;
       animation: tada 1s linear;
@@ -40,7 +28,22 @@
       opacity: 0;
     }
   }
-  &.presentingResult {
+  &.fusion-visualizer--fusing {
+    .card:nth-child(1) {
+      left: 50%;
+      animation-delay: 0s;
+      animation: spiralFromLeft 2s linear;
+    }
+    .card:nth-child(2) {
+      right: 50%;
+      animation-delay: 1s;
+      animation: spiralFromRight 2s linear;
+    }
+    .card:nth-child(3) {
+      opacity: 0;
+    }
+  }
+  &.fusion-visualizer--result {
     .card:nth-child(1),
     .card:nth-child(2) {
       opacity: 0;
@@ -52,7 +55,7 @@
       opacity: 1;
     }
   }
-  &.gone {
+  &.fusion-visualizer--done {
     .card:nth-child(1),
     .card:nth-child(2),
     .card:nth-child(3) {

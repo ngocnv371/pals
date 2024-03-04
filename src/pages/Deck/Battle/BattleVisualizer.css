@@ -9,8 +9,11 @@
     position: absolute;
     top: 50vh;
     opacity: 0;
+    ion-card {
+      scale: 2;
+    }
   }
-  &.presenting {
+  &.battle-visualizer--intro {
     .card:nth-child(1) {
       left: 20%;
       animation: zoomInUp 1s linear;
@@ -22,7 +25,7 @@
       opacity: 1;
     }
   }
-  &.damage1 {
+  &.battle-visualizer--damage1 {
     .card:nth-child(1) {
       left: 20%;
       animation-delay: 0s;
@@ -36,7 +39,7 @@
       opacity: 1;
     }
   }
-  &.damage2 {
+  &.battle-visualizer--damage2 {
     .card:nth-child(1) {
       left: 20%;
       animation-delay: 0s;
@@ -50,7 +53,7 @@
       opacity: 1;
     }
   }
-  &.damage-both {
+  &.battle-visualizer--damage-both {
     .card:nth-child(1) {
       left: 20%;
       animation-delay: 0s;
@@ -64,7 +67,7 @@
       opacity: 1;
     }
   }
-  &.dead1 {
+  &.battle-visualizer--dead1 {
     .card:nth-child(1) {
       left: 20%;
       animation-delay: 0s;
@@ -78,7 +81,7 @@
       opacity: 1;
     }
   }
-  &.dead2 {
+  &.battle-visualizer--dead2 {
     .card:nth-child(1) {
       left: 20%;
       animation-delay: 0s;
@@ -92,7 +95,7 @@
       opacity: 1;
     }
   }
-  &.dead-both {
+  &.battle-visualizer--dead-both {
     .card:nth-child(1) {
       left: 20%;
       animation-delay: 0s;
