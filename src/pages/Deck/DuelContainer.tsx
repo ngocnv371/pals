@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { myCardsDrawed, selectStage } from "../../store/duelSlice";
+import { myCardsDrawed, selectStage } from "./duelSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Board } from "./Board/Board";
 import { Hand } from "./Hand/Hand";

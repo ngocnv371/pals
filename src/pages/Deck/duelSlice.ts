@@ -1,6 +1,6 @@
 import { PayloadAction, createSelector, createSlice } from "@reduxjs/toolkit";
-import { AppDispatch, RootState } from "./store";
-import { CardStance, DuelStage, Formation, Side } from "../pages/Deck/model";
+import { AppDispatch, RootState } from "../../store/store";
+import { CardStance, DuelStage, Formation, Side } from "./model";
 import {
   changeStanceToDefensive,
   deploy,
@@ -15,8 +15,8 @@ import {
   selectTargetForOffensive,
   selectUnitForOffensive,
   simulateBattle,
-} from "../pages/Deck/service";
-import { getPalMetadataById } from "../data/palMetadata";
+} from "./service";
+import { getPalMetadataById } from "../../data/palMetadata";
 
 interface State {
   their: Side;

@@ -5,7 +5,7 @@ import facilitiesSlice from "./facilitiesSlice";
 import palsSlice from "./palsSlice";
 import uiSlice from "./uiSlice";
 import shopSlice from "./shopSlice";
-import duelSlice from "./duelSlice";
+import duelSlice from "../pages/Deck/duelSlice";
 
 export const store = configureStore({
   reducer: {

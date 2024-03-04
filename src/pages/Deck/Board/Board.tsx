@@ -11,7 +11,7 @@ import {
   myTargetCardSelected,
   myBattle,
   myDeploymentTargetSelected,
-} from "../../../store/duelSlice";
+} from "../duelSlice";
 import { withFormationSelector } from "./withFormationSelector";
 import "./Board.css";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";

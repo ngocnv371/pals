@@ -1,4 +1,4 @@
-import { selectStage } from "../../../store/duelSlice";
+import { selectStage } from "../duelSlice";
 import { useAppSelector } from "../../../store/hooks";
 import { DuelStage } from "../model";
 

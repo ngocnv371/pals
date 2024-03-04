@@ -1,7 +1,7 @@
 import { IonFab, IonFabButton, IonIcon } from "@ionic/react";
 import { chevronForward } from "ionicons/icons";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import { myPlacingStarted } from "../../../../store/duelSlice";
+import { myPlacingStarted } from "../../duelSlice";
 
 const PlaceCardsButton: React.FC = () => {
   const dispatch = useAppDispatch();

@@ -7,7 +7,7 @@ import {
   myReservesSelected,
   selectMyHand,
   selectSelectedReservesIndices,
-} from "../../../store/duelSlice";
+} from "../duelSlice";
 
 export const Hand: React.FC = () => {
   const hand = useAppSelector(selectMyHand);
