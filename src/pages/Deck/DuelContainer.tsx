@@ -6,7 +6,7 @@ import { Hand } from "./Hand/Hand";
 import FusionVisualizer from "./Fusion/FusionVisualizer";
 import StageBanner from "./stages/StageBanner";
 import { BattleVisualizer } from "./Battle/BattleVisualizer";
-import { MyLifeLabel, TheirLifeLabel } from "./stages/LifeLabel";
+import { LifeLabel } from "./stages/LifeLabel";
 import EndTurnButton from "./stages/attacking/EndTurnButton";
 import PlaceCardsButton from "./stages/drawing/PlaceCardsButton";
 import { DuelStage } from "./model";
@@ -25,8 +25,7 @@ const DuelContainer: React.FC = () => {
 
   return (
     <div className={`duel-container ${stage}`}>
-      <MyLifeLabel />
-      <TheirLifeLabel />
+      <LifeLabel />
       <Board />
       <StageBanner />
       <BattleVisualizer />

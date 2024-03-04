@@ -6,7 +6,7 @@ const StageBanner: React.FC = () => {
   const stage = useAppSelector(selectStage);
 
   return (
-    <div className="stage-banner">
+    <div className="stage-banner ion-padding">
       {stage == DuelStage.MyDrawing && <h1>Select card(s) to deploy</h1>}
       {stage == DuelStage.MyPlacing && <h1>Select placement</h1>}
       {stage == DuelStage.MyFusion && <h1>Fuuusion!!</h1>}
