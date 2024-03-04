@@ -2,9 +2,11 @@
   position: absolute;
   right: 0;
   bottom: 50%;
+  z-index: 999;
 }
 .their-life-label {
   position: absolute;
   right: 0;
   top: 5em;
+  z-index: 999;
 }

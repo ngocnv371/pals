@@ -8,6 +8,9 @@
     transform-style: preserve-3d;
     transition: all 200ms;
     transform: rotateX(0deg) translateY(0px);
+    @media (width<800px) {
+      transform: rotateX(0deg) translateZ(-190px);
+    }
     .their-row {
       .card {
         transform: rotateZ(180deg);
@@ -21,5 +24,8 @@
 .TheirFusion {
   .board {
     transform: rotateX(30deg) translateY(-160px);
+    @media (width<800px) {
+      transform: rotateX(30deg) translateY(-160px) translateZ(-190px);
+    }
   }
 }
