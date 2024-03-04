@@ -27,6 +27,7 @@ That was our starting point, nowaday generating new cards are not that difficult
 # fusion rules
 
 - TBD
+- Consider [https://www.monstermmorpg.com/Type-Chart]
 
 # backlog
 
