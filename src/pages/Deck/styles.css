@@ -31,7 +31,8 @@
   ion-card {
     margin: 2px;
     width: 80px;
-    height: 120px;
+    height: auto;
+    aspect-ratio: 2 / 3;
     transition: all 200ms;
   }
   &.defensive {
