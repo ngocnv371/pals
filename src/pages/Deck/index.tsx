@@ -34,7 +34,7 @@ const DeckPage: React.FC = () => {
       </IonHeader>
 
       <IonContent fullscreen>
-        <DeckGrid selected={selected?.id} onSelect={toggle} />
+        <DeckGrid selected={selected} onSelect={toggle} />
       </IonContent>
 
       {Boolean(selected) && (

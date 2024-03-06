@@ -30,7 +30,7 @@ export const { added: addedToBook } = bookSlice.actions;
 export const moveToDeck =
   (item: DeckItem) =>
   async (dispatch: AppDispatch, getState: () => RootState) => {
-    const ids = getState().deck.ids;
+    const ids = getState().book.ids;
     if (!ids.includes(item.id)) {
       return;
     }
