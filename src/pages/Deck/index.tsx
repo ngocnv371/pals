@@ -10,9 +10,11 @@ import {
 import { useState } from "react";
 import "./styles.css";
 import DeckGrid from "./DeckGrid";
+import CardModal from "../../components/Card/CardModal";
+import { DeckItem } from "./model";
 
 const DeckPage: React.FC = () => {
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState<DeckItem>();
 
   return (
     <IonPage>
@@ -31,7 +33,8 @@ const DeckPage: React.FC = () => {
             <IonTitle size="large">Deck</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <DeckGrid selected={selected} onSelect={setSelected} />
+        <DeckGrid selected={selected?.id} onSelect={setSelected} />
+        {Boolean(selected) && <CardModal cardId={selected!.type} />}
       </IonContent>
     </IonPage>
   );

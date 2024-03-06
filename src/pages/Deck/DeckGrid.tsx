@@ -4,10 +4,11 @@ import { checkmarkCircle } from "ionicons/icons";
 import { useAppSelector } from "../../store/hooks";
 import { selectAllDeckItems, selectDeckItemById } from "./deckSlice";
 import { CardInfo } from "../../components/Card/CardInfo";
+import { DeckItem } from "./model";
 
 const DeckGrid: React.FC<{
-  selected: string;
-  onSelect?: (id: string) => void;
+  selected?: string;
+  onSelect?: (item: DeckItem) => void;
 }> = ({ onSelect, selected }) => {
   const filtered = useAppSelector(selectAllDeckItems);
 
@@ -22,7 +23,7 @@ const DeckGrid: React.FC<{
           itemType="deck-item"
           itemID={p.id.toString()}
           key={p.id}
-          onClick={() => onSelect && onSelect(p.id)}
+          onClick={() => onSelect && onSelect(p)}
           tabIndex={idx + 1}
         >
           <CardInfo cardId={p.type} />
