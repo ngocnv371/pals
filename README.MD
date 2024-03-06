@@ -31,27 +31,24 @@ That was our starting point, nowaday generating new cards are not that difficult
 
 # backlog
 
-- advanced COM turn
-  - optimized fusion
-  - optimized attacks
-- improve life indicator placement
-- improve stance indicator
-- improve board display
-- adjust display for mobile
-- use stage banner for guide
-- card inspection
-- display card element
-- improve fusion rule
-- generate brand new cards
-- setup rule for new player deck initialization
-- setup rule for new player progression
-- match end
-- direct damage when opponent board is empty
-- match reward
-- ⬜ fusion preview (helper)
-- ⬜ improve fusion animation
-- ⬜ improve battle animation
-- ❌ add COM actions indicator (select card, select target)
+- resposinve for mobile
+- battle
+  - battle AI
+    - optimized fusion
+    - optimized attacks
+    - ❌ add COM actions indicator (select card, select target)
+  - use stage banner for guide
+  - card inspection
+  - display card element
+  - match end
+  - direct damage when opponent board is empty
+  - ⬜ fusion preview (helper)
+  - ⬜ improve fusion animation
+  - ⬜ improve battle animation
+- create original cards
+  - fusion rule
+- player progression
+  - match reward
 
 # completed
 
