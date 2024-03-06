@@ -3,12 +3,15 @@ import { getPalMetadataById } from "../../data/palMetadata";
 import {
   IonCard,
   IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
   IonIcon,
   IonImg,
   IonItem,
   IonLabel,
   IonList,
   IonNote,
+  IonText,
 } from "@ionic/react";
 import { shield } from "ionicons/icons";
 import "./CardFlavor.css";
@@ -23,7 +26,16 @@ const CardFlavor: React.FC<{ cardId: string }> = ({ cardId }) => {
     <>
       <IonCard className="card-flavor ion-no-padding ion-no-margin flex">
         <IonImg src={`/pals/${card.content.image}`}></IonImg>
-        <IonCardContent>{card.content.description}</IonCardContent>
+        <div>
+          <IonCardHeader>
+            <IonCardTitle>
+              {card.title}
+              {" - "}
+              <IonText color="secondary">{card.content.type}</IonText>
+            </IonCardTitle>
+          </IonCardHeader>
+          <IonCardContent>{card.content.description}</IonCardContent>
+        </div>
       </IonCard>
       <IonList>
         <IonItem>
