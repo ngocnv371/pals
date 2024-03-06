@@ -11,7 +11,7 @@ const adapter = createEntityAdapter<DeckItem>();
 
 const initialState = adapter.addMany(
   adapter.getInitialState(),
-  chance.n(() => generateItem(), 5)
+  chance.n(() => generateItem(), 40)
 );
 
 export const deckSlice = createSlice({

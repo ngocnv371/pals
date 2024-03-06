@@ -30,7 +30,13 @@ export const { added: addedToBook } = bookSlice.actions;
 export const moveToDeck =
   (item: DeckItem) =>
   async (dispatch: AppDispatch, getState: () => RootState) => {
-    const ids = getState().book.ids;
+    const state = getState();
+    if (state.deck.ids.length >= 40) {
+      console.warn("can move more than 40 cards to deck");
+      return;
+    }
+
+    const ids = state.book.ids;
     if (!ids.includes(item.id)) {
       return;
     }
