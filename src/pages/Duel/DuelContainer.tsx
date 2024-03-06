@@ -12,17 +12,10 @@ import PlaceCardsButton from "./stages/drawing/PlaceCardsButton";
 import { DuelStage } from "./model";
 import { TheirHand } from "./Hand/TheirHand";
 import FusionPreview from "./Fusion/FusionPreview";
+import { IonButton } from "@ionic/react";
 
 const DuelContainer: React.FC = () => {
   const stage = useAppSelector(selectStage);
-  const dispatch = useAppDispatch();
-
-  // start duel
-  useEffect(() => {
-    if (stage === DuelStage.Start) {
-      dispatch(myCardsDrawed());
-    }
-  }, [stage]);
 
   return (
     <div className={`duel-container ${stage}`}>

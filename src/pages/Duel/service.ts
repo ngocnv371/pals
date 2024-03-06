@@ -5,24 +5,19 @@ import { Side, CardStance, Battle } from "./model";
 import pals from "../../data/pals.json";
 const chance = new Chance();
 
+export function generateTheirDeck() {
+  return chance.n(
+    () => chance.pickone(pals.filter((p) => p.content.rarity < 5)).id,
+    40
+  );
+}
+
 export function generateSide(): Side {
   return {
     life: 4000,
-    deck: chance.n(() => chance.pickone(pals).id, 30),
+    deck: [],
     reserves: [],
-    forward: chance.n(
-      () =>
-        chance.bool()
-          ? {
-              cardId: chance.pickone(pals).id,
-              stance: chance.bool()
-                ? CardStance.Offensive
-                : CardStance.Defensive,
-              acted: false,
-            }
-          : null,
-      5
-    ),
+    forward: [null, null, null, null, null],
     support: [null, null, null, null, null],
   };
 }

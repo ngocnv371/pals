@@ -7,6 +7,7 @@ import {
   endBattle,
   fuseOne,
   generateSide,
+  generateTheirDeck,
   prepareDeployment,
   refillReserves,
   resetAction,
@@ -56,6 +57,13 @@ export const duelSlice = createSlice({
   name: "duel",
   initialState,
   reducers: {
+    started(
+      state,
+      action: PayloadAction<{ myDeck: string[]; theirDeck: string[] }>
+    ) {
+      state.my.deck = action.payload.myDeck;
+      state.their.deck = action.payload.theirDeck;
+    },
     myCardsDrawed(state) {
       refillReserves(state.my);
       state.stage = DuelStage.MyDrawing;
@@ -261,6 +269,15 @@ export const drawTheirCards =
     // TODO: better attacks
 
     dispatch(leadTheirOffensive());
+  };
+
+export const duelStarted =
+  () => async (dispatch: AppDispatch, getState: () => RootState) => {
+    const state = getState();
+    const myDeck = state.deck.ids.map((i) => state.deck.entities[i].type);
+    const theirDeck = generateTheirDeck();
+    dispatch(duelSlice.actions.started({ myDeck, theirDeck }));
+    dispatch(duelSlice.actions.myCardsDrawed());
   };
 
 export const leadTheirOffensive =
