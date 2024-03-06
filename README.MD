@@ -55,6 +55,8 @@ That was our starting point, nowaday generating new cards are not that difficult
 
 # completed
 
+- ✅ add quit button
+- ✅ duel start with cards in deck
 - ✅ deck management
 - ✅ COM basic turn
 - ✅ complete turn

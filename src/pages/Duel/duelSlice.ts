@@ -187,6 +187,9 @@ export const duelSlice = createSlice({
     battleEnded(state) {
       state.battle = undefined;
     },
+    duelEnded(state) {
+      state.stage = DuelStage.Start;
+    },
   },
 });
 
@@ -224,6 +227,7 @@ export const {
   myTargetCardSelected,
   theirCardsDrawed,
   myPlacingStarted,
+  duelEnded,
 } = duelSlice.actions;
 
 function delay(ms: number) {

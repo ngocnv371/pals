@@ -1,6 +1,5 @@
-import { useEffect } from "react";
-import { myCardsDrawed, selectStage } from "./duelSlice";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { selectStage } from "./duelSlice";
+import { useAppSelector } from "../../store/hooks";
 import { Board } from "./Board/Board";
 import { Hand } from "./Hand/Hand";
 import FusionVisualizer from "./Fusion/FusionVisualizer";
@@ -12,7 +11,7 @@ import PlaceCardsButton from "./stages/drawing/PlaceCardsButton";
 import { DuelStage } from "./model";
 import { TheirHand } from "./Hand/TheirHand";
 import FusionPreview from "./Fusion/FusionPreview";
-import { IonButton } from "@ionic/react";
+import QuitButton from "./stages/QuitButton";
 
 const DuelContainer: React.FC = () => {
   const stage = useAppSelector(selectStage);
@@ -24,6 +23,8 @@ const DuelContainer: React.FC = () => {
       <StageBanner />
       <BattleVisualizer />
       <FusionVisualizer />
+
+      {stage !== DuelStage.End && <QuitButton />}
       {stage == DuelStage.MyDrawing && <FusionPreview />}
 
       {stage == DuelStage.MyDrawing && <Hand />}
