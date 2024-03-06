@@ -1,0 +1,112 @@
+.battle-visualizer {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+
+  .card-info {
+    position: absolute;
+    top: 50vh;
+    opacity: 0;
+    ion-card {
+      scale: 2;
+    }
+  }
+  &.battle-visualizer--intro {
+    .card-info:nth-child(1) {
+      left: 20%;
+      animation: zoomInUp 1s linear;
+      opacity: 1;
+    }
+    .card-info:nth-child(2) {
+      right: 20%;
+      animation: zoomInUp 1s linear;
+      opacity: 1;
+    }
+  }
+  &.battle-visualizer--damage1 {
+    .card-info:nth-child(1) {
+      left: 20%;
+      animation-delay: 0s;
+      animation: flash 2s linear;
+      opacity: 1;
+    }
+    .card-info:nth-child(2) {
+      right: 20%;
+      animation-delay: 1s;
+      animation: tada 2s linear;
+      opacity: 1;
+    }
+  }
+  &.battle-visualizer--damage2 {
+    .card-info:nth-child(1) {
+      left: 20%;
+      animation-delay: 0s;
+      animation: tada 2s linear;
+      opacity: 1;
+    }
+    .card-info:nth-child(2) {
+      right: 20%;
+      animation-delay: 1s;
+      animation: flash 2s linear;
+      opacity: 1;
+    }
+  }
+  &.battle-visualizer--damage-both {
+    .card-info:nth-child(1) {
+      left: 20%;
+      animation-delay: 0s;
+      animation: flash 2s linear;
+      opacity: 1;
+    }
+    .card-info:nth-child(2) {
+      right: 20%;
+      animation-delay: 1s;
+      animation: flash 2s linear;
+      opacity: 1;
+    }
+  }
+  &.battle-visualizer--dead1 {
+    .card-info:nth-child(1) {
+      left: 20%;
+      animation-delay: 0s;
+      animation: bounceOutLeft 2s linear;
+      opacity: 1;
+    }
+    .card-info:nth-child(2) {
+      right: 20%;
+      animation-delay: 1s;
+      animation: tada 2s linear;
+      opacity: 1;
+    }
+  }
+  &.battle-visualizer--dead2 {
+    .card-info:nth-child(1) {
+      left: 20%;
+      animation-delay: 0s;
+      animation: tada 2s linear;
+      opacity: 1;
+    }
+    .card-info:nth-child(2) {
+      right: 20%;
+      animation-delay: 1s;
+      animation: bounceOutRight 2s linear;
+      opacity: 1;
+    }
+  }
+  &.battle-visualizer--dead-both {
+    .card-info:nth-child(1) {
+      left: 20%;
+      animation-delay: 0s;
+      animation: bounceOutLeft 2s linear;
+      opacity: 1;
+    }
+    .card-info:nth-child(2) {
+      right: 20%;
+      animation-delay: 1s;
+      animation: bounceOutRight 2s linear;
+      opacity: 1;
+    }
+  }
+}

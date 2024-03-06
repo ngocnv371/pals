@@ -29,12 +29,11 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 import "animate.css/animate.css";
 
-import BasePage from "./pages/Base";
-import MyPalsPage from "./pages/MyPals";
 import { Provider } from "react-redux";
 import { store } from "./store";
-import InventoryPage from "./pages/Inventory";
+
 import DeckPage from "./pages/Deck";
+import DuelPage from "./pages/Duel";
 
 setupIonicReact();
 
@@ -49,14 +48,8 @@ const App: React.FC = () => {
               <Route path="/" exact={true}>
                 <Redirect to="/deck" />
               </Route>
-              <Route path="/bases/:id" exact={true}>
-                <BasePage />
-              </Route>
-              <Route path="/my-pals" exact={true}>
-                <MyPalsPage />
-              </Route>
-              <Route path="/inventory" exact={true}>
-                <InventoryPage />
+              <Route path="/duel" exact={true}>
+                <DuelPage />
               </Route>
               <Route path="/deck" exact={true}>
                 <DeckPage />

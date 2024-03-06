@@ -1,35 +1,31 @@
-import PalAvatar from "./PalAvatar";
-import "./PalsList.css";
+import "./DeckGrid.css";
 import { IonIcon, IonItem, IonLabel } from "@ionic/react";
 import { checkmarkCircle } from "ionicons/icons";
 import { useAppSelector } from "../../store/hooks";
-import { selectAllPals, selectPalsByGender } from "../../pages/Deck/deckSlice";
+import { selectAllDeckItems, selectDeckItemById } from "./deckSlice";
+import { CardInfo } from "../../components/Card/CardInfo";
 
-const PalsList: React.FC<{
-  gender?: string;
+const DeckGrid: React.FC<{
   selected: string;
   onSelect?: (id: string) => void;
-}> = ({ onSelect, gender, selected }) => {
-  const filtered = useAppSelector((state) =>
-    gender ? selectPalsByGender(state.pals, gender) : selectAllPals(state.pals)
-  );
+}> = ({ onSelect, selected }) => {
+  const filtered = useAppSelector(selectAllDeckItems);
 
   if (filtered.length == 0) {
     return <p>No result</p>;
   }
 
   return (
-    <div className="pals-list">
+    <div className="deck-grid">
       {filtered.map((p, idx) => (
         <div
-          itemType="pal"
+          itemType="deck-item"
           itemID={p.id.toString()}
           key={p.id}
           onClick={() => onSelect && onSelect(p.id)}
           tabIndex={idx + 1}
-          style={{ position: "relative" }}
         >
-          <PalAvatar palId={p.id} />
+          <CardInfo cardId={p.type} />
           {p.id == selected && (
             <IonIcon icon={checkmarkCircle} size="large" color="primary" />
           )}
@@ -39,4 +35,4 @@ const PalsList: React.FC<{
   );
 };
 
-export default PalsList;
+export default DeckGrid;

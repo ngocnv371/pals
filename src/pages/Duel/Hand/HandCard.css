@@ -1,0 +1,8 @@
+.hand-card {
+  ion-badge {
+    z-index: 99;
+    position: absolute;
+    top: -1em;
+    right: 0;
+  }
+}

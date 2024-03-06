@@ -1,0 +1,15 @@
+.card-info {
+  margin: 2px;
+  width: 80px;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  transition: all 200ms;
+
+  p {
+    text-align: center;
+    color: grey;
+    span.atk {
+      color: red;
+    }
+  }
+}

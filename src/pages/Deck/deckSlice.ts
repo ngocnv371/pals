@@ -1,45 +1,28 @@
-import {
-  PayloadAction,
-  createEntityAdapter,
-  createSlice,
-} from "@reduxjs/toolkit";
+import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 import { Chance } from "chance";
-import { nanoid } from "nanoid";
-import pals from "../../data/pals.json";
-
+import { DeckItem } from "./model";
+import { generateItem } from "./service";
+import { RootState } from "../../store";
 const chance = new Chance();
-
-export interface DeckItem {
-  id: string;
-  type: string;
-}
 
 const adapter = createEntityAdapter<DeckItem>();
 
-function generateItem(): DeckItem {
-  return {
-    id: nanoid(),
-    type: chance.pickone(pals).id,
-  };
-}
-
 const initialState = adapter.addMany(
   adapter.getInitialState(),
-  chance.n(generateItem, 4)
+  chance.n(() => generateItem(), 5)
 );
 
-export const duelSlice = createSlice({
+export const deckSlice = createSlice({
   name: "deck",
   initialState,
   reducers: {
-    added(state, action: PayloadAction<DeckItem>) {
-      adapter.addOne(state, action.payload);
-    },
+    added: adapter.addOne,
   },
 });
 
-export const { selectAll: selectAllDeckItems } = adapter.getSelectors();
+export const { selectAll: selectAllDeckItems, selectById: selectDeckItemById } =
+  adapter.getSelectors((state: RootState) => state.deck);
 
-export const { added } = duelSlice.actions;
+export const { added } = deckSlice.actions;
 
-export default duelSlice.reducer;
+export default deckSlice.reducer;

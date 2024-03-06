@@ -1,0 +1,19 @@
+.dueling-card {
+  display: flex;
+  position: relative;
+  margin: auto;
+  transition: all 200ms;
+  margin-top: 0;
+
+  &.defensive {
+    transform: rotateZ(-90deg);
+    p {
+      span.atk {
+        color: inherit;
+      }
+      span.def {
+        color: red;
+      }
+    }
+  }
+}

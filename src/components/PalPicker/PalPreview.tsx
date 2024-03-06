@@ -8,7 +8,7 @@ import {
 import { female, male } from "ionicons/icons";
 import WorkSkillsList from "../WorkSkillsList";
 import { useAppSelector } from "../../store/hooks";
-import { selectPalById } from "../../store/palsSlice";
+import { selectPalById } from "../../pages/Deck/deckSlice";
 import getPalMetadata from "../../data/palMetadata";
 
 const PalPreview: React.FC<{ palId: string }> = ({ palId }) => {
@@ -26,7 +26,8 @@ const PalPreview: React.FC<{ palId: string }> = ({ palId }) => {
     <IonCard className="pal-preview">
       <IonCardHeader>
         <IonCardTitle>
-          <IonIcon icon={pal.gender == "male" ? male : female} /> {meta.title} Lv
+          <IonIcon icon={pal.gender == "male" ? male : female} /> {meta.title}{" "}
+          Lv
           {pal.level}
         </IonCardTitle>
       </IonCardHeader>

@@ -9,23 +9,26 @@ import {
 } from "@ionic/react";
 
 import "./Menu.css";
-import BasesList from "./BasesList";
 
 const Menu: React.FC = () => {
   return (
     <IonMenu contentId="main" type="overlay">
       <IonContent>
-        <BasesList />
         <IonList>
-          <IonListHeader>Others</IonListHeader>
+          <IonListHeader>Hello there</IonListHeader>
           <IonMenuToggle>
-            <IonItem routerLink="/my-pals">
-              <IonLabel>My Pals</IonLabel>
+            <IonItem routerLink="/deck">
+              <IonLabel>Deck</IonLabel>
             </IonItem>
           </IonMenuToggle>
           <IonMenuToggle>
             <IonItem routerLink="/inventory">
               <IonLabel>Inventory</IonLabel>
+            </IonItem>
+          </IonMenuToggle>
+          <IonMenuToggle>
+            <IonItem routerLink="/duel">
+              <IonLabel>Duel</IonLabel>
             </IonItem>
           </IonMenuToggle>
         </IonList>

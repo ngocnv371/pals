@@ -1,6 +1,6 @@
 import { IonLabel } from "@ionic/react";
 import { useAppSelector } from "../../store/hooks";
-import { selectPalById } from "../../store/palsSlice";
+import { selectPalById } from "../../pages/Deck/deckSlice";
 import getPalMetadata from "../../data/palMetadata";
 
 const PalLabel: React.FC<

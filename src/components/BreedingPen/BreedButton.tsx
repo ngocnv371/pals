@@ -1,17 +1,17 @@
 import { IonItem, IonButton } from "@ionic/react";
 import useNewPalNotification from "../NewPalNotification";
 import { useAppDispatch } from "../../store/hooks";
-import { breedPals } from "../../store/palsSlice";
+import { breedPals } from "../../pages/Deck/deckSlice";
 
 const BreedButton: React.FC<{ parent1: string; parent2: string }> = ({
   parent1,
   parent2,
 }) => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const { present } = useNewPalNotification();
 
   function handleClick() {
-    const child = dispatch(breedPals(parent1, parent2))
+    const child = dispatch(breedPals(parent1, parent2));
     present(child);
   }
 

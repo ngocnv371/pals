@@ -1,0 +1,10 @@
+.fusion-preview {
+  .card-info {
+    position: absolute;
+    top: 20vh;
+    left: 45vw;
+    ion-card {
+      scale: 2;
+    }
+  }
+}
