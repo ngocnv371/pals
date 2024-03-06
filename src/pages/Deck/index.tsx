@@ -6,15 +6,21 @@ import {
   IonMenuButton,
   IonTitle,
   IonContent,
+  IonFooter,
 } from "@ionic/react";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import "./styles.css";
 import DeckGrid from "./DeckGrid";
-import CardModal from "../../components/Card/CardModal";
 import { DeckItem } from "./model";
+import CardFlavor from "../../components/Card/CardFlavor";
 
 const DeckPage: React.FC = () => {
   const [selected, setSelected] = useState<DeckItem>();
+  const toggle = useCallback(
+    (value: DeckItem) =>
+      setSelected((old) => (old?.id == value.id ? undefined : value)),
+    []
+  );
 
   return (
     <IonPage>
@@ -28,14 +34,14 @@ const DeckPage: React.FC = () => {
       </IonHeader>
 
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Deck</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <DeckGrid selected={selected?.id} onSelect={setSelected} />
-        {Boolean(selected) && <CardModal cardId={selected!.type} />}
+        <DeckGrid selected={selected?.id} onSelect={toggle} />
       </IonContent>
+
+      {Boolean(selected) && (
+        <IonFooter>
+          <CardFlavor cardId={selected!.type} />{" "}
+        </IonFooter>
+      )}
     </IonPage>
   );
 };
