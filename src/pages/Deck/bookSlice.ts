@@ -3,8 +3,7 @@ import { Chance } from "chance";
 import { DeckItem } from "./model";
 import { generateItem } from "./service";
 import { AppDispatch, RootState } from "../../store";
-import { addedToBook } from "./bookSlice";
-
+import { addedToDeck } from "./deckSlice";
 const chance = new Chance();
 
 const adapter = createEntityAdapter<DeckItem>();
@@ -14,8 +13,8 @@ const initialState = adapter.addMany(
   chance.n(() => generateItem(), 5)
 );
 
-export const deckSlice = createSlice({
-  name: "deck",
+export const bookSlice = createSlice({
+  name: "book",
   initialState,
   reducers: {
     added: adapter.addOne,
@@ -23,12 +22,12 @@ export const deckSlice = createSlice({
   },
 });
 
-export const { selectAll: selectAllDeckItems, selectById: selectDeckItemById } =
-  adapter.getSelectors((state: RootState) => state.deck);
+export const { selectAll: selectAllBookItems, selectById: selectBookItemById } =
+  adapter.getSelectors((state: RootState) => state.book);
 
-export const { added: addedToDeck } = deckSlice.actions;
+export const { added: addedToBook } = bookSlice.actions;
 
-export const moveToBook =
+export const moveToDeck =
   (item: DeckItem) =>
   async (dispatch: AppDispatch, getState: () => RootState) => {
     const ids = getState().deck.ids;
@@ -36,8 +35,8 @@ export const moveToBook =
       return;
     }
 
-    dispatch(deckSlice.actions.removed(item.id));
-    dispatch(addedToBook(item));
+    dispatch(bookSlice.actions.removed(item.id));
+    dispatch(addedToDeck(item));
   };
 
-export default deckSlice.reducer;
+export default bookSlice.reducer;
