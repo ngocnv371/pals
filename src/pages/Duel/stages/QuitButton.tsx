@@ -1,7 +1,7 @@
 import { IonAlert, IonFab, IonFabButton, IonIcon } from "@ionic/react";
 import { exit } from "ionicons/icons";
 import { useAppDispatch } from "../../../store/hooks";
-import { duelEnded } from "../duelSlice";
+import { duelEnded } from "../store/duelSlice";
 
 const QuitButton: React.FC = () => {
   const dispatch = useAppDispatch();

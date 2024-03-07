@@ -3,11 +3,11 @@ import { HandCard } from "./HandCard";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { getPalMetadataById } from "../../../data/palMetadata";
 import "./Hand.css";
+import { myReservesSelected } from "../store/duelSlice";
 import {
-  myReservesSelected,
   selectMyHand,
   selectSelectedReservesIndices,
-} from "../duelSlice";
+} from "../store/selectors";
 
 export const Hand: React.FC = () => {
   const hand = useAppSelector(selectMyHand);

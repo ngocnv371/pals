@@ -9,19 +9,24 @@
     position: absolute;
     top: 50vh;
     opacity: 0;
-    ion-card {
-      scale: 2;
-    }
+    scale: 2;
+  }
+  .effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%) scale(3);
+    z-index: 999;
   }
   &.fusion-visualizer--intro {
     .card-info:nth-child(1) {
       left: 20%;
-      animation: tada 1s linear;
+      animation: zoomInUp 1s linear;
       opacity: 1;
     }
     .card-info:nth-child(2) {
       right: 20%;
-      animation: tada 1s linear;
+      animation: zoomInUp 1s linear;
       opacity: 1;
     }
     .card-info:nth-child(3) {
@@ -38,6 +43,34 @@
       right: 50%;
       animation-delay: 1s;
       animation: spiralFromRight 2s linear;
+    }
+    .card-info:nth-child(3) {
+      opacity: 0;
+    }
+  }
+  &.fusion-visualizer--failed1 {
+    .card-info:nth-child(1) {
+      left: 20%;
+      opacity: 1;
+    }
+    .card-info:nth-child(2) {
+      right: 80%;
+      animation: bounceInRight 2s linear;
+      opacity: 1;
+    }
+    .card-info:nth-child(3) {
+      opacity: 0;
+    }
+  }
+  &.fusion-visualizer--failed2 {
+    .card-info:nth-child(1) {
+      left: 20%;
+      animation: hinge 2s linear;
+      opacity: 1;
+    }
+    .card-info:nth-child(2) {
+      right: 80%;
+      opacity: 1;
     }
     .card-info:nth-child(3) {
       opacity: 0;

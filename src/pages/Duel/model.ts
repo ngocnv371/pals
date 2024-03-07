@@ -96,3 +96,13 @@ export enum DuelStage {
   TheirBattle = "TheirBattle",
   End = "End",
 }
+
+export interface Fusion {
+  card1: string;
+  card2: string;
+  result: string;
+}
+export interface ClassAnimationSegment {
+  className: string;
+  duration: number;
+}

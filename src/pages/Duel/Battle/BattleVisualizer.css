@@ -4,14 +4,30 @@
   height: 100vh;
   top: 0;
   left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
 
   .card-info {
     position: absolute;
     top: 50vh;
     opacity: 0;
-    ion-card {
-      scale: 2;
+    scale: 2;
+  }
+  &.defensive .card-info:nth-child(2) {
+    p {
+      span.atk {
+        color: inherit;
+      }
+      span.def {
+        color: red;
+      }
     }
+  }
+  .effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%) scale(3);
+    z-index: 999;
   }
   &.battle-visualizer--intro {
     .card-info:nth-child(1) {
@@ -38,6 +54,9 @@
       animation: tada 2s linear;
       opacity: 1;
     }
+    .effect {
+      left: 20%;
+    }
   }
   &.battle-visualizer--damage2 {
     .card-info:nth-child(1) {
@@ -52,6 +71,9 @@
       animation: flash 2s linear;
       opacity: 1;
     }
+    .effect {
+      right: 20%;
+    }
   }
   &.battle-visualizer--damage-both {
     .card-info:nth-child(1) {
@@ -65,6 +87,9 @@
       animation-delay: 1s;
       animation: flash 2s linear;
       opacity: 1;
+    }
+    .effect {
+      left: 50%;
     }
   }
   &.battle-visualizer--dead1 {
@@ -107,6 +132,16 @@
       animation-delay: 1s;
       animation: bounceOutRight 2s linear;
       opacity: 1;
+    }
+  }
+  &.battle-visualizer--end {
+    .card-info:nth-child(1) {
+      left: 20%;
+      opacity: 0;
+    }
+    .card-info:nth-child(2) {
+      right: 20%;
+      opacity: 0;
     }
   }
 }

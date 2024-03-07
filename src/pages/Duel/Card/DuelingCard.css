@@ -6,7 +6,9 @@
   margin-top: 0;
 
   &.defensive {
-    transform: rotateZ(-90deg);
+    ion-card {
+      transform: rotateZ(90deg);
+    }
     p {
       span.atk {
         color: inherit;

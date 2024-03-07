@@ -1,0 +1,27 @@
+import { createSelector } from "@reduxjs/toolkit";
+import { RootState } from "../../../store";
+
+export const selectTheirHand = (state: RootState) => state.duel.their.reserves;
+
+export const selectMyHand = (state: RootState) => state.duel.my.reserves;
+
+export const selectTheirDeployed = (state: RootState) =>
+  state.duel.their.forward;
+
+export const selectMyDeployed = (state: RootState) => state.duel.my.forward;
+
+export const selectTheirSupports = (state: RootState) =>
+  state.duel.their.support;
+
+export const selectMySupports = (state: RootState) => state.duel.my.support;
+
+export const selectSelectedReservesIndices = (state: RootState) =>
+  state.duel.my.deploymentPlan?.selectedReservesIndices;
+
+export const selectMyFusionQueue = createSelector(
+  (state: RootState) => state.duel.my.deploymentPlan?.selectedReservesIndices,
+  (state: RootState) => state.duel.my.reserves,
+  (indices, reserves) => indices?.map((i) => reserves[i])
+);
+
+export const selectStage = (state: RootState) => state.duel.stage;

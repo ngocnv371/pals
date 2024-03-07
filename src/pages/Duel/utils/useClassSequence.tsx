@@ -1,13 +1,9 @@
 import { useEffect } from "react";
-
-interface Segment {
-  className: string;
-  duration: number;
-}
+import { ClassAnimationSegment } from "../model";
 
 export function useClassSequence<T extends HTMLElement>(
   ref: React.MutableRefObject<T | undefined>,
-  segments: Segment[],
+  segments: ClassAnimationSegment[],
   onCompleted?: () => void
 ) {
   useEffect(() => {

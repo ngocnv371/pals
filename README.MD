@@ -29,6 +29,18 @@ That was our starting point, nowaday generating new cards are not that difficult
 - TBD
 - Consider [https://www.monstermmorpg.com/Type-Chart]
 
+# generate original monsters
+
+see [MYTHULU.MD](MYTHULU.MD)
+
+# runbooks
+
+see [RUNBOOKS.MD](RUNBOOKS.MD)
+
+# battle flow
+
+see [BATTLEFLOW.MD](BATTLEFLOW.MD)
+
 # backlog
 
 - resposinve for mobile
@@ -41,10 +53,10 @@ That was our starting point, nowaday generating new cards are not that difficult
   - card inspection
   - display card element
   - match end
-  - direct damage when opponent board is empty
-  - ⬜ fusion preview (helper)
-  - ⬜ improve fusion animation
-  - ⬜ improve battle animation
+  - ⬜ direct damage when opponent board is empty
+  - fusion preview (helper)
+  - improve fusion animation
+  - improve battle animation
 - create original cards
   - fusion rule
 - player progression
