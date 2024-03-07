@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 
 interface SpriteProps {
-  width: number;
+  tileWidth: number;
+  frames: number;
   cols: number;
   duration: number;
   url: string;
@@ -9,21 +10,19 @@ interface SpriteProps {
 }
 
 const Sprite: React.FC<SpriteProps> = ({
-  width,
+  tileWidth,
+  frames,
   cols,
   duration,
   url,
   repeat,
 }) => {
-  const tileWidth = width / cols;
-  const totalTiles = cols * cols;
-
   const [tileIndex, setTileIndex] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setTileIndex((prevTileIndex) => {
-        if (prevTileIndex === totalTiles - 1) {
+        if (prevTileIndex === frames - 1) {
           if (repeat) {
             return 0;
           }
@@ -37,10 +36,10 @@ const Sprite: React.FC<SpriteProps> = ({
     }, duration);
 
     return () => clearInterval(timer);
-  }, [totalTiles, repeat]);
+  }, [frames, repeat]);
 
-  const x = -(tileIndex % width) * tileWidth;
-  const y = -Math.floor(tileIndex / width) * tileWidth;
+  const x = -(tileIndex % cols) * tileWidth;
+  const y = -Math.floor(tileIndex / cols) * tileWidth;
   return (
     <div
       style={{

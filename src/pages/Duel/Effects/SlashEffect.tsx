@@ -4,9 +4,10 @@ const SlashEffect: React.FC = () => {
   return (
     <Sprite
       url="url(/effects/slash-sprite.png)"
-      width={894}
+      tileWidth={894 / 5}
+      frames={7}
       cols={5}
-      duration={100}
+      duration={50}
       repeat
     />
   );
