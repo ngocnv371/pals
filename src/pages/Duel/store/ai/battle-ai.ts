@@ -1,8 +1,8 @@
 import { AppThunkAction } from "../../../../store";
-import { duelSlice } from "../duelSlice";
+import { DuelSliceType } from "../duelSlice";
 
 export interface BattleAI {
-  (slice: typeof duelSlice): {
+  (slice: DuelSliceType): {
     leadTheirOffensive: AppThunkAction;
     drawTheirCards: AppThunkAction;
   };

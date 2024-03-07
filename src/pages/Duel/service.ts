@@ -96,6 +96,10 @@ export function fuseOne(side: Side) {
   const [card1, card2, ...rest] = side.deploymentPlan.queue;
   const result = breedById(card1, card2);
 
+  if (!result) {
+    return undefined;
+  }
+
   console.debug(`fusing ${card1} and ${card2} into ${result}`);
   side.deploymentPlan.queue = [result, ...rest];
   return { card1, card2, result };

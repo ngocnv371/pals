@@ -52,6 +52,7 @@ export const theirFuseAndPlace = fuseAllThenPlace(
 );
 
 export const { leadTheirOffensive, drawTheirCards } = jake(duelSlice);
+
 function battle(
   selector: SideSelector,
   startAction: any,
@@ -62,6 +63,7 @@ function battle(
   return () => async (dispatch, getState) => {
     console.debug("attack!!");
     dispatch(startAction);
+    // TODO: calculate wait duration
     await delay(4000);
     dispatch(endAction);
     await delay(50);

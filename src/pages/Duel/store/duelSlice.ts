@@ -194,6 +194,8 @@ export const duelSlice = createSlice({
   },
 });
 
+export type DuelSliceType = typeof duelSlice;
+
 export const {
   myCardsDrawed,
   myReservesSelected,
