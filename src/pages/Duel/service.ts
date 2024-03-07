@@ -12,7 +12,7 @@ export function generateTheirDeck() {
   );
 }
 
-export function generateSide(): Side {
+export function initSide(): Side {
   return {
     life: 4000,
     deck: [],

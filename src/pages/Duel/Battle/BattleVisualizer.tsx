@@ -1,10 +1,11 @@
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useAppSelector } from "../../../store/hooks";
 import "./BattleVisualizer.css";
 import { useClassSequence } from "../utils/useClassSequence";
 import { simulateBattle } from "../service";
 import { CardStance } from "../model";
 import { CardInfo } from "../../../components/Card/CardInfo";
+import SlashEffect from "../Effects/SlashEffect";
 
 const winSequence = [
   { className: "battle-visualizer--intro", duration: 1000 },
@@ -32,16 +33,31 @@ const _BattleVisualizer: React.FC<{
     () => simulateBattle(card1, card2, card2Stance),
     [card1, card2, card2Stance]
   );
+  const win = result > 0;
+  const tie = result == 0;
 
-  const sequence =
-    result == 0 ? tieSequence : result > 0 ? winSequence : looseSequence;
+  const sequence = tie ? tieSequence : win ? winSequence : looseSequence;
 
   useClassSequence(ref, sequence);
+  const [showEffect, setShowEffect] = useState(false);
+  // schedule effect
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowEffect(true);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="battle-visualizer" ref={ref as any}>
       <CardInfo cardId={card1} />
       <CardInfo cardId={card2} />
+      {showEffect && (
+        <div className="effect">
+          <SlashEffect />
+        </div>
+      )}
     </div>
   );
 };

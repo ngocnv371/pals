@@ -6,7 +6,7 @@ import {
   deploy,
   endBattle,
   fuseOne,
-  generateSide,
+  initSide,
   generateTheirDeck,
   prepareDeployment,
   refillReserves,
@@ -48,8 +48,8 @@ interface State {
 }
 
 const initialState: State = {
-  their: generateSide(),
-  my: generateSide(),
+  their: initSide(),
+  my: initSide(),
   stage: DuelStage.Start,
 };
 
@@ -61,8 +61,11 @@ export const duelSlice = createSlice({
       state,
       action: PayloadAction<{ myDeck: string[]; theirDeck: string[] }>
     ) {
+      state.my = initSide();
       state.my.deck = action.payload.myDeck;
+      state.their = initSide();
       state.their.deck = action.payload.theirDeck;
+      state.stage = DuelStage.Start;
     },
     myCardsDrawed(state) {
       refillReserves(state.my);
@@ -189,6 +192,8 @@ export const duelSlice = createSlice({
     },
     duelEnded(state) {
       state.stage = DuelStage.Start;
+      state.my = initSide();
+      state.their = initSide();
     },
   },
 });

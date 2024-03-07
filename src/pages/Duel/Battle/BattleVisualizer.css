@@ -13,6 +13,13 @@
       scale: 2;
     }
   }
+  .effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%) scale(3);
+    z-index: 999;
+  }
   &.battle-visualizer--intro {
     .card-info:nth-child(1) {
       left: 20%;
@@ -38,6 +45,9 @@
       animation: tada 2s linear;
       opacity: 1;
     }
+    .effect {
+      left: 20%;
+    }
   }
   &.battle-visualizer--damage2 {
     .card-info:nth-child(1) {
@@ -52,6 +62,9 @@
       animation: flash 2s linear;
       opacity: 1;
     }
+    .effect {
+      right: 20%;
+    }
   }
   &.battle-visualizer--damage-both {
     .card-info:nth-child(1) {
@@ -65,6 +78,9 @@
       animation-delay: 1s;
       animation: flash 2s linear;
       opacity: 1;
+    }
+    .effect {
+      left: 50%;
     }
   }
   &.battle-visualizer--dead1 {
