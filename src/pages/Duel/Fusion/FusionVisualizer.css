@@ -13,6 +13,13 @@
       scale: 2;
     }
   }
+  .effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%) scale(3);
+    z-index: 999;
+  }
   &.fusion-visualizer--intro {
     .card-info:nth-child(1) {
       left: 20%;
