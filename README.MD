@@ -64,6 +64,8 @@ see [BATTLEFLOW.MD](BATTLEFLOW.MD)
 
 # completed
 
+- ✅ add tests pages
+- ✅ handle failed fusion
 - ✅ add quit button
 - ✅ duel start with cards in deck
 - ✅ deck management
