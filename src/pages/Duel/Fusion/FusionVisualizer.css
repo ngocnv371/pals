@@ -9,9 +9,7 @@
     position: absolute;
     top: 50vh;
     opacity: 0;
-    ion-card {
-      scale: 2;
-    }
+    scale: 2;
   }
   .effect {
     position: absolute;
