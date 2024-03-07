@@ -1,4 +1,4 @@
-import { selectStage } from "./duelSlice";
+import { selectStage } from "./store/selectors";
 import { useAppSelector } from "../../store/hooks";
 import { Board } from "./Board/Board";
 import { Hand } from "./Hand/Hand";

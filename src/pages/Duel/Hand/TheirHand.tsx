@@ -3,7 +3,7 @@ import { HandCard } from "./HandCard";
 import { useAppSelector } from "../../../store/hooks";
 import { getPalMetadataById } from "../../../data/palMetadata";
 import "./Hand.css";
-import { selectTheirHand } from "../duelSlice";
+import { selectTheirHand } from "../store/selectors";
 
 export const TheirHand: React.FC = () => {
   const hand = useAppSelector(selectTheirHand);

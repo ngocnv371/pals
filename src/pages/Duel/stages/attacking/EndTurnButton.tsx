@@ -1,7 +1,7 @@
 import { IonFab, IonFabButton, IonIcon } from "@ionic/react";
 import { chevronForward } from "ionicons/icons";
 import { useAppDispatch } from "../../../../store/hooks";
-import { drawTheirCards } from "../../duelSlice";
+import { drawTheirCards } from "../../store/thunk-actions";
 
 const EndTurnButton: React.FC = () => {
   const dispatch = useAppDispatch();

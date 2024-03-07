@@ -12,7 +12,8 @@ import React from "react";
 import "./styles.css";
 import DuelContainer from "./DuelContainer";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
-import { duelStarted, selectStage } from "./duelSlice";
+import { selectStage } from "./store/selectors";
+import { duelStarted } from "./store/thunk-actions";
 import { DuelStage } from "./model";
 
 const DeckPage: React.FC = () => {

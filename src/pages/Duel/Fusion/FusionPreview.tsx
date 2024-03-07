@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useAppSelector } from "../../../store/hooks";
-import { selectMyFusionQueue } from "../duelSlice";
+import { selectMyFusionQueue } from "../store/selectors";
 import "./FusionPreview.css";
 import { breedChain } from "../../../data/palBreed";
 import { CardInfo } from "../../../components/Card/CardInfo";

@@ -3,7 +3,7 @@ import inventorySlice from "./inventorySlice";
 import uiSlice from "./uiSlice";
 import shopSlice from "./shopSlice";
 import deckSlice from "../pages/Deck/deckSlice";
-import duelSlice from "../pages/Duel/duelSlice";
+import duelSlice from "../pages/Duel/store/duelSlice";
 import bookSlice from "../pages/Deck/bookSlice";
 
 export const store = configureStore({

@@ -53,10 +53,10 @@ see [BATTLEFLOW.MD](BATTLEFLOW.MD)
   - card inspection
   - display card element
   - match end
-  - direct damage when opponent board is empty
-  - ⬜ fusion preview (helper)
-  - ⬜ improve fusion animation
-  - ⬜ improve battle animation
+  - ⬜ direct damage when opponent board is empty
+  - fusion preview (helper)
+  - improve fusion animation
+  - improve battle animation
 - create original cards
   - fusion rule
 - player progression

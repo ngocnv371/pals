@@ -1,17 +1,18 @@
 import React from "react";
 import {
+  myStanceChangedToDefensive,
+  myOffensiveCardSelected,
+  myTargetCardSelected,
+  myDeploymentTargetSelected,
+} from "../store/duelSlice";
+import {
   selectTheirDeployed,
   selectMyDeployed,
   selectTheirSupports,
   selectMySupports,
   selectStage,
-  myFuseAndPlace,
-  myStanceChangedToDefensive,
-  myOffensiveCardSelected,
-  myTargetCardSelected,
-  myBattle,
-  myDeploymentTargetSelected,
-} from "../duelSlice";
+} from "../store/selectors";
+import { myFuseAndPlace, myBattle } from "../store/thunk-actions";
 import { withFormationSelector } from "./withFormationSelector";
 import "./Board.css";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
