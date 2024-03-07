@@ -7,7 +7,7 @@ import SparkEffect from "../Effects/SparkEffect";
 import { calculateFusionAnimationSequence } from "../service";
 import { Fusion } from "../model";
 
-export const _FusionVisualizer: React.FC<
+export const FusionVisualizer: React.FC<
   Fusion & {
     onCompleted?: () => void;
   }
@@ -44,7 +44,7 @@ export const _FusionVisualizer: React.FC<
   );
 };
 
-const FusionVisualizer: React.FC = () => {
+export const FusionVisualizerContainer: React.FC = () => {
   const data = useAppSelector((state) => state.duel.fusion);
 
   if (!data) {
@@ -53,7 +53,5 @@ const FusionVisualizer: React.FC = () => {
 
   const { card1, card2, result } = data;
 
-  return <_FusionVisualizer card1={card1} card2={card2} result={result} />;
+  return <FusionVisualizer card1={card1} card2={card2} result={result} />;
 };
-
-export default FusionVisualizer;

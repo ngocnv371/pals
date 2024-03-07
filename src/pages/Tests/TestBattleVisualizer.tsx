@@ -12,14 +12,14 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { useMemo, useState } from "react";
-import { _BattleVisualizer } from "../Duel/Battle/BattleVisualizer";
+import { BattleVisualizer } from "../Duel/Battle/BattleVisualizer";
 import { CardStance } from "../Duel/model";
 
 const winItems = ["kelpie", "blueplatypus"];
 const looseItems = ["blueplatypus", "kelpie"];
 const tieItems = ["kelpie", "kelpie"];
 
-const TestBattlePage: React.FC = () => {
+const TestBattleVisualizerPage: React.FC = () => {
   const [show, setShow] = useState(true);
   const [result, setResult] = useState(1);
   const [stance, setStance] = useState(CardStance.Offensive);
@@ -80,7 +80,7 @@ const TestBattlePage: React.FC = () => {
 
       <IonContent fullscreen>
         {show && (
-          <_BattleVisualizer
+          <BattleVisualizer
             card1={items[0]}
             card2={items[1]}
             card2Stance={stance}
@@ -92,4 +92,4 @@ const TestBattlePage: React.FC = () => {
   );
 };
 
-export default TestBattlePage;
+export default TestBattleVisualizerPage;

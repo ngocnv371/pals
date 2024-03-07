@@ -2,9 +2,9 @@ import { selectStage } from "./store/selectors";
 import { useAppSelector } from "../../store/hooks";
 import { Board } from "./Board/Board";
 import { Hand } from "./Hand/Hand";
-import FusionVisualizer from "./Fusion/FusionVisualizer";
+import { FusionVisualizerContainer } from "./Fusion/FusionVisualizer";
 import StageBanner from "./stages/StageBanner";
-import { BattleVisualizer } from "./Battle/BattleVisualizer";
+import { BattleVisualizerContainer } from "./Battle/BattleVisualizer";
 import { LifeLabel } from "./stages/LifeLabel";
 import EndTurnButton from "./stages/attacking/EndTurnButton";
 import PlaceCardsButton from "./stages/drawing/PlaceCardsButton";
@@ -21,8 +21,8 @@ const DuelContainer: React.FC = () => {
       <LifeLabel />
       <Board />
       <StageBanner />
-      <BattleVisualizer />
-      <FusionVisualizer />
+      <BattleVisualizerContainer />
+      <FusionVisualizerContainer />
 
       {stage !== DuelStage.End && <QuitButton />}
       {stage == DuelStage.MyDrawing && <FusionPreview />}

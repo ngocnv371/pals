@@ -7,7 +7,7 @@ import { CardStance } from "../model";
 import { CardInfo } from "../../../components/Card/CardInfo";
 import SlashEffect from "../Effects/SlashEffect";
 
-export const _BattleVisualizer: React.FC<{
+export const BattleVisualizer: React.FC<{
   card1: string;
   card2: string;
   card2Stance: CardStance;
@@ -52,7 +52,7 @@ export const _BattleVisualizer: React.FC<{
   );
 };
 
-export const BattleVisualizer: React.FC = () => {
+export const BattleVisualizerContainer: React.FC = () => {
   const data = useAppSelector((state) => state.duel.battle);
   if (!data) {
     return null;
@@ -60,6 +60,6 @@ export const BattleVisualizer: React.FC = () => {
 
   const { card1, card2, card2Stance } = data;
   return (
-    <_BattleVisualizer card1={card1} card2={card2} card2Stance={card2Stance} />
+    <BattleVisualizer card1={card1} card2={card2} card2Stance={card2Stance} />
   );
 };

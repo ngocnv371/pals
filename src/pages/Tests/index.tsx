@@ -26,15 +26,11 @@ const TestsPage: React.FC = () => {
 
       <IonContent fullscreen>
         <IonList>
-          <IonListHeader>Fusion</IonListHeader>
-          <IonItem routerLink="/tests/fusion-failed">
-            <IonLabel>Fusion Failed</IonLabel>
+          <IonItem routerLink="/tests/fusion-visualizer">
+            <IonLabel>Fusion Visualizer</IonLabel>
           </IonItem>
-          <IonItem routerLink="/tests/fusion-ok">
-            <IonLabel>Fusion OK</IonLabel>
-          </IonItem>
-          <IonItem routerLink="/tests/battle">
-            <IonLabel>Battle</IonLabel>
+          <IonItem routerLink="/tests/battle-visualizer">
+            <IonLabel>Battle Visualizer</IonLabel>
           </IonItem>
         </IonList>
       </IonContent>
