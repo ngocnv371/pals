@@ -1,7 +1,13 @@
 import { Chance } from "chance";
 import breed, { breedById } from "../../data/palBreed";
 import getPalMetadata, { getPalMetadataById } from "../../data/palMetadata";
-import { Side, CardStance, Battle } from "./model";
+import {
+  Side,
+  CardStance,
+  Battle,
+  ClassAnimationSegment,
+  Fusion,
+} from "./model";
 import pals from "../../data/pals.json";
 const chance = new Chance();
 
@@ -98,7 +104,8 @@ export function fuseOne(side: Side) {
 
   if (!result) {
     console.debug(`failed to fuse ${card1} and ${card2}`);
-    return undefined;
+    side.deploymentPlan.queue = [card2, ...rest];
+    return { card1, card2, result: "" };
   }
 
   console.debug(`fusing ${card1} and ${card2} into ${result}`);
@@ -228,4 +235,31 @@ export function endBattle(side: Side, other: Side) {
 
   side.offensivePlan = undefined;
   return { ...battle, result };
+}
+
+export function calculateFusionAnimationSequence(
+  fusion: Fusion
+): ClassAnimationSegment[] {
+  const segments = [
+    { className: "fusion-visualizer--intro", duration: 1000 },
+    { className: "fusion-visualizer--fusing", duration: 2000 },
+    { className: "fusion-visualizer--result", duration: 1000 },
+    { className: "fusion-visualizer--done", duration: 10 },
+  ];
+
+  const failedSegments = [
+    { className: "fusion-visualizer--intro", duration: 1000 },
+    { className: "fusion-visualizer--failed1", duration: 2000 },
+    { className: "fusion-visualizer--failed2", duration: 2000 },
+    { className: "fusion-visualizer--result", duration: 1000 },
+    { className: "fusion-visualizer--done", duration: 10 },
+  ];
+
+  return fusion.result ? segments : failedSegments;
+}
+
+export function calculateFusionAnimationDuration(fusion: Fusion) {
+  const sequence = calculateFusionAnimationSequence(fusion);
+  const sum = sequence.reduce((prev, current) => prev + current.duration, 0);
+  return sum;
 }

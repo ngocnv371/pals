@@ -20,10 +20,18 @@ export default function breed(parent1Name: string, parent2Name: string) {
   const p2 = parent2Name.replace("Alpha", "").replace("Boss", "").trim();
   const x = cached[p1];
   if (!x) {
+    console.debug(`failed to breed ${parent1Name} and ${parent2Name}`);
     return null;
   }
 
-  return x[p2];
+  const result = x[p2];
+  if (!result) {
+    console.debug(`failed to breed ${parent1Name} and ${parent2Name}`);
+    return null;
+  }
+
+  console.debug(`breed ${parent1Name} + ${parent2Name} => ${result}`);
+  return result;
 }
 
 export function breedById(id1: string, id2: string) {
@@ -48,10 +56,16 @@ export function breedChain(ids: string[]) {
     .map(getPalMetadataById)
     .map((f) => f.title)
     .reverse();
+  console.debug("chain titles", pals);
   let result = pals.pop()!;
   while (pals.length > 0) {
     const candidate = pals.pop()!;
-    result = breed(result, candidate)!;
+    const title = breed(result, candidate);
+    if (!title) {
+      result = candidate;
+    } else {
+      result = title;
+    }
   }
 
   const c3 = getPalMetadata(result);

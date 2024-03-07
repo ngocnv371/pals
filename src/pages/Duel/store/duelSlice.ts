@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { CardStance, DuelStage, Side } from "../model";
+import { CardStance, DuelStage, Fusion, Side } from "../model";
 import {
   changeStanceToDefensive,
   deploy,
@@ -20,11 +20,7 @@ export interface State {
   my: Side;
   stage: DuelStage;
 
-  fusion?: {
-    card1: string;
-    card2: string;
-    result: string;
-  };
+  fusion?: Fusion;
 
   battle?: {
     card1: string;

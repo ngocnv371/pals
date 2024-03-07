@@ -1,33 +1,24 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useAppSelector } from "../../../store/hooks";
 import { useClassSequence } from "../utils/useClassSequence";
 import "./FusionVisualizer.css";
 import { CardInfo } from "../../../components/Card/CardInfo";
 import SparkEffect from "../Effects/SparkEffect";
+import { calculateFusionAnimationSequence } from "../service";
+import { Fusion } from "../model";
 
-const segments = [
-  { className: "fusion-visualizer--intro", duration: 1000 },
-  { className: "fusion-visualizer--fusing", duration: 2000 },
-  { className: "fusion-visualizer--result", duration: 1000 },
-  { className: "fusion-visualizer--done", duration: 10 },
-];
-const failedSegments = [
-  { className: "fusion-visualizer--intro", duration: 1000 },
-  { className: "fusion-visualizer--failed1", duration: 2000 },
-  { className: "fusion-visualizer--failed2", duration: 2000 },
-  { className: "fusion-visualizer--result", duration: 1000 },
-  { className: "fusion-visualizer--done", duration: 10 },
-];
-
-export const _FusionVisualizer: React.FC<{
-  card1: string;
-  card2: string;
-  card3: string;
-  onCompleted?: () => void;
-}> = ({ card1, card2, card3, onCompleted }) => {
+export const _FusionVisualizer: React.FC<
+  Fusion & {
+    onCompleted?: () => void;
+  }
+> = ({ card1, card2, result, onCompleted }) => {
   const ref = useRef<HTMLDivElement>();
-  const failed = !card3;
-  useClassSequence(ref, failed ? failedSegments : segments, onCompleted);
+  const failed = !result;
+  const sequences = useMemo(
+    () => calculateFusionAnimationSequence({ card1, card2, result }),
+    [card1, card2, result]
+  );
+  useClassSequence(ref, sequences, onCompleted);
   const [showEffect, setShowEffect] = useState(false);
 
   // schedule effect
@@ -43,7 +34,7 @@ export const _FusionVisualizer: React.FC<{
     <div className="fusion-visualizer" ref={ref as any}>
       <CardInfo cardId={card1} />
       <CardInfo cardId={card2} />
-      <CardInfo cardId={card3} />
+      <CardInfo cardId={result} />
       {showEffect && !failed && (
         <div className="effect">
           <SparkEffect />
@@ -62,7 +53,7 @@ const FusionVisualizer: React.FC = () => {
 
   const { card1, card2, result } = data;
 
-  return <_FusionVisualizer card1={card1} card2={card2} card3={result} />;
+  return <_FusionVisualizer card1={card1} card2={card2} result={result} />;
 };
 
 export default FusionVisualizer;

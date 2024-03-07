@@ -1,7 +1,10 @@
 import { State, duelSlice } from "./duelSlice";
 import { AppThunkAction } from "../../../store";
 import { Side } from "../model";
-import { generateTheirDeck } from "../service";
+import {
+  calculateFusionAnimationDuration,
+  generateTheirDeck,
+} from "../service";
 import { delay } from "../utils/delay";
 import { jake } from "./ai/jake";
 import { breedById } from "../../../data/palBreed";
@@ -18,15 +21,15 @@ function fuseAllThenPlace(
     while (selector(getState().duel).deploymentPlan?.queue?.length! >= 2) {
       const [card1, card2] = selector(getState().duel).deploymentPlan?.queue!;
       const result = breedById(card1, card2);
-      if (!result) {
-        // failure
-      } else {
-        dispatch(fuseAction);
-        console.debug("delay, wait for animation");
-        // TODO: calculate wait duration
-        await delay(4000);
-        dispatch(duelSlice.actions.fusionCompleted());
-      }
+      dispatch(fuseAction);
+      console.debug("delay, wait for animation");
+      const duration = calculateFusionAnimationDuration({
+        card1,
+        card2,
+        result: result || "",
+      });
+      await delay(duration);
+      dispatch(duelSlice.actions.fusionCompleted());
       await delay(10);
     }
     console.debug("done fusing, now place");
