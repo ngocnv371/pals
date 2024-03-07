@@ -56,8 +56,8 @@ const TestBattleVisualizerPage: React.FC = () => {
             }}
           >
             <IonSegmentButton value={1}>Win</IonSegmentButton>
-            <IonSegmentButton value={0}>Loose</IonSegmentButton>
-            <IonSegmentButton value={-1}>Tie</IonSegmentButton>
+            <IonSegmentButton value={-1}>Loose</IonSegmentButton>
+            <IonSegmentButton value={0}>Tie</IonSegmentButton>
           </IonSegment>
         </IonToolbar>
         <IonToolbar>

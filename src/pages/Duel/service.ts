@@ -290,6 +290,7 @@ export function calculateBattleAnimationSequence(
   const defensiveWinSequence = [
     { className: "battle-visualizer--intro", duration: 1000 },
     { className: "battle-visualizer--damage2", duration: 2000 },
+    { className: "battle-visualizer--dead2", duration: 2000 },
     { className: "battle-visualizer--end", duration: 10 },
   ];
   const defensiveLooseSequence = [
