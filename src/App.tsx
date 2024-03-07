@@ -37,6 +37,7 @@ import DuelPage from "./pages/Duel";
 import TestsPage from "./pages/Tests";
 import FusionFailedPage from "./pages/Tests/TestFusionFailed";
 import FusionOkPage from "./pages/Tests/TestFusionOk";
+import TestBattlePage from "./pages/Tests/TestBattle";
 
 setupIonicReact();
 
@@ -65,6 +66,9 @@ const App: React.FC = () => {
               </Route>
               <Route path="/tests/fusion-failed" exact={true}>
                 <FusionFailedPage />
+              </Route>
+              <Route path="/tests/battle" exact={true}>
+                <TestBattlePage />
               </Route>
             </IonRouterOutlet>
           </IonSplitPane>

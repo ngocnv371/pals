@@ -33,6 +33,9 @@ const TestsPage: React.FC = () => {
           <IonItem routerLink="/tests/fusion-ok">
             <IonLabel>Fusion OK</IonLabel>
           </IonItem>
+          <IonItem routerLink="/tests/battle">
+            <IonLabel>Battle</IonLabel>
+          </IonItem>
         </IonList>
       </IonContent>
     </IonPage>

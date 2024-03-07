@@ -11,7 +11,8 @@ export const _BattleVisualizer: React.FC<{
   card1: string;
   card2: string;
   card2Stance: CardStance;
-}> = ({ card1, card2, card2Stance }) => {
+  onCompleted?: () => void;
+}> = ({ card1, card2, card2Stance, onCompleted }) => {
   const ref = useRef<HTMLDivElement>();
   const result = useMemo(
     () => simulateBattle(card1, card2, card2Stance),
@@ -24,7 +25,7 @@ export const _BattleVisualizer: React.FC<{
     [result, defensive]
   );
 
-  useClassSequence(ref, sequence);
+  useClassSequence(ref, sequence, onCompleted);
   const [showEffect, setShowEffect] = useState(false);
   // schedule effect
   useEffect(() => {
