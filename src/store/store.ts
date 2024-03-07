@@ -22,3 +22,8 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;
+
+export type AppThunkAction = () => (
+  dispatch: AppDispatch,
+  getState: () => RootState
+) => Promise<void>;

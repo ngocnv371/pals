@@ -1,14 +1,14 @@
-import { AppDispatch, RootState } from "../../../../store/store";
 import { Formation } from "../../model";
 import { simulateBattle } from "../../service";
 import { getPalMetadataById } from "../../../../data/palMetadata";
 import { delay } from "../../utils/delay";
 import { theirBattle, theirFuseAndPlace } from "../thunk-actions";
 import { BattleAI } from "./battle-ai";
+import { AppThunkAction } from "../../../../store";
 
 export const jake: BattleAI = (slice) => {
-  const leadTheirOffensive =
-    () => async (dispatch: AppDispatch, getState: () => RootState) => {
+  const leadTheirOffensive: AppThunkAction =
+    () => async (dispatch, getState) => {
       function inflateFormation(formation: Formation) {
         // sort by desc
         return formation
@@ -69,24 +69,23 @@ export const jake: BattleAI = (slice) => {
       dispatch(leadTheirOffensive());
     };
 
-  const drawTheirCards =
-    () => async (dispatch: AppDispatch, getState: () => RootState) => {
-      dispatch(slice.actions.theirCardsDrawed());
-      // TODO: calculate optimal fusing
-      await delay(500);
-      dispatch(slice.actions.theirReservesSelected([0]));
-      await delay(1000);
-      dispatch(slice.actions.theirReservesSelected([0, 3]));
-      await delay(1000);
-      // TODO: select a target
-      dispatch(slice.actions.theirPlacingStarted());
-      await delay(500);
-      dispatch(slice.actions.theirDeploymentTargetSelected(0));
-      await delay(500);
-      await dispatch(theirFuseAndPlace());
-      // TODO: better attacks
-      dispatch(leadTheirOffensive());
-    };
+  const drawTheirCards: AppThunkAction = () => async (dispatch, getState) => {
+    dispatch(slice.actions.theirCardsDrawed());
+    // TODO: calculate optimal fusing
+    await delay(500);
+    dispatch(slice.actions.theirReservesSelected([0]));
+    await delay(1000);
+    dispatch(slice.actions.theirReservesSelected([0, 3]));
+    await delay(1000);
+    // TODO: select a target
+    dispatch(slice.actions.theirPlacingStarted());
+    await delay(500);
+    dispatch(slice.actions.theirDeploymentTargetSelected(0));
+    await delay(500);
+    await dispatch(theirFuseAndPlace());
+    // TODO: better attacks
+    dispatch(leadTheirOffensive());
+  };
 
   return {
     leadTheirOffensive,
