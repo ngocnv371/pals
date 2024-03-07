@@ -263,3 +263,63 @@ export function calculateFusionAnimationDuration(fusion: Fusion) {
   const sum = sequence.reduce((prev, current) => prev + current.duration, 0);
   return sum;
 }
+
+export function calculateBattleAnimationSequence(
+  result: number,
+  defensive: boolean
+): ClassAnimationSegment[] {
+  const winSequence = [
+    { className: "battle-visualizer--intro", duration: 1000 },
+    { className: "battle-visualizer--damage2", duration: 2000 },
+    { className: "battle-visualizer--dead2", duration: 1000 },
+    { className: "battle-visualizer--end", duration: 10 },
+  ];
+  const looseSequence = [
+    { className: "battle-visualizer--intro", duration: 1000 },
+    { className: "battle-visualizer--damage1", duration: 2000 },
+    { className: "battle-visualizer--dead1", duration: 1000 },
+    { className: "battle-visualizer--end", duration: 10 },
+  ];
+  const tieSequence = [
+    { className: "battle-visualizer--intro", duration: 1000 },
+    { className: "battle-visualizer--damage-both", duration: 2000 },
+    { className: "battle-visualizer--dead-both", duration: 1000 },
+    { className: "battle-visualizer--end", duration: 10 },
+  ];
+
+  const defensiveWinSequence = [
+    { className: "battle-visualizer--intro", duration: 1000 },
+    { className: "battle-visualizer--damage2", duration: 2000 },
+    { className: "battle-visualizer--end", duration: 10 },
+  ];
+  const defensiveLooseSequence = [
+    { className: "battle-visualizer--intro", duration: 1000 },
+    { className: "battle-visualizer--damage1", duration: 2000 },
+    { className: "battle-visualizer--end", duration: 10 },
+  ];
+  const defensiveTieSequence = [
+    { className: "battle-visualizer--intro", duration: 1000 },
+    { className: "battle-visualizer--damage-both", duration: 2000 },
+    { className: "battle-visualizer--end", duration: 10 },
+  ];
+
+  const win = result > 0;
+  const tie = result == 0;
+
+  const sequence = tie ? tieSequence : win ? winSequence : looseSequence;
+  const defensiveSequence = tie
+    ? defensiveTieSequence
+    : win
+    ? defensiveWinSequence
+    : defensiveLooseSequence;
+  return defensive ? defensiveSequence : sequence;
+}
+
+export function calculateBattleAnimationDuration(
+  result: number,
+  defensive: boolean
+) {
+  const sequence = calculateBattleAnimationSequence(result, defensive);
+  const sum = sequence.reduce((prev, current) => prev + current.duration, 0);
+  return sum;
+}

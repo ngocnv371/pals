@@ -1,7 +1,8 @@
 import { State, duelSlice } from "./duelSlice";
 import { AppThunkAction } from "../../../store";
-import { Side } from "../model";
+import { CardStance, Side } from "../model";
 import {
+  calculateBattleAnimationDuration,
   calculateFusionAnimationDuration,
   generateTheirDeck,
 } from "../service";
@@ -73,10 +74,22 @@ function battle(
   return () => async (dispatch, getState) => {
     console.debug("attack!!");
     dispatch(startAction);
-    // TODO: calculate wait duration
-    await delay(4000);
+    await delay(10);
+    const battle = getState().duel.battle;
+    if (!battle) {
+      console.error("battle not available");
+      return;
+    }
+
+    const duration = calculateBattleAnimationDuration(
+      battle.result,
+      battle.card2Stance == CardStance.Defensive
+    );
+    await delay(duration);
     dispatch(endAction);
     await delay(50);
+
+    // next
     if (selector(getState().duel).forward.some((d) => !d?.acted)) {
       dispatch(attackAction);
     } else {

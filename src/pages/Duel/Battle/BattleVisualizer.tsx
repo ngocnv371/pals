@@ -2,60 +2,12 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useAppSelector } from "../../../store/hooks";
 import "./BattleVisualizer.css";
 import { useClassSequence } from "../utils/useClassSequence";
-import { simulateBattle } from "../service";
+import { calculateBattleAnimationSequence, simulateBattle } from "../service";
 import { CardStance } from "../model";
 import { CardInfo } from "../../../components/Card/CardInfo";
 import SlashEffect from "../Effects/SlashEffect";
 
-const winSequence = [
-  { className: "battle-visualizer--intro", duration: 1000 },
-  { className: "battle-visualizer--damage2", duration: 1000 },
-  { className: "battle-visualizer--dead2", duration: 1000 },
-  { className: "battle-visualizer--end", duration: 10 },
-];
-const looseSequence = [
-  { className: "battle-visualizer--intro", duration: 1000 },
-  { className: "battle-visualizer--damage1", duration: 1000 },
-  { className: "battle-visualizer--dead1", duration: 1000 },
-  { className: "battle-visualizer--end", duration: 10 },
-];
-const tieSequence = [
-  { className: "battle-visualizer--intro", duration: 1000 },
-  { className: "battle-visualizer--damage-both", duration: 1000 },
-  { className: "battle-visualizer--dead-both", duration: 1000 },
-  { className: "battle-visualizer--end", duration: 10 },
-];
-
-const defensiveWinSequence = [
-  { className: "battle-visualizer--intro", duration: 1000 },
-  { className: "battle-visualizer--damage2", duration: 1000 },
-  { className: "battle-visualizer--end", duration: 10 },
-];
-const defensiveLooseSequence = [
-  { className: "battle-visualizer--intro", duration: 1000 },
-  { className: "battle-visualizer--damage1", duration: 1000 },
-  { className: "battle-visualizer--end", duration: 10 },
-];
-const defensiveTieSequence = [
-  { className: "battle-visualizer--intro", duration: 1000 },
-  { className: "battle-visualizer--damage-both", duration: 1000 },
-  { className: "battle-visualizer--end", duration: 10 },
-];
-
-function getSequence(result: number, defensive: boolean) {
-  const win = result > 0;
-  const tie = result == 0;
-
-  const sequence = tie ? tieSequence : win ? winSequence : looseSequence;
-  const defensiveSequence = tie
-    ? defensiveTieSequence
-    : win
-    ? defensiveWinSequence
-    : defensiveLooseSequence;
-  return defensive ? defensiveSequence : sequence;
-}
-
-const _BattleVisualizer: React.FC<{
+export const _BattleVisualizer: React.FC<{
   card1: string;
   card2: string;
   card2Stance: CardStance;
@@ -65,9 +17,10 @@ const _BattleVisualizer: React.FC<{
     () => simulateBattle(card1, card2, card2Stance),
     [card1, card2, card2Stance]
   );
+  console.debug("visualize", card1, card2, card2Stance);
   const defensive = card2Stance == CardStance.Defensive;
   const sequence = useMemo(
-    () => getSequence(result, defensive),
+    () => calculateBattleAnimationSequence(result, defensive),
     [result, defensive]
   );
 

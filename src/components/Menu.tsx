@@ -31,6 +31,11 @@ const Menu: React.FC = () => {
               <IonLabel>Duel</IonLabel>
             </IonItem>
           </IonMenuToggle>
+          <IonMenuToggle>
+            <IonItem routerLink="/tests">
+              <IonLabel>Tests</IonLabel>
+            </IonItem>
+          </IonMenuToggle>
         </IonList>
       </IonContent>
     </IonMenu>
