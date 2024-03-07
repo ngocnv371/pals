@@ -97,6 +97,7 @@ export function fuseOne(side: Side) {
   const result = breedById(card1, card2);
 
   if (!result) {
+    console.debug(`failed to fuse ${card1} and ${card2}`);
     return undefined;
   }
 

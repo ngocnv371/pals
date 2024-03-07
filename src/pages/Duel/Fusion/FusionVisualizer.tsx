@@ -11,15 +11,23 @@ const segments = [
   { className: "fusion-visualizer--result", duration: 1000 },
   { className: "fusion-visualizer--done", duration: 10 },
 ];
+const failedSegments = [
+  { className: "fusion-visualizer--intro", duration: 1000 },
+  { className: "fusion-visualizer--failed1", duration: 2000 },
+  { className: "fusion-visualizer--failed2", duration: 2000 },
+  { className: "fusion-visualizer--result", duration: 1000 },
+  { className: "fusion-visualizer--done", duration: 10 },
+];
 
-const _FusionVisualizer: React.FC<{
+export const _FusionVisualizer: React.FC<{
   card1: string;
   card2: string;
   card3: string;
   onCompleted?: () => void;
 }> = ({ card1, card2, card3, onCompleted }) => {
   const ref = useRef<HTMLDivElement>();
-  useClassSequence(ref, segments, onCompleted);
+  const failed = !card3;
+  useClassSequence(ref, failed ? failedSegments : segments, onCompleted);
   const [showEffect, setShowEffect] = useState(false);
 
   // schedule effect
@@ -36,7 +44,7 @@ const _FusionVisualizer: React.FC<{
       <CardInfo cardId={card1} />
       <CardInfo cardId={card2} />
       <CardInfo cardId={card3} />
-      {showEffect && (
+      {showEffect && !failed && (
         <div className="effect">
           <SparkEffect />
         </div>

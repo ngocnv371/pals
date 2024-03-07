@@ -4,6 +4,7 @@ import { Side } from "../model";
 import { generateTheirDeck } from "../service";
 import { delay } from "../utils/delay";
 import { jake } from "./ai/jake";
+import { breedById } from "../../../data/palBreed";
 
 type SideSelector = (state: State) => Side;
 
@@ -15,11 +16,17 @@ function fuseAllThenPlace(
 ): AppThunkAction {
   return () => async (dispatch, getState) => {
     while (selector(getState().duel).deploymentPlan?.queue?.length! >= 2) {
-      dispatch(fuseAction);
-      console.debug("delay, wait for animation");
-      // TODO: calculate wait duration
-      await delay(4000);
-      dispatch(duelSlice.actions.fusionCompleted());
+      const [card1, card2] = selector(getState().duel).deploymentPlan?.queue!;
+      const result = breedById(card1, card2);
+      if (!result) {
+        // failure
+      } else {
+        dispatch(fuseAction);
+        console.debug("delay, wait for animation");
+        // TODO: calculate wait duration
+        await delay(4000);
+        dispatch(duelSlice.actions.fusionCompleted());
+      }
       await delay(10);
     }
     console.debug("done fusing, now place");
