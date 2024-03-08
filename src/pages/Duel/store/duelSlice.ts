@@ -42,6 +42,10 @@ export interface State {
    * indicate which target is being considered by the AI
    */
   consideredTargetIndex?: number;
+  /**
+   * result of the duel
+   */
+  result?: number;
 }
 
 const initialState: State = {
@@ -192,6 +196,14 @@ export const duelSlice = createSlice({
       state.battle = undefined;
     },
     duelEnded(state) {
+      if (state.my.life <= 0) {
+        state.result = -1;
+      } else if (state.their.life <= 0) {
+        state.result = 1;
+      } else {
+        state.result = 0;
+      }
+
       state.stage = DuelStage.Start;
       state.my = initSide();
       state.their = initSide();

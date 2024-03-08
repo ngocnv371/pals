@@ -49,6 +49,7 @@ see [BATTLEFLOW.MD](BATTLEFLOW.MD)
   - card inspection
   - display card element
   - match end
+  - can skip deployment
   - improve fusion animation
   - improve battle animation
 - create original cards
