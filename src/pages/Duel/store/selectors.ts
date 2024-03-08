@@ -1,5 +1,16 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../../../store";
+import { DuelStage } from "../model";
+
+export const selectIsMyTurn = (state: RootState) =>
+  [
+    DuelStage.MyDrawing,
+    DuelStage.MyPlacing,
+    DuelStage.MyFusion,
+    DuelStage.MyAttack,
+    DuelStage.MyTargetting,
+    DuelStage.MyBattle,
+  ].includes(state.duel.stage);
 
 export const selectTheirHand = (state: RootState) => state.duel.their.reserves;
 

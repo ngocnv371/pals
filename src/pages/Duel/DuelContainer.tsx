@@ -22,8 +22,7 @@ const DuelContainer: React.FC = () => {
       <StageBanner />
       <BattleVisualizerContainer />
       <FusionVisualizerContainer />
-
-      {stage !== DuelStage.End && <QuitButton />}
+      <QuitButton />
 
       {stage == DuelStage.MyDrawing && <Hand />}
       {stage == DuelStage.MyDrawing && <PlaceCardsButton />}

@@ -1,10 +1,12 @@
 import { IonAlert, IonFab, IonFabButton, IonIcon } from "@ionic/react";
 import { exit } from "ionicons/icons";
-import { useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { duelEnded } from "../store/duelSlice";
+import { selectIsMyTurn } from "../store/selectors";
 
 const QuitButton: React.FC = () => {
   const dispatch = useAppDispatch();
+  const isMyTurn = useAppSelector(selectIsMyTurn);
 
   return (
     <>
@@ -22,7 +24,7 @@ const QuitButton: React.FC = () => {
         ]}
       ></IonAlert>
       <IonFab horizontal="start" vertical="bottom">
-        <IonFabButton color="danger" id="fab-quit-btn">
+        <IonFabButton color="danger" id="fab-quit-btn" disabled={!isMyTurn}>
           <IonIcon icon={exit} />
         </IonFabButton>
       </IonFab>
