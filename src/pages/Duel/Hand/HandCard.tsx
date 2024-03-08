@@ -15,11 +15,11 @@ export const HandCard: React.FC<{
     <div
       className={`dueling-card hand-card ${className} ${
         selected ? "selected" : ""
-      } ${hidden ? "hidden" : ""}`}
+      }`}
       onClick={onClick}
     >
       {selected && <IonBadge>{index}</IonBadge>}
-      <CardInfo cardId={cardId} />
+      <CardInfo cardId={cardId} hidden={hidden} />
     </div>
   );
 };

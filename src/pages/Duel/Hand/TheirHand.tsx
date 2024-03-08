@@ -25,6 +25,7 @@ export const TheirHand: React.FC = () => {
             cardId={c.id}
             selected={selected}
             index={index}
+            hidden
             className={`animate__animated animate__slideInRight6 animate__faster animate__delay-${cidx}`}
           />
         );

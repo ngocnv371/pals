@@ -58,6 +58,7 @@ see [BATTLEFLOW.MD](BATTLEFLOW.MD)
 
 # completed
 
+- ✅ their hand is hiddden
 - ✅ duel end transition
 - ✅ add COM actions indicator (select offensive card)
 - ✅ show card name

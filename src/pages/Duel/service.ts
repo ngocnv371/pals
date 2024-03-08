@@ -24,7 +24,7 @@ export function generateTheirDeck() {
 
 export function initSide(): Side {
   return {
-    life: 20,
+    life: 2000,
     deck: [],
     reserves: [],
     forward: [null, null, null, null, null],
