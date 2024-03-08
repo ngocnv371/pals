@@ -70,8 +70,6 @@ export const jake: BattleAI = (slice) => {
         dispatch(slice.actions.theirTargetCardSelected({ index: -1 }));
         await delay(100);
         await dispatch(theirBattle());
-        const duration = calculateBattleAnimationDuration(1, true);
-        await delay(duration);
       } else if (simulateBattle(unit.id, target.id, target.stance) > 0) {
         // attack if winning
         console.debug("since we are winning, let us attack");
@@ -86,8 +84,6 @@ export const jake: BattleAI = (slice) => {
         );
         await delay(10);
         await dispatch(theirBattle());
-        const duration = calculateBattleAnimationDuration(1, true);
-        await delay(duration);
       } else {
         // if not, set to defensive
         dispatch(
