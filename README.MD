@@ -48,15 +48,14 @@ see [BATTLEFLOW.MD](BATTLEFLOW.MD)
   - battle AI
     - optimized fusion
     - optimized attacks
-    - ❌ add COM actions indicator (select card, select target)
   - use stage banner for guide
   - card inspection
   - display card element
   - match end
-  - ⬜ direct damage when opponent board is empty
   - fusion preview (helper)
   - improve fusion animation
   - improve battle animation
+  - ⬜ add COM actions indicator (select offensive card)
 - create original cards
   - fusion rule
 - player progression
@@ -64,6 +63,8 @@ see [BATTLEFLOW.MD](BATTLEFLOW.MD)
 
 # completed
 
+- ✅ add COM actions indicator (select target)
+- ✅ direct damage when opponent board is empty
 - ✅ add tests pages
 - ✅ handle failed fusion
 - ✅ add quit button

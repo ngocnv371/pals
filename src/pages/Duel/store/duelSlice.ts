@@ -186,6 +186,7 @@ export const duelSlice = createSlice({
     theirBattleStarted(state) {
       state.stage = DuelStage.TheirBattle;
       state.battle = endBattle(state.their, state.my);
+      state.consideredTargetIndex = undefined;
     },
     battleEnded(state) {
       state.battle = undefined;
