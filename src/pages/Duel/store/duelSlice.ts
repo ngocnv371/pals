@@ -137,6 +137,7 @@ export const duelSlice = createSlice({
       state.fusion = undefined;
     },
     myAttackStarted(state) {
+      state.my.forward = [null, null, null, null, null];
       state.stage = DuelStage.MyAttack;
     },
     theirAttackStarted(state) {

@@ -1,5 +1,8 @@
 import { Formation } from "../../model";
-import { simulateBattle } from "../../service";
+import {
+  calculateBattleAnimationDuration,
+  simulateBattle,
+} from "../../service";
 import { getPalMetadataById } from "../../../../data/palMetadata";
 import { delay } from "../../utils/delay";
 import { theirBattle, theirFuseAndPlace } from "../thunk-actions";
@@ -39,11 +42,17 @@ export const jake: BattleAI = (slice) => {
       const target = myInflatedUnits.pop();
       if (!target) {
         // TODO: direct attack
-        return;
-      }
-
-      const result = simulateBattle(unit.id, target.id, target.stance);
-      if (result > 0) {
+        console.debug("wide open, direct attack");
+        dispatch(
+          slice.actions.theirOffensiveCardSelected({ index: unit.index })
+        );
+        await delay(10);
+        dispatch(slice.actions.theirTargetCardSelected({ index: -1 }));
+        await delay(10);
+        await dispatch(theirBattle());
+        const duration = calculateBattleAnimationDuration(1, true);
+        await delay(duration);
+      } else if (simulateBattle(unit.id, target.id, target.stance) > 0) {
         // attack if winning
         console.debug("since we are winning, let us attack");
         dispatch(
@@ -55,7 +64,8 @@ export const jake: BattleAI = (slice) => {
         );
         await delay(10);
         await dispatch(theirBattle());
-        await delay(4000);
+        const duration = calculateBattleAnimationDuration(1, true);
+        await delay(duration);
       } else {
         // if not, set to defensive
         dispatch(
