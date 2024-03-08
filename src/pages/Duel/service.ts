@@ -176,6 +176,14 @@ export function selectDeploymentTarget(side: Side, index: number) {
   side.deploymentPlan!.targetIndex = index;
 }
 
+function removeFrom(source: string[], deleteItems: string[]) {
+  while (deleteItems.length > 0) {
+    const item = deleteItems.pop()!;
+    const index = source.indexOf(item);
+    source.splice(index, 1);
+  }
+}
+
 export function prepareDeployment(side: Side) {
   if (!side.deploymentPlan) {
     console.error("deployment plan not initiated");
@@ -196,6 +204,7 @@ export function prepareDeployment(side: Side) {
   }
 
   side.forward[index] = null;
+  removeFrom(side.reserves, selectedReserves);
 }
 
 export function resetAction(side: Side) {
