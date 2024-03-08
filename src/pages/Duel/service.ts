@@ -168,8 +168,16 @@ export function simulateBattle(
   card2Stance: CardStance
 ) {
   const c1 = getPalMetadataById(card1);
-  const c2 = getPalMetadataById(card2);
   const life1 = c1.content.baseAttack;
+  if (!card2) {
+    // direct attack
+    console.debug(
+      `battle simulation: ${card1} (${life1}) vs nothing -> ${life1}`
+    );
+    return life1;
+  }
+
+  const c2 = getPalMetadataById(card2);
   const life2 =
     card2Stance == CardStance.Offensive
       ? c2.content.baseAttack
@@ -189,8 +197,13 @@ export function getBattle(side: Side, otherSide: Side): Battle | undefined {
 
   const { targetIndex, unitIndex } = side.offensivePlan;
   const card1 = side.forward[unitIndex!]!.cardId;
-  const target = otherSide.forward[targetIndex!]!;
-  return { card1, card2: target.cardId, card2Stance: target.stance };
+  const target = otherSide.forward[targetIndex!];
+  // target is unavailable if attack the heart
+  return {
+    card1,
+    card2: target?.cardId || "",
+    card2Stance: target?.stance || CardStance.Offensive,
+  };
 }
 
 export function endBattle(side: Side, other: Side) {
@@ -200,6 +213,7 @@ export function endBattle(side: Side, other: Side) {
   const damage = Math.abs(result);
   const won = result > 0;
   const lost = result < 0;
+  const plan = side.offensivePlan!;
 
   if (won) {
     other.life -= damage;
@@ -208,10 +222,12 @@ export function endBattle(side: Side, other: Side) {
     }
 
     // destroy target
-    other.forward[side.offensivePlan?.targetIndex!] = null;
-    side.forward[side.offensivePlan?.unitIndex!]!.acted = true;
+    if (plan.targetIndex! >= 0) {
+      other.forward[plan.targetIndex!] = null;
+    }
+    side.forward[plan.unitIndex!]!.acted = true;
     // attacked unit is always offensive
-    side.forward[side.offensivePlan?.unitIndex!]!.stance = CardStance.Offensive;
+    side.forward[plan.unitIndex!]!.stance = CardStance.Offensive;
   } else if (lost) {
     side.life -= damage;
     if (side.life < 0) {
@@ -219,17 +235,16 @@ export function endBattle(side: Side, other: Side) {
     }
 
     // destroy unit
-    side.forward[side.offensivePlan?.unitIndex!] = null;
+    side.forward[plan.unitIndex!] = null;
   } else {
     // tie
     if (card2Stance == CardStance.Offensive) {
       // mutual destruction
-      side.forward[side.offensivePlan?.unitIndex!] = null;
-      other.forward[side.offensivePlan?.targetIndex!] = null;
+      side.forward[plan.unitIndex!] = null;
+      other.forward[plan.targetIndex!] = null;
     } else {
       // attacked unit is always offensive
-      side.forward[side.offensivePlan?.unitIndex!]!.stance =
-        CardStance.Offensive;
+      side.forward[plan.unitIndex!]!.stance = CardStance.Offensive;
     }
   }
 

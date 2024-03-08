@@ -11,6 +11,8 @@ export interface TargettingFormationLineProps {
 export const TargettingFormationLine: React.FC<
   TargettingFormationLineProps
 > = ({ formation, onSelected }) => {
+  const directAttackAvailable = !formation.some(Boolean);
+
   return formation.map((d, idx) => (
     <div className="cell" key={idx}>
       {d && (
@@ -20,6 +22,9 @@ export const TargettingFormationLine: React.FC<
         />
       )}
       {d && <TargetSign onClick={() => onSelected && onSelected(idx)} />}
+      {directAttackAvailable && idx == 0 && (
+        <TargetSign onClick={() => onSelected && onSelected(-1)} />
+      )}
     </div>
   ));
 };
