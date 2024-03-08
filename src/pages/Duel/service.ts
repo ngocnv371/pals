@@ -77,6 +77,14 @@ function getCombinations<T>(items: T[]) {
  * @returns
  */
 function getCombinationPower(reserves: ReserveItem[], indices: number[]) {
+  if (indices.length == 1) {
+    const card = reserves[indices[0]].cardId;
+    return {
+      breed: card,
+      power: getPalMetadataById(card).content.baseAttack,
+    };
+  }
+
   const breed =
     breedById(reserves[indices[0]].cardId, reserves[indices[1]].cardId) ||
     reserves[indices[1]].cardId;
@@ -132,8 +140,8 @@ export function getDeploymentPlans(side: Side): EvaluatedPlan[] {
     cardId,
   }));
   console.debug(`reserves`, side.reserves);
-  // TODO: single card? doesn't have to combine all the time
-  const combinations = getCombinations(reserves);
+  const singles = reserves.map((r) => [r.index]);
+  const combinations = getCombinations(reserves).concat(singles);
   const sortedByPower: EvaluatedCombination[] = combinations
     .map((c) => ({ indices: c, ...getCombinationPower(reserves, c) }))
     .sort((a, b) => a.power - b.power);

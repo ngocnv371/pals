@@ -1,5 +1,6 @@
 import { Formation } from "../../model";
 import {
+  EvaluatedPlan,
   calculateBattleAnimationDuration,
   getDeploymentPlans,
   simulateBattle,
@@ -108,22 +109,32 @@ export const jake: BattleAI = (slice) => {
     console.time("calculate deployment plan");
     const plans = getDeploymentPlans(side);
     console.timeEnd("calculate deployment plan");
-    const bestPlan = plans.reverse()[0];
-    console.debug(`best plan`, bestPlan);
-    const indices1 = [bestPlan.indices[0]];
-    const indices2 = bestPlan.indices;
+    const hasEmptyCell = side.forward.some((f) => !Boolean(f));
+    const noReplacementPlans = plans.filter(
+      (p) => !Boolean(side.forward[p.targetIndex])
+    );
+    console.debug("has empty?", hasEmptyCell, noReplacementPlans);
+    let plan: EvaluatedPlan;
+    if (hasEmptyCell && noReplacementPlans.length > 0) {
+      plan = noReplacementPlans.reverse()[0];
+    } else {
+      plan = plans.reverse()[0];
+    }
 
+    console.debug(`best plan`, plan);
+    const indices1 = [plan.indices[0]];
+    const indices2 = plan.indices;
     dispatch(slice.actions.theirReservesSelected(indices1));
     await delay(1000);
     dispatch(slice.actions.theirReservesSelected(indices2));
     await delay(1000);
-    // TODO: select a target
+
     dispatch(slice.actions.theirPlacingStarted());
     await delay(500);
-    dispatch(slice.actions.theirDeploymentTargetSelected(0));
+    dispatch(slice.actions.theirDeploymentTargetSelected(plan.targetIndex));
     await delay(500);
     await dispatch(theirFuseAndPlace());
-    // TODO: better attacks
+
     dispatch(leadTheirOffensive());
   };
 
