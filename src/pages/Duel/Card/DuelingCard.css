@@ -9,13 +9,5 @@
     ion-card {
       transform: rotateZ(90deg);
     }
-    p {
-      span.atk {
-        color: inherit;
-      }
-      span.def {
-        color: red;
-      }
-    }
   }
 }

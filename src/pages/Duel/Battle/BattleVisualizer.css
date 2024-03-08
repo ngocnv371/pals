@@ -12,16 +12,6 @@
     opacity: 0;
     scale: 2;
   }
-  &.defensive .card-info:nth-child(2) {
-    p {
-      span.atk {
-        color: inherit;
-      }
-      span.def {
-        color: red;
-      }
-    }
-  }
   .effect {
     position: absolute;
     top: 50%;

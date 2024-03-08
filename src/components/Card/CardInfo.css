@@ -4,6 +4,10 @@
   height: auto;
   aspect-ratio: 2 / 3;
   transition: all 200ms;
+
+  ion-img {
+    max-height: 80px;
+  }
   p.title {
     margin: 0;
     text-align: center;
@@ -18,6 +22,14 @@
     text-align: center;
     color: grey;
     span.atk {
+      color: red;
+    }
+  }
+  &.defensive p.power {
+    span.atk {
+      color: inherit;
+    }
+    span.def {
       color: red;
     }
   }

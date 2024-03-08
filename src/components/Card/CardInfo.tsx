@@ -3,7 +3,10 @@ import React, { useMemo } from "react";
 import { getPalMetadataById } from "../../data/palMetadata";
 import "./CardInfo.css";
 
-export const CardInfo: React.FC<{ cardId: string }> = ({ cardId }) => {
+export const CardInfo: React.FC<{ cardId: string; defensive?: boolean }> = ({
+  cardId,
+  defensive,
+}) => {
   const card = useMemo(() => getPalMetadataById(cardId), [cardId]);
 
   if (!card) {
@@ -13,7 +16,7 @@ export const CardInfo: React.FC<{ cardId: string }> = ({ cardId }) => {
   const longTitle = card.title.length > 10;
 
   return (
-    <IonCard className="card-info">
+    <IonCard className={`card-info ${defensive ? "defensive" : ""}`}>
       <IonImg src={`/pals/${card.content.image}`}></IonImg>
       <p className={`title ${longTitle ? "long" : ""}`}>{card.title}</p>
       <p className="power">

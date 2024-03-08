@@ -42,7 +42,7 @@ export const BattleVisualizer: React.FC<{
       ref={ref as any}
     >
       <CardInfo cardId={card1} />
-      <CardInfo cardId={card2} />
+      <CardInfo cardId={card2} defensive={defensive} />
       {showEffect && (
         <div className="effect">
           <SlashEffect />
