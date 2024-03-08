@@ -26,6 +26,23 @@ export const jake: BattleAI = (slice) => {
           .sort((a, b) => b.content.baseAttack - a.content.baseAttack);
       }
 
+      async function considerTargetDramatically(target?: number) {
+        dispatch(slice.actions.theirTargetCardConsidered({ index: 0 }));
+        await delay(200);
+        dispatch(slice.actions.theirTargetCardConsidered({ index: 1 }));
+        await delay(200);
+        dispatch(slice.actions.theirTargetCardConsidered({ index: 2 }));
+        await delay(200);
+        dispatch(slice.actions.theirTargetCardConsidered({ index: 3 }));
+        await delay(200);
+        dispatch(slice.actions.theirTargetCardConsidered({ index: 4 }));
+        await delay(200);
+        if (typeof target !== "undefined") {
+          dispatch(slice.actions.theirTargetCardConsidered({ index: target }));
+          await delay(200);
+        }
+      }
+
       const theirInflatedUnits = inflateFormation(
         getState().duel.their.forward
       ).filter((f) => !f!.acted);
@@ -47,8 +64,9 @@ export const jake: BattleAI = (slice) => {
           slice.actions.theirOffensiveCardSelected({ index: unit.index })
         );
         await delay(10);
+        await considerTargetDramatically();
         dispatch(slice.actions.theirTargetCardSelected({ index: -1 }));
-        await delay(10);
+        await delay(100);
         await dispatch(theirBattle());
         const duration = calculateBattleAnimationDuration(1, true);
         await delay(duration);
@@ -59,6 +77,8 @@ export const jake: BattleAI = (slice) => {
           slice.actions.theirOffensiveCardSelected({ index: unit.index })
         );
         await delay(10);
+        await considerTargetDramatically(target.index);
+        await delay(100);
         dispatch(
           slice.actions.theirTargetCardSelected({ index: target.index })
         );

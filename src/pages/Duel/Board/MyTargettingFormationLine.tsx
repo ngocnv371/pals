@@ -2,18 +2,17 @@ import React from "react";
 import { CardStance, Formation } from "../model";
 import { DuelingCard } from "../Card/DuelingCard";
 import TargetSign from "../stages/attacking/TargetSign";
+import { useAppSelector } from "../../../store/hooks";
+import { selectMyDeployed } from "../store/selectors";
 
 export interface TargettingFormationLineProps {
   formation: Formation;
   considerIndex?: number;
-  onSelected?: (index: number) => void;
 }
 
-export const TargettingFormationLine: React.FC<
+export const MyTargettingFormationLine: React.FC<
   TargettingFormationLineProps
-> = ({ formation, considerIndex, onSelected }) => {
-  const directAttackAvailable = !formation.some(Boolean);
-
+> = ({ formation, considerIndex }) => {
   return formation.map((d, idx) => (
     <div className="cell" key={idx}>
       {d && (
@@ -22,11 +21,16 @@ export const TargettingFormationLine: React.FC<
           defensive={d.stance == CardStance.Defensive}
         />
       )}
-      {d && <TargetSign onClick={() => onSelected && onSelected(idx)} />}
-      {directAttackAvailable && idx == 0 && (
-        <TargetSign onClick={() => onSelected && onSelected(-1)} />
-      )}
       {idx == considerIndex && <TargetSign />}
     </div>
   ));
+};
+
+export const MyTargettingFormationLineContainer: React.FC = () => {
+  const formation = useAppSelector(selectMyDeployed);
+  const index = useAppSelector((state) => state.duel.consideredTargetIndex);
+
+  return (
+    <MyTargettingFormationLine formation={formation} considerIndex={index} />
+  );
 };

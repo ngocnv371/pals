@@ -37,6 +37,11 @@ export interface State {
      */
     result: number;
   };
+
+  /**
+   * indicate which target is being considered by the AI
+   */
+  consideredTargetIndex?: number;
 }
 
 const initialState: State = {
@@ -170,6 +175,9 @@ export const duelSlice = createSlice({
     },
     theirTargetCardSelected(state, action: PayloadAction<{ index: number }>) {
       selectTargetForOffensive(state.their, action.payload.index);
+    },
+    theirTargetCardConsidered(state, action: PayloadAction<{ index: number }>) {
+      state.consideredTargetIndex = action.payload.index;
     },
     myBattleStarted(state) {
       state.stage = DuelStage.MyBattle;
