@@ -5,13 +5,12 @@ import TargetSign from "../stages/attacking/TargetSign";
 
 export interface TargettingFormationLineProps {
   formation: Formation;
-  considerIndex?: number;
   onSelected?: (index: number) => void;
 }
 
 export const TargettingFormationLine: React.FC<
   TargettingFormationLineProps
-> = ({ formation, considerIndex, onSelected }) => {
+> = ({ formation, onSelected }) => {
   const directAttackAvailable = !formation.some(Boolean);
 
   return formation.map((d, idx) => (
@@ -26,7 +25,6 @@ export const TargettingFormationLine: React.FC<
       {directAttackAvailable && idx == 0 && (
         <TargetSign onClick={() => onSelected && onSelected(-1)} />
       )}
-      {idx == considerIndex && <TargetSign />}
     </div>
   ));
 };
