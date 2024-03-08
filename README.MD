@@ -51,7 +51,6 @@ see [BATTLEFLOW.MD](BATTLEFLOW.MD)
   - match end
   - improve fusion animation
   - improve battle animation
-  - ⬜ add COM actions indicator (select offensive card)
 - create original cards
   - fusion rule
 - player progression
@@ -59,6 +58,7 @@ see [BATTLEFLOW.MD](BATTLEFLOW.MD)
 
 # completed
 
+- ✅ add COM actions indicator (select offensive card)
 - ✅ show card name
 - ✅ end game on life reach 0
 - ✅ take no damage on defensive

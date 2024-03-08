@@ -12,3 +12,6 @@
     justify-content: center;
   }
 }
+.their-row .stance-switcher {
+  transform: rotateZ(180deg);
+}

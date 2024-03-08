@@ -70,7 +70,7 @@ export const jake: BattleAI = (slice) => {
         dispatch(
           slice.actions.theirOffensiveCardSelected({ index: unit.index })
         );
-        await delay(10);
+        await delay(1000);
         await considerTargetDramatically();
         dispatch(slice.actions.theirTargetCardSelected({ index: -1 }));
         await delay(100);
@@ -81,7 +81,7 @@ export const jake: BattleAI = (slice) => {
         dispatch(
           slice.actions.theirOffensiveCardSelected({ index: unit.index })
         );
-        await delay(10);
+        await delay(1000);
         await considerTargetDramatically(target.index);
         await delay(100);
         dispatch(

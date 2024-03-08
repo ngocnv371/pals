@@ -21,6 +21,7 @@ import { AttackingFormationLine } from "./AttackingFormationLine";
 import { TargettingFormationLine } from "./TargettingFormationLine";
 import { CardStance, DuelStage } from "../model";
 import { MyTargettingFormationLineContainer } from "./MyTargettingFormationLine";
+import { TheirAttackingFormationLineContainer } from "./TheirAttackingFormationLine";
 
 const TheirDeployedFormation = withFormationSelector(
   FormationLine,
@@ -71,6 +72,8 @@ export const Board: React.FC = () => {
                 dispatch(myBattle());
               }}
             />
+          ) : stage == DuelStage.TheirTargetting ? (
+            <TheirAttackingFormationLineContainer />
           ) : (
             <TheirDeployedFormation />
           )}
