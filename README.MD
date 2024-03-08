@@ -51,6 +51,7 @@ see [BATTLEFLOW.MD](BATTLEFLOW.MD)
   - can skip deployment
   - improve fusion animation
   - improve battle animation
+  - explosion effects
 - create original cards
   - fusion rule
 - player progression
