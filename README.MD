@@ -59,6 +59,7 @@ see [BATTLEFLOW.MD](BATTLEFLOW.MD)
 
 # completed
 
+- ✅ show card name
 - ✅ end game on life reach 0
 - ✅ take no damage on defensive
 - ✅ improved ai attacks

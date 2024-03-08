@@ -4,8 +4,17 @@
   height: auto;
   aspect-ratio: 2 / 3;
   transition: all 200ms;
-
-  p {
+  p.title {
+    margin: 0;
+    text-align: center;
+    text-wrap: nowrap;
+    line-height: 1rem;
+  }
+  p.title.long {
+    font-size: 80%;
+  }
+  p.power {
+    margin-top: 0.3em;
     text-align: center;
     color: grey;
     span.atk {
