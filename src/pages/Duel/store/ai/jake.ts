@@ -1,6 +1,7 @@
 import { Formation } from "../../model";
 import {
   calculateBattleAnimationDuration,
+  getDeploymentPlans,
   simulateBattle,
 } from "../../service";
 import { getPalMetadataById } from "../../../../data/palMetadata";
@@ -8,6 +9,7 @@ import { delay } from "../../utils/delay";
 import { theirBattle, theirFuseAndPlace } from "../thunk-actions";
 import { BattleAI } from "./battle-ai";
 import { AppThunkAction } from "../../../../store";
+import { breedById } from "../../../../data/palBreed";
 
 export const jake: BattleAI = (slice) => {
   const leadTheirOffensive: AppThunkAction =
@@ -58,7 +60,6 @@ export const jake: BattleAI = (slice) => {
       const unit = theirInflatedUnits.pop()!;
       const target = myInflatedUnits.pop();
       if (!target) {
-        // TODO: direct attack
         console.debug("wide open, direct attack");
         dispatch(
           slice.actions.theirOffensiveCardSelected({ index: unit.index })
@@ -101,11 +102,20 @@ export const jake: BattleAI = (slice) => {
 
   const drawTheirCards: AppThunkAction = () => async (dispatch, getState) => {
     dispatch(slice.actions.theirCardsDrawed());
-    // TODO: calculate optimal fusing
+    const side = getState().duel.their;
     await delay(500);
-    dispatch(slice.actions.theirReservesSelected([0]));
+
+    console.time("calculate deployment plan");
+    const plans = getDeploymentPlans(side);
+    console.timeEnd("calculate deployment plan");
+    const bestPlan = plans.reverse()[0];
+    console.debug(`best plan`, bestPlan);
+    const indices1 = [bestPlan.indices[0]];
+    const indices2 = bestPlan.indices;
+
+    dispatch(slice.actions.theirReservesSelected(indices1));
     await delay(1000);
-    dispatch(slice.actions.theirReservesSelected([0, 3]));
+    dispatch(slice.actions.theirReservesSelected(indices2));
     await delay(1000);
     // TODO: select a target
     dispatch(slice.actions.theirPlacingStarted());

@@ -106,3 +106,19 @@ export interface ClassAnimationSegment {
   className: string;
   duration: number;
 }
+
+export interface ReserveItem {
+  cardId: string;
+  index: number;
+}
+
+export interface TargetCell {
+  cardId: string;
+  index: number;
+}
+
+export interface BreedingResult {
+  items: ReserveItem[];
+  result: string;
+  power: number;
+}

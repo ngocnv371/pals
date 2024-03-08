@@ -1,4 +1,5 @@
 import { Chance } from "chance";
+import { uniqBy } from "lodash";
 import breed, { breedById } from "../../data/palBreed";
 import getPalMetadata, { getPalMetadataById } from "../../data/palMetadata";
 import {
@@ -7,6 +8,9 @@ import {
   Battle,
   ClassAnimationSegment,
   Fusion,
+  BreedingResult,
+  ReserveItem,
+  TargetCell as DeploymentTarget,
 } from "./model";
 import pals from "../../data/pals.json";
 const chance = new Chance();
@@ -20,7 +24,7 @@ export function generateTheirDeck() {
 
 export function initSide(): Side {
   return {
-    life: 4000,
+    life: 2000,
     deck: [],
     reserves: [],
     forward: [null, null, null, null, null],
@@ -38,6 +42,114 @@ export function refillReserves(side: Side) {
 
     side.reserves.push(item);
   }
+}
+
+export interface EvaluatedPlan {
+  indices: number[];
+  targetIndex: number;
+  result: string;
+  power: number;
+}
+
+/**
+ * get all unique combinations of 2 items in an array
+ * @example getCombinations([1,2]) => [[0, 1], [1, 0]]
+ * @param items
+ * @returns array of indices, not values
+ */
+function getCombinations<T>(items: T[]) {
+  const combinations: number[][] = [];
+
+  for (let i = 0; i < items.length; i++) {
+    for (let j = i + 1; j < items.length; j++) {
+      combinations.push([i, j]);
+      combinations.push([j, i]);
+    }
+  }
+
+  return combinations;
+}
+
+/**
+ * breed the item in reserves as indicated by the indices and return the result `attack power`
+ * @param reserves
+ * @param indices
+ * @returns
+ */
+function getCombinationPower(reserves: ReserveItem[], indices: number[]) {
+  const breed =
+    breedById(reserves[indices[0]].cardId, reserves[indices[1]].cardId) ||
+    reserves[indices[1]].cardId;
+  const power = getPalMetadataById(breed).content.baseAttack;
+  return { breed, power };
+}
+
+export function getValidDeploymentTargets(side: Side): DeploymentTarget[] {
+  const allTargets = side.forward.map((f, index) => ({
+    index,
+    cardId: f?.cardId || "",
+  }));
+  const targets = uniqBy(allTargets, (t) => t.cardId);
+  return targets;
+}
+
+interface Plan {
+  combination: EvaluatedCombination;
+  target: DeploymentTarget;
+}
+
+interface EvaluatedCombination {
+  indices: number[];
+  breed: string;
+  power: number;
+}
+
+function evaluatePlan(plan: Plan): EvaluatedPlan {
+  if (plan.target.cardId) {
+    const breed =
+      breedById(plan.combination.breed, plan.target.cardId) ||
+      plan.target.cardId;
+    const power = getPalMetadataById(breed).content.baseAttack;
+    return {
+      indices: plan.combination.indices,
+      targetIndex: plan.target.index,
+      result: breed,
+      power: power,
+    } as EvaluatedPlan;
+  } else {
+    return {
+      indices: plan.combination.indices,
+      targetIndex: plan.target.index,
+      result: plan.combination.breed,
+      power: plan.combination.power,
+    };
+  }
+}
+
+export function getDeploymentPlans(side: Side): EvaluatedPlan[] {
+  const reserves: ReserveItem[] = side.reserves.map((cardId, index) => ({
+    index,
+    cardId,
+  }));
+  console.debug(`reserves`, side.reserves);
+  // TODO: single card? doesn't have to combine all the time
+  const combinations = getCombinations(reserves);
+  const sortedByPower: EvaluatedCombination[] = combinations
+    .map((c) => ({ indices: c, ...getCombinationPower(reserves, c) }))
+    .sort((a, b) => a.power - b.power);
+  console.debug(`sorted reserves`, sortedByPower);
+
+  const validTargets = getValidDeploymentTargets(side);
+  // place all the combinations into each targets, see which one yield the best result
+  const plans = sortedByPower.flatMap((p) =>
+    validTargets.map((v) => ({ combination: p, target: v }))
+  );
+  const evalPlans: EvaluatedPlan[] = plans
+    .map(evaluatePlan)
+    .sort((a, b) => a.power - b.power);
+  console.debug(`eval plans`, evalPlans);
+
+  return evalPlans;
 }
 
 export function selectReserves(side: Side, indices: number[]) {

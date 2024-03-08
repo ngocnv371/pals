@@ -10,7 +10,6 @@ import EndTurnButton from "./stages/attacking/EndTurnButton";
 import PlaceCardsButton from "./stages/drawing/PlaceCardsButton";
 import { DuelStage } from "./model";
 import { TheirHand } from "./Hand/TheirHand";
-import FusionPreview from "./Fusion/FusionPreview";
 import QuitButton from "./stages/QuitButton";
 
 const DuelContainer: React.FC = () => {
@@ -25,7 +24,6 @@ const DuelContainer: React.FC = () => {
       <FusionVisualizerContainer />
 
       {stage !== DuelStage.End && <QuitButton />}
-      {stage == DuelStage.MyDrawing && <FusionPreview />}
 
       {stage == DuelStage.MyDrawing && <Hand />}
       {stage == DuelStage.MyDrawing && <PlaceCardsButton />}
