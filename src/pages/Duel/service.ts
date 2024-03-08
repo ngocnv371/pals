@@ -343,11 +343,14 @@ export function endBattle(side: Side, other: Side) {
   const won = result > 0;
   const lost = result < 0;
   const plan = side.offensivePlan!;
+  const isDefensive = card2Stance == CardStance.Defensive;
 
   if (won) {
-    other.life -= damage;
-    if (other.life < 0) {
-      other.life = 0;
+    if (!isDefensive) {
+      other.life -= damage;
+      if (other.life < 0) {
+        other.life = 0;
+      }
     }
 
     // destroy target
@@ -358,13 +361,17 @@ export function endBattle(side: Side, other: Side) {
     // attacked unit is always offensive
     side.forward[plan.unitIndex!]!.stance = CardStance.Offensive;
   } else if (lost) {
-    side.life -= damage;
-    if (side.life < 0) {
-      side.life = 0;
-    }
+    if (!isDefensive) {
+      side.life -= damage;
+      if (side.life < 0) {
+        side.life = 0;
+      }
 
-    // destroy unit
-    side.forward[plan.unitIndex!] = null;
+      // destroy unit
+      side.forward[plan.unitIndex!] = null;
+    } else {
+      side.forward[plan.unitIndex!]!.acted = true;
+    }
   } else {
     // tie
     if (card2Stance == CardStance.Offensive) {
@@ -374,6 +381,7 @@ export function endBattle(side: Side, other: Side) {
     } else {
       // attacked unit is always offensive
       side.forward[plan.unitIndex!]!.stance = CardStance.Offensive;
+      side.forward[plan.unitIndex!]!.acted = true;
     }
   }
 

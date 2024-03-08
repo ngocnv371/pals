@@ -89,6 +89,17 @@ function battle(
     dispatch(endAction);
     await delay(50);
 
+    // check endgame
+    const {
+      their: { life: theirLife },
+      my: { life: myLife },
+    } = getState().duel;
+    if (myLife <= 0 || theirLife <= 0) {
+      console.debug(`game over dude`);
+      dispatch(duelSlice.actions.duelEnded());
+      return;
+    }
+
     // next
     if (selector(getState().duel).forward.some((d) => !d?.acted)) {
       dispatch(attackAction);

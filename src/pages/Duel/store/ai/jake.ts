@@ -1,4 +1,4 @@
-import { Formation } from "../../model";
+import { DuelStage, Formation } from "../../model";
 import {
   EvaluatedPlan,
   calculateBattleAnimationDuration,
@@ -44,6 +44,11 @@ export const jake: BattleAI = (slice) => {
           dispatch(slice.actions.theirTargetCardConsidered({ index: target }));
           await delay(200);
         }
+      }
+
+      if (getState().duel.stage !== DuelStage.TheirAttack) {
+        console.warn("wrong stage");
+        return;
       }
 
       const theirInflatedUnits = inflateFormation(

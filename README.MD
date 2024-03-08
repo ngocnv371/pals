@@ -43,16 +43,12 @@ see [BATTLEFLOW.MD](BATTLEFLOW.MD)
 
 # backlog
 
-- resposinve for mobile
+- responsive css for mobile
 - battle
-  - battle AI
-    - optimized fusion
-    - optimized attacks
   - use stage banner for guide
   - card inspection
   - display card element
   - match end
-  - fusion preview (helper)
   - improve fusion animation
   - improve battle animation
   - ⬜ add COM actions indicator (select offensive card)
@@ -63,6 +59,10 @@ see [BATTLEFLOW.MD](BATTLEFLOW.MD)
 
 # completed
 
+- ✅ end game on life reach 0
+- ✅ take no damage on defensive
+- ✅ improved ai attacks
+- ✅ improved ai cards deployments
 - ✅ add COM actions indicator (select target)
 - ✅ direct damage when opponent board is empty
 - ✅ add tests pages
