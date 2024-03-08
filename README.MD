@@ -48,7 +48,6 @@ see [BATTLEFLOW.MD](BATTLEFLOW.MD)
   - use stage banner for guide
   - card inspection
   - display card element
-  - match end
   - can skip deployment
   - improve fusion animation
   - improve battle animation
@@ -59,6 +58,7 @@ see [BATTLEFLOW.MD](BATTLEFLOW.MD)
 
 # completed
 
+- ✅ duel end transition
 - ✅ add COM actions indicator (select offensive card)
 - ✅ show card name
 - ✅ end game on life reach 0

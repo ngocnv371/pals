@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { CardStance, DuelStage, Fusion, Side } from "../model";
+import { CardStance, DuelStage, Fusion, Side, DuelResult } from "../model";
 import {
   changeStanceToDefensive,
   deploy,
@@ -45,13 +45,14 @@ export interface State {
   /**
    * result of the duel
    */
-  result?: number;
+  result: DuelResult;
 }
 
 const initialState: State = {
   their: initSide(),
   my: initSide(),
   stage: DuelStage.Start,
+  result: "unresolved",
 };
 
 export const duelSlice = createSlice({
@@ -67,6 +68,7 @@ export const duelSlice = createSlice({
       state.their = initSide();
       state.their.deck = action.payload.theirDeck;
       state.stage = DuelStage.Start;
+      state.result = "unresolved";
     },
     myCardsDrawed(state) {
       refillReserves(state.my);
@@ -197,11 +199,11 @@ export const duelSlice = createSlice({
     },
     duelEnded(state) {
       if (state.my.life <= 0) {
-        state.result = -1;
+        state.result = "loose";
       } else if (state.their.life <= 0) {
-        state.result = 1;
+        state.result = "win";
       } else {
-        state.result = 0;
+        state.result = "tie";
       }
 
       state.stage = DuelStage.Start;

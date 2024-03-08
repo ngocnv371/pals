@@ -13,6 +13,7 @@ import ResultMessage from "./ResultMessage";
 
 const DuelResultPage: React.FC = () => {
   const result = useAppSelector((state) => state.duel.result);
+
   return (
     <IonPage>
       <IonHeader>

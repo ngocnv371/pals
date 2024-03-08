@@ -122,3 +122,5 @@ export interface BreedingResult {
   result: string;
   power: number;
 }
+
+export type DuelResult = "win" | "loose" | "tie" | "unresolved";
