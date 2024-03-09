@@ -68,6 +68,36 @@ export const natures = [
   "Wise",
 ];
 
+export const habitats = [
+  "Desert",
+  "Forest",
+  "Mountain",
+  "Ocean",
+  "River",
+  "Lake",
+  "Swamp",
+  "Tundra",
+  "Volcano",
+  "Cave",
+  "Ruins",
+  "Village",
+  "City",
+  "Graveyard",
+  "Abyss",
+  "Dreamscape",
+  "Wasteland",
+  "Sky",
+];
+
+export const roleInHabitats = [
+  "Hunter",
+  "Prey",
+  "Scavenger",
+  "Ruler",
+  "Guardian",
+  "Guide",
+];
+
 export interface Monster {
   id: string;
   name: string;
@@ -75,4 +105,6 @@ export interface Monster {
   type: string;
   nature: string;
   description: string;
+  habitat: string;
+  roleInHabitat: string;
 }

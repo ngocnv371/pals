@@ -38,6 +38,14 @@ const MonsterCard: React.FC<{ monster: Monster } & React.PropsWithChildren> = ({
           <IonLabel>Nature</IonLabel>
           <IonNote slot="end">{monster.nature}</IonNote>
         </IonItem>
+        <IonItem>
+          <IonLabel>Habitat</IonLabel>
+          <IonNote slot="end">{monster.habitat}</IonNote>
+        </IonItem>
+        <IonItem>
+          <IonLabel>Role in Habitat</IonLabel>
+          <IonNote slot="end">{monster.roleInHabitat}</IonNote>
+        </IonItem>
       </IonList>
       <IonCardContent>{monster.description}</IonCardContent>
       {children}
