@@ -1,6 +1,7 @@
 import { Chance } from "chance";
 import { BingChat } from "bing-chat";
 import { Monster, classes, natures, types } from "./model";
+import { nanoid } from "@reduxjs/toolkit";
 const chance = new Chance();
 let api: BingChat;
 
@@ -12,7 +13,8 @@ export function setBingCookie(cookie: string) {
 
 export function generateMonster(): Monster {
   return {
-    name: "?",
+    id: nanoid(),
+    name: "",
     description: "",
     class: chance.pickone(classes),
     nature: chance.pickone(natures),

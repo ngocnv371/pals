@@ -8,6 +8,10 @@ const SettingsButton: React.FC = () => {
 
   function handleSubmit(value: any) {
     console.debug("submit value", value);
+    if (!value.cookie) {
+      return;
+    }
+
     setCookie(value.cookie);
     setBingCookie(value.cookie);
   }

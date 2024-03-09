@@ -69,6 +69,7 @@ export const natures = [
 ];
 
 export interface Monster {
+  id: string;
   name: string;
   class: string;
   type: string;

@@ -9,21 +9,40 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Monster } from "./model";
 import MonsterCard from "./MonsterCard";
 import { generateMonster } from "./service";
+import { refresh, save } from "ionicons/icons";
+import "./styles.css";
 import SettingsButton from "./SettingsButton";
+import { useAppDispatch } from "../../store/hooks";
+import { added, updated } from "./beastiarySlice";
 
 const MonsterFactoryPage: React.FC = () => {
   const [monster, setMonster] = useState<Monster | null>(null);
+  const dispatch = useAppDispatch();
 
-  function handleGenerate() {
+  // init
+  useEffect(() => {
     setMonster(generateMonster());
-  }
+  }, []);
+
+  const handleSave = useCallback(() => {
+    if (!monster) {
+      console.error("no monster to save");
+      return;
+    }
+
+    dispatch(added(monster));
+  }, [monster]);
+
+  const handleRegenerate = useCallback(() => {
+    setMonster(generateMonster());
+  }, [monster]);
 
   return (
-    <IonPage>
+    <IonPage className="monster-factory-page">
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
@@ -31,14 +50,25 @@ const MonsterFactoryPage: React.FC = () => {
           </IonButtons>
           <IonTitle>Monster Factory</IonTitle>
           <IonButtons slot="end">
-            <IonButton onClick={handleGenerate}>Generate</IonButton>
             <SettingsButton />
           </IonButtons>
         </IonToolbar>
       </IonHeader>
 
       <IonContent fullscreen>
-        {Boolean(monster) && <MonsterCard monster={monster!} />}
+        <div className="container">
+          {Boolean(monster) && (
+            <MonsterCard monster={monster!}>
+              <IonButton fill="clear" onClick={handleSave}>
+                <IonIcon slot="start" icon={save}></IonIcon>Save
+              </IonButton>
+              <IonButton fill="clear" onClick={handleRegenerate}>
+                <IonIcon slot="start" icon={refresh}></IonIcon>
+                Regenerate
+              </IonButton>
+            </MonsterCard>
+          )}
+        </div>
       </IonContent>
     </IonPage>
   );

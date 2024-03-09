@@ -1,5 +1,10 @@
 import {
+  IonButton,
   IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
+  IonIcon,
   IonImg,
   IonItem,
   IonLabel,
@@ -10,12 +15,17 @@ import {
 import { Monster } from "./model";
 import "./MonsterCard.css";
 
-const MonsterCard: React.FC<{ monster: Monster }> = ({ monster }) => {
+const MonsterCard: React.FC<{ monster: Monster } & React.PropsWithChildren> = ({
+  monster,
+  children,
+}) => {
   return (
     <IonCard className="monster-card">
       <IonImg src="/icons/question-mark-80.png" />
+      <IonCardHeader>
+        <IonCardTitle>{monster.name}</IonCardTitle>
+      </IonCardHeader>
       <IonList>
-        <IonListHeader>{monster.name}</IonListHeader>
         <IonItem>
           <IonLabel>Class</IonLabel>
           <IonNote slot="end">{monster.class}</IonNote>
@@ -29,6 +39,8 @@ const MonsterCard: React.FC<{ monster: Monster }> = ({ monster }) => {
           <IonNote slot="end">{monster.nature}</IonNote>
         </IonItem>
       </IonList>
+      <IonCardContent>{monster.description}</IonCardContent>
+      {children}
     </IonCard>
   );
 };
