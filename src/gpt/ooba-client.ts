@@ -8,7 +8,7 @@ import {
 
 export const OobaClient: GPTClient = {
   completions: function (opts: CompletionRequest): Promise<CompletionResponse> {
-    const url = "http://localhost:5000/v1/completions";
+    const url = `${import.meta.env.VITE_OOBA_URL}/v1/completions`;
     return fetch(url, {
       method: "POST",
       body: JSON.stringify(opts),
@@ -26,7 +26,7 @@ export const OobaClient: GPTClient = {
   chatCompletions: function (
     opts: ChatCompletionRequest
   ): Promise<ChatCompletionResponse> {
-    const url = "http://localhost:5000/v1/chat/completions";
+    const url = `${import.meta.env.VITE_OOBA_URL}/v1/chat/completions`;
     return fetch(url, {
       method: "POST",
       body: JSON.stringify(opts),
