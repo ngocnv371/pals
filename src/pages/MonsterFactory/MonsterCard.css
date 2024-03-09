@@ -1,3 +1,6 @@
-ion-content {
-  white-space: break-spaces;
+.monster-card {
+  min-width: 30em;
+  ion-card-content {
+    white-space: break-spaces;
+  }
 }

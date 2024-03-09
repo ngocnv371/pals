@@ -67,15 +67,17 @@ const MonsterFactoryPage: React.FC = () => {
       <IonContent fullscreen>
         <div className="monster-container">
           {Boolean(monster) && (
-            <MonsterCard monster={monster!}>
-              <IonButton fill="clear" onClick={handleSave}>
-                <IonIcon slot="start" icon={save}></IonIcon>Save
-              </IonButton>
-              <IonButton fill="clear" onClick={handleRegenerate}>
-                <IonIcon slot="start" icon={refresh}></IonIcon>
-                Regenerate
-              </IonButton>
-            </MonsterCard>
+            <div>
+              <MonsterCard monster={monster!}>
+                <IonButton fill="clear" onClick={handleSave}>
+                  <IonIcon slot="start" icon={save}></IonIcon>Save
+                </IonButton>
+                <IonButton fill="clear" onClick={handleRegenerate}>
+                  <IonIcon slot="start" icon={refresh}></IonIcon>
+                  Regenerate
+                </IonButton>
+              </MonsterCard>
+            </div>
           )}
           {Boolean(monster) && <MonsterPrompt monster={monster!} />}
         </div>
