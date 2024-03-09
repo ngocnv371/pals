@@ -18,7 +18,6 @@ const MonsterCard: React.FC<{ monster: Monster } & React.PropsWithChildren> = ({
 }) => {
   return (
     <IonCard className="monster-card">
-      <IonImg src="/icons/question-mark-80.png" />
       <IonCardHeader>
         <IonCardTitle>{monster.name}</IonCardTitle>
       </IonCardHeader>
@@ -44,6 +43,7 @@ const MonsterCard: React.FC<{ monster: Monster } & React.PropsWithChildren> = ({
           <IonNote slot="end">{monster.roleInHabitat}</IonNote>
         </IonItem>
       </IonList>
+      <IonCardContent>{monster.appearance}</IonCardContent>
       <IonCardContent>{monster.description}</IonCardContent>
       {children}
     </IonCard>

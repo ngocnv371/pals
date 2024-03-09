@@ -2,21 +2,39 @@ import { IonButton, IonIcon } from "@ionic/react";
 import { colorWand } from "ionicons/icons";
 import { Monster } from "./model";
 import { useCallback, useState } from "react";
-import { generateDetail } from "./service";
+import { extractInfo, generateDetail } from "./service";
 import { useAppDispatch } from "../../store/hooks";
 import { updated } from "./beastiarySlice";
+import { ChatCompletionMessage } from "../../gpt/model";
 
-const SmartFillButton: React.FC<{ monster: Monster }> = ({ monster }) => {
+const SmartFillButton: React.FC<{
+  monster: Monster;
+  onCompleted?: (message: ChatCompletionMessage) => void;
+}> = ({ monster, onCompleted }) => {
   const [loading, setLoading] = useState(false);
-  const [text, setText] = useState("");
   const dispatch = useAppDispatch();
 
   const handleClick = useCallback(async () => {
     setLoading(true);
     try {
-      const description = await generateDetail(monster);
-      setText(description);
-      dispatch(updated({ id: monster.id, changes: { description } }));
+      const msg = await generateDetail(monster);
+      onCompleted && onCompleted(msg);
+      const info = extractInfo(msg);
+      if (!info || !info.appearance || !info.description || !info.name) {
+        console.error("failed to generate info", info);
+        return;
+      }
+
+      dispatch(
+        updated({
+          id: monster.id,
+          changes: {
+            name: info.name,
+            description: info.description,
+            appearance: info.appearance,
+          },
+        })
+      );
     } catch (e) {
       console.error("failed to fill", e);
     } finally {

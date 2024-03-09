@@ -104,6 +104,7 @@ export interface Monster {
   class: string;
   type: string;
   nature: string;
+  appearance: string;
   description: string;
   habitat: string;
   roleInHabitat: string;

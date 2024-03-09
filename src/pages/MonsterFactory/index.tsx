@@ -12,7 +12,7 @@ import {
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Monster } from "./model";
 import MonsterCard from "./MonsterCard";
-import { generateMonster, generatePrompt } from "./service";
+import { generateMonster } from "./service";
 import { copy, refresh, save } from "ionicons/icons";
 import "./styles.css";
 import SettingsButton from "./SettingsButton";
@@ -75,15 +75,9 @@ const MonsterFactoryPage: React.FC = () => {
                 <IonIcon slot="start" icon={refresh}></IonIcon>
                 Regenerate
               </IonButton>
-              <SmartFillButton monster={monster!} />
             </MonsterCard>
           )}
-          {Boolean(monster) && (
-            <div>
-              <MonsterPrompt monster={monster!} />
-              <p className="description">{monster.description}</p>
-            </div>
-          )}
+          {Boolean(monster) && <MonsterPrompt monster={monster!} />}
         </div>
       </IonContent>
     </IonPage>
