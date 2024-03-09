@@ -1,15 +1,12 @@
 import {
-  IonButton,
   IonCard,
   IonCardContent,
   IonCardHeader,
   IonCardTitle,
-  IonIcon,
   IonImg,
   IonItem,
   IonLabel,
   IonList,
-  IonListHeader,
   IonNote,
 } from "@ionic/react";
 import { Monster } from "./model";

@@ -31,6 +31,20 @@ export function generateMonster(): Monster {
   };
 }
 
+export function generatePrompt(monster: Monster): string {
+  const prompt = `
+  Imagine a monster like this:
+  - class: ${monster.class}
+  - type: ${monster.type}
+  - nature: ${monster.nature}
+  - habitat: ${monster.habitat}
+  - role in habitat: ${monster.roleInHabitat}
+
+  What is its name? and what does it look like?
+  `;
+  return prompt;
+}
+
 export function generateDetail(monster: Monster) {
   //
 }

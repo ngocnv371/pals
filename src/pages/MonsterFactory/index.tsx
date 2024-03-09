@@ -9,10 +9,10 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Monster } from "./model";
 import MonsterCard from "./MonsterCard";
-import { generateMonster } from "./service";
+import { generateMonster, generatePrompt } from "./service";
 import { refresh, save } from "ionicons/icons";
 import "./styles.css";
 import SettingsButton from "./SettingsButton";
@@ -22,6 +22,10 @@ import { added, updated } from "./beastiarySlice";
 const MonsterFactoryPage: React.FC = () => {
   const [monster, setMonster] = useState<Monster | null>(null);
   const dispatch = useAppDispatch();
+  const prompt = useMemo(
+    () => (monster ? generatePrompt(monster) : ""),
+    [monster]
+  );
 
   // init
   useEffect(() => {
@@ -68,6 +72,7 @@ const MonsterFactoryPage: React.FC = () => {
               </IonButton>
             </MonsterCard>
           )}
+          <pre>{prompt}</pre>
         </div>
       </IonContent>
     </IonPage>
