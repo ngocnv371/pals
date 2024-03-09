@@ -16,18 +16,25 @@ import { generateMonster, generatePrompt } from "./service";
 import { copy, refresh, save } from "ionicons/icons";
 import "./styles.css";
 import SettingsButton from "./SettingsButton";
-import { useAppDispatch } from "../../store/hooks";
-import { added, updated } from "./beastiarySlice";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { added, selectById, updated } from "./beastiarySlice";
 import MonsterPrompt from "./MonsterPrompt";
 import SmartFillButton from "./SmartFillButton";
 
 const MonsterFactoryPage: React.FC = () => {
-  const [monster, setMonster] = useState<Monster | null>(null);
+  const [id, setId] = useState("");
   const dispatch = useAppDispatch();
+  const monster = useAppSelector((state) => selectById(state, id));
+
+  function createOne() {
+    const m = generateMonster();
+    dispatch(added(m));
+    setId(m.id);
+  }
 
   // init
   useEffect(() => {
-    setMonster(generateMonster());
+    createOne();
   }, []);
 
   const handleSave = useCallback(() => {
@@ -40,8 +47,8 @@ const MonsterFactoryPage: React.FC = () => {
   }, [monster]);
 
   const handleRegenerate = useCallback(() => {
-    setMonster(generateMonster());
-  }, [monster]);
+    createOne();
+  }, []);
 
   return (
     <IonPage className="monster-factory-page">
@@ -74,6 +81,7 @@ const MonsterFactoryPage: React.FC = () => {
           {Boolean(monster) && (
             <div>
               <MonsterPrompt monster={monster!} />
+              <p>{monster.description}</p>
             </div>
           )}
         </div>

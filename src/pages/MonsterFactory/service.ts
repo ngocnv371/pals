@@ -1,5 +1,4 @@
 import { Chance } from "chance";
-import { BingChat, ChatMessage } from "bing-chat";
 import {
   Monster,
   classes,
@@ -9,14 +8,10 @@ import {
   types,
 } from "./model";
 import { nanoid } from "@reduxjs/toolkit";
+import { OobaClient } from "../../gpt/ooba-client";
 const chance = new Chance();
-let api: BingChat;
 
-export function setBingCookie(cookie: string) {
-  api = new BingChat({
-    cookie,
-  });
-}
+export function setBingCookie(cookie: string) {}
 
 export function generateMonster(): Monster {
   return {
@@ -33,29 +28,24 @@ export function generateMonster(): Monster {
 
 export function generatePrompt(monster: Monster): string {
   const prompt = `
-  Imagine a monster like this:
+  # Beastiary entry
   - class: ${monster.class}
   - type: ${monster.type}
   - nature: ${monster.nature}
   - habitat: ${monster.habitat}
   - role in habitat: ${monster.roleInHabitat}
 
-  What is its name? describe it for me?
+  Description:
   `;
   return prompt;
 }
 
-export async function generateDetail(
-  monster: Monster,
-  onProgress?: (partialResponse: ChatMessage) => void
-) {
-  const conv = await api.createConversation();
+export async function generateDetail(monster: Monster) {
   const prompt = generatePrompt(monster);
-  const message = await api.sendMessage(prompt, {
-    clientId: conv.clientId,
-    conversationId: conv.conversationId,
-    conversationSignature: conv.conversationSignature,
-    onProgress,
+  const msg = await OobaClient.completions({
+    prompt,
+    max_tokens: 900,
   });
-  return message;
+  console.debug("gpt response", msg);
+  return msg;
 }
