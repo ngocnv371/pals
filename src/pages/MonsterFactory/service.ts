@@ -44,7 +44,7 @@ export async function generateDetail(monster: Monster) {
   const prompt = generatePrompt(monster);
   const msg = await OobaClient.completions({
     prompt,
-    max_tokens: 900,
+    max_tokens: 200,
   });
   console.debug("gpt response", msg);
   return msg;

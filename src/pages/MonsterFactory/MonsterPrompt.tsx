@@ -19,7 +19,7 @@ const MonsterPrompt: React.FC<{ monster: Monster }> = ({ monster }) => {
       <IonButton fill="clear" onClick={handleCopy} disabled={copied}>
         <IonIcon slot="start" icon={copy} /> Copy Prompt
       </IonButton>
-      <pre>{prompt}</pre>
+      <p className="prompt">{prompt}</p>
     </>
   );
 };

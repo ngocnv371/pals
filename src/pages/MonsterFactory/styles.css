@@ -1,0 +1,8 @@
+.monster-container {
+  display: flex;
+
+  .description,
+  .prompt {
+    white-space: break-spaces;
+  }
+}
