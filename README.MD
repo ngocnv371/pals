@@ -31,15 +31,15 @@ That was our starting point, nowaday generating new cards are not that difficult
 
 # generate original monsters
 
-see [MYTHULU.MD](MYTHULU.MD)
+see [MYTHULU.MD](docs/MYTHULU.MD)
 
 # runbooks
 
-see [RUNBOOKS.MD](RUNBOOKS.MD)
+see [RUNBOOKS.MD](docs/RUNBOOKS.MD)
 
 # battle flow
 
-see [BATTLEFLOW.MD](BATTLEFLOW.MD)
+see [BATTLEFLOW.MD](docs/BATTLEFLOW.MD)
 
 # backlog
 

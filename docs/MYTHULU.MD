@@ -140,3 +140,17 @@ Weapon:
 - What enemy is using: 1 Element
 - Who gave you your weapon: 1 Character
 - Weapon itself: 1 Element, 1 Trait, 1 Texture
+
+# CARDS
+
+- Elements: Fire, Water, Earth, Air, Metal, Wood, Lightning, Ice, Light, Darkness, Life, Death, Love, Hate, Truth, Lie, Order, Chaos, Creation, Destruction, Void, Cosmos, Time, Space, Peace, War, Hope, Despair, Joy, Sorrow, Faith, Doubt, Courage, Fear, Justice, Injustice, Freedom, Oppression, Knowledge, Ignorance.
+
+- Habitats: Desert, Forest, Mountain, Ocean, River, Lake, Swamp, Tundra, Volcano, Cave, Ruins, Village, City, Castle, Temple, Tower, Ship, Battlefield, Graveyard, Labyrinth, Abyss, Limbo, Dreamscape, Wasteland, Paradise, Hell, Prison, Asylum, Laboratory, Library, Theater, Palace, Arena, Market, Tavern, Inn, Farm, Mine, Factory, Island, Sky.
+
+- Characters: King, Queen, Prince, Princess, Knight, Wizard, Witch, Druid, Bard, Monk, Assassin, Thief, Merchant, Peasant, Serf, Slave, Warrior, Soldier, Guard, Executioner, Torturer, Prisoner, Exile, Wanderer, Pilgrim, Hermit, Beggar, Madman, Fool, Cripple, Child, Mother, Father, Elder, Sage, Prophet, Priest, Nun, Heretic, Apostate, Seer, Oracle, Martyr, Savior.
+
+- Relationships: Lover, Friend, Enemy, Rival, Sibling, Parent, Child, Teacher, Student, Master, Apprentice, Partner, Ally, Servant, Subject, Ruler, Creator, Creation, Destroyer, Victim, Oppressor, Oppressed, Savior, Saved, Betrayer, Betrayed, Mentor, Protégé, Seeker, Guide, Benefactor, Dependent, Stranger, Kin, Neighbor, Rival, Competitor, Superior, Subordinate, Leader, Follower, Usurper, Rightful, Captor, Captive.
+
+- Traits: Curious, Reckless, Brave, Cowardly, Loyal, Treacherous, Honorable, Dishonorable, Merciful, Cruel, Generous, Greedy, Ambitious, Lazy, Determined, Indecisive, Wise, Foolish, Cunning, Gullible, Humble, Arrogant, Patient, Impulsive, Calm, Volatile, Forgiving, Vengeful, Compassionate, Callous, Disciplined, Chaotic, Principled, Corrupt, Imaginative, Conventional, Adventurous, Cautious, Optimistic, Pessimistic, Resilient, Fragile, Strong, Weak, Confident, Insecure, Extroverted, Introverted.
+
+- Textures: Smooth, Rough, Soft, Hard, Sharp, Dull, Warm, Cold, Wet, Dry, Heavy, Light, Bright, Dim, Colorful, Drab, Sweet, Bitter, Fragrant, Foul, Melodic, Discordant, Soothing, Grating, Solid, Ethereal, Opaque, Translucent, Transparent, Reflective, Matte, Glossy, Rigid, Flexible, Brittle, Elastic, Lustrous, Tarnished, Crystalline, Amorphous, Ornate, Plain, Intricate, Simple, Natural, Artificial, Ancient, Modern, Pristine, Decayed, Organic, Inorganic.
