@@ -1,6 +1,7 @@
 import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import { Monster } from "./model";
-import { RootState } from "../../store";
+import { AppDispatch, RootState } from "../../store";
+import { saveAs } from "file-saver";
 
 const adapter = createEntityAdapter<Monster>();
 

@@ -7,7 +7,7 @@ import {
   IonIcon,
   IonList,
 } from "@ionic/react";
-import { copy } from "ionicons/icons";
+import { copy, download } from "ionicons/icons";
 import { Monster } from "./model";
 import { useCallback, useEffect, useState } from "react";
 import { generateMessages } from "./service";

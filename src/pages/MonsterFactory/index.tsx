@@ -9,17 +9,16 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { Monster } from "./model";
+import { useCallback, useEffect, useState } from "react";
 import MonsterCard from "./MonsterCard";
 import { generateMonster } from "./service";
-import { copy, refresh, save } from "ionicons/icons";
+import { refresh } from "ionicons/icons";
 import "./styles.css";
 import SettingsButton from "./SettingsButton";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { added, selectById, updated } from "./beastiarySlice";
+import { added, selectById } from "./beastiarySlice";
 import MonsterPrompt from "./MonsterPrompt";
-import SmartFillButton from "./SmartFillButton";
+import DowloadButton from "./DownloadButton";
 
 const MonsterFactoryPage: React.FC = () => {
   const [id, setId] = useState("");
@@ -36,15 +35,6 @@ const MonsterFactoryPage: React.FC = () => {
   useEffect(() => {
     createOne();
   }, []);
-
-  const handleSave = useCallback(() => {
-    if (!monster) {
-      console.error("no monster to save");
-      return;
-    }
-
-    dispatch(added(monster));
-  }, [monster]);
 
   const handleRegenerate = useCallback(() => {
     createOne();
@@ -69,9 +59,7 @@ const MonsterFactoryPage: React.FC = () => {
           {Boolean(monster) && (
             <div>
               <MonsterCard monster={monster!}>
-                <IonButton fill="clear" onClick={handleSave}>
-                  <IonIcon slot="start" icon={save}></IonIcon>Save
-                </IonButton>
+                <DowloadButton monsterId={monster.id} />
                 <IonButton fill="clear" onClick={handleRegenerate}>
                   <IonIcon slot="start" icon={refresh}></IonIcon>
                   Regenerate
