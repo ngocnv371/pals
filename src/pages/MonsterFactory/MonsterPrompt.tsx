@@ -14,6 +14,7 @@ import { generateMessages } from "./service";
 import { ChatCompletionMessage } from "../../gpt/model";
 import ChatMessageCard from "./ChatMessage";
 import SmartFillButton from "./SmartFillButton";
+import UploadButton from "./UploadButton";
 
 const MonsterPrompt: React.FC<{ monster: Monster }> = ({ monster }) => {
   const [copied, setCopied] = useState(false);
@@ -44,6 +45,7 @@ const MonsterPrompt: React.FC<{ monster: Monster }> = ({ monster }) => {
         monster={monster}
         onCompleted={(msg) => setGeneratedMessage(msg)}
       />
+      <UploadButton />
       {messages.map((m, idx) => (
         <ChatMessageCard message={m} key={idx} />
       ))}

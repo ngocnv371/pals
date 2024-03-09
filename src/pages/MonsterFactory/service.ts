@@ -143,3 +143,32 @@ export async function generateDetail(monster: Monster) {
   const lastMessage = msg.choices[msg.choices.length - 1].message;
   return lastMessage;
 }
+
+export async function parseFiles(files: FileList) {
+  function parseFile(file: File) {
+    return new Promise<any>((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        console.debug("file reader loaded", file.name);
+        try {
+          const text = fileReader.result as string;
+          const data = JSON.parse(text);
+          resolve(data);
+        } catch (err) {
+          console.debug("failed too parse file", file.name, err);
+        }
+      };
+      fileReader.readAsText(file);
+    });
+  }
+
+  for (let i = 0; i < files.length; i++) {
+    parseFile(files[i]);
+  }
+
+  const results = await Promise.allSettled([...files].map(parseFile));
+
+  return results
+    .filter((r) => r.status === "fulfilled")
+    .map((r: any) => r.value);
+}
