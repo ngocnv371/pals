@@ -38,6 +38,7 @@ import TestsPage from "./pages/Tests";
 import TestFusionVisualizerPage from "./pages/Tests/TestFusionVisualizer";
 import TestBattleVisualizerPage from "./pages/Tests/TestBattleVisualizer";
 import DuelResultPage from "./pages/DuelResult";
+import MonsterFactoryPage from "./pages/MonsterFactory";
 
 setupIonicReact();
 
@@ -69,6 +70,9 @@ const App: React.FC = () => {
               </Route>
               <Route path="/tests/battle-visualizer" exact={true}>
                 <TestBattleVisualizerPage />
+              </Route>
+              <Route path="/monster-factory" exact={true}>
+                <MonsterFactoryPage />
               </Route>
             </IonRouterOutlet>
           </IonSplitPane>
