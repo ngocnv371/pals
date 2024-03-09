@@ -59,6 +59,9 @@ see [BATTLEFLOW.MD](docs/BATTLEFLOW.MD)
 
 # completed
 
+- ✅ monster factory
+  - generate info with gpt
+  - download & upload json
 - ✅ their hand is hiddden
 - ✅ duel end transition
 - ✅ add COM actions indicator (select offensive card)
