@@ -19,6 +19,7 @@ import SettingsButton from "./SettingsButton";
 import { useAppDispatch } from "../../store/hooks";
 import { added, updated } from "./beastiarySlice";
 import MonsterPrompt from "./MonsterPrompt";
+import SmartFillButton from "./SmartFillButton";
 
 const MonsterFactoryPage: React.FC = () => {
   const [monster, setMonster] = useState<Monster | null>(null);
@@ -67,6 +68,7 @@ const MonsterFactoryPage: React.FC = () => {
                 <IonIcon slot="start" icon={refresh}></IonIcon>
                 Regenerate
               </IonButton>
+              <SmartFillButton monster={monster!} />
             </MonsterCard>
           )}
           {Boolean(monster) && (

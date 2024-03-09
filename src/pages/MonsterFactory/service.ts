@@ -1,5 +1,5 @@
 import { Chance } from "chance";
-import { BingChat } from "bing-chat";
+import { BingChat, ChatMessage } from "bing-chat";
 import {
   Monster,
   classes,
@@ -40,11 +40,22 @@ export function generatePrompt(monster: Monster): string {
   - habitat: ${monster.habitat}
   - role in habitat: ${monster.roleInHabitat}
 
-  What is its name? and what does it look like?
+  What is its name? describe it for me?
   `;
   return prompt;
 }
 
-export function generateDetail(monster: Monster) {
-  //
+export async function generateDetail(
+  monster: Monster,
+  onProgress?: (partialResponse: ChatMessage) => void
+) {
+  const conv = await api.createConversation();
+  const prompt = generatePrompt(monster);
+  const message = await api.sendMessage(prompt, {
+    clientId: conv.clientId,
+    conversationId: conv.conversationId,
+    conversationSignature: conv.conversationSignature,
+    onProgress,
+  });
+  return message;
 }

@@ -1,7 +1,7 @@
 import { IonButton, IonIcon } from "@ionic/react";
 import { copy } from "ionicons/icons";
 import { Monster } from "./model";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { generatePrompt } from "./service";
 
 const MonsterPrompt: React.FC<{ monster: Monster }> = ({ monster }) => {
