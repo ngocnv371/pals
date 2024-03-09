@@ -24,6 +24,35 @@ export interface CompletionResponse {
   usage: CompletionUsage;
 }
 
+export interface ChatCompletionMessage {
+  role: string;
+  content: string;
+}
+
+export interface ChatCompletionChoice {
+  index: number;
+  finish_reason: string;
+  message: ChatCompletionMessage;
+}
+
+export interface ChatCompletionResponse {
+  id: string;
+  choices: ChatCompletionChoice[];
+  created: number;
+  model: string;
+  object: string;
+  usage: CompletionUsage;
+}
+
+export interface ChatCompletionRequest {
+  messages: ChatCompletionMessage[];
+  max_tokens: number;
+  stream: boolean;
+  mode: string;
+  instruction_template: string;
+}
+
 export interface GPTClient {
   completions(opts: CompletionRequest): Promise<CompletionResponse>;
+  chatCompletions(opts: ChatCompletionRequest): Promise<ChatCompletionResponse>;
 }

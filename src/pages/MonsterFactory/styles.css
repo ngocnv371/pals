@@ -1,6 +1,10 @@
 .monster-container {
   display: flex;
 
+  > ion-card {
+    min-width: 40%;
+  }
+
   .description,
   .prompt {
     white-space: break-spaces;

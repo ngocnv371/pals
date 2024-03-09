@@ -28,24 +28,29 @@ export function generateMonster(): Monster {
 
 export function generatePrompt(monster: Monster): string {
   const prompt = `
+  Hello worldbuilding expert. Help me fill in the blanks to finish the following monster entry. Do not ask questions.
   # Beastiary entry
   - class: ${monster.class}
   - type: ${monster.type}
   - nature: ${monster.nature}
   - habitat: ${monster.habitat}
   - role in habitat: ${monster.roleInHabitat}
-
-  Description:
+  - name: 
+  - appearance: 
+  - description:
   `;
   return prompt;
 }
 
 export async function generateDetail(monster: Monster) {
   const prompt = generatePrompt(monster);
-  const msg = await OobaClient.completions({
-    prompt,
-    max_tokens: 200,
+  const msg = await OobaClient.chatCompletions({
+    messages: [{ role: "user", content: prompt }],
+    max_tokens: 400,
+    instruction_template: "Alpaca",
+    stream: false,
+    mode: "instruct",
   });
   console.debug("gpt response", msg);
-  return msg;
+  return msg.choices[0].message.content;
 }

@@ -14,8 +14,7 @@ const SmartFillButton: React.FC<{ monster: Monster }> = ({ monster }) => {
   const handleClick = useCallback(async () => {
     setLoading(true);
     try {
-      const msg = await generateDetail(monster);
-      const description = msg.choices[0].text;
+      const description = await generateDetail(monster);
       setText(description);
       dispatch(updated({ id: monster.id, changes: { description } }));
     } catch (e) {
