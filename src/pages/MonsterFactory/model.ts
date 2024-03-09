@@ -1,11 +1,10 @@
 export const classes = [
-  "Starter",
-  "Regular",
+  "Common",
   "Superior",
-  "Emissary",
-  "Zenith",
+  "Elite",
   "Legendary",
-  "Ancient",
+  "Mythical",
+  "Primordial",
 ];
 
 export const types = [
@@ -96,6 +95,9 @@ export const roleInHabitats = [
   "Ruler",
   "Guardian",
   "Guide",
+  "Trickster",
+  "Hermit",
+  "Stalker",
 ];
 
 export interface Monster {
