@@ -23,6 +23,7 @@
     "@types/react-router": "^5.1.20",
     "@types/react-router-dom": "^5.3.3",
     "animate.css": "^4.1.1",
+    "bing-chat": "^0.2.3",
     "chance": "^1.1.11",
     "ionicons": "^7.0.0",
     "lodash": "^4.17.21",

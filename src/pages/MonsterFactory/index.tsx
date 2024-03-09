@@ -3,6 +3,7 @@ import {
   IonButtons,
   IonContent,
   IonHeader,
+  IonIcon,
   IonMenuButton,
   IonPage,
   IonTitle,
@@ -12,6 +13,7 @@ import { useState } from "react";
 import { Monster } from "./model";
 import MonsterCard from "./MonsterCard";
 import { generateMonster } from "./service";
+import SettingsButton from "./SettingsButton";
 
 const MonsterFactoryPage: React.FC = () => {
   const [monster, setMonster] = useState<Monster | null>(null);
@@ -30,6 +32,7 @@ const MonsterFactoryPage: React.FC = () => {
           <IonTitle>Monster Factory</IonTitle>
           <IonButtons slot="end">
             <IonButton onClick={handleGenerate}>Generate</IonButton>
+            <SettingsButton />
           </IonButtons>
         </IonToolbar>
       </IonHeader>
