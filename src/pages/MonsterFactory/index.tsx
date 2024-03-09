@@ -13,19 +13,16 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Monster } from "./model";
 import MonsterCard from "./MonsterCard";
 import { generateMonster, generatePrompt } from "./service";
-import { refresh, save } from "ionicons/icons";
+import { copy, refresh, save } from "ionicons/icons";
 import "./styles.css";
 import SettingsButton from "./SettingsButton";
 import { useAppDispatch } from "../../store/hooks";
 import { added, updated } from "./beastiarySlice";
+import MonsterPrompt from "./MonsterPrompt";
 
 const MonsterFactoryPage: React.FC = () => {
   const [monster, setMonster] = useState<Monster | null>(null);
   const dispatch = useAppDispatch();
-  const prompt = useMemo(
-    () => (monster ? generatePrompt(monster) : ""),
-    [monster]
-  );
 
   // init
   useEffect(() => {
@@ -72,7 +69,11 @@ const MonsterFactoryPage: React.FC = () => {
               </IonButton>
             </MonsterCard>
           )}
-          <pre>{prompt}</pre>
+          {Boolean(monster) && (
+            <div>
+              <MonsterPrompt monster={monster!} />
+            </div>
+          )}
         </div>
       </IonContent>
     </IonPage>
