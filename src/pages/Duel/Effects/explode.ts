@@ -3,7 +3,9 @@
 //- https://codepen.io/nicksheffield/pen/NNEoLg/
 
 const colors = ["#ffc000", "#ff3b3b", "#ff8400"];
-const bubbles = 25;
+const bubbles = 125;
+const width = 200;
+const height = 300;
 
 interface Particle {
   x: number;
@@ -27,14 +29,14 @@ export const explode = (x: number, y: number) => {
   let ctx = c.getContext("2d");
 
   c.style.position = "absolute";
-  c.style.left = x - 100 + "px";
-  c.style.top = y - 100 + "px";
+  c.style.left = x - width / 2 + "px";
+  c.style.top = y - height / 2 + "px";
   c.style.pointerEvents = "none";
-  c.style.width = 200 + "px";
-  c.style.height = 200 + "px";
+  c.style.width = width + "px";
+  c.style.height = height + "px";
   c.style.zIndex = 100 + "";
-  c.width = 200 * ratio;
-  c.height = 200 * ratio;
+  c.width = width * ratio;
+  c.height = height * ratio;
   document.body.appendChild(c);
 
   for (var i = 0; i < bubbles; i++) {
