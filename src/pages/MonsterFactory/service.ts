@@ -117,8 +117,8 @@ export function generateMessages(monster: Monster): ChatCompletionMessage[] {
 
 export function extractInfo({ content }: ChatCompletionMessage) {
   const key0 = "- name:";
-  const key1 = "- appearance:";
-  const key2 = "- description:";
+  const key1 = "- description:";
+  const key2 = "- appearance:";
   const [, relevantText] = content.split(key0);
   if (!relevantText) {
     console.error("failed to extract relevant parts", content);
