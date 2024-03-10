@@ -20,7 +20,7 @@ const SmartFillButton: React.FC<{
       const msg = await generateDetail(monster);
       onCompleted && onCompleted(msg);
       const info = extractInfo(msg);
-      if (!info || !info.appearance || !info.description || !info.name) {
+      if (!info) {
         console.error("failed to generate info", info);
         return;
       }
@@ -28,11 +28,7 @@ const SmartFillButton: React.FC<{
       dispatch(
         updated({
           id: monster.id,
-          changes: {
-            name: info.name,
-            description: info.description,
-            appearance: info.appearance,
-          },
+          changes: info,
         })
       );
     } catch (e) {

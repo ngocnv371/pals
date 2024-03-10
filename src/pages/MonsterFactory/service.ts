@@ -19,7 +19,8 @@ export function generateMonster(): Monster {
     id: nanoid(),
     name: "",
     appearance: "",
-    description: "",
+    abilities: "",
+    behavior: "",
     habitat: chance.pickone(habitats),
     roleInHabitat: chance.pickone(roleInHabitats),
     class: chance.pickone(classes),
@@ -32,7 +33,8 @@ const pendingMonster: Monster = {
   id: "pending",
   name: "",
   appearance: "",
-  description: "",
+  abilities: "",
+  behavior: "",
   class: "Regular",
   type: "Electric",
   nature: "Endurable",
@@ -45,15 +47,17 @@ const completeMonster: Monster = {
   name: "Snowgryph",
   appearance:
     "\
-An image of fierce beast with electrical feathers and talons hunting across the tundra,\
+A fierce beast with electrical feathers and talons hunting across the tundra,\
 lit by the aurora borealis, detailed, realistic.",
-  description:
+  abilities:
     "\
-The Snowgryph is a formidable hunter across the tundra.\
-Well adapted for stealth hunting, it can spot prey from high altitudes and swoop down silently to capture them in its powerful talons.\
-Its fur and feathers are infused with an ability to generate weak electric charges, enough to stun smaller prey.\
-Larger creatures face the Snowgryph's razor sharp beak and claws.\
-Solitary by nature, the Snowgryph defends its territory fiercely from other predators.",
+Powerful wings for high altitude spotting and swooping prey.\
+Razor sharp beak and claws.\
+Feathers and fur generate weak electric charges to stun small prey.\
+",
+  behavior:
+    "\
+Solitary and highly territorial .",
   class: "Regular",
   type: "Electric",
   nature: "Endurable",
@@ -76,9 +80,10 @@ function createPendingBeastiaryEntry(
   - habitat: ${monster.habitat}
   - role in habitat: ${monster.roleInHabitat}
   - name: 
-  - description:
+  - abilities:
+  - behavior:
   - appearance: [insert text-to-image prompt]
-  `;
+  `.trim();
   return {
     role,
     content,
@@ -98,9 +103,10 @@ function createCompleteBeastiaryEntry(
   - habitat: ${monster.habitat}
   - role in habitat: ${monster.roleInHabitat}
   - name: ${monster.name}
-  - description: ${monster.description}
+  - abilities: ${monster.abilities}
+  - behavior: ${monster.behavior}
   - appearance: ${monster.appearance}
-  `;
+  `.trim();
   return {
     role,
     content,
@@ -116,24 +122,24 @@ export function generateMessages(monster: Monster): ChatCompletionMessage[] {
 }
 
 export function extractInfo({ content }: ChatCompletionMessage) {
-  const key0 = "- name:";
-  const key1 = "- description:";
-  const key2 = "- appearance:";
-  const [, relevantText] = content.split(key0);
+  const keys = ["- name:", "- abilities:", "- behavior:", "- appearance:"];
+  const [, relevantText] = content.split(keys[0]);
   if (!relevantText) {
     console.error("failed to extract relevant parts", content);
     return;
   }
 
-  const stripped = relevantText.replace(key1, key0).replace(key2, key0);
+  let stripped = relevantText;
+  keys.forEach((k) => (stripped = stripped.replace(k, keys[0])));
 
-  const [name, appearance, description] = stripped
-    .split(key0)
+  const [name, abilities, behavior, appearance] = stripped
+    .split(keys[0])
     .map((s) => s.trim());
   return {
     name,
+    abilities,
+    behavior,
     appearance,
-    description,
   };
 }
 
