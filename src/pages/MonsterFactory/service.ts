@@ -44,9 +44,16 @@ const completeMonster: Monster = {
   id: "complete",
   name: "Snowgryph",
   appearance:
-    "This creature has the front legs and head of a snowy owl and the hindquarters and wings of a snow leopard. Its plumage and fur are a pristine white to help it camouflage in snow drifts. Icy blue eyes peek out from beneath its feathered brows.",
+    "\
+An image of fierce beast with electrical feathers and talons hunting across the tundra,\
+lit by the aurora borealis, detailed, realistic.",
   description:
-    "The Snowgryph is a formidable hunter across the tundra. Well adapted for stealth hunting, it can spot prey from high altitudes and swoop down silently to capture them in its powerful talons. Its fur and feathers are infused with an ability to generate weak electric charges, enough to stun smaller prey. Larger creatures face the Snowgryph's razor sharp beak and claws. Solitary by nature, the Snowgryph defends its territory fiercely from other predators.",
+    "\
+The Snowgryph is a formidable hunter across the tundra.\
+Well adapted for stealth hunting, it can spot prey from high altitudes and swoop down silently to capture them in its powerful talons.\
+Its fur and feathers are infused with an ability to generate weak electric charges, enough to stun smaller prey.\
+Larger creatures face the Snowgryph's razor sharp beak and claws.\
+Solitary by nature, the Snowgryph defends its territory fiercely from other predators.",
   class: "Regular",
   type: "Electric",
   nature: "Endurable",
@@ -69,8 +76,8 @@ function createPendingBeastiaryEntry(
   - habitat: ${monster.habitat}
   - role in habitat: ${monster.roleInHabitat}
   - name: 
-  - appearance: 
   - description:
+  - appearance: [insert text-to-image prompt]
   `;
   return {
     role,
@@ -91,8 +98,8 @@ function createCompleteBeastiaryEntry(
   - habitat: ${monster.habitat}
   - role in habitat: ${monster.roleInHabitat}
   - name: ${monster.name}
-  - appearance: ${monster.appearance}
   - description: ${monster.description}
+  - appearance: ${monster.appearance}
   `;
   return {
     role,
