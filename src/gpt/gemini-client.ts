@@ -50,7 +50,7 @@ export const GeminiClient: GPTClient = {
             finish_reason: c.finish_reason,
             index: c.index,
             message: {
-              role: c.content.role,
+              role: "assistant",
               content: c.content.parts[0].text,
             },
           })),

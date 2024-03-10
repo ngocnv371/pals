@@ -1,0 +1,6 @@
+.chat-message {
+  &:not(.role-user) {
+    background-color: rgb(0, 74, 60);
+    color: rgb(216, 213, 208);
+  }
+}

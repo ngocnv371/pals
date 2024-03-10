@@ -9,6 +9,7 @@ import {
 import { ChatCompletionMessage } from "../../gpt/model";
 import { copyOutline } from "ionicons/icons";
 import { useCallback, useState } from "react";
+import "./ChatMessage.css";
 
 const ChatMessageCard: React.FC<{ message: ChatCompletionMessage }> = ({
   message,
@@ -22,7 +23,7 @@ const ChatMessageCard: React.FC<{ message: ChatCompletionMessage }> = ({
   }, [message]);
 
   return (
-    <IonCard>
+    <IonCard className={`chat-message role-${message.role}`}>
       <IonCardHeader>
         <IonCardTitle>{message.role}</IonCardTitle>
       </IonCardHeader>
