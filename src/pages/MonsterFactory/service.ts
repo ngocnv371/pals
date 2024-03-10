@@ -8,8 +8,8 @@ import {
   types,
 } from "./model";
 import { nanoid } from "@reduxjs/toolkit";
-import { OobaClient } from "../../gpt/ooba-client";
 import { ChatCompletionMessage } from "../../gpt/model";
+import { GeminiClient } from "../../gpt/gemini-client";
 const chance = new Chance();
 
 export function setBingCookie(cookie: string) {}
@@ -139,7 +139,7 @@ export function extractInfo({ content }: ChatCompletionMessage) {
 
 export async function generateDetail(monster: Monster) {
   const messages = generateMessages(monster);
-  const msg = await OobaClient.chatCompletions({
+  const msg = await GeminiClient.chatCompletions({
     messages,
     max_tokens: 400,
     instruction_template: "Alpaca",
