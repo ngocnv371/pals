@@ -9,6 +9,7 @@ import beastiarySlice from "../pages/MonsterFactory/beastiarySlice";
 import gptSlice from "../pages/GPT/gptSlice";
 import factorySlice from "../pages/MonsterFactory/factorySlice";
 import sdSlice from "../pages/SD/sdSlice";
+import visualizerSlice from "../pages/visualizer/visualizerSlice";
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ export const store = configureStore({
     gpt: gptSlice,
     sd: sdSlice,
     factory: factorySlice,
+    visualizer: visualizerSlice,
   },
   devTools: process.env.NODE_ENV !== "production",
 });

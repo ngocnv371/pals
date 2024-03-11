@@ -22,7 +22,6 @@ const BatchFillCard: React.FC = () => {
   const [playing, setPlaying] = useState(false);
   const [batchSize, setBatchSize] = useState(1);
   const dispatch = useAppDispatch();
-  const percentage = total ? completed / total : 0;
 
   const handleStart = useCallback(() => {
     setPlaying(true);

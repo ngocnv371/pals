@@ -13,6 +13,7 @@ import BatchFillCard from "./BatchFillCard";
 import PromptWatcher from "./PromptWatcher";
 import GPTConfigCard from "../GPT/GPTConfigCard";
 import SDConfigCard from "../SD/SDConfigCard";
+import BatchVisualizerCard from "../visualizer/BatchVisualizerCard";
 
 const MonsterFactoryPage: React.FC = () => {
   return (
@@ -33,6 +34,7 @@ const MonsterFactoryPage: React.FC = () => {
         <GPTConfigCard />
         <SDConfigCard />
         <BatchFillCard />
+        <BatchVisualizerCard />
         <PromptWatcher />
       </IonContent>
     </IonPage>

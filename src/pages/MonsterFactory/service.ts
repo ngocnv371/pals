@@ -26,6 +26,7 @@ export function generateMonster(className?: string): Monster {
     appearance: "",
     abilities: "",
     behavior: "",
+    images: [],
     habitat: chance.pickone(habitats),
     roleInHabitat: chance.pickone(roleInHabitats),
     class: className || chance.pickone(simpleClasses),
@@ -40,6 +41,7 @@ const pendingMonster: Monster = {
   appearance: "",
   abilities: "",
   behavior: "",
+  images: [],
   class: "Regular",
   type: "Electric",
   nature: "Endurable",
@@ -68,6 +70,7 @@ Solitary and highly territorial .",
   nature: "Endurable",
   habitat: "Tundra",
   roleInHabitat: "Hunter",
+  images: [],
 };
 
 const instruction = `Fill in the blanks to finish the following monster entry:`;

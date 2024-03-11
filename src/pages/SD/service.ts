@@ -24,7 +24,7 @@ const gptMap = Object.freeze({
   a1111: GeminiClient,
 });
 
-export function getGpt(): SDClient {
+export function getSd(): SDClient {
   const state = loadData();
   const client: SDClient = (gptMap as any)[state.provider];
   client.setConfig(state.url, state.apiKey);

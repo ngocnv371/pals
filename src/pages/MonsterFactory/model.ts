@@ -111,4 +111,5 @@ export interface Monster {
   appearance: string;
   abilities: string;
   behavior: string;
+  images: string[];
 }
