@@ -10,6 +10,7 @@ import {
 import { nanoid } from "@reduxjs/toolkit";
 import { ChatCompletionMessage } from "../GPT/model";
 import { getGpt } from "../GPT/service";
+import { retryAsync } from "../../utils/retryAsync";
 const chance = new Chance();
 
 export function generateMonsters(n: number, className?: string) {
@@ -169,13 +170,19 @@ export function extractInfo(content: string) {
 
 export async function generateDetail(monsters: Monster[]) {
   const messages = generateMessages(monsters);
-  const msg = await getGpt().chatCompletions({
-    messages,
-    max_tokens: 400,
-    instruction_template: "Alpaca",
-    stream: false,
-    mode: "instruct",
-  });
+  const msg = await retryAsync(() =>
+    getGpt().chatCompletions({
+      messages,
+      max_tokens: 400,
+      instruction_template: "Alpaca",
+      stream: false,
+      mode: "instruct",
+    })
+  );
+  if (!msg) {
+    throw Error("gpt failed");
+  }
+
   const lastMessage = msg.choices[msg.choices.length - 1].message;
   console.debug("gpt response", lastMessage.content);
 

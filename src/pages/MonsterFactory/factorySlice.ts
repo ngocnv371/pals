@@ -82,23 +82,29 @@ const batchFill =
     dispatch(factorySlice.actions.fillStarted(ids));
     console.debug("start smart fill", ids);
 
-    const updatedItems = await generateDetail(items);
-    updatedItems.forEach((i) =>
-      dispatch(
-        updated({
-          id: i.id,
-          changes: i,
-        })
-      )
-    );
+    try {
+      const updatedItems = await generateDetail(items);
+      updatedItems.forEach((i) =>
+        dispatch(
+          updated({
+            id: i.id,
+            changes: i,
+          })
+        )
+      );
 
-    dispatch(factorySlice.actions.fillCompleted(ids.length));
+      dispatch(factorySlice.actions.fillCompleted(ids.length));
 
-    await delay(100);
-    dispatch(saveBeastiaryData());
+      await delay(100);
+      dispatch(saveBeastiaryData());
 
-    await delay(100);
-    dispatch(batchFill(batchSize, onDone));
+      await delay(100);
+      dispatch(batchFill(batchSize, onDone));
+    } catch (e) {
+      console.error(e);
+      dispatch(factorySlice.actions.aborted(true));
+      onDone();
+    }
   };
 
 export default factorySlice.reducer;
