@@ -20,6 +20,7 @@ import MonsterPrompt from "./MonsterPrompt";
 import DowloadButton from "./DownloadButton";
 import SelectAdapterButton from "../GPT/SelectAdapterButton";
 import SetApiKeyButton from "../GPT/SetApiKeyButton";
+import BatchCreateButton from "./BatchCreateButton";
 
 const MonsterFactoryPage: React.FC = () => {
   const [id, setId] = useState("");
@@ -50,6 +51,7 @@ const MonsterFactoryPage: React.FC = () => {
           </IonButtons>
           <IonTitle>Monster Factory</IonTitle>
           <IonButtons slot="end">
+            <BatchCreateButton />
             <SetApiKeyButton />
             <SelectAdapterButton />
           </IonButtons>

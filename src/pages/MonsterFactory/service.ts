@@ -12,7 +12,11 @@ import { ChatCompletionMessage } from "../GPT/model";
 import { getGpt } from "../GPT/service";
 const chance = new Chance();
 
-export function generateMonster(): Monster {
+export function generateMonsters(n: number, className?: string) {
+  return chance.n(() => generateMonster(className), n);
+}
+
+export function generateMonster(className?: string): Monster {
   // don't generate the crazy ones
   const [mythical, primordial, ...simpleClasses] = classes.slice().reverse();
   return {
@@ -23,7 +27,7 @@ export function generateMonster(): Monster {
     behavior: "",
     habitat: chance.pickone(habitats),
     roleInHabitat: chance.pickone(roleInHabitats),
-    class: chance.pickone(simpleClasses),
+    class: className || chance.pickone(simpleClasses),
     nature: chance.pickone(natures),
     type: chance.pickone(types),
   };

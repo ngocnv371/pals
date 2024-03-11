@@ -3,9 +3,10 @@ import {
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
-import { Monster } from "./model";
+import { Monster, classes } from "./model";
 import { AppDispatch, AppThunkAction, RootState } from "../../store";
 import { saveAs } from "file-saver";
+import { generateMonsters } from "./service";
 
 const adapter = createEntityAdapter<Monster>();
 
@@ -20,6 +21,7 @@ const beastiarySlice = createSlice({
       state.ids = action.payload.ids;
     },
     added: adapter.addOne,
+    manyAdded: adapter.addMany,
     removed: adapter.removeOne,
     updated: adapter.updateOne,
   },
@@ -51,6 +53,16 @@ export const loadBeastiaryData =
     } catch (e) {
       console.error("failed to load beastiary", e);
     }
+  };
+
+export const batchCreate =
+  (quantities: number[]) =>
+  (dispatch: AppDispatch, getState: () => RootState) => {
+    const items = quantities.flatMap((q, idx) =>
+      generateMonsters(q, classes[idx])
+    );
+    console.debug("batch created", items);
+    dispatch(beastiarySlice.actions.manyAdded(items));
   };
 
 export default beastiarySlice.reducer;
