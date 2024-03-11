@@ -189,3 +189,18 @@ export async function parseFiles(files: FileList) {
     .filter((r) => r.status === "fulfilled")
     .map((r: any) => r.value);
 }
+
+const STORAGE_KEY = "beastiary";
+
+export function saveData(data: any) {
+  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+export function loadData(): any {
+  const json = window.localStorage.getItem(STORAGE_KEY);
+  if (!json) {
+    return null;
+  }
+
+  return JSON.parse(json);
+}

@@ -1,46 +1,26 @@
 import {
-  IonButton,
   IonButtons,
   IonContent,
   IonHeader,
-  IonIcon,
   IonMenuButton,
   IonPage,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { useCallback, useEffect, useState } from "react";
 import MonsterCard from "./MonsterCard";
-import { generateMonster } from "./service";
-import { refresh } from "ionicons/icons";
 import "./styles.css";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { added, selectById } from "./beastiarySlice";
+import { useAppSelector } from "../../store/hooks";
+import { selectById } from "./beastiarySlice";
 import MonsterPrompt from "./MonsterPrompt";
 import DowloadButton from "./DownloadButton";
 import SelectAdapterButton from "../GPT/SelectAdapterButton";
 import SetApiKeyButton from "../GPT/SetApiKeyButton";
 import BatchCreateButton from "./BatchCreateButton";
+import BatchFillCard from "./BatchFillCard";
 
 const MonsterFactoryPage: React.FC = () => {
-  const [id, setId] = useState("");
-  const dispatch = useAppDispatch();
+  const id = useAppSelector((state) => state.factory.currentId);
   const monster = useAppSelector((state) => selectById(state, id));
-
-  function createOne() {
-    const m = generateMonster();
-    dispatch(added(m));
-    setId(m.id);
-  }
-
-  // init
-  useEffect(() => {
-    createOne();
-  }, []);
-
-  const handleRegenerate = useCallback(() => {
-    createOne();
-  }, []);
 
   return (
     <IonPage className="monster-factory-page">
@@ -64,13 +44,12 @@ const MonsterFactoryPage: React.FC = () => {
             <div>
               <MonsterCard monster={monster!}>
                 <DowloadButton monsterId={monster.id} />
-                <IonButton fill="clear" onClick={handleRegenerate}>
-                  <IonIcon slot="start" icon={refresh}></IonIcon>
-                  Regenerate
-                </IonButton>
               </MonsterCard>
             </div>
           )}
+          <div>
+            <BatchFillCard />
+          </div>
           {Boolean(monster) && <MonsterPrompt monster={monster!} />}
         </div>
       </IonContent>

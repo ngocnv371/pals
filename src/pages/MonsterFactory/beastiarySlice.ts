@@ -4,9 +4,8 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import { Monster, classes } from "./model";
-import { AppDispatch, AppThunkAction, RootState } from "../../store";
-import { saveAs } from "file-saver";
-import { generateMonsters } from "./service";
+import { AppDispatch, RootState } from "../../store";
+import { generateMonsters, loadData, saveData } from "./service";
 
 const adapter = createEntityAdapter<Monster>();
 
@@ -33,22 +32,19 @@ export const { selectAll, selectById } = adapter.getSelectors(
 
 export const { added, removed, updated } = beastiarySlice.actions;
 
-const STORAGE_KEY = "beastiary";
 export const saveBeastiaryData =
   () => (dispatch: AppDispatch, getState: () => RootState) => {
     const state = getState().beastiary;
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    saveData(state);
   };
 
 export const loadBeastiaryData =
   () => (dispatch: AppDispatch, getState: () => RootState) => {
-    const json = window.localStorage.getItem(STORAGE_KEY);
-    if (!json) {
-      return;
-    }
-
     try {
-      const data = JSON.parse(json);
+      const data = loadData();
+      if (!data) {
+        return;
+      }
       dispatch(beastiarySlice.actions.load(data));
     } catch (e) {
       console.error("failed to load beastiary", e);

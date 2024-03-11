@@ -7,6 +7,7 @@ import duelSlice from "../pages/Duel/store/duelSlice";
 import bookSlice from "../pages/Deck/bookSlice";
 import beastiarySlice from "../pages/MonsterFactory/beastiarySlice";
 import gptSlice from "../pages/GPT/gptSlice";
+import factorySlice from "../pages/MonsterFactory/factorySlice";
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     book: bookSlice,
     beastiary: beastiarySlice,
     gpt: gptSlice,
+    factory: factorySlice,
   },
   devTools: process.env.NODE_ENV !== "production",
 });
