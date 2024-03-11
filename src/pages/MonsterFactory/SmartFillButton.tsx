@@ -5,7 +5,7 @@ import { useCallback, useState } from "react";
 import { extractInfo, generateDetail } from "./service";
 import { useAppDispatch } from "../../store/hooks";
 import { updated } from "./beastiarySlice";
-import { ChatCompletionMessage } from "../../gpt/model";
+import { ChatCompletionMessage } from "../GPT/model";
 
 const SmartFillButton: React.FC<{
   monster: Monster;

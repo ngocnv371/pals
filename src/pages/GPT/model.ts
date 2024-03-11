@@ -53,6 +53,14 @@ export interface ChatCompletionRequest {
 }
 
 export interface GPTClient {
+  setApiKey(key: string): void;
   completions(opts: CompletionRequest): Promise<CompletionResponse>;
   chatCompletions(opts: ChatCompletionRequest): Promise<ChatCompletionResponse>;
+}
+
+export const adapters = ["gemini", "claude", "bing-chat"];
+
+export interface GPTState {
+  apiKey: string;
+  adapter: string;
 }

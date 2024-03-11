@@ -36,4 +36,7 @@ export const ClaudeClient: GPTClient = {
         console.error("claude failed", reason);
       });
   },
+  setApiKey: function (key: string): void {
+    throw new Error("Function not implemented.");
+  },
 };

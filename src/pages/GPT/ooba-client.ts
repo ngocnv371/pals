@@ -41,4 +41,7 @@ export const OobaClient: GPTClient = {
         console.error("ooba failed", reason);
       });
   },
+  setApiKey: function (key: string): void {
+    throw new Error("Function not implemented.");
+  },
 };

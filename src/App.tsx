@@ -39,6 +39,7 @@ import TestFusionVisualizerPage from "./pages/Tests/TestFusionVisualizer";
 import TestBattleVisualizerPage from "./pages/Tests/TestBattleVisualizer";
 import DuelResultPage from "./pages/DuelResult";
 import MonsterFactoryPage from "./pages/MonsterFactory";
+import StorageLoader from "./store/StorageLoader";
 
 setupIonicReact();
 
@@ -77,6 +78,7 @@ const App: React.FC = () => {
             </IonRouterOutlet>
           </IonSplitPane>
         </IonReactRouter>
+        <StorageLoader />
       </IonApp>
     </Provider>
   );

@@ -21,6 +21,9 @@ interface GeminiResponse {
 }
 
 const baseUrl = "https://generativelanguage.googleapis.com";
+// private key
+let apiKey = "";
+
 export const GeminiClient: GPTClient = {
   completions: function (opts: CompletionRequest): Promise<CompletionResponse> {
     throw new Error("Function not implemented.");
@@ -28,9 +31,7 @@ export const GeminiClient: GPTClient = {
   chatCompletions: function (
     opts: ChatCompletionRequest
   ): Promise<ChatCompletionResponse> {
-    const url = `${baseUrl}/v1beta/models/gemini-pro:generateContent?key=${
-      import.meta.env.VITE_GEMINI_API_KEY
-    }`;
+    const url = `${baseUrl}/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
     return fetch(url, {
       method: "POST",
       body: JSON.stringify({
@@ -65,5 +66,8 @@ export const GeminiClient: GPTClient = {
       .catch((reason: any) => {
         console.error("gemini failed", reason);
       });
+  },
+  setApiKey: function (key: string): void {
+    apiKey = key;
   },
 };

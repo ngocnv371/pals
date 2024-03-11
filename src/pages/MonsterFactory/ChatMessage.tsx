@@ -6,7 +6,7 @@ import {
   IonButton,
   IonIcon,
 } from "@ionic/react";
-import { ChatCompletionMessage } from "../../gpt/model";
+import { ChatCompletionMessage } from "../GPT/model";
 import { copyOutline } from "ionicons/icons";
 import { useCallback, useState } from "react";
 import "./ChatMessage.css";

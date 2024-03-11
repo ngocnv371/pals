@@ -1,7 +1,7 @@
 import { Monster } from "./model";
 import { useEffect, useState } from "react";
 import { generateMessages } from "./service";
-import { ChatCompletionMessage } from "../../gpt/model";
+import { ChatCompletionMessage } from "../GPT/model";
 import ChatMessageCard from "./ChatMessage";
 import SmartFillButton from "./SmartFillButton";
 import UploadButton from "./UploadButton";

@@ -8,11 +8,9 @@ import {
   types,
 } from "./model";
 import { nanoid } from "@reduxjs/toolkit";
-import { ChatCompletionMessage } from "../../gpt/model";
-import { GeminiClient } from "../../gpt/gemini-client";
+import { ChatCompletionMessage } from "../GPT/model";
+import { getGpt } from "../GPT/service";
 const chance = new Chance();
-
-export function setBingCookie(cookie: string) {}
 
 export function generateMonster(): Monster {
   // don't generate the crazy ones
@@ -147,7 +145,7 @@ export function extractInfo({ content }: ChatCompletionMessage) {
 
 export async function generateDetail(monster: Monster) {
   const messages = generateMessages(monster);
-  const msg = await GeminiClient.chatCompletions({
+  const msg = await getGpt().chatCompletions({
     messages,
     max_tokens: 400,
     instruction_template: "Alpaca",

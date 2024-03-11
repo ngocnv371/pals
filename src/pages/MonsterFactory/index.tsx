@@ -14,11 +14,12 @@ import MonsterCard from "./MonsterCard";
 import { generateMonster } from "./service";
 import { refresh } from "ionicons/icons";
 import "./styles.css";
-import SettingsButton from "./SettingsButton";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { added, selectById } from "./beastiarySlice";
 import MonsterPrompt from "./MonsterPrompt";
 import DowloadButton from "./DownloadButton";
+import SelectAdapterButton from "../GPT/SelectAdapterButton";
+import SetApiKeyButton from "../GPT/SetApiKeyButton";
 
 const MonsterFactoryPage: React.FC = () => {
   const [id, setId] = useState("");
@@ -49,7 +50,8 @@ const MonsterFactoryPage: React.FC = () => {
           </IonButtons>
           <IonTitle>Monster Factory</IonTitle>
           <IonButtons slot="end">
-            <SettingsButton />
+            <SetApiKeyButton />
+            <SelectAdapterButton />
           </IonButtons>
         </IonToolbar>
       </IonHeader>
