@@ -1,6 +1,7 @@
 import {
   PayloadAction,
   createEntityAdapter,
+  createSelector,
   createSlice,
 } from "@reduxjs/toolkit";
 import { Monster, classes } from "./model";
@@ -9,33 +10,68 @@ import { saveAs } from "file-saver";
 import { extractInfo, generateDetail, generateMonsters } from "./service";
 import { delay } from "../Duel/utils/delay";
 import { getGpt } from "../GPT/service";
-import { saveBeastiaryData, selectAll, updated } from "./beastiarySlice";
+import {
+  saveBeastiaryData,
+  selectAll,
+  selectUnfilledCount,
+  updated,
+} from "./beastiarySlice";
 
 const initialState = {
-  shouldStop: true,
+  aborted: true,
   currentId: "",
+  completed: 0,
+  total: 0,
 };
 
 const factorySlice = createSlice({
   name: "factory",
   initialState,
   reducers: {
-    shouldStopChanged(state, action: PayloadAction<boolean>) {
-      state.shouldStop = action.payload;
+    aborted(state, action: PayloadAction<boolean>) {
+      state.aborted = action.payload;
     },
-    currentIdChanged(state, action: PayloadAction<string>) {
+    fillStarted(state, action: PayloadAction<string>) {
       state.currentId = action.payload;
+    },
+    fillCompleted(state) {
+      state.completed += 1;
+      state.currentId = "";
+    },
+    batchStarted(state, action: PayloadAction<number>) {
+      state.completed = 0;
+      state.total = action.payload;
     },
   },
 });
 
-export const { shouldStopChanged } = factorySlice.actions;
+export const selectProgress = createSelector(
+  (state: RootState) => state.factory.completed,
+  (state: RootState) => state.factory.total,
+  (completed, total) => ({ completed, total })
+);
 
-export const batchFill =
+export const { aborted } = factorySlice.actions;
+
+export const startBatchFill =
   (onDone: () => void) =>
   async (dispatch: AppDispatch, getState: () => RootState) => {
     const state = getState().factory;
-    if (state.shouldStop) {
+    if (state.aborted) {
+      console.debug("aborted", state);
+      return onDone();
+    }
+
+    const total = selectUnfilledCount(getState());
+    dispatch(factorySlice.actions.batchStarted(total));
+    dispatch(batchFill(onDone));
+  };
+
+const batchFill =
+  (onDone: () => void) =>
+  async (dispatch: AppDispatch, getState: () => RootState) => {
+    const state = getState().factory;
+    if (state.aborted) {
       console.debug("aborted", state);
       return onDone();
     }
@@ -48,7 +84,7 @@ export const batchFill =
       return onDone();
     }
 
-    dispatch(factorySlice.actions.currentIdChanged(item.id));
+    dispatch(factorySlice.actions.fillStarted(item.id));
     console.debug("start smart fill", item);
 
     const msg = await generateDetail(item);
@@ -64,6 +100,8 @@ export const batchFill =
         changes: info,
       })
     );
+
+    dispatch(factorySlice.actions.fillCompleted());
 
     await delay(100);
     dispatch(saveBeastiaryData());

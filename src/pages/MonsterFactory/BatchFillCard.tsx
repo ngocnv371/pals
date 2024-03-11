@@ -12,21 +12,24 @@ import {
 } from "@ionic/react";
 import { play, stop } from "ionicons/icons";
 import { useCallback, useState } from "react";
-import { useAppDispatch } from "../../store/hooks";
-import { batchFill, shouldStopChanged } from "./factorySlice";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { startBatchFill, aborted, selectProgress } from "./factorySlice";
+import { selectUnfilledCount } from "./beastiarySlice";
 
 const BatchFillCard: React.FC = () => {
+  const { completed, total } = useAppSelector(selectProgress);
   const [playing, setPlaying] = useState(false);
   const [batchSize, setBatchSize] = useState(1);
   const dispatch = useAppDispatch();
+  const percentage = total ? completed / total : 0;
 
   const handleStart = useCallback(() => {
     setPlaying(true);
-    dispatch(shouldStopChanged(false));
+    dispatch(aborted(false));
     setTimeout(
       () =>
         dispatch(
-          batchFill(() => {
+          startBatchFill(() => {
             setPlaying(false);
           })
         ),
@@ -34,13 +37,15 @@ const BatchFillCard: React.FC = () => {
     );
   }, [playing, batchSize]);
 
-  const handleStop = useCallback(() => dispatch(shouldStopChanged(true)), []);
+  const handleStop = useCallback(() => dispatch(aborted(true)), []);
 
   return (
     <IonCard className="batch-fill-card">
-      <IonProgressBar value={0.7} />
+      <IonProgressBar value={percentage} />
       <IonCardHeader>
-        <IonCardTitle>Batch Fill Monsters 3/7</IonCardTitle>
+        <IonCardTitle>
+          Batch Fill Monsters {completed}/{total}
+        </IonCardTitle>
       </IonCardHeader>
       <IonList>
         <IonItem>

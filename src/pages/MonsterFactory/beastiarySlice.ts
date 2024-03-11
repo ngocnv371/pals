@@ -1,6 +1,7 @@
 import {
   PayloadAction,
   createEntityAdapter,
+  createSelector,
   createSlice,
 } from "@reduxjs/toolkit";
 import { Monster, classes } from "./model";
@@ -29,6 +30,11 @@ const beastiarySlice = createSlice({
 
 export const { selectAll, selectById } = adapter.getSelectors(
   (state: RootState) => state.beastiary
+);
+
+export const selectUnfilledCount = createSelector(
+  selectAll,
+  (items) => items.filter((i) => !i.name).length
 );
 
 export const { added, removed, updated } = beastiarySlice.actions;
