@@ -7,6 +7,7 @@ let baseUrl = "";
 export const A1111Client: SDClient = {
   txt2img: function (request: Text2imgRequest): Promise<Text2imgResponse> {
     const url = `${baseUrl}/sdapi/v1/txt2img`;
+    // model: dreamshaperXL_sfwLightningDPMSDE
     const overwrite: Omit<Text2imgRequest, "prompt"> = {
       save_images: true,
       send_images: false,
