@@ -7,9 +7,19 @@ let baseUrl = "";
 export const A1111Client: SDClient = {
   txt2img: function (request: Text2imgRequest): Promise<Text2imgResponse> {
     const url = `${baseUrl}/sdapi/v1/txt2img`;
+    const overwrite: Omit<Text2imgRequest, "prompt"> = {
+      save_images: true,
+      send_images: false,
+      batch_size: 2,
+      steps: 8,
+      cfg_scale: 2,
+      width: 768,
+      height: 1152,
+      sampler_index: "DPM++ SDE Karras",
+    };
     return fetch(url, {
       method: "POST",
-      body: JSON.stringify(request),
+      body: JSON.stringify({ ...request, ...overwrite }),
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -19,7 +29,9 @@ export const A1111Client: SDClient = {
       if (!data) {
         throw new Error("malformed response");
       }
-      return data;
+      const info = JSON.parse(data.info);
+      const seeds = info.all_seeds.map((i: any) => "" + i);
+      return { ...data, images: seeds };
     });
   },
   setConfig: function (url: string, key: string): void {

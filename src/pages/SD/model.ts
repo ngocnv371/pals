@@ -14,6 +14,8 @@ export interface Text2imgRequest {
   width?: number;
   height?: number;
   sampler_index?: string;
+  save_images?: boolean;
+  send_images?: boolean;
 }
 
 export interface SDClient {
