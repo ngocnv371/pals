@@ -24,8 +24,7 @@ const SelectAdapterButton: React.FC = () => {
       </IonButton>
       <IonAlert
         trigger="select-adapter-btn"
-        header="Adapter"
-        message="Get this from the GPT provider."
+        header="GPT Provider"
         buttons={[
           {
             text: "Submit",

@@ -27,7 +27,7 @@ const BatchCreateButton: React.FC = () => {
       </IonButton>
       <IonAlert
         trigger="batch-create-btn"
-        header="API KEY"
+        header="Batch Create Monsters"
         message="Specifies the quantity of each class to create."
         buttons={[
           {
