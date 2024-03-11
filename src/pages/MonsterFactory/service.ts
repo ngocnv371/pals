@@ -134,6 +134,10 @@ function createCompleteBeastiaryEntry(
 }
 
 export function generateMessages(monsters: Monster[]): ChatCompletionMessage[] {
+  if (!monsters.length) {
+    return [];
+  }
+
   return [
     createPendingBeastiaryEntryMany([pendingMonster], "user", instruction),
     createCompleteBeastiaryEntry(completeMonster, "assistant", ""),

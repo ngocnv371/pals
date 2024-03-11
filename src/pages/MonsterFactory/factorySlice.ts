@@ -1,15 +1,7 @@
-import {
-  PayloadAction,
-  createEntityAdapter,
-  createSelector,
-  createSlice,
-} from "@reduxjs/toolkit";
-import { Monster, classes } from "./model";
-import { AppDispatch, AppThunkAction, RootState } from "../../store";
-import { saveAs } from "file-saver";
-import { extractInfo, generateDetail, generateMonsters } from "./service";
+import { PayloadAction, createSelector, createSlice } from "@reduxjs/toolkit";
+import { AppDispatch, RootState } from "../../store";
+import { generateDetail } from "./service";
 import { delay } from "../Duel/utils/delay";
-import { getGpt } from "../GPT/service";
 import {
   saveBeastiaryData,
   selectAll,
@@ -50,6 +42,12 @@ export const selectProgress = createSelector(
   (state: RootState) => state.factory.completed,
   (state: RootState) => state.factory.total,
   (completed, total) => ({ completed, total })
+);
+
+export const selectCurrentMonsters = createSelector(
+  (state: RootState) => state.factory.currentIds,
+  (state: RootState) => state.beastiary.entities,
+  (currentIds, entities) => currentIds.map((c) => entities[c])
 );
 
 export const { aborted } = factorySlice.actions;

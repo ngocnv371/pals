@@ -8,13 +8,11 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import "./styles.css";
-import { useAppSelector } from "../../store/hooks";
-import { selectById } from "./beastiarySlice";
-import MonsterPrompt from "./MonsterPrompt";
 import SelectAdapterButton from "../GPT/SelectAdapterButton";
 import SetApiKeyButton from "../GPT/SetApiKeyButton";
 import BatchCreateButton from "./BatchCreateButton";
 import BatchFillCard from "./BatchFillCard";
+import PromptWatcher from "./PromptWatcher";
 
 const MonsterFactoryPage: React.FC = () => {
   return (
@@ -35,6 +33,7 @@ const MonsterFactoryPage: React.FC = () => {
 
       <IonContent fullscreen className="monster-container">
         <BatchFillCard />
+        <PromptWatcher />
       </IonContent>
     </IonPage>
   );
