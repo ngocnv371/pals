@@ -19,7 +19,7 @@ import {
 
 const initialState = {
   aborted: true,
-  currentId: "",
+  currentIds: [] as string[],
   completed: 0,
   total: 0,
 };
@@ -31,16 +31,17 @@ const factorySlice = createSlice({
     aborted(state, action: PayloadAction<boolean>) {
       state.aborted = action.payload;
     },
-    fillStarted(state, action: PayloadAction<string>) {
-      state.currentId = action.payload;
+    fillStarted(state, action: PayloadAction<string[]>) {
+      state.currentIds = action.payload;
     },
-    fillCompleted(state) {
-      state.completed += 1;
-      state.currentId = "";
+    fillCompleted(state, action: PayloadAction<number>) {
+      state.completed += action.payload;
+      state.currentIds = [];
     },
     batchStarted(state, action: PayloadAction<number>) {
       state.completed = 0;
       state.total = action.payload;
+      state.aborted = false;
     },
   },
 });
@@ -54,21 +55,15 @@ export const selectProgress = createSelector(
 export const { aborted } = factorySlice.actions;
 
 export const startBatchFill =
-  (onDone: () => void) =>
+  (batchSize: number, onDone: () => void) =>
   async (dispatch: AppDispatch, getState: () => RootState) => {
-    const state = getState().factory;
-    if (state.aborted) {
-      console.debug("aborted", state);
-      return onDone();
-    }
-
     const total = selectUnfilledCount(getState());
     dispatch(factorySlice.actions.batchStarted(total));
-    dispatch(batchFill(onDone));
+    dispatch(batchFill(batchSize, onDone));
   };
 
 const batchFill =
-  (onDone: () => void) =>
+  (batchSize: number, onDone: () => void) =>
   async (dispatch: AppDispatch, getState: () => RootState) => {
     const state = getState().factory;
     if (state.aborted) {
@@ -77,37 +72,35 @@ const batchFill =
     }
 
     // get one
-    const items = selectAll(getState());
-    const item = items.find((d) => !d.name);
-    if (!item) {
+    const unfilledItems = selectAll(getState()).filter((d) => !d.name);
+    const items = unfilledItems.slice(0, batchSize);
+
+    if (!items.length) {
       console.debug("all is filled", state);
       return onDone();
     }
 
-    dispatch(factorySlice.actions.fillStarted(item.id));
-    console.debug("start smart fill", item);
+    const ids = items.map((i) => i.id);
+    dispatch(factorySlice.actions.fillStarted(ids));
+    console.debug("start smart fill", ids);
 
-    const msg = await generateDetail(item);
-    const info = extractInfo(msg);
-    if (!info) {
-      console.error("failed to generate info", info);
-      return;
-    }
-
-    dispatch(
-      updated({
-        id: item.id,
-        changes: info,
-      })
+    const updatedItems = await generateDetail(items);
+    updatedItems.forEach((i) =>
+      dispatch(
+        updated({
+          id: i.id,
+          changes: i,
+        })
+      )
     );
 
-    dispatch(factorySlice.actions.fillCompleted());
+    dispatch(factorySlice.actions.fillCompleted(ids.length));
 
     await delay(100);
     dispatch(saveBeastiaryData());
 
     await delay(100);
-    dispatch(batchFill(onDone));
+    dispatch(batchFill(batchSize, onDone));
   };
 
 export default factorySlice.reducer;

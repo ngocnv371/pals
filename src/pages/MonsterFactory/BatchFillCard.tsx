@@ -9,12 +9,12 @@ import {
   IonLabel,
   IonList,
   IonProgressBar,
+  IonRange,
 } from "@ionic/react";
 import { play, stop } from "ionicons/icons";
 import { useCallback, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { startBatchFill, aborted, selectProgress } from "./factorySlice";
-import { selectUnfilledCount } from "./beastiarySlice";
 
 const BatchFillCard: React.FC = () => {
   const { completed, total } = useAppSelector(selectProgress);
@@ -25,11 +25,11 @@ const BatchFillCard: React.FC = () => {
 
   const handleStart = useCallback(() => {
     setPlaying(true);
-    dispatch(aborted(false));
     setTimeout(
       () =>
         dispatch(
-          startBatchFill(() => {
+          startBatchFill(batchSize, () => {
+            console.debug("done");
             setPlaying(false);
           })
         ),
@@ -49,7 +49,18 @@ const BatchFillCard: React.FC = () => {
       </IonCardHeader>
       <IonList>
         <IonItem>
-          <IonInput label="Batch Size" value={batchSize} type="number" />
+          <IonRange
+            labelPlacement="start"
+            min={1}
+            max={5}
+            disabled={playing}
+            pin
+            snaps
+            value={batchSize}
+            onIonChange={(evt) => setBatchSize(+evt.detail.value!)}
+          >
+            <div slot="label">Batch Size</div>
+          </IonRange>
         </IonItem>
       </IonList>
       <IonButton fill="clear" disabled={playing} onClick={handleStart}>

@@ -71,6 +71,22 @@ Solitary and highly territorial .",
 
 const instruction = `Fill in the blanks to finish the following monster entry:`;
 
+function createPendingBeastiaryEntryMany(
+  monsters: Monster[],
+  role: string,
+  instruction: string
+): ChatCompletionMessage {
+  const [first, ...rest] = monsters;
+  const firstMsg = createPendingBeastiaryEntry(first, role, instruction);
+
+  firstMsg.content +=
+    "\n\n" +
+    rest
+      .map((r) => createPendingBeastiaryEntry(r, role, "").content)
+      .join("\n\n");
+  return firstMsg;
+}
+
 function createPendingBeastiaryEntry(
   monster: Monster,
   role: string,
@@ -117,15 +133,15 @@ function createCompleteBeastiaryEntry(
   };
 }
 
-export function generateMessages(monster: Monster): ChatCompletionMessage[] {
+export function generateMessages(monsters: Monster[]): ChatCompletionMessage[] {
   return [
-    createPendingBeastiaryEntry(pendingMonster, "user", instruction),
+    createPendingBeastiaryEntryMany([pendingMonster], "user", instruction),
     createCompleteBeastiaryEntry(completeMonster, "assistant", ""),
-    createPendingBeastiaryEntry(monster, "user", instruction),
+    createPendingBeastiaryEntryMany(monsters, "user", instruction),
   ];
 }
 
-export function extractInfo({ content }: ChatCompletionMessage) {
+export function extractInfo(content: string) {
   const keys = ["- name:", "- abilities:", "- behavior:", "- appearance:"];
   const [, relevantText] = content.split(keys[0]);
   if (!relevantText) {
@@ -147,8 +163,8 @@ export function extractInfo({ content }: ChatCompletionMessage) {
   };
 }
 
-export async function generateDetail(monster: Monster) {
-  const messages = generateMessages(monster);
+export async function generateDetail(monsters: Monster[]) {
+  const messages = generateMessages(monsters);
   const msg = await getGpt().chatCompletions({
     messages,
     max_tokens: 400,
@@ -157,7 +173,19 @@ export async function generateDetail(monster: Monster) {
     mode: "instruct",
   });
   const lastMessage = msg.choices[msg.choices.length - 1].message;
-  return lastMessage;
+  console.debug("gpt response", lastMessage.content);
+
+  const [, ...parts] = lastMessage.content.split("#");
+  const updatedMonsters = parts.map((t, idx) => {
+    const info = extractInfo(t);
+    if (!info) {
+      console.debug("failed to extract info", monsters[idx], t);
+      return monsters[idx];
+    }
+
+    return Object.assign({}, monsters[idx], info!)! as Monster;
+  });
+  return updatedMonsters;
 }
 
 export async function parseFiles(files: FileList) {

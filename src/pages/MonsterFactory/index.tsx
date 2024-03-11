@@ -17,9 +17,6 @@ import BatchCreateButton from "./BatchCreateButton";
 import BatchFillCard from "./BatchFillCard";
 
 const MonsterFactoryPage: React.FC = () => {
-  const id = useAppSelector((state) => state.factory.currentId);
-  const monster = useAppSelector((state) => selectById(state, id));
-
   return (
     <IonPage className="monster-factory-page">
       <IonHeader>
@@ -36,11 +33,8 @@ const MonsterFactoryPage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent fullscreen>
-        <div className="monster-container">
-          <BatchFillCard />
-          {Boolean(monster) && <MonsterPrompt monster={monster!} />}
-        </div>
+      <IonContent fullscreen className="monster-container">
+        <BatchFillCard />
       </IonContent>
     </IonPage>
   );
