@@ -1,4 +1,4 @@
-import { GeminiClient } from "./a1111-client";
+import { A1111Client } from "./a1111-client";
 import { SDClient, SDState, providers } from "./model";
 
 const STORAGE_KEY = "sd";
@@ -20,13 +20,13 @@ export function loadData(): SDState {
   return JSON.parse(json) as SDState;
 }
 
-const gptMap = Object.freeze({
-  a1111: GeminiClient,
+const sdMap = Object.freeze({
+  automatic1111: A1111Client,
 });
 
 export function getSd(): SDClient {
   const state = loadData();
-  const client: SDClient = (gptMap as any)[state.provider];
+  const client: SDClient = (sdMap as any)[state.provider];
   client.setConfig(state.url, state.apiKey);
 
   return client;

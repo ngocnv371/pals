@@ -65,7 +65,9 @@ const visualizeItem =
     }
 
     // get one
-    const item = selectAll(getState()).find((i) => !i.images.length);
+    const item = selectAll(getState()).find(
+      (i) => !i.images || !i.images.length
+    );
     if (!item) {
       console.debug("all visualized");
       return onCompleted();
