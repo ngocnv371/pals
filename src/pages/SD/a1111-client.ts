@@ -14,7 +14,6 @@ export const A1111Client: SDClient = {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      mode: "no-cors",
     }).then(async (res) => {
       const data: Text2imgResponse = await res.json();
       if (!data) {
