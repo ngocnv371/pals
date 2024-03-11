@@ -15,6 +15,8 @@ const chance = new Chance();
 export function setBingCookie(cookie: string) {}
 
 export function generateMonster(): Monster {
+  // don't generate the crazy ones
+  const [mythical, primordial, ...simpleClasses] = classes.slice().reverse();
   return {
     id: nanoid(),
     name: "",
@@ -23,7 +25,7 @@ export function generateMonster(): Monster {
     behavior: "",
     habitat: chance.pickone(habitats),
     roleInHabitat: chance.pickone(roleInHabitats),
-    class: chance.pickone(classes),
+    class: chance.pickone(simpleClasses),
     nature: chance.pickone(natures),
     type: chance.pickone(types),
   };
