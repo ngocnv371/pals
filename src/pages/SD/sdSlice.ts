@@ -36,8 +36,8 @@ export const loadSdData =
     try {
       const data: SDState = loadData();
       dispatch(sdSlice.actions.keyChanged(data.apiKey));
+      dispatch(sdSlice.actions.urlChanged(data.url));
       dispatch(sdSlice.actions.providerChanged(data.provider));
-      dispatch(sdSlice.actions.providerChanged(data.url));
     } catch (e) {
       console.error("failed to load sd data", e);
     }
