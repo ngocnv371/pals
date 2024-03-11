@@ -34,7 +34,7 @@ export const loadGptData =
       dispatch(gptSlice.actions.keyChanged(data.apiKey));
       dispatch(gptSlice.actions.adapterChanged(data.adapter));
     } catch (e) {
-      console.error("failed to load beastiary", e);
+      console.error("failed to load gpt data", e);
     }
   };
 

@@ -9,32 +9,42 @@ import {
   IonSelectOption,
 } from "@ionic/react";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
-import { adapters } from "./model";
-import { setAdapter, setApiKey } from "./gptSlice";
+import { providers } from "./model";
+import { setProvider, setApiKey, setUrl } from "./sdSlice";
 
-const GPTConfigCard: React.FC = () => {
-  const adapter = useAppSelector((state) => state.gpt.adapter);
-  const apiKey = useAppSelector((state) => state.gpt.apiKey);
+const SDConfigCard: React.FC = () => {
+  const provider = useAppSelector((state) => state.sd.provider);
+  const apiKey = useAppSelector((state) => state.sd.apiKey);
+  const url = useAppSelector((state) => state.sd.url);
   const dispatch = useAppDispatch();
 
   return (
     <IonCard>
       <IonCardHeader>
-        <IonCardTitle>GPT Configuration</IonCardTitle>
+        <IonCardTitle>SD Configuration</IonCardTitle>
       </IonCardHeader>
       <IonList>
         <IonItem>
           <IonSelect
             label="Provider"
-            value={adapter}
-            onIonChange={(evt) => dispatch(setAdapter(evt.detail.value))}
+            value={provider}
+            onIonChange={(evt) => dispatch(setProvider(evt.detail.value))}
           >
-            {adapters.map((a) => (
+            {providers.map((a) => (
               <IonSelectOption value={a} key={a}>
                 {a}
               </IonSelectOption>
             ))}
           </IonSelect>
+        </IonItem>
+        <IonItem>
+          <IonInput
+            value={url}
+            label="URL"
+            onIonChange={(evt) => dispatch(setUrl(evt.detail.value!))}
+            clearInput
+            required
+          />
         </IonItem>
         <IonItem>
           <IonInput
@@ -49,4 +59,4 @@ const GPTConfigCard: React.FC = () => {
   );
 };
 
-export default GPTConfigCard;
+export default SDConfigCard;

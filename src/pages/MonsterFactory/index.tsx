@@ -12,6 +12,7 @@ import BatchCreateButton from "./BatchCreateButton";
 import BatchFillCard from "./BatchFillCard";
 import PromptWatcher from "./PromptWatcher";
 import GPTConfigCard from "../GPT/GPTConfigCard";
+import SDConfigCard from "../SD/SDConfigCard";
 
 const MonsterFactoryPage: React.FC = () => {
   return (
@@ -30,6 +31,7 @@ const MonsterFactoryPage: React.FC = () => {
 
       <IonContent fullscreen className="monster-container">
         <GPTConfigCard />
+        <SDConfigCard />
         <BatchFillCard />
         <PromptWatcher />
       </IonContent>
