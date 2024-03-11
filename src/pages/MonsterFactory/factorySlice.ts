@@ -9,7 +9,7 @@ import { saveAs } from "file-saver";
 import { extractInfo, generateDetail, generateMonsters } from "./service";
 import { delay } from "../Duel/utils/delay";
 import { getGpt } from "../GPT/service";
-import { selectAll, updated } from "./beastiarySlice";
+import { saveBeastiaryData, selectAll, updated } from "./beastiarySlice";
 
 const initialState = {
   shouldStop: true,
@@ -37,6 +37,7 @@ export const batchFill =
     console.debug("start batch fill");
     const state = getState().factory;
     if (state.shouldStop) {
+      console.debug("aborted", state);
       return onDone();
     }
 
@@ -63,6 +64,9 @@ export const batchFill =
         changes: info,
       })
     );
+
+    await delay(100);
+    dispatch(saveBeastiaryData());
 
     await delay(100);
     dispatch(batchFill(onDone));

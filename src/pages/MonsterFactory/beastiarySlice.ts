@@ -6,6 +6,7 @@ import {
 import { Monster, classes } from "./model";
 import { AppDispatch, RootState } from "../../store";
 import { generateMonsters, loadData, saveData } from "./service";
+import { delay } from "../Duel/utils/delay";
 
 const adapter = createEntityAdapter<Monster>();
 
@@ -53,12 +54,14 @@ export const loadBeastiaryData =
 
 export const batchCreate =
   (quantities: number[]) =>
-  (dispatch: AppDispatch, getState: () => RootState) => {
+  async (dispatch: AppDispatch, getState: () => RootState) => {
     const items = quantities.flatMap((q, idx) =>
       generateMonsters(q, classes[idx])
     );
     console.debug("batch created", items);
     dispatch(beastiarySlice.actions.manyAdded(items));
+    await delay(100);
+    dispatch(saveBeastiaryData());
   };
 
 export default beastiarySlice.reducer;
