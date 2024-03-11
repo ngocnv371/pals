@@ -156,7 +156,6 @@ export async function generateDetail(monster: Monster) {
     stream: false,
     mode: "instruct",
   });
-  console.debug("gpt response", msg);
   const lastMessage = msg.choices[msg.choices.length - 1].message;
   return lastMessage;
 }

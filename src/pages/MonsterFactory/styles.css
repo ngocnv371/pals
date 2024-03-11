@@ -1,5 +1,6 @@
 .monster-container {
   display: flex;
+  flex-direction: column;
 
   > ion-card {
     min-width: 40%;

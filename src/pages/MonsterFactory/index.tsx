@@ -7,12 +7,10 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import MonsterCard from "./MonsterCard";
 import "./styles.css";
 import { useAppSelector } from "../../store/hooks";
 import { selectById } from "./beastiarySlice";
 import MonsterPrompt from "./MonsterPrompt";
-import DowloadButton from "./DownloadButton";
 import SelectAdapterButton from "../GPT/SelectAdapterButton";
 import SetApiKeyButton from "../GPT/SetApiKeyButton";
 import BatchCreateButton from "./BatchCreateButton";
@@ -40,16 +38,7 @@ const MonsterFactoryPage: React.FC = () => {
 
       <IonContent fullscreen>
         <div className="monster-container">
-          {Boolean(monster) && (
-            <div>
-              <MonsterCard monster={monster!}>
-                <DowloadButton monsterId={monster.id} />
-              </MonsterCard>
-            </div>
-          )}
-          <div>
-            <BatchFillCard />
-          </div>
+          <BatchFillCard />
           {Boolean(monster) && <MonsterPrompt monster={monster!} />}
         </div>
       </IonContent>

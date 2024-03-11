@@ -34,7 +34,6 @@ export const { shouldStopChanged } = factorySlice.actions;
 export const batchFill =
   (onDone: () => void) =>
   async (dispatch: AppDispatch, getState: () => RootState) => {
-    console.debug("start batch fill");
     const state = getState().factory;
     if (state.shouldStop) {
       console.debug("aborted", state);
@@ -50,6 +49,7 @@ export const batchFill =
     }
 
     dispatch(factorySlice.actions.currentIdChanged(item.id));
+    console.debug("start smart fill", item);
 
     const msg = await generateDetail(item);
     const info = extractInfo(msg);
