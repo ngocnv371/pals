@@ -59,6 +59,7 @@ see [BATTLEFLOW.MD](docs/BATTLEFLOW.MD)
 
 # completed
 
+- ✅ switch gpt and set api key
 - ✅ monster factory
   - generate info with gpt
   - download & upload json
