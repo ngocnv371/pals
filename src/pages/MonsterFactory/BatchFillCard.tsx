@@ -18,6 +18,7 @@ import { startBatchFill, aborted, selectProgress } from "./factorySlice";
 
 const BatchFillCard: React.FC = () => {
   const { completed, total } = useAppSelector(selectProgress);
+  const isAborted = useAppSelector((state) => state.factory.aborted);
   const [playing, setPlaying] = useState(false);
   const [batchSize, setBatchSize] = useState(1);
   const dispatch = useAppDispatch();
@@ -41,7 +42,7 @@ const BatchFillCard: React.FC = () => {
 
   return (
     <IonCard className="batch-fill-card">
-      <IonProgressBar value={percentage} />
+      {playing && <IonProgressBar type="indeterminate" />}
       <IonCardHeader>
         <IonCardTitle>
           Batch Fill Monsters {completed}/{total}
@@ -67,10 +68,19 @@ const BatchFillCard: React.FC = () => {
         <IonIcon slot="start" icon={play} />
         Start
       </IonButton>
-      <IonButton fill="clear" disabled={!playing} onClick={handleStop}>
+      <IonButton
+        fill="clear"
+        disabled={!playing || isAborted}
+        onClick={handleStop}
+      >
         <IonIcon slot="start" icon={stop} />
         Stop
       </IonButton>
+      {isAborted && (
+        <IonButton disabled fill="clear" color="danger">
+          Aborted
+        </IonButton>
+      )}
     </IonCard>
   );
 };
