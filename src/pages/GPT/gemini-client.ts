@@ -46,6 +46,10 @@ export const GeminiClient: GPTClient = {
     })
       .then(async (res) => {
         const data: GeminiResponse = await res.json();
+        if (!data) {
+          throw new Error("malformed response");
+        }
+
         const adapted: ChatCompletionResponse = {
           choices: data.candidates.map((c) => ({
             finish_reason: c.finish_reason,

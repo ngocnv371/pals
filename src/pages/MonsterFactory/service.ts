@@ -186,7 +186,7 @@ export async function generateDetail(monsters: Monster[]) {
   const lastMessage = msg.choices[msg.choices.length - 1].message;
   console.debug("gpt response", lastMessage.content);
 
-  const [, ...parts] = lastMessage.content.split("#");
+  const [, ...parts] = lastMessage.content.split("# Beastiary entry");
   const updatedMonsters = parts.map((t, idx) => {
     const info = extractInfo(t);
     if (!info) {
