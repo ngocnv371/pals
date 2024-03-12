@@ -1,13 +1,13 @@
-.fire-effect {
+.explosion-effect {
   width: 200px;
   height: 127px;
-  background-image: url("/effects/fire-sprite.png");
-  animation: fire_effect 1s;
+  background-image: url("/effects/explosion-sprite.png");
+  animation: explosion_effect 1s;
   animation-timing-function: step-start;
   opacity: 0;
 }
 
-@keyframes fire_effect {
+@keyframes explosion_effect {
   0% {
     background-position: 0px 0px;
     opacity: 1;

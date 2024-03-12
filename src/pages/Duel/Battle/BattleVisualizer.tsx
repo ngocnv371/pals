@@ -31,11 +31,21 @@ export const BattleVisualizer: React.FC<{
       className={`battle-visualizer ${defensive ? "defensive" : ""}`}
       ref={ref as any}
     >
-      <CardInfo cardId={card1} />
-      <CardInfo cardId={card2} defensive={defensive} />
-      <div className="effect slash-effect"></div>
-      <div className="fire1 effect fire-effect"></div>
-      <div className="fire2 effect fire-effect"></div>
+      <div className="card1">
+        <CardInfo cardId={card1} />
+      </div>
+      <div className="card2">
+        <CardInfo cardId={card2} defensive={defensive} />
+      </div>
+      <div className="slash">
+        <div className="effect slash-effect"></div>
+      </div>
+      <div className="explosion1">
+        <div className="effect explosion-effect"></div>
+      </div>
+      <div className="explosion2">
+        <div className="effect explosion-effect"></div>
+      </div>
     </div>
   );
 };

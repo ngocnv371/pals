@@ -6,142 +6,139 @@
   left: 0;
   background-color: rgba(0, 0, 0, 0.8);
 
-  .card-info {
-    position: absolute;
-    top: 50vh;
-    opacity: 0;
+  .card-info,
+  .effect {
     scale: 2;
   }
-  .effect {
+  .card1,
+  .card2 {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%) translateX(-50%) scale(2);
+    opacity: 0;
+    /* transform: translateY(-50%) translateX(-50%) scale(2); */
+  }
+  .slash,
+  .explosion1,
+  .explosion2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
     z-index: 999;
     display: none;
-  }
-  .slash-effect {
-    left: 50%;
+    /* transform: translateY(-50%) translateX(-50%) scale(2); */
   }
   &.battle-visualizer--intro {
-    .card-info:nth-child(1) {
+    .card1 {
       left: 20%;
       animation: zoomInUp 1s linear;
       opacity: 1;
     }
-    .card-info:nth-child(2) {
+    .card2 {
       right: 20%;
       animation: zoomInUp 1s linear;
       opacity: 1;
     }
   }
   &.battle-visualizer--damage1 {
-    .card-info:nth-child(1) {
+    .card1 {
       left: 20%;
-      animation-delay: 0s;
       animation: flash 2s linear;
       opacity: 1;
     }
-    .card-info:nth-child(2) {
+    .card2 {
       right: 20%;
-      animation-delay: 1s;
       animation: tada 2s linear;
       opacity: 1;
     }
-    .slash-effect {
+    .slash {
       display: block;
       left: 20%;
     }
   }
   &.battle-visualizer--damage2 {
-    .card-info:nth-child(1) {
+    .card1 {
       left: 20%;
-      animation-delay: 0s;
       animation: tada 2s linear;
       opacity: 1;
     }
-    .card-info:nth-child(2) {
+    .card2 {
       right: 20%;
-      animation-delay: 1s;
       animation: flash 2s linear;
       opacity: 1;
     }
-    .slash-effect {
+    .slash {
       display: block;
       left: unset;
       right: 20%;
     }
   }
   &.battle-visualizer--damage-both {
-    .card-info:nth-child(1) {
+    .card1 {
       left: 20%;
-      animation-delay: 0s;
       animation: flash 2s linear;
       opacity: 1;
     }
-    .card-info:nth-child(2) {
+    .card2 {
       right: 20%;
-      animation-delay: 1s;
       animation: flash 2s linear;
       opacity: 1;
     }
-    .slash-effect {
+    .slash {
       display: block;
     }
   }
   &.battle-visualizer--dead1 {
-    .card-info:nth-child(1) {
+    .card1 {
       opacity: 0;
     }
-    .card-info:nth-child(2) {
+    .card2 {
       right: 20%;
-      animation-delay: 1s;
       animation: tada 2s linear;
       opacity: 1;
     }
-    .fire1 {
+    .explosion1 {
       left: 20%;
       display: block;
     }
   }
   &.battle-visualizer--dead2 {
-    .card-info:nth-child(1) {
+    .card1 {
       left: 20%;
-      animation-delay: 0s;
       animation: tada 2s linear;
       opacity: 1;
     }
-    .card-info:nth-child(2) {
+    .card2 {
       opacity: 0;
     }
-    .fire1 {
+    .explosion1 {
       left: unset;
       right: 20%;
       display: block;
     }
   }
   &.battle-visualizer--dead-both {
-    .card-info:nth-child(1) {
+    .card1 {
       opacity: 0;
     }
-    .card-info:nth-child(2) {
+    .card2 {
       opacity: 0;
     }
-    .fire1 {
+    .explosion1 {
       left: 20%;
       display: block;
     }
-    .fire2 {
+    .explosion2 {
       right: 20%;
       left: unset;
       display: block;
     }
   }
   &.battle-visualizer--end {
-    .card-info:nth-child(1) {
+    .card1 {
       left: 20%;
       opacity: 0;
     }
-    .card-info:nth-child(2) {
+    .card2 {
       right: 20%;
       opacity: 0;
     }
