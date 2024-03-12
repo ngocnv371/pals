@@ -13,6 +13,7 @@ import "./styles.css";
 import DeckGrid from "./DeckGrid";
 import { DeckItem } from "./model";
 import CardFlavor from "../../components/Card/CardFlavor";
+import CardToolbar from "./CardToolbar";
 
 const DeckPage: React.FC = () => {
   const [selected, setSelected] = useState<DeckItem>();
@@ -39,7 +40,8 @@ const DeckPage: React.FC = () => {
 
       {Boolean(selected) && (
         <IonFooter>
-          <CardFlavor cardId={selected!.type} />{" "}
+          <CardToolbar cardId={selected!.id} />
+          <CardFlavor cardId={selected!.type} />
         </IonFooter>
       )}
     </IonPage>

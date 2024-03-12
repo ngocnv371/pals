@@ -1,15 +1,6 @@
 import "./DeckGrid.css";
-import {
-  IonButton,
-  IonButtons,
-  IonIcon,
-  IonItem,
-  IonLabel,
-  IonNote,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/react";
-import { arrowDown, arrowUp, checkmarkCircle } from "ionicons/icons";
+import { IonIcon, IonNote, IonTitle, IonToolbar } from "@ionic/react";
+import { checkmarkCircle } from "ionicons/icons";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { moveToBook, selectAllDeckItems } from "./deckSlice";
 import { CardInfo } from "../../components/Card/CardInfo";
@@ -41,18 +32,8 @@ const DeckGrid: React.FC<{
   selected?: DeckItem;
   onSelect?: (item: DeckItem) => void;
 }> = ({ onSelect, selected }) => {
-  const dispatch = useAppDispatch();
   const deck = useAppSelector(selectAllDeckItems);
   const book = useAppSelector(selectAllBookItems);
-
-  const moveUp = useCallback(() => dispatch(moveToDeck(selected!)), [selected]);
-  const moveDown = useCallback(
-    () => dispatch(moveToBook(selected!)),
-    [selected]
-  );
-  const canMoveUp = Boolean(selected) && book.some((b) => b.id == selected?.id);
-  const canMoveDown =
-    Boolean(selected) && deck.some((b) => b.id == selected?.id);
 
   return (
     <div>
@@ -72,22 +53,8 @@ const DeckGrid: React.FC<{
       </IonNote>
 
       <IonToolbar>
-        <IonButtons slot="start">
-          <IonButton onClick={moveUp} disabled={!canMoveUp}>
-            <IonIcon icon={arrowUp}></IonIcon>Up
-          </IonButton>
-        </IonButtons>
-        <IonTitle>Collections</IonTitle>
-        <IonButtons slot="end">
-          <IonButton onClick={moveDown} disabled={!canMoveDown}>
-            <IonIcon icon={arrowDown}></IonIcon>Down
-          </IonButton>
-        </IonButtons>
+        <IonTitle>Collection ({book.length})</IonTitle>
       </IonToolbar>
-
-      <IonNote color="medium" class="ion-margin-horizontal ion-margin-top">
-        {book.length} cards in collections
-      </IonNote>
 
       <div className="deck-grid book">
         {book.map((p) => (

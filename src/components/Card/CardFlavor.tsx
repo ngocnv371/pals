@@ -22,6 +22,8 @@ const CardFlavor: React.FC<{ cardId: string }> = ({ cardId }) => {
     return null;
   }
 
+  const subtitle = useMemo(() => card.types.join(", "), [card]);
+
   return (
     <>
       <IonCard className="card-flavor ion-no-padding ion-no-margin flex">
@@ -30,8 +32,9 @@ const CardFlavor: React.FC<{ cardId: string }> = ({ cardId }) => {
           <IonCardHeader>
             <IonCardTitle>
               {card.name}
-              {" - "}
-              <IonText color="secondary">{card.types.join(", ")}</IonText>
+              <IonText color="secondary" className="ion-padding-start">
+                {subtitle}
+              </IonText>
             </IonCardTitle>
           </IonCardHeader>
           <IonCardContent>{card.description}</IonCardContent>

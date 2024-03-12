@@ -1,4 +1,8 @@
-import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createEntityAdapter,
+  createSelector,
+} from "@reduxjs/toolkit";
 import { Chance } from "chance";
 import { DeckItem } from "./model";
 import { generateItem } from "./service";
@@ -25,6 +29,11 @@ export const deckSlice = createSlice({
 
 export const { selectAll: selectAllDeckItems, selectById: selectDeckItemById } =
   adapter.getSelectors((state: RootState) => state.deck);
+
+export const canAdd = createSelector(
+  (state: RootState) => state.deck.ids,
+  (ids) => ids.length < 40
+);
 
 export const { added: addedToDeck } = deckSlice.actions;
 
