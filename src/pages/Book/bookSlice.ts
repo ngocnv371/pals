@@ -36,6 +36,7 @@ export const {
   selectTotal,
 } = adapter.getSelectors((state: RootState) => state.book);
 
+// TODO: fix this double execution?
 export const selectPage = (page: number, filter: Filter) =>
   createSelector(selectAllBookItems, (items) =>
     filterBookItems(items, page, filter)
