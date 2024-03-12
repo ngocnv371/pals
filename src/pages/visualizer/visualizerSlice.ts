@@ -19,14 +19,17 @@ const visualizerSlice = createSlice({
   name: "visualizer",
   initialState,
   reducers: {
-    sessionStarted(state) {
+    sessionStarted(state, action: PayloadAction<number>) {
       state.aborted = false;
+      state.total = action.payload;
+      state.completed = 0;
     },
     itemStarted(state, action: PayloadAction<string>) {
       state.currentId = action.payload;
     },
     itemCompleted(state) {
       state.currentId = "";
+      state.completed += 1;
     },
     sessionAborted(state) {
       state.aborted = true;
@@ -51,7 +54,10 @@ export const { sessionAborted } = visualizerSlice.actions;
 export const startSession =
   (onCompleted: () => void) =>
   async (dispatch: AppDispatch, getState: () => RootState) => {
-    dispatch(visualizerSlice.actions.sessionStarted());
+    const count = selectAll(getState()).filter(
+      (i) => !i.images || !i.images.length
+    ).length;
+    dispatch(visualizerSlice.actions.sessionStarted(count));
     dispatch(visualizeItem(onCompleted));
   };
 

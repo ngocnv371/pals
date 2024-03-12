@@ -4,6 +4,7 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonIcon,
+  IonProgressBar,
 } from "@ionic/react";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import {
@@ -38,6 +39,7 @@ const BatchVisualizerCard: React.FC = () => {
 
   return (
     <IonCard>
+      {playing && <IonProgressBar type="indeterminate" />}
       <IonCardHeader>
         <IonCardTitle>
           Batch Visualizer {completed}/{total}
