@@ -24,15 +24,6 @@ That was our starting point, nowaday generating new cards are not that difficult
   - Both fusing cards are consumed for the fusion
   - If the fusion failed (they're not compatible), the first card will be discarded
 
-# fusion rules
-
-- TBD
-- Consider [https://www.monstermmorpg.com/Type-Chart]
-
-# generate original monsters
-
-see [MYTHULU.MD](docs/MYTHULU.MD)
-
 # runbooks
 
 see [RUNBOOKS.MD](docs/RUNBOOKS.MD)
@@ -44,7 +35,7 @@ see [BATTLEFLOW.MD](docs/BATTLEFLOW.MD)
 # backlog
 
 - responsive css for mobile
-- battle
+- duel
   - use stage banner for guide
   - card inspection
   - display card element
@@ -52,10 +43,13 @@ see [BATTLEFLOW.MD](docs/BATTLEFLOW.MD)
   - improve fusion animation
   - improve battle animation
   - explosion effects
-- create original cards
-  - fusion rule
 - player progression
-  - match reward
+  - duel reward
+  - how to trigger duel
+  - quests?
+- deck
+  - sort cards
+  - easier card moving
 
 # completed
 
