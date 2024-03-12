@@ -5,7 +5,6 @@ import { useClassSequence } from "../utils/useClassSequence";
 import { calculateBattleAnimationSequence, simulateBattle } from "../service";
 import { CardStance } from "../model";
 import { CardInfo } from "../../../components/Card/CardInfo";
-import SlashEffect from "../Effects/SlashEffect";
 
 export const BattleVisualizer: React.FC<{
   card1: string;
@@ -26,15 +25,6 @@ export const BattleVisualizer: React.FC<{
   );
 
   useClassSequence(ref, sequence, onCompleted);
-  const [showEffect, setShowEffect] = useState(false);
-  // schedule effect
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowEffect(true);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <div
@@ -43,11 +33,9 @@ export const BattleVisualizer: React.FC<{
     >
       <CardInfo cardId={card1} />
       <CardInfo cardId={card2} defensive={defensive} />
-      {showEffect && (
-        <div className="effect">
-          <SlashEffect />
-        </div>
-      )}
+      <div className="effect slash-effect"></div>
+      <div className="fire1 effect fire-effect"></div>
+      <div className="fire2 effect fire-effect"></div>
     </div>
   );
 };

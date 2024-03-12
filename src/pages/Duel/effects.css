@@ -1,7 +1,7 @@
 .fire-effect {
   width: 200px;
   height: 127px;
-  background-image: url("/public/effects/fire-sprite.png");
+  background-image: url("/effects/fire-sprite.png");
   animation: fire_effect 1s;
   animation-timing-function: step-start;
   opacity: 0;
@@ -56,7 +56,7 @@
 .slash-effect {
   width: var(--slash-width);
   height: var(--slash-width);
-  background-image: url("/public/effects/slash-sprite.png");
+  background-image: url("/effects/slash-sprite.png");
   animation: slash_effect 1s;
   animation-timing-function: step-start;
   opacity: 0;
