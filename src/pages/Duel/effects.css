@@ -2,12 +2,12 @@
   width: 200px;
   height: 127px;
   background-image: url("/public/effects/fire-sprite.png");
-  animation: fire_explode 1s;
+  animation: fire_effect 1s;
   animation-timing-function: step-start;
   opacity: 0;
 }
 
-@keyframes fire_explode {
+@keyframes fire_effect {
   0% {
     background-position: 0px 0px;
     opacity: 1;
@@ -46,6 +46,65 @@
   }
   100% {
     background-position: 0px 0px;
+    opacity: 0;
+  }
+}
+
+:root {
+  --slash-width: calc(894px / 5);
+}
+.slash-effect {
+  width: var(--slash-width);
+  height: var(--slash-width);
+  background-image: url("/public/effects/slash-sprite.png");
+  animation: slash_effect 1s;
+  animation-timing-function: step-start;
+  opacity: 0;
+}
+
+@keyframes slash_effect {
+  0% {
+    background-position: 0px 0px;
+    opacity: 1;
+  }
+  11% {
+    background-position: calc(var(--slash-width) * -1) 0px;
+    opacity: 1;
+  }
+  22% {
+    background-position: calc(var(--slash-width) * -2) 0px;
+    opacity: 1;
+  }
+  33% {
+    background-position: calc(var(--slash-width) * -3) 0px;
+    opacity: 1;
+  }
+  44% {
+    background-position: calc(var(--slash-width) * -4) 0px;
+    opacity: 1;
+  }
+  55% {
+    background-position: 0 calc(var(--slash-width) * -1);
+    opacity: 1;
+  }
+  66% {
+    background-position: calc(var(--slash-width) * -1)
+      calc(var(--slash-width) * -1);
+    opacity: 1;
+  }
+  77% {
+    background-position: calc(var(--slash-width) * -2)
+      calc(var(--slash-width) * -1);
+    opacity: 1;
+  }
+  88% {
+    background-position: calc(var(--slash-width) * -3)
+      calc(var(--slash-width) * -1);
+    opacity: 1;
+  }
+  100% {
+    background-position: calc(var(--slash-width) * -4)
+      calc(var(--slash-width) * -1);
     opacity: 0;
   }
 }
