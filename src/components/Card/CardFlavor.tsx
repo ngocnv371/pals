@@ -29,9 +29,9 @@ const CardFlavor: React.FC<{ cardId: string }> = ({ cardId }) => {
         <div>
           <IonCardHeader>
             <IonCardTitle>
-              {card.title}
+              {card.name}
               {" - "}
-              <IonText color="secondary">{card.type}</IonText>
+              <IonText color="secondary">{card.types.join(", ")}</IonText>
             </IonCardTitle>
           </IonCardHeader>
           <IonCardContent>{card.description}</IonCardContent>

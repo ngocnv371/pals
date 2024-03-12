@@ -48,7 +48,7 @@ const CardModal: React.FC<CardModalProps> = ({ cardId, onDismiss }) => {
               Close
             </IonButton>
           </IonButtons>
-          <IonTitle>{card.title}</IonTitle>
+          <IonTitle>{card.name}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
