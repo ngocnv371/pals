@@ -10,20 +10,25 @@ import {
 } from "@ionic/react";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { providers } from "./model";
-import { setProvider, setApiKey, setUrl } from "./sdSlice";
+import { setProvider, setApiKey, setUrl, setProps } from "./sdSlice";
+import { useState } from "react";
+import "./SDConfigCard.css";
+import JsonInput from "./JsonInput";
 
 const SDConfigCard: React.FC = () => {
   const provider = useAppSelector((state) => state.sd.provider);
   const apiKey = useAppSelector((state) => state.sd.apiKey);
   const url = useAppSelector((state) => state.sd.url);
+  const props = useAppSelector((state) => state.sd.props);
   const dispatch = useAppDispatch();
+  const [expanded, setExpanded] = useState(false);
 
   return (
-    <IonCard>
-      <IonCardHeader>
+    <IonCard className={`sd-config-card ${expanded ? "expanded" : ""}`}>
+      <IonCardHeader onClick={() => setExpanded(!expanded)}>
         <IonCardTitle>SD Configuration</IonCardTitle>
       </IonCardHeader>
-      <IonList>
+      <IonList className="list">
         <IonItem>
           <IonSelect
             label="Provider"
@@ -53,6 +58,9 @@ const SDConfigCard: React.FC = () => {
             onIonChange={(evt) => dispatch(setApiKey(evt.detail.value!))}
             clearInput
           />
+        </IonItem>
+        <IonItem>
+          <JsonInput value={props} onChange={(v) => dispatch(setProps(v))} />
         </IonItem>
       </IonList>
     </IonCard>

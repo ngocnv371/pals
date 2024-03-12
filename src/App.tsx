@@ -52,7 +52,7 @@ const App: React.FC = () => {
             <Menu />
             <IonRouterOutlet id="main">
               <Route path="/" exact={true}>
-                <Redirect to="/deck" />
+                <Redirect to="/monster-factory" />
               </Route>
               <Route path="/duel" exact={true}>
                 <DuelPage />

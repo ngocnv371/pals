@@ -19,7 +19,7 @@ export interface Text2imgRequest {
 }
 
 export interface SDClient {
-  setConfig(url: string, key: string): void;
+  setConfig(url: string, key: string, props: string): void;
   txt2img(request: Text2imgRequest): Promise<Text2imgResponse>;
 }
 
@@ -29,4 +29,5 @@ export interface SDState {
   apiKey: string;
   url: string;
   provider: string;
+  props: string;
 }

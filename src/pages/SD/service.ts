@@ -10,14 +10,33 @@ export function saveData(data: SDState) {
 export function loadData(): SDState {
   const json = window.localStorage.getItem(STORAGE_KEY);
   if (!json) {
-    return {
-      provider: providers[0],
-      apiKey: "",
-      url: "",
-    };
+    return initState();
   }
 
   return JSON.parse(json) as SDState;
+}
+
+const defaultProps = `
+{
+  "model": "dreamshaperXL_sfwLightningDPMSDE",
+  "prompt": ", in Pokémon styke. Vibrant, cute, anime, fantasy, reminiscent of Pokémon series",
+  "negative_prompt": "realistic, modern, horror, dystopian, violent",
+  "save_images": true,
+  "send_images": false,
+  "batch_size": 2,
+  "steps": 5,
+  "cfg_scale": 2,
+  "width": 768,
+  "height": 1152,
+  "sampler_index": "DPM++ SDE Karras"
+}`;
+export function initState(): SDState {
+  return {
+    provider: providers[0],
+    apiKey: "",
+    url: "",
+    props: defaultProps,
+  };
 }
 
 const sdMap = Object.freeze({
@@ -27,7 +46,7 @@ const sdMap = Object.freeze({
 export function getSd(): SDClient {
   const state = loadData();
   const client: SDClient = (sdMap as any)[state.provider];
-  client.setConfig(state.url, state.apiKey);
+  client.setConfig(state.url, state.apiKey, state.props);
 
   return client;
 }

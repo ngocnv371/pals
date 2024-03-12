@@ -1,13 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "../../store/store";
-import { loadData, saveData } from "./service";
-import { SDState, providers } from "./model";
+import { initState, loadData, saveData } from "./service";
+import { SDState } from "./model";
 
-const initialState: SDState = {
-  apiKey: "",
-  url: "",
-  provider: providers[0],
-};
+const initialState = initState();
 
 const sdSlice = createSlice({
   name: "sd",
@@ -21,6 +17,9 @@ const sdSlice = createSlice({
     },
     urlChanged(state, action: PayloadAction<string>) {
       state.url = action.payload;
+    },
+    propsChanged(state, action: PayloadAction<string>) {
+      state.props = action.payload;
     },
   },
 });
@@ -38,6 +37,7 @@ export const loadSdData =
       dispatch(sdSlice.actions.keyChanged(data.apiKey));
       dispatch(sdSlice.actions.urlChanged(data.url));
       dispatch(sdSlice.actions.providerChanged(data.provider));
+      dispatch(sdSlice.actions.propsChanged(data.props));
     } catch (e) {
       console.error("failed to load sd data", e);
     }
@@ -58,6 +58,12 @@ export const setApiKey =
 export const setUrl =
   (url: string) => (dispatch: AppDispatch, getState: () => RootState) => {
     dispatch(sdSlice.actions.urlChanged(url));
+    dispatch(saveSdData());
+  };
+
+export const setProps =
+  (props: string) => (dispatch: AppDispatch, getState: () => RootState) => {
+    dispatch(sdSlice.actions.propsChanged(props));
     dispatch(saveSdData());
   };
 

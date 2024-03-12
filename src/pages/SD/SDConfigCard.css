@@ -1,0 +1,8 @@
+.sd-config-card:not(.expanded) {
+  ion-list {
+    display: none;
+  }
+  ion-textarea {
+    display: none;
+  }
+}
