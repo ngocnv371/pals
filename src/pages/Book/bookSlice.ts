@@ -11,6 +11,7 @@ import { addedToDeck } from "../Deck/deckSlice";
 import { Sorters, getPalById } from "../pals/service";
 import Pal from "../../models/pal";
 import Filter from "../../models/filter";
+import { filterBookItems } from "./service";
 const chance = new Chance();
 
 const adapter = createEntityAdapter<DeckItem>();
@@ -36,27 +37,9 @@ export const {
 } = adapter.getSelectors((state: RootState) => state.book);
 
 export const selectPage = (page: number, filter: Filter) =>
-  createSelector(selectAllBookItems, (items) => {
-    const { query, asc, sort } = filter;
-    const inflatedItems = items.map((i) => ({
-      ...getPalById(i.type),
-      bid: i.id,
-    }));
-    const lowercaseQuery = query.toLocaleLowerCase();
-    const filteredItems = inflatedItems.filter(
-      (i) =>
-        !lowercaseQuery ||
-        i.name.toLocaleLowerCase().includes(lowercaseQuery) ||
-        i.description.toLocaleLowerCase().includes(lowercaseQuery)
-    );
-    const sorted = filteredItems.sort((Sorters as any)[sort]);
-    if (!asc) {
-      sorted.reverse();
-    }
-    const pagedItems = sorted.splice(page * DECK_SIZE, DECK_SIZE);
-    console.debug("paged result", pagedItems);
-    return pagedItems.map((p) => ({ id: p.bid, type: p.id })) as DeckItem[];
-  });
+  createSelector(selectAllBookItems, (items) =>
+    filterBookItems(items, page, filter)
+  );
 
 export const { added: addedToBook } = bookSlice.actions;
 
