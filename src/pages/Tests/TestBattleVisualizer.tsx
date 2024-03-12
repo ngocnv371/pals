@@ -16,8 +16,9 @@ import { BattleVisualizer } from "../Duel/Battle/BattleVisualizer";
 import { CardStance } from "../Duel/model";
 import "../Duel/effects.css";
 
-const winItems = ["kelpie", "blueplatypus"];
-const looseItems = ["blueplatypus", "kelpie"];
+// kelpie (70/70), deer (80/80)
+const winItems = ["deer", "kelpie"];
+const looseItems = ["kelpie", "deer"];
 const tieItems = ["kelpie", "kelpie"];
 
 const TestBattleVisualizerPage: React.FC = () => {

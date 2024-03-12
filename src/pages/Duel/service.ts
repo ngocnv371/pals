@@ -458,6 +458,12 @@ export function calculateBattleAnimationSequence(
 
   const win = result > 0;
   const tie = result == 0;
+  console.debug("simulate", result, defensive);
+  console.debug(
+    `${defensive ? "defensive" : "offensive"} ${
+      tie ? "tie" : win ? "win" : "loose"
+    }`
+  );
 
   const sequence = tie ? tieSequence : win ? winSequence : looseSequence;
   const defensiveSequence = tie

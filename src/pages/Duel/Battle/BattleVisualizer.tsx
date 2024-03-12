@@ -17,7 +17,7 @@ export const BattleVisualizer: React.FC<{
     () => simulateBattle(card1, card2, card2Stance),
     [card1, card2, card2Stance]
   );
-  console.debug("visualize", card1, card2, card2Stance);
+  console.debug("visualize", card1, card2, card2Stance, result);
   const defensive = card2Stance == CardStance.Defensive;
   const sequence = useMemo(
     () => calculateBattleAnimationSequence(result, defensive),
