@@ -50,8 +50,11 @@ export const selectPage = (page: number, filter: Filter) =>
         i.description.toLocaleLowerCase().includes(lowercaseQuery)
     );
     const sorted = filteredItems.sort((Sorters as any)[sort]);
-    const ordered = asc ? sorted : sorted.reverse();
-    const pagedItems = ordered.splice(page * DECK_SIZE, DECK_SIZE);
+    if (!asc) {
+      sorted.reverse();
+    }
+    const pagedItems = sorted.splice(page * DECK_SIZE, DECK_SIZE);
+    console.debug("paged result", pagedItems);
     return pagedItems.map((p) => ({ id: p.bid, type: p.id })) as DeckItem[];
   });
 

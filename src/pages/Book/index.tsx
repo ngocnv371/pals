@@ -37,6 +37,7 @@ const BookPage: React.FC = () => {
 
   const handleFilterChanged = useCallback((value: Filter) => {
     setFilter(value);
+    console.debug("filter updated", value);
     setPage(0);
   }, []);
 

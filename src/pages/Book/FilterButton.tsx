@@ -29,10 +29,12 @@ const FilterButton: React.FC<{
 
   // clone props
   useEffect(() => {
+    console.debug("clone filter props");
     setLocalValue(value);
   }, [value]);
 
   const handleApply = useCallback(() => {
+    console.debug("local value", localValue);
     ref.current?.dismiss();
     onChange(localValue);
   }, [localValue]);
@@ -67,7 +69,7 @@ const FilterButton: React.FC<{
           <IonSearchbar
             placeholder="Search"
             value={localValue.query}
-            onIonChange={(evt) =>
+            onIonInput={(evt) =>
               setLocalValue((old) => ({
                 ...old,
                 query: evt.detail.value || "",
@@ -77,7 +79,7 @@ const FilterButton: React.FC<{
           <IonItem>
             <IonSelect
               label="Sort"
-              value={value.sort}
+              value={localValue.sort}
               onIonChange={(evt) =>
                 setLocalValue((old) => ({ ...old, sort: evt.detail.value }))
               }
@@ -85,11 +87,14 @@ const FilterButton: React.FC<{
               <IonSelectOption value="name">Name</IonSelectOption>
               <IonSelectOption value="attack">Attack</IonSelectOption>
               <IonSelectOption value="defense">Defense</IonSelectOption>
+              <IonSelectOption value="price">Price</IonSelectOption>
+              <IonSelectOption value="rarity">Rarity</IonSelectOption>
+              <IonSelectOption value="type">Type</IonSelectOption>
             </IonSelect>
           </IonItem>
           <IonItem>
             <IonToggle
-              checked={value.asc}
+              checked={localValue.asc}
               onIonChange={(evt) =>
                 setLocalValue((old) => ({ ...old, asc: evt.detail.checked }))
               }
