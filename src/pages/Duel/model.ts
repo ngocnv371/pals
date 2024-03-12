@@ -31,7 +31,7 @@ export interface Side {
    */
   life: number;
   /**
-   * all owned cards, 40 at the start
+   * all owned cards, `DECK_SIZE` at the start
    */
   deck: string[];
   /**

@@ -11,12 +11,13 @@ import {
   TargetCell as DeploymentTarget,
 } from "./model";
 import { breedPals, getAllPals, getPalById } from "../pals/service";
+import { DECK_SIZE } from "../Deck/model";
 const chance = new Chance();
 
 export function generateTheirDeck() {
   return chance.n(
     () => chance.pickone(getAllPals().filter((p) => p.rarity < 5)).id,
-    40
+    DECK_SIZE
   );
 }
 

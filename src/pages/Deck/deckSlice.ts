@@ -4,7 +4,7 @@ import {
   createSelector,
 } from "@reduxjs/toolkit";
 import { Chance } from "chance";
-import { DeckItem } from "./model";
+import { DECK_SIZE, DeckItem } from "./model";
 import { generateItem } from "./service";
 import { AppDispatch, RootState } from "../../store";
 import { addedToBook } from "../Book/bookSlice";
@@ -15,7 +15,7 @@ const adapter = createEntityAdapter<DeckItem>();
 
 const initialState = adapter.addMany(
   adapter.getInitialState(),
-  chance.n(() => generateItem(), 40)
+  chance.n(() => generateItem(), DECK_SIZE)
 );
 
 export const deckSlice = createSlice({
@@ -33,10 +33,7 @@ export const {
   selectTotal,
 } = adapter.getSelectors((state: RootState) => state.deck);
 
-export const canAdd = createSelector(
-  (state: RootState) => state.deck.ids,
-  (ids) => ids.length < 40
-);
+export const canAdd = createSelector(selectTotal, (total) => total < DECK_SIZE);
 
 export const { added: addedToDeck } = deckSlice.actions;
 

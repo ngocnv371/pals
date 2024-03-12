@@ -4,7 +4,7 @@ import {
   createSelector,
 } from "@reduxjs/toolkit";
 import { Chance } from "chance";
-import { DeckItem } from "../Deck/model";
+import { DECK_SIZE, DeckItem } from "../Deck/model";
 import { generateItem } from "../Deck/service";
 import { AppDispatch, RootState } from "../../store";
 import { addedToDeck } from "../Deck/deckSlice";
@@ -34,7 +34,7 @@ export const {
 
 export const selectPage = (page: number) =>
   createSelector(selectAllBookItems, (items) =>
-    items.slice().splice(page * 40, 40)
+    items.slice().splice(page * DECK_SIZE, DECK_SIZE)
   );
 
 export const { added: addedToBook } = bookSlice.actions;
@@ -43,8 +43,8 @@ export const moveToDeck =
   (item: DeckItem) =>
   async (dispatch: AppDispatch, getState: () => RootState) => {
     const state = getState();
-    if (state.deck.ids.length >= 40) {
-      console.warn("can move more than 40 cards to deck");
+    if (state.deck.ids.length >= DECK_SIZE) {
+      console.warn(`can move more than ${DECK_SIZE} cards to deck`);
       return;
     }
 

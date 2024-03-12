@@ -14,7 +14,7 @@ import {
 import { useCallback, useState } from "react";
 import "./styles.css";
 import DeckGrid from "./DeckGrid";
-import { DeckItem } from "./model";
+import { DECK_SIZE, DeckItem } from "./model";
 import CardFlavor from "../../components/Card/CardFlavor";
 import CardToolbar from "./CardToolbar";
 import { useAppSelector } from "../../store/hooks";
@@ -38,7 +38,9 @@ const DeckPage: React.FC = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>Deck ({total}/40)</IonTitle>
+          <IonTitle>
+            Deck ({total}/{DECK_SIZE})
+          </IonTitle>
           <IonButtons slot="end">
             <IonButton routerLink="/book">
               Collection
