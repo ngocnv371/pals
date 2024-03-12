@@ -16,9 +16,9 @@ import {
   IonIcon,
 } from "@ionic/react";
 import { useEffect, useMemo, useRef } from "react";
-import { getPalMetadataById } from "../../data/palMetadata";
 import "./CardModal.css";
 import { shield } from "ionicons/icons";
+import { getPalById } from "../../pages/pals/service";
 
 interface CardModalProps {
   cardId: string;
@@ -28,7 +28,7 @@ interface CardModalProps {
 const CardModal: React.FC<CardModalProps> = ({ cardId, onDismiss }) => {
   const modal = useRef<HTMLIonModalElement>(null);
 
-  const card = useMemo(() => getPalMetadataById(cardId), [cardId]);
+  const card = useMemo(() => getPalById(cardId), [cardId]);
 
   // on load card info
   useEffect(() => {

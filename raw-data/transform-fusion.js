@@ -1,24 +1,37 @@
 import fs from "fs";
 import combinations from "./combinations.json" assert { type: "json" };
-
+import pals from "./pals.json" assert { type: "json" };
 console.debug("combinations", combinations.length);
 
-const cached = buildIndex();
+function buildPalsTitleIndex() {
+  const bag = {};
+  pals.forEach((p) => (bag[p.title] = p));
+  return bag;
+}
 
-function buildIndex() {
+const indexedPals = buildPalsTitleIndex();
+
+function buildFusionIndex() {
   const bag = {};
   combinations.forEach((c) => {
-    if (bag[c.parent1Name]) {
-      bag[c.parent1Name][c.parent2Name] = c.childName;
+    const _id1 = indexedPals[c.parent1Name].id;
+    const _id2 = indexedPals[c.parent2Name].id;
+    const [id1, id2] = [_id1, _id2].sort();
+    const id3 = indexedPals[c.childName].id;
+
+    if (bag[id1]) {
+      bag[id1][id2] = id3;
     } else {
-      bag[c.parent1Name] = { [c.parent2Name]: c.childName };
+      bag[id1] = { [id2]: id3 };
     }
   });
   return bag;
 }
 
-const json = JSON.stringify(cached);
-console.debug("json length", json.length);
+const indexedFusion = buildFusionIndex();
+
+const json = JSON.stringify(indexedFusion);
+console.debug("serialized data length", json.length);
 
 const filePath = "../src/data/fusion.json";
 fs.writeFile(filePath, json, (err) => {

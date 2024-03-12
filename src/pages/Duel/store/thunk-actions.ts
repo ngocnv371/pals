@@ -8,7 +8,7 @@ import {
 } from "../service";
 import { delay } from "../utils/delay";
 import { jake } from "./ai/jake";
-import { breedById } from "../../../data/palBreed";
+import { breedPals } from "../../pals/service";
 
 type SideSelector = (state: State) => Side;
 
@@ -21,7 +21,7 @@ function fuseAllThenPlace(
   return () => async (dispatch, getState) => {
     while (selector(getState().duel).deploymentPlan?.queue?.length! >= 2) {
       const [card1, card2] = selector(getState().duel).deploymentPlan?.queue!;
-      const result = breedById(card1, card2);
+      const result = breedPals(card1, card2);
       dispatch(fuseAction);
       console.debug("delay, wait for animation");
       const duration = calculateFusionAnimationDuration({

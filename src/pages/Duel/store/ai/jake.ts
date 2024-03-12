@@ -5,12 +5,11 @@ import {
   getDeploymentPlans,
   simulateBattle,
 } from "../../service";
-import { getPalMetadataById } from "../../../../data/palMetadata";
 import { delay } from "../../utils/delay";
 import { theirBattle, theirFuseAndPlace } from "../thunk-actions";
 import { BattleAI } from "./battle-ai";
 import { AppThunkAction } from "../../../../store";
-import { breedById } from "../../../../data/palBreed";
+import { getPalById } from "../../../pals/service";
 
 export const jake: BattleAI = (slice) => {
   const leadTheirOffensive: AppThunkAction =
@@ -21,7 +20,7 @@ export const jake: BattleAI = (slice) => {
           .map((f, index) => ({ unit: f, index }))
           .filter((f) => Boolean(f.unit))
           .map((f) => ({
-            ...getPalMetadataById(f.unit!.cardId),
+            ...getPalById(f.unit!.cardId),
             index: f.index,
             stance: f.unit!.stance,
             acted: f.unit!.acted,

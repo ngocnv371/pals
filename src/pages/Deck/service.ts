@@ -1,13 +1,13 @@
 import { Chance } from "chance";
-import pals from "../../data/pals.json";
 import { DeckItem } from "./model";
 import { nanoid } from "@reduxjs/toolkit";
+import { getAllPals } from "../pals/service";
 
 const chance = new Chance();
 
 export function generateItem(): DeckItem {
   return {
     id: nanoid(),
-    type: chance.pickone(pals.filter((p) => p.rarity < 5)).id,
+    type: chance.pickone(getAllPals().filter((p) => p.rarity < 5)).id,
   };
 }

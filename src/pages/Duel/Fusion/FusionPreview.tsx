@@ -2,8 +2,8 @@ import { useMemo } from "react";
 import { useAppSelector } from "../../../store/hooks";
 import { selectMyFusionQueue } from "../store/selectors";
 import "./FusionPreview.css";
-import { breedChain } from "../../../data/palBreed";
 import { CardInfo } from "../../../components/Card/CardInfo";
+import { breedChain } from "../../pals/service";
 
 const _FusionPreview: React.FC<{ cards: string[] }> = ({ cards }) => {
   const result = useMemo(() => breedChain(cards), [cards]);

@@ -1,8 +1,11 @@
-import Gender from "./gender";
-
 export default interface Pal {
   id: string;
-  type: string;
-  level: number;
-  gender: Gender;
+  types: string[];
+  name: string;
+  description: string;
+  attack: number;
+  defense: number;
+  rarity: number;
+  price: number;
+  image: string;
 }

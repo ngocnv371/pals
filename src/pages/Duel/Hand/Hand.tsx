@@ -1,18 +1,18 @@
 import React, { useCallback, useMemo, useState } from "react";
 import { HandCard } from "./HandCard";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { getPalMetadataById } from "../../../data/palMetadata";
 import "./Hand.css";
 import { myReservesSelected } from "../store/duelSlice";
 import {
   selectMyHand,
   selectSelectedReservesIndices,
 } from "../store/selectors";
+import { getPalById } from "../../pals/service";
 
 export const Hand: React.FC = () => {
   const hand = useAppSelector(selectMyHand);
   const dispatch = useAppDispatch();
-  const cards = useMemo(() => hand.map(getPalMetadataById), [hand]);
+  const cards = useMemo(() => hand.map(getPalById), [hand]);
   const selectedCards = useAppSelector(selectSelectedReservesIndices) || [];
   const setSelectedCards = (ids: number[]) => dispatch(myReservesSelected(ids));
 

@@ -1,7 +1,5 @@
 import { Chance } from "chance";
 import { uniqBy } from "lodash";
-import breed, { breedById } from "../../data/palBreed";
-import getPalMetadata, { getPalMetadataById } from "../../data/palMetadata";
 import {
   Side,
   CardStance,
@@ -12,12 +10,12 @@ import {
   ReserveItem,
   TargetCell as DeploymentTarget,
 } from "./model";
-import pals from "../../data/pals.json";
+import { breedPals, getAllPals, getPalById } from "../pals/service";
 const chance = new Chance();
 
 export function generateTheirDeck() {
   return chance.n(
-    () => chance.pickone(pals.filter((p) => p.rarity < 5)).id,
+    () => chance.pickone(getAllPals().filter((p) => p.rarity < 5)).id,
     40
   );
 }
@@ -81,14 +79,14 @@ function getCombinationPower(reserves: ReserveItem[], indices: number[]) {
     const card = reserves[indices[0]].cardId;
     return {
       breed: card,
-      power: getPalMetadataById(card).attack,
+      power: getPalById(card).attack,
     };
   }
 
   const breed =
-    breedById(reserves[indices[0]].cardId, reserves[indices[1]].cardId) ||
+    breedPals(reserves[indices[0]].cardId, reserves[indices[1]].cardId) ||
     reserves[indices[1]].cardId;
-  const power = getPalMetadataById(breed).attack;
+  const power = getPalById(breed).attack;
   return { breed, power };
 }
 
@@ -115,9 +113,9 @@ interface EvaluatedCombination {
 function evaluatePlan(plan: Plan): EvaluatedPlan {
   if (plan.target.cardId) {
     const breed =
-      breedById(plan.combination.breed, plan.target.cardId) ||
+      breedPals(plan.combination.breed, plan.target.cardId) ||
       plan.target.cardId;
-    const power = getPalMetadataById(breed).attack;
+    const power = getPalById(breed).attack;
     return {
       indices: plan.combination.indices,
       targetIndex: plan.target.index,
@@ -229,7 +227,7 @@ export function fuseOne(side: Side) {
   }
 
   const [card1, card2, ...rest] = side.deploymentPlan.queue;
-  const result = breedById(card1, card2);
+  const result = breedPals(card1, card2);
 
   if (!result) {
     console.debug(`failed to fuse ${card1} and ${card2}`);
@@ -296,7 +294,7 @@ export function simulateBattle(
   card2: string,
   card2Stance: CardStance
 ) {
-  const c1 = getPalMetadataById(card1);
+  const c1 = getPalById(card1);
   const life1 = c1.attack;
   if (!card2) {
     // direct attack
@@ -306,7 +304,7 @@ export function simulateBattle(
     return life1;
   }
 
-  const c2 = getPalMetadataById(card2);
+  const c2 = getPalById(card2);
   const life2 = card2Stance == CardStance.Offensive ? c2.attack : c2.defense;
   const result = life1 - life2;
   console.debug(

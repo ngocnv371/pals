@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { getPalMetadataById } from "../../data/palMetadata";
 import {
   IonCard,
   IonCardContent,
@@ -15,9 +14,10 @@ import {
 } from "@ionic/react";
 import { shield } from "ionicons/icons";
 import "./CardFlavor.css";
+import { getPalById } from "../../pages/pals/service";
 
 const CardFlavor: React.FC<{ cardId: string }> = ({ cardId }) => {
-  const card = useMemo(() => getPalMetadataById(cardId), [cardId]);
+  const card = useMemo(() => getPalById(cardId), [cardId]);
   if (!card) {
     return null;
   }
