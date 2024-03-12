@@ -32,9 +32,9 @@ const PalPreview: React.FC<{ palId: string }> = ({ palId }) => {
         </IonCardTitle>
       </IonCardHeader>
       <IonCardContent>
-        <p>{meta.content.description}</p>
+        <p>{meta.description}</p>
       </IonCardContent>
-      <WorkSkillsList skills={meta.content.workSkills} />
+      <WorkSkillsList skills={meta.workSkills} />
     </IonCard>
   );
 };

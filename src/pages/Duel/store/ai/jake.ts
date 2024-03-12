@@ -26,7 +26,7 @@ export const jake: BattleAI = (slice) => {
             stance: f.unit!.stance,
             acted: f.unit!.acted,
           }))
-          .sort((a, b) => b.content.baseAttack - a.content.baseAttack);
+          .sort((a, b) => b.attack - a.attack);
       }
 
       async function considerTargetDramatically(target?: number) {

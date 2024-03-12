@@ -1,13 +1,9 @@
-import {
-  buildMapByField,
-  buildMapByFieldMany,
-  buildMapByKey,
-} from "../utils/buildMap";
+import { buildMapByFieldMany, buildMapByKey } from "../utils/buildMap";
 import palMetadata from "./pals.json";
 
 const cachedPals = buildMapByKey(palMetadata, "title");
 const cachedPalsById = buildMapByKey(palMetadata, "id");
-const indexedByType = buildMapByFieldMany(palMetadata, (v) => v.content.type);
+const indexedByType = buildMapByFieldMany(palMetadata, (v) => v.types);
 
 export function getPalsByType(type: string) {
   return indexedByType[type];

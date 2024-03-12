@@ -53,19 +53,19 @@ const CardModal: React.FC<CardModalProps> = ({ cardId, onDismiss }) => {
       </IonHeader>
       <IonContent className="ion-padding">
         <IonCard className="info ion-no-padding ion-no-margin">
-          <IonImg src={`/pals/${card.content.image}`}></IonImg>
-          <IonCardContent>{card.content.description}</IonCardContent>
+          <IonImg src={`/pals/${card.image}`}></IonImg>
+          <IonCardContent>{card.description}</IonCardContent>
         </IonCard>
         <IonList>
           <IonItem>
             <IonIcon icon="/icons/sword.svg" slot="start"></IonIcon>
             <IonLabel>Attack</IonLabel>
-            <IonNote slot="end">{card.content.baseAttack}</IonNote>
+            <IonNote slot="end">{card.attack}</IonNote>
           </IonItem>
           <IonItem>
             <IonIcon icon={shield} slot="start"></IonIcon>
             <IonLabel>Defense</IonLabel>
-            <IonNote slot="end">{card.content.defense}</IonNote>
+            <IonNote slot="end">{card.defense}</IonNote>
           </IonItem>
         </IonList>
       </IonContent>

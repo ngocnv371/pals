@@ -18,7 +18,7 @@ const PalAvatar: React.FC<
 
   return (
     <IonAvatar {...rest}>
-      <IonImg src={`/pals/${meta.content.image}`} />
+      <IonImg src={`/pals/${meta.image}`} />
     </IonAvatar>
   );
 };

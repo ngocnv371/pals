@@ -8,6 +8,6 @@ const chance = new Chance();
 export function generateItem(): DeckItem {
   return {
     id: nanoid(),
-    type: chance.pickone(pals.filter((p) => p.content.rarity < 5)).id,
+    type: chance.pickone(pals.filter((p) => p.rarity < 5)).id,
   };
 }

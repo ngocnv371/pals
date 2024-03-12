@@ -17,7 +17,7 @@ const chance = new Chance();
 
 export function generateTheirDeck() {
   return chance.n(
-    () => chance.pickone(pals.filter((p) => p.content.rarity < 5)).id,
+    () => chance.pickone(pals.filter((p) => p.rarity < 5)).id,
     40
   );
 }
@@ -81,14 +81,14 @@ function getCombinationPower(reserves: ReserveItem[], indices: number[]) {
     const card = reserves[indices[0]].cardId;
     return {
       breed: card,
-      power: getPalMetadataById(card).content.baseAttack,
+      power: getPalMetadataById(card).attack,
     };
   }
 
   const breed =
     breedById(reserves[indices[0]].cardId, reserves[indices[1]].cardId) ||
     reserves[indices[1]].cardId;
-  const power = getPalMetadataById(breed).content.baseAttack;
+  const power = getPalMetadataById(breed).attack;
   return { breed, power };
 }
 
@@ -117,7 +117,7 @@ function evaluatePlan(plan: Plan): EvaluatedPlan {
     const breed =
       breedById(plan.combination.breed, plan.target.cardId) ||
       plan.target.cardId;
-    const power = getPalMetadataById(breed).content.baseAttack;
+    const power = getPalMetadataById(breed).attack;
     return {
       indices: plan.combination.indices,
       targetIndex: plan.target.index,
@@ -297,7 +297,7 @@ export function simulateBattle(
   card2Stance: CardStance
 ) {
   const c1 = getPalMetadataById(card1);
-  const life1 = c1.content.baseAttack;
+  const life1 = c1.attack;
   if (!card2) {
     // direct attack
     console.debug(
@@ -307,10 +307,7 @@ export function simulateBattle(
   }
 
   const c2 = getPalMetadataById(card2);
-  const life2 =
-    card2Stance == CardStance.Offensive
-      ? c2.content.baseAttack
-      : c2.content.defense;
+  const life2 = card2Stance == CardStance.Offensive ? c2.attack : c2.defense;
   const result = life1 - life2;
   console.debug(
     `battle simulation: ${card1} (${life1}) vs ${card2} (${life2}) -> ${result}`

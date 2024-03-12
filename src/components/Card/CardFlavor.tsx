@@ -25,28 +25,28 @@ const CardFlavor: React.FC<{ cardId: string }> = ({ cardId }) => {
   return (
     <>
       <IonCard className="card-flavor ion-no-padding ion-no-margin flex">
-        <IonImg src={`/pals/${card.content.image}`}></IonImg>
+        <IonImg src={`/pals/${card.image}`}></IonImg>
         <div>
           <IonCardHeader>
             <IonCardTitle>
               {card.title}
               {" - "}
-              <IonText color="secondary">{card.content.type}</IonText>
+              <IonText color="secondary">{card.type}</IonText>
             </IonCardTitle>
           </IonCardHeader>
-          <IonCardContent>{card.content.description}</IonCardContent>
+          <IonCardContent>{card.description}</IonCardContent>
         </div>
       </IonCard>
       <IonList>
         <IonItem>
           <IonIcon icon="/icons/sword.svg" slot="start"></IonIcon>
           <IonLabel>Attack</IonLabel>
-          <IonNote slot="end">{card.content.baseAttack}</IonNote>
+          <IonNote slot="end">{card.attack}</IonNote>
         </IonItem>
         <IonItem>
           <IonIcon icon={shield} slot="start"></IonIcon>
           <IonLabel>Defense</IonLabel>
-          <IonNote slot="end">{card.content.defense}</IonNote>
+          <IonNote slot="end">{card.defense}</IonNote>
         </IonItem>
       </IonList>
     </>

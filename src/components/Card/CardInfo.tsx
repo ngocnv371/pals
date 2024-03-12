@@ -26,11 +26,11 @@ export const CardInfo: React.FC<{
 
   return (
     <IonCard className={`card-info ${defensive ? "defensive" : ""}`}>
-      <IonImg src={`/pals/${card.content.image}`}></IonImg>
+      <IonImg src={`/pals/${card.image}`}></IonImg>
       <p className={`title ${longTitle ? "long" : ""}`}>{card.title}</p>
       <p className="power">
-        <span className="atk">{card.content.baseAttack}</span>/
-        <span className="def">{card.content.defense}</span>
+        <span className="atk">{card.attack}</span>/
+        <span className="def">{card.defense}</span>
       </p>
     </IonCard>
   );
