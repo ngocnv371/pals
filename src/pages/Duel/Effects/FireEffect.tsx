@@ -1,18 +1,18 @@
 import GenericSprite from "./GenericSprite";
 
-const SparkEffect: React.FC = () => {
+const FireEffect: React.FC = () => {
   return (
     <div className="animate__animated animate__fadeOut animate__slower">
       <GenericSprite
-        url="url(/effects/spark-sprite.png)"
-        frames={8}
-        tileWidth={256}
-        tileHeight={256}
-        cols={4}
+        url="url(/effects/fire-sprite.png)"
+        frames={9}
+        tileWidth={200}
+        tileHeight={381 / 3}
+        cols={3}
         duration={120}
       />
     </div>
   );
 };
 
-export default SparkEffect;
+export default FireEffect;

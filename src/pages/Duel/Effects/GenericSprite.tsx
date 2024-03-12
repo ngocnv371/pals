@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 
-interface SpriteProps {
+interface GenericSpriteProps {
   tileWidth: number;
+  tileHeight: number;
   frames: number;
   cols: number;
   duration: number;
@@ -9,8 +10,9 @@ interface SpriteProps {
   repeat?: boolean;
 }
 
-const Sprite: React.FC<SpriteProps> = ({
+const GenericSprite: React.FC<GenericSpriteProps> = ({
   tileWidth,
+  tileHeight,
   frames,
   cols,
   duration,
@@ -39,17 +41,17 @@ const Sprite: React.FC<SpriteProps> = ({
   }, [frames, repeat]);
 
   const x = -(tileIndex % cols) * tileWidth;
-  const y = -Math.floor(tileIndex / cols) * tileWidth;
+  const y = -Math.floor(tileIndex / cols) * tileHeight;
   return (
     <div
       style={{
         backgroundImage: url,
         width: `${tileWidth}px`,
-        height: `${tileWidth}px`,
+        height: `${tileHeight}px`,
         backgroundPosition: `${x}px ${y}px`,
       }}
     />
   );
 };
 
-export default Sprite;
+export default GenericSprite;
