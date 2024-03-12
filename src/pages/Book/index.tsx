@@ -14,6 +14,7 @@ import { DeckItem } from "../Deck/model";
 import { useAppSelector } from "../../store/hooks";
 import { selectPage, selectTotal } from "./bookSlice";
 import BookGrid from "./BookGrid";
+import CardToolbar from "../Deck/CardToolbar";
 
 const BookPage: React.FC = () => {
   const [selected, setSelected] = useState<DeckItem>();
@@ -41,6 +42,13 @@ const BookPage: React.FC = () => {
       <IonContent fullscreen>
         <BookGrid selected={selected} onSelect={toggle} items={items} />
       </IonContent>
+
+      {Boolean(selected) && (
+        <IonFooter>
+          <CardToolbar cardId={selected!.id} />
+          <CardFlavor cardId={selected!.type} />
+        </IonFooter>
+      )}
     </IonPage>
   );
 };
