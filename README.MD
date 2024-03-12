@@ -54,9 +54,11 @@ see [BATTLEFLOW.MD](docs/BATTLEFLOW.MD)
 - deck
   - sort cards
   - easier card moving
+  - book paging
 
 # completed
 
+- ✅ book filter
 - ✅ tranform raw data
 - ✅ their hand is hiddden
 - ✅ duel end transition
