@@ -6,6 +6,7 @@ import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { selectStage } from "./store/selectors";
 import { duelStarted } from "./store/thunk-actions";
 import { DuelStage } from "./model";
+import "./effects.css";
 
 const DeckPage: React.FC = () => {
   const stage = useAppSelector(selectStage);

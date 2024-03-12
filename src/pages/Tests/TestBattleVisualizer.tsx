@@ -14,6 +14,7 @@ import {
 import { useMemo, useState } from "react";
 import { BattleVisualizer } from "../Duel/Battle/BattleVisualizer";
 import { CardStance } from "../Duel/model";
+import "../Duel/effects.css";
 
 const winItems = ["kelpie", "blueplatypus"];
 const looseItems = ["blueplatypus", "kelpie"];

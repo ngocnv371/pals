@@ -1,0 +1,51 @@
+.fire-effect {
+  width: 200px;
+  height: 127px;
+  background-image: url("/public/effects/fire-sprite.png");
+  animation: fire_explode 1s;
+  animation-timing-function: step-start;
+  opacity: 0;
+}
+
+@keyframes fire_explode {
+  0% {
+    background-position: 0px 0px;
+    opacity: 1;
+  }
+  11% {
+    background-position: -200px 0px;
+    opacity: 1;
+  }
+  22% {
+    background-position: -400px 0px;
+    opacity: 1;
+  }
+  33% {
+    background-position: 0px -127px;
+    opacity: 1;
+  }
+  44% {
+    background-position: -200px -127px;
+    opacity: 1;
+  }
+  55% {
+    background-position: -400px -127px;
+    opacity: 1;
+  }
+  66% {
+    background-position: 0px -254px;
+    opacity: 1;
+  }
+  77% {
+    background-position: -200px -254px;
+    opacity: 1;
+  }
+  88% {
+    background-position: -400px -254px;
+    opacity: 1;
+  }
+  100% {
+    background-position: 0px 0px;
+    opacity: 0;
+  }
+}
