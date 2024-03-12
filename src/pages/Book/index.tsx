@@ -9,17 +9,17 @@ import {
   IonFooter,
 } from "@ionic/react";
 import { useCallback, useState } from "react";
-import "./styles.css";
-import DeckGrid from "./DeckGrid";
-import { DeckItem } from "./model";
 import CardFlavor from "../../components/Card/CardFlavor";
-import CardToolbar from "./CardToolbar";
+import { DeckItem } from "../Deck/model";
 import { useAppSelector } from "../../store/hooks";
-import { selectTotal } from "./deckSlice";
+import { selectPage, selectTotal } from "./bookSlice";
+import BookGrid from "./BookGrid";
 
-const DeckPage: React.FC = () => {
+const BookPage: React.FC = () => {
   const [selected, setSelected] = useState<DeckItem>();
+  const [page, setPage] = useState(0);
   const total = useAppSelector(selectTotal);
+  const items = useAppSelector(selectPage(page));
 
   const toggle = useCallback(
     (value: DeckItem) =>
@@ -34,22 +34,15 @@ const DeckPage: React.FC = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>Deck ({total}/40)</IonTitle>
+          <IonTitle>Deck ({total})</IonTitle>
         </IonToolbar>
       </IonHeader>
 
       <IonContent fullscreen>
-        <DeckGrid selected={selected} onSelect={toggle} />
+        <BookGrid selected={selected} onSelect={toggle} items={items} />
       </IonContent>
-
-      {Boolean(selected) && (
-        <IonFooter>
-          <CardToolbar cardId={selected!.id} />
-          <CardFlavor cardId={selected!.type} />
-        </IonFooter>
-      )}
     </IonPage>
   );
 };
 
-export default DeckPage;
+export default BookPage;

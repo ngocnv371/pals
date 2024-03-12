@@ -7,7 +7,7 @@ import { Chance } from "chance";
 import { DeckItem } from "./model";
 import { generateItem } from "./service";
 import { AppDispatch, RootState } from "../../store";
-import { addedToBook } from "./bookSlice";
+import { addedToBook } from "../Book/bookSlice";
 
 const chance = new Chance();
 
@@ -27,8 +27,11 @@ export const deckSlice = createSlice({
   },
 });
 
-export const { selectAll: selectAllDeckItems, selectById: selectDeckItemById } =
-  adapter.getSelectors((state: RootState) => state.deck);
+export const {
+  selectAll: selectAllDeckItems,
+  selectById: selectDeckItemById,
+  selectTotal,
+} = adapter.getSelectors((state: RootState) => state.deck);
 
 export const canAdd = createSelector(
   (state: RootState) => state.deck.ids,

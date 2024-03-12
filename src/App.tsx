@@ -38,6 +38,7 @@ import TestsPage from "./pages/Tests";
 import TestFusionVisualizerPage from "./pages/Tests/TestFusionVisualizer";
 import TestBattleVisualizerPage from "./pages/Tests/TestBattleVisualizer";
 import DuelResultPage from "./pages/DuelResult";
+import BookPage from "./pages/Book";
 
 setupIonicReact();
 
@@ -51,6 +52,9 @@ const App: React.FC = () => {
             <IonRouterOutlet id="main">
               <Route path="/" exact={true}>
                 <Redirect to="/deck" />
+              </Route>
+              <Route path="/book" exact={true}>
+                <BookPage />
               </Route>
               <Route path="/duel" exact={true}>
                 <DuelPage />

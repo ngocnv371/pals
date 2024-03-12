@@ -1,9 +1,13 @@
-import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createEntityAdapter,
+  createSelector,
+} from "@reduxjs/toolkit";
 import { Chance } from "chance";
-import { DeckItem } from "./model";
-import { generateItem } from "./service";
+import { DeckItem } from "../Deck/model";
+import { generateItem } from "../Deck/service";
 import { AppDispatch, RootState } from "../../store";
-import { addedToDeck } from "./deckSlice";
+import { addedToDeck } from "../Deck/deckSlice";
 const chance = new Chance();
 
 const adapter = createEntityAdapter<DeckItem>();
@@ -22,8 +26,14 @@ export const bookSlice = createSlice({
   },
 });
 
-export const { selectAll: selectAllBookItems, selectById: selectBookItemById } =
-  adapter.getSelectors((state: RootState) => state.book);
+export const {
+  selectAll: selectAllBookItems,
+  selectById: selectBookItemById,
+  selectTotal,
+} = adapter.getSelectors((state: RootState) => state.book);
+
+export const selectPage = (page: number) =>
+  createSelector(selectAllBookItems, (items) => items.splice(page * 40, 40));
 
 export const { added: addedToBook } = bookSlice.actions;
 

@@ -22,6 +22,11 @@ const Menu: React.FC = () => {
             </IonItem>
           </IonMenuToggle>
           <IonMenuToggle>
+            <IonItem routerLink="/book">
+              <IonLabel>Collection</IonLabel>
+            </IonItem>
+          </IonMenuToggle>
+          <IonMenuToggle>
             <IonItem routerLink="/inventory">
               <IonLabel>Inventory</IonLabel>
             </IonItem>

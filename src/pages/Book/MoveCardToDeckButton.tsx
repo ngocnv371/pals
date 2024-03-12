@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { moveToDeck, selectBookItemById } from "./bookSlice";
 import { useCallback } from "react";
 import { add } from "ionicons/icons";
-import { canAdd } from "./deckSlice";
+import { canAdd } from "../Deck/deckSlice";
 
 const MoveCardToDeckButton: React.FC<{ cardId: string }> = ({ cardId }) => {
   const dispatch = useAppDispatch();

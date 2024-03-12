@@ -1,5 +1,5 @@
 import { IonToolbar, IonButtons } from "@ionic/react";
-import MoveCardToDeckButton from "./MoveCardToDeckButton";
+import MoveCardToDeckButton from "../Book/MoveCardToDeckButton";
 import MoveCardToBookButton from "./MoveCardToBookButton";
 
 const CardToolbar: React.FC<{ cardId: string }> = ({ cardId }) => {
