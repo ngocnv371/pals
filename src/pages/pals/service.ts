@@ -45,3 +45,12 @@ export function breedChain(ids: string[]) {
 
   return result;
 }
+
+export const Sorters = Object.freeze({
+  name: (a: Pal, b: Pal) => a.name.localeCompare(b.name),
+  attack: (a: Pal, b: Pal) => a.attack - b.attack,
+  defense: (a: Pal, b: Pal) => a.defense - b.defense,
+  rarity: (a: Pal, b: Pal) => a.rarity - b.rarity,
+  price: (a: Pal, b: Pal) => a.price - b.price,
+  type: (a: Pal, b: Pal) => a.types[0].localeCompare(b.types[0]),
+});

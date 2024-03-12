@@ -15,18 +15,30 @@ import { useAppSelector } from "../../store/hooks";
 import { selectPage, selectTotal } from "./bookSlice";
 import BookGrid from "./BookGrid";
 import CardToolbar from "../Deck/CardToolbar";
+import FilterButton from "./FilterButton";
+import Filter from "../../models/filter";
 
 const BookPage: React.FC = () => {
   const [selected, setSelected] = useState<DeckItem>();
   const [page, setPage] = useState(0);
   const total = useAppSelector(selectTotal);
-  const items = useAppSelector(selectPage(page));
+  const [filter, setFilter] = useState<Filter>({
+    query: "",
+    asc: true,
+    sort: "name",
+  });
+  const items = useAppSelector(selectPage(page, filter));
 
   const toggle = useCallback(
     (value: DeckItem) =>
       setSelected((old) => (old?.id == value.id ? undefined : value)),
     []
   );
+
+  const handleFilterChanged = useCallback((value: Filter) => {
+    setFilter(value);
+    setPage(0);
+  }, []);
 
   return (
     <IonPage>
@@ -36,6 +48,9 @@ const BookPage: React.FC = () => {
             <IonMenuButton />
           </IonButtons>
           <IonTitle>Deck ({total})</IonTitle>
+          <IonButtons slot="end">
+            <FilterButton value={filter} onChange={handleFilterChanged} />
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
 
