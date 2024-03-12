@@ -108,3 +108,50 @@
     opacity: 0;
   }
 }
+
+:root {
+  --spark-width: calc(1024px / 4);
+}
+.spark-effect {
+  width: var(--spark-width);
+  height: var(--spark-width);
+  background-image: url("/effects/spark-sprite.png");
+  animation: spark_effect 1s;
+  animation-timing-function: step-start;
+  opacity: 0;
+}
+
+@keyframes spark_effect {
+  0% {
+    background-position: 0px 0px;
+    opacity: 1;
+  }
+  15% {
+    background-position: calc(var(--spark-width) * -1) 0px;
+    opacity: 1;
+  }
+  30% {
+    background-position: calc(var(--spark-width) * -2) 0px;
+    opacity: 1;
+  }
+  45% {
+    background-position: calc(var(--spark-width) * -3) 0px;
+    opacity: 1;
+  }
+  60% {
+    background-position: 0px 0px;
+    opacity: 1;
+  }
+  75% {
+    background-position: calc(var(--spark-width) * -1) var(--spark-width);
+    opacity: 1;
+  }
+  90% {
+    background-position: calc(var(--spark-width) * -2) var(--spark-width);
+    opacity: 1;
+  }
+  100% {
+    background-position: calc(var(--spark-width) * -3) var(--spark-width);
+    opacity: 1;
+  }
+}

@@ -1,9 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef } from "react";
 import { useAppSelector } from "../../../store/hooks";
 import { useClassSequence } from "../utils/useClassSequence";
 import "./FusionVisualizer.css";
 import { CardInfo } from "../../../components/Card/CardInfo";
-import SparkEffect from "../Effects/SparkEffect";
 import { calculateFusionAnimationSequence } from "../service";
 import { Fusion } from "../model";
 
@@ -19,27 +18,13 @@ export const FusionVisualizer: React.FC<
     [card1, card2, result]
   );
   useClassSequence(ref, sequences, onCompleted);
-  const [showEffect, setShowEffect] = useState(false);
-
-  // schedule effect
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowEffect(true);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <div className="fusion-visualizer" ref={ref as any}>
       <CardInfo cardId={card1} />
       <CardInfo cardId={card2} />
       <CardInfo cardId={result} />
-      {showEffect && !failed && (
-        <div className="effect">
-          <SparkEffect />
-        </div>
-      )}
+      <div className="effect spark-effect"></div>
     </div>
   );
 };

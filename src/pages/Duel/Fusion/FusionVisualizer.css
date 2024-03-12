@@ -7,7 +7,7 @@
 
   .card-info {
     position: absolute;
-    top: 50vh;
+    top: 50%;
     opacity: 0;
     scale: 2;
   }
@@ -15,8 +15,9 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translateY(-50%) translateX(-50%) scale(3);
+    transform: translateY(-50%) translateX(-50%) scale(2);
     z-index: 999;
+    display: none;
   }
   &.fusion-visualizer--intro {
     .card-info:nth-child(1) {
@@ -46,6 +47,10 @@
     }
     .card-info:nth-child(3) {
       opacity: 0;
+    }
+    .effect {
+      display: block;
+      animation-delay: 1.5s;
     }
   }
   &.fusion-visualizer--failed1 {
