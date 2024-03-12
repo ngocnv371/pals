@@ -7,6 +7,9 @@ import {
   IonTitle,
   IonContent,
   IonFooter,
+  IonRouterLink,
+  IonButton,
+  IonIcon,
 } from "@ionic/react";
 import { useCallback, useState } from "react";
 import "./styles.css";
@@ -16,6 +19,7 @@ import CardFlavor from "../../components/Card/CardFlavor";
 import CardToolbar from "./CardToolbar";
 import { useAppSelector } from "../../store/hooks";
 import { selectTotal } from "./deckSlice";
+import { arrowForward } from "ionicons/icons";
 
 const DeckPage: React.FC = () => {
   const [selected, setSelected] = useState<DeckItem>();
@@ -35,6 +39,12 @@ const DeckPage: React.FC = () => {
             <IonMenuButton />
           </IonButtons>
           <IonTitle>Deck ({total}/40)</IonTitle>
+          <IonButtons slot="end">
+            <IonButton routerLink="/book">
+              Collection
+              <IonIcon icon={arrowForward} slot="end" />
+            </IonButton>
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
 

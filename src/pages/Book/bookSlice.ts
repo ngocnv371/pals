@@ -33,7 +33,9 @@ export const {
 } = adapter.getSelectors((state: RootState) => state.book);
 
 export const selectPage = (page: number) =>
-  createSelector(selectAllBookItems, (items) => items.splice(page * 40, 40));
+  createSelector(selectAllBookItems, (items) =>
+    items.slice().splice(page * 40, 40)
+  );
 
 export const { added: addedToBook } = bookSlice.actions;
 
