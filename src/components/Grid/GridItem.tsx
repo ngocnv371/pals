@@ -1,21 +1,23 @@
 import { IonIcon } from "@ionic/react";
 import { checkmarkCircle } from "ionicons/icons";
 import { CardInfo } from "../Card/CardInfo";
-import { DeckItem } from "../../pages/Deck/model";
+import "./GridItem.css";
 
 export const GridItem: React.FC<{
-  item: DeckItem;
+  id: string;
+  type: string;
   onClick: () => void;
   selected: boolean;
-}> = ({ item: p, selected, onClick }) => {
+}> = ({ id, type, selected, onClick }) => {
   return (
     <div
-      itemType="deck-item"
-      itemID={p.id.toString()}
-      key={p.id}
+      className="grid-item"
+      itemType="grid-item"
+      itemID={id.toString()}
+      key={id}
       onClick={onClick}
     >
-      <CardInfo cardId={p.type} />
+      <CardInfo cardId={type} />
       {selected && (
         <IonIcon icon={checkmarkCircle} size="large" color="primary" />
       )}

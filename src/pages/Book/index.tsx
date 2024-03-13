@@ -10,36 +10,41 @@ import {
 } from "@ionic/react";
 import { useCallback, useState } from "react";
 import CardFlavor from "../../components/Card/CardFlavor";
-import { DeckItem } from "../Deck/model";
 import { useAppSelector } from "../../store/hooks";
-import { selectPage, selectTotal } from "./bookSlice";
-import BookGrid from "./BookGrid";
+import { selectFiltered, selectTotal } from "./bookSlice";
 import CardToolbar from "../Deck/CardToolbar";
 import FilterButton from "./FilterButton";
 import Filter from "../../models/filter";
+import { VirtuosoGrid } from "react-virtuoso";
+import { ItemWrapper, gridComponents } from "./grid";
+import { GridItem } from "../../components/Grid/GridItem";
+
+const defaultFilter = {
+  query: "",
+  asc: true,
+  sort: "name",
+};
 
 const BookPage: React.FC = () => {
-  const [selected, setSelected] = useState<DeckItem>();
-  const [page, setPage] = useState(0);
   const total = useAppSelector(selectTotal);
-  const [filter, setFilter] = useState<Filter>({
-    query: "",
-    asc: true,
-    sort: "name",
-  });
-  const items = useAppSelector(selectPage(page, filter));
+  const [filter, setFilter] = useState<Filter>(defaultFilter);
+  const filtered = useAppSelector(selectFiltered(filter));
+  const [selected, setSelected] = useState<(typeof filtered)["items"][0]>();
 
   const toggle = useCallback(
-    (value: DeckItem) =>
-      setSelected((old) => (old?.id == value.id ? undefined : value)),
+    (item: typeof selected) =>
+      setSelected((old) => (old?.bookId == item?.bookId ? undefined : item)),
     []
   );
 
   const handleFilterChanged = useCallback((value: Filter) => {
     setFilter(value);
     console.debug("filter updated", value);
-    setPage(0);
   }, []);
+
+  if (!filtered) {
+    return;
+  }
 
   return (
     <IonPage>
@@ -48,7 +53,9 @@ const BookPage: React.FC = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>Deck ({total})</IonTitle>
+          <IonTitle>
+            Book ({filtered.total}/{total})
+          </IonTitle>
           <IonButtons slot="end">
             <FilterButton value={filter} onChange={handleFilterChanged} />
           </IonButtons>
@@ -56,13 +63,27 @@ const BookPage: React.FC = () => {
       </IonHeader>
 
       <IonContent fullscreen>
-        <BookGrid selected={selected} onSelect={toggle} items={items} />
+        <VirtuosoGrid
+          style={{ height: "100%" }}
+          totalCount={filtered.total}
+          components={gridComponents}
+          itemContent={(index) => (
+            <ItemWrapper>
+              <GridItem
+                id={filtered.items[index].bookId}
+                type={filtered.items[index].id}
+                selected={filtered.items[index].bookId == selected?.bookId}
+                onClick={() => toggle(filtered.items[index])}
+              />
+            </ItemWrapper>
+          )}
+        />
       </IonContent>
 
       {Boolean(selected) && (
         <IonFooter>
-          <CardToolbar cardId={selected!.id} />
-          <CardFlavor cardId={selected!.type} />
+          <CardToolbar cardId={selected!.bookId} />
+          <CardFlavor cardId={selected!.id} />
         </IonFooter>
       )}
     </IonPage>
