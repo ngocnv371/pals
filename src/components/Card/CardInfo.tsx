@@ -4,11 +4,13 @@ import "./CardInfo.css";
 import { getPalById } from "../../pages/pals/service";
 import CardTypes from "./CardTypes";
 
-export const CardInfo: React.FC<{
-  cardId: string;
-  defensive?: boolean;
-  hidden?: boolean;
-}> = ({ cardId, defensive, hidden }) => {
+export const CardInfo: React.FC<
+  {
+    cardId: string;
+    defensive?: boolean;
+    hidden?: boolean;
+  } & React.HTMLAttributes<HTMLIonCardElement>
+> = ({ cardId, defensive, hidden, className, ...props }) => {
   const card = useMemo(() => getPalById(cardId), [cardId]);
 
   if (!card) {
@@ -17,7 +19,12 @@ export const CardInfo: React.FC<{
 
   if (hidden) {
     return (
-      <IonCard className={`card-info ${defensive ? "defensive" : ""}`}>
+      <IonCard
+        className={`card-info ${className ?? ""} ${
+          defensive ? "defensive" : ""
+        }`}
+        {...props}
+      >
         <IonImg src={`/icons/question-mark-80.png`}></IonImg>
       </IonCard>
     );
