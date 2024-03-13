@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import "./styles.css";
 import { CardInfo } from "../Card/CardInfo";
 
@@ -12,13 +12,26 @@ const Box: React.FC<
   return <CardInfo cardId="anubis" hidden={!selected} {...props} />;
 };
 
-const LootBox: React.FC<{ count: number }> = ({ count }) => {
+const LootBox: React.FC<{
+  count: number;
+  drawReward: () => Promise<string>;
+}> = ({ count, drawReward }) => {
   const items = useMemo(() => Array.from({ length: count }).fill(0), [count]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const selected = useMemo(() => selectedIndex >= 0, [selectedIndex]);
   const selectedClass = useMemo(
     () => (selected ? `selected-${selectedIndex}` : ""),
     [selectedIndex, selected]
+  );
+  const [reward, setReward] = useState("");
+
+  const handleSelect = useCallback(
+    async (idx: number) => {
+      const r = await drawReward();
+      setSelectedIndex(idx);
+      setReward(r);
+    },
+    [drawReward]
   );
 
   return (
@@ -27,7 +40,7 @@ const LootBox: React.FC<{ count: number }> = ({ count }) => {
         idx == selectedIndex ? (
           <CardInfo
             key={idx}
-            cardId="anubis"
+            cardId={reward}
             className="animate__animated animate__flipInY"
           />
         ) : (
@@ -36,7 +49,7 @@ const LootBox: React.FC<{ count: number }> = ({ count }) => {
             className="animate__animated animate__zoomInDown"
             disabled={selectedIndex >= 0}
             selected={selectedIndex == idx}
-            onClick={() => setSelectedIndex(idx)}
+            onClick={() => handleSelect(idx)}
           />
         )
       )}

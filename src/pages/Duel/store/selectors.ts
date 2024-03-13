@@ -29,6 +29,8 @@ export const selectMySupports = (state: RootState) => state.duel.my.support;
 export const selectSelectedReservesIndices = (state: RootState) =>
   state.duel.my.deploymentPlan?.selectedReservesIndices;
 
+export const selectResult = (state: RootState) => state.duel.result;
+
 export const selectMyFusionQueue = createSelector(
   (state: RootState) => state.duel.my.deploymentPlan?.selectedReservesIndices,
   (state: RootState) => state.duel.my.reserves,

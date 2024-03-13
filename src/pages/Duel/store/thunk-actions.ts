@@ -5,11 +5,13 @@ import {
   calculateBattleAnimationDuration,
   calculateFusionAnimationDuration,
   generateTheirDeck,
+  getDungeonReward as getReward,
 } from "../service";
 import { delay } from "../utils/delay";
 import { jake } from "./ai/jake";
 import { breedPals } from "../../pals/service";
 import { Dungeon } from "../../Dungeons/model";
+import { getDungeon } from "../../Dungeons/service";
 
 type SideSelector = (state: State) => Side;
 
@@ -51,6 +53,13 @@ export const dungeonStarted =
       duelSlice.actions.started({ myDeck, theirDeck, dungeon: dungeon.type })
     );
     dispatch(duelSlice.actions.myCardsDrawed());
+  };
+
+export const getDungeonReward =
+  () => async (dispatch: AppDispatch, getState: () => RootState) => {
+    const state = getState();
+    const type = state.duel.dungeon;
+    return getReward(type);
   };
 
 export const duelStarted: AppThunkAction = () => async (dispatch, getState) => {

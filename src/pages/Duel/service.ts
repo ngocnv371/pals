@@ -12,6 +12,7 @@ import {
 } from "./model";
 import { breedPals, getAllPals, getPalById } from "../pals/service";
 import { DECK_SIZE } from "../Deck/model";
+import { getDungeon } from "../Dungeons/service";
 const chance = new Chance();
 
 export function generateTheirDeck() {
@@ -19,6 +20,19 @@ export function generateTheirDeck() {
     () => chance.pickone(getAllPals().filter((p) => p.rarity < 5)).id,
     DECK_SIZE
   );
+}
+
+export function getDungeonReward(type?: string): string {
+  if (!type) {
+    return "chickenpal";
+  }
+
+  const dungeon = getDungeon(type);
+  if (!dungeon) {
+    return "chickenpal";
+  }
+
+  return chance.pickone(dungeon.bosses);
 }
 
 export function initSide(): Side {
