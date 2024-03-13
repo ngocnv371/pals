@@ -1,0 +1,124 @@
+[
+  {
+    "type": "Hillside Cavern",
+    "level": 13,
+    "wilds": ["Daedream", "Fuddler", "Killamari", "Mau"],
+    "bosses": [
+      "Tanzee",
+      "Jolthog",
+      "Gumoss",
+      "Depresso",
+      "Fuddler",
+      "Killamari",
+      "Mau",
+      "Direhowl",
+      "Caprity",
+      "Melpaca",
+      "Eikthyrdeer"
+    ]
+  },
+  {
+    "type": "Isolated Island Cavern",
+    "level": 13,
+    "wilds": ["Daedream", "Fuddler", "Killamari", "Mau"],
+    "bosses": [
+      "Cattiva",
+      "Chikipi",
+      "Fuack",
+      "Gumoss",
+      "Hoocrates",
+      "Depresso",
+      "Daedream",
+      "Fuddler",
+      "Killamari",
+      "Celaray",
+      "Eikthyrdeer",
+      "Tombat"
+    ]
+  },
+  {
+    "type": "Ravine Grotto",
+    "level": 19,
+    "wilds": ["Daedream", "Nox", "Fuddler", "Mau"],
+    "bosses": [
+      "Tocotoco",
+      "Woolipop",
+      "Ribbuny",
+      "Dumud",
+      "Galeclaw",
+      "Swee",
+      "Sweepa",
+      "Surfent"
+    ]
+  },
+  {
+    "type": "Mountain Stream Grotto",
+    "level": 29,
+    "wilds": ["Loupmoon", "Beegarde", "Grintale", "Katress", "Felbat"],
+    "bosses": [
+      "Flopie",
+      "Bristla",
+      "Gobfin",
+      "Mossanda",
+      "Robinquill",
+      "Gorirat",
+      "Katress",
+      "Felbat"
+    ]
+  },
+  {
+    "type": "Cavern of the Dunes",
+    "level": 35,
+    "wilds": [
+      "Tocotoco",
+      "Incineram",
+      "Leezpunk Ignis",
+      "Pyrin Noct",
+      "Blazehowl Noct"
+    ],
+    "bosses": [
+      "Nitewing",
+      "Incineram",
+      "Dumud",
+      "Pyrin",
+      "Flambelle",
+      "Bushi",
+      "Ragnahawk",
+      "Wixen",
+      "Blazehowl",
+      "Reptyro",
+      "Fenglope"
+    ]
+  },
+  {
+    "type": "Volcanic Cavern",
+    "level": 40,
+    "wilds": ["Fuddler", "Tocotoco", "Mossanda Lux", "Cawgnito", "Lovander"],
+    "bosses": [
+      "Nitewing",
+      "Cawgnito",
+      "Leezpunk",
+      "Robinquill Terra",
+      "Dinossom Lux",
+      "Surfent Terra"
+    ]
+  },
+  {
+    "type": "Sacred Mountain Cavern",
+    "level": 45,
+    "wilds": ["Lunaris", "Maraith", "Tombat", "Sibelyx"],
+    "bosses": [
+      "Pengullet",
+      "Chillet",
+      "Reindrix",
+      "Maraith",
+      "Tombat",
+      "Vanwyrm Cryst",
+      "Elphidran",
+      "Cryolinx",
+      "Wumpo",
+      "Quivern",
+      "Suzaku Aqua"
+    ]
+  }
+]

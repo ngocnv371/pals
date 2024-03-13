@@ -14,6 +14,8 @@ TBD.
 
 Visit [https://game8.co/games/Palworld/archives/440117] and get it from each table.
 
+Inspect each table, then:
+
 ```js
 const bag = [];
 $0.querySelectorAll("tr").forEach((tr) => {
@@ -34,3 +36,9 @@ $0.querySelectorAll("tr").forEach((tr) => {
 });
 bag;
 ```
+
+# get dungeons
+
+Visit [https://game8.co/games/Palworld/archives/440211].
+
+Extract data manually.
