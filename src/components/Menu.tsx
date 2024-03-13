@@ -10,7 +10,7 @@ import {
 } from "@ionic/react";
 
 import "./Menu.css";
-import { bag, book, bug, card, folder, play } from "ionicons/icons";
+import { bag, book, bug, card, folder, location, play } from "ionicons/icons";
 
 const Menu: React.FC = () => {
   return (
@@ -33,6 +33,12 @@ const Menu: React.FC = () => {
             <IonItem routerLink="/book">
               <IonIcon slot="start" icon={folder} />
               <IonLabel>Collection</IonLabel>
+            </IonItem>
+          </IonMenuToggle>
+          <IonMenuToggle>
+            <IonItem routerLink="/dungeons">
+              <IonIcon slot="start" icon={location} />
+              <IonLabel>Dungeons</IonLabel>
             </IonItem>
           </IonMenuToggle>
           <IonMenuToggle>

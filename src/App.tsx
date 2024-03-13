@@ -40,6 +40,7 @@ import TestBattleVisualizerPage from "./pages/Tests/TestBattleVisualizer";
 import DuelResultPage from "./pages/DuelResult";
 import BookPage from "./pages/Book";
 import LobbyPage from "./pages/Lobby";
+import DungeonsPage from "./pages/Dungeons";
 
 setupIonicReact();
 
@@ -65,6 +66,9 @@ const App: React.FC = () => {
               </Route>
               <Route path="/lobby" exact={true}>
                 <LobbyPage />
+              </Route>
+              <Route path="/dungeons" exact={true}>
+                <DungeonsPage />
               </Route>
               <Route path="/tests" exact={true}>
                 <TestsPage />

@@ -1,5 +1,5 @@
 import { State, duelSlice } from "./duelSlice";
-import { AppThunkAction } from "../../../store";
+import { AppDispatch, AppThunkAction, RootState } from "../../../store";
 import { CardStance, Side } from "../model";
 import {
   calculateBattleAnimationDuration,
@@ -9,6 +9,7 @@ import {
 import { delay } from "../utils/delay";
 import { jake } from "./ai/jake";
 import { breedPals } from "../../pals/service";
+import { Dungeon } from "../../Dungeons/model";
 
 type SideSelector = (state: State) => Side;
 
@@ -39,6 +40,16 @@ function fuseAllThenPlace(
     dispatch(attackAction);
   };
 }
+
+export const dungeonStarted =
+  (dungeon: Dungeon) =>
+  async (dispatch: AppDispatch, getState: () => RootState) => {
+    const state = getState();
+    const myDeck = state.deck.ids.map((i) => state.deck.entities[i].cardId);
+    const theirDeck = dungeon.wilds.concat(dungeon.bosses);
+    dispatch(duelSlice.actions.started({ myDeck, theirDeck }));
+    dispatch(duelSlice.actions.myCardsDrawed());
+  };
 
 export const duelStarted: AppThunkAction = () => async (dispatch, getState) => {
   const state = getState();
