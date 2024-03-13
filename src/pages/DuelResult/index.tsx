@@ -10,6 +10,7 @@ import {
 import { useAppSelector } from "../../store/hooks";
 import "./styles.css";
 import ResultMessage from "./ResultMessage";
+import LootBox from "../../components/LootBox";
 
 const DuelResultPage: React.FC = () => {
   const result = useAppSelector((state) => state.duel.result);
@@ -33,6 +34,7 @@ const DuelResultPage: React.FC = () => {
         </IonHeader>
         <div className="container">
           <ResultMessage result={result} />
+          <LootBox count={3} />
         </div>
       </IonContent>
     </IonPage>
