@@ -25,7 +25,7 @@ export const CardInfo: React.FC<
         }`}
         {...props}
       >
-        <IonImg src={`/backside.png`}></IonImg>
+        <IonImg src={`/backside-small.png`}></IonImg>
       </IonCard>
     );
   }
