@@ -53,6 +53,7 @@ see [BATTLEFLOW.MD](docs/BATTLEFLOW.MD)
 
 # completed
 
+- ✅ card backside
 - ✅ add lobby page
 - ✅ display card types
 - ✅ sort deck
