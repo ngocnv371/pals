@@ -52,11 +52,11 @@ see [BATTLEFLOW.MD](docs/BATTLEFLOW.MD)
   - how to trigger duel
   - quests?
 - deck
-  - sort cards
   - easier card moving
 
 # completed
 
+- ✅ sort deck
 - ✅ book virtual scrolling
 - ✅ book filter
 - ✅ tranform raw data

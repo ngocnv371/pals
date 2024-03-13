@@ -20,6 +20,7 @@ import { selectFiltered, selectTotal } from "./deckSlice";
 import { arrowForward } from "ionicons/icons";
 import Filter from "../../models/filter";
 import { GridItem } from "../../components/Grid/GridItem";
+import FilterButton from "../Book/FilterButton";
 
 const defaultFilter = {
   query: "",
@@ -39,6 +40,11 @@ const DeckPage: React.FC = () => {
     []
   );
 
+  const handleFilterChanged = useCallback((value: Filter) => {
+    setFilter(value);
+    console.debug("filter updated", value);
+  }, []);
+
   return (
     <IonPage>
       <IonHeader>
@@ -50,10 +56,7 @@ const DeckPage: React.FC = () => {
             Deck ({total}/{DECK_SIZE})
           </IonTitle>
           <IonButtons slot="end">
-            <IonButton routerLink="/book">
-              Collection
-              <IonIcon icon={arrowForward} slot="end" />
-            </IonButton>
+            <FilterButton value={filter} onChange={handleFilterChanged} />
           </IonButtons>
         </IonToolbar>
       </IonHeader>

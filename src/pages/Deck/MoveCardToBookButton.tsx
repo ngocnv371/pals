@@ -1,8 +1,7 @@
-import { IonButton, IonIcon } from "@ionic/react";
+import { IonButton } from "@ionic/react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useCallback } from "react";
 import { moveToBook, selectDeckItemById } from "./deckSlice";
-import { remove } from "ionicons/icons";
 
 const MoveCardToBookButton: React.FC<{ bookId: string }> = ({ bookId }) => {
   const dispatch = useAppDispatch();
@@ -18,8 +17,7 @@ const MoveCardToBookButton: React.FC<{ bookId: string }> = ({ bookId }) => {
 
   return (
     <IonButton onClick={handleClick} fill="clear">
-      <IonIcon icon={remove} />
-      From Deck
+      Remove From Deck
     </IonButton>
   );
 };

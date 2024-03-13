@@ -1,8 +1,7 @@
-import { IonButton, IonIcon } from "@ionic/react";
+import { IonButton } from "@ionic/react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { moveToDeck, selectBookItemById } from "./bookSlice";
 import { useCallback } from "react";
-import { add } from "ionicons/icons";
 import { canAdd } from "../Deck/deckSlice";
 
 const MoveCardToDeckButton: React.FC<{ bookId: string }> = ({ bookId }) => {
@@ -20,7 +19,7 @@ const MoveCardToDeckButton: React.FC<{ bookId: string }> = ({ bookId }) => {
 
   return (
     <IonButton onClick={handleClick} fill="clear" disabled={disabled}>
-      <IonIcon icon={add} /> To Deck
+      Add To Deck
     </IonButton>
   );
 };
