@@ -4,7 +4,7 @@ import {
   createSelector,
 } from "@reduxjs/toolkit";
 import { Chance } from "chance";
-import { DECK_SIZE, DeckItem } from "../Deck/model";
+import { DECK_SIZE, BookItem } from "../Deck/model";
 import { generateItem } from "../Deck/service";
 import { AppDispatch, RootState } from "../../store";
 import { addedToDeck } from "../Deck/deckSlice";
@@ -14,7 +14,7 @@ import Filter from "../../models/filter";
 import { filterBookItems } from "./service";
 const chance = new Chance();
 
-const adapter = createEntityAdapter<DeckItem>();
+const adapter = createEntityAdapter<BookItem>();
 
 const initialState = adapter.addMany(
   adapter.getInitialState(),
@@ -43,7 +43,7 @@ export const selectFiltered = (filter: Filter) =>
 export const { added: addedToBook } = bookSlice.actions;
 
 export const moveToDeck =
-  (item: DeckItem) =>
+  (item: BookItem) =>
   async (dispatch: AppDispatch, getState: () => RootState) => {
     const state = getState();
     if (state.deck.ids.length >= DECK_SIZE) {

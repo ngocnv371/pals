@@ -1,6 +1,6 @@
-export interface DeckItem {
+export interface BookItem {
   id: string;
-  type: string;
+  cardId: string;
 }
 
 export const DECK_SIZE = 40;

@@ -1,12 +1,12 @@
 import Filter from "../../models/filter";
 import Pal from "../../models/pal";
-import { DeckItem, DECK_SIZE } from "../Deck/model";
+import { BookItem, DECK_SIZE } from "../Deck/model";
 import { getPalById, Sorters } from "../pals/service";
 
-export function filterBookItems(items: DeckItem[], filter: Filter) {
+export function filterBookItems(items: BookItem[], filter: Filter) {
   const { query, asc, sort } = filter;
   const inflatedItems = items.map((i) => ({
-    ...getPalById(i.type),
+    ...getPalById(i.cardId),
     bookId: i.id,
   }));
   const lowercaseQuery = query.toLocaleLowerCase();

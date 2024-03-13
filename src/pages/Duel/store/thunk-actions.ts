@@ -42,7 +42,7 @@ function fuseAllThenPlace(
 
 export const duelStarted: AppThunkAction = () => async (dispatch, getState) => {
   const state = getState();
-  const myDeck = state.deck.ids.map((i) => state.deck.entities[i].type);
+  const myDeck = state.deck.ids.map((i) => state.deck.entities[i].cardId);
   const theirDeck = generateTheirDeck();
   dispatch(duelSlice.actions.started({ myDeck, theirDeck }));
   dispatch(duelSlice.actions.myCardsDrawed());

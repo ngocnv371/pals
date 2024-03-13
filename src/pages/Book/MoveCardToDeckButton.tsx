@@ -15,7 +15,6 @@ const MoveCardToDeckButton: React.FC<{ bookId: string }> = ({ bookId }) => {
   }, [item]);
 
   if (!item) {
-    console.debug("card not found", bookId);
     return null;
   }
 
