@@ -17,22 +17,8 @@ const DuelResultPage: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>Duel Result</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Duel Result</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <div className="container">
+        <div className="container bg1">
           <ResultMessage result={result} />
           <LootBox count={3} />
         </div>

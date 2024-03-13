@@ -9,5 +9,12 @@
 
   h1 {
     font-size: 300%;
+    text-shadow: 2px 2px 4px aqua;
   }
+}
+
+.bg1 {
+  background-image: url("/background/bg1.png");
+  background-size: cover;
+  background-position: center;
 }
