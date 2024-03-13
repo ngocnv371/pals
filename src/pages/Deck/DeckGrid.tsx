@@ -16,7 +16,8 @@ const DeckGrid: React.FC<{
         {deck.map((p) => (
           <GridItem
             key={p.id}
-            item={p}
+            id={p.id}
+            type={p.type}
             selected={selected?.id == p.id}
             onClick={() => onSelect && onSelect(p)}
           />
