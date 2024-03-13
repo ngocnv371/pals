@@ -4,3 +4,22 @@
   bottom: 0;
   width: 95%;
 }
+.deck-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.deck-grid {
+  > div {
+    display: flex;
+    position: relative;
+    padding: 0.3em;
+  }
+
+  ion-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}

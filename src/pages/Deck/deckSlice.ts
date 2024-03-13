@@ -8,6 +8,8 @@ import { DECK_SIZE, DeckItem } from "./model";
 import { generateItem } from "./service";
 import { AppDispatch, RootState } from "../../store";
 import { addedToBook } from "../Book/bookSlice";
+import Filter from "../../models/filter";
+import { filterBookItems } from "../Book/service";
 
 const chance = new Chance();
 
@@ -34,6 +36,9 @@ export const {
 } = adapter.getSelectors((state: RootState) => state.deck);
 
 export const canAdd = createSelector(selectTotal, (total) => total < DECK_SIZE);
+
+export const selectFiltered = (filter: Filter) =>
+  createSelector(selectAllDeckItems, (items) => filterBookItems(items, filter));
 
 export const { added: addedToDeck } = deckSlice.actions;
 

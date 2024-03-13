@@ -5,17 +5,17 @@ import { useCallback } from "react";
 import { add } from "ionicons/icons";
 import { canAdd } from "../Deck/deckSlice";
 
-const MoveCardToDeckButton: React.FC<{ cardId: string }> = ({ cardId }) => {
+const MoveCardToDeckButton: React.FC<{ bookId: string }> = ({ bookId }) => {
   const dispatch = useAppDispatch();
-  const card = useAppSelector((state) => selectBookItemById(state, cardId));
+  const item = useAppSelector((state) => selectBookItemById(state, bookId));
   const disabled = !useAppSelector(canAdd);
 
   const handleClick = useCallback(() => {
-    dispatch(moveToDeck(card));
-  }, [card]);
+    dispatch(moveToDeck(item));
+  }, [item]);
 
-  if (!card) {
-    console.debug("card not found", cardId);
+  if (!item) {
+    console.debug("card not found", bookId);
     return null;
   }
 

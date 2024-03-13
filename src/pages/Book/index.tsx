@@ -82,7 +82,7 @@ const BookPage: React.FC = () => {
 
       {Boolean(selected) && (
         <IonFooter>
-          <CardToolbar cardId={selected!.bookId} />
+          <CardToolbar bookId={selected!.bookId} />
           <CardFlavor cardId={selected!.id} />
         </IonFooter>
       )}

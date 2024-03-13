@@ -7,27 +7,35 @@ import {
   IonTitle,
   IonContent,
   IonFooter,
-  IonRouterLink,
   IonButton,
   IonIcon,
 } from "@ionic/react";
 import { useCallback, useState } from "react";
 import "./styles.css";
-import DeckGrid from "./DeckGrid";
-import { DECK_SIZE, DeckItem } from "./model";
+import { DECK_SIZE } from "./model";
 import CardFlavor from "../../components/Card/CardFlavor";
 import CardToolbar from "./CardToolbar";
 import { useAppSelector } from "../../store/hooks";
-import { selectTotal } from "./deckSlice";
+import { selectFiltered, selectTotal } from "./deckSlice";
 import { arrowForward } from "ionicons/icons";
+import Filter from "../../models/filter";
+import { GridItem } from "../../components/Grid/GridItem";
+
+const defaultFilter = {
+  query: "",
+  asc: true,
+  sort: "name",
+};
 
 const DeckPage: React.FC = () => {
-  const [selected, setSelected] = useState<DeckItem>();
+  const [filter, setFilter] = useState<Filter>(defaultFilter);
+  const [selected, setSelected] = useState<(typeof filtered)["items"][0]>();
   const total = useAppSelector(selectTotal);
+  const filtered = useAppSelector(selectFiltered(filter));
 
   const toggle = useCallback(
-    (value: DeckItem) =>
-      setSelected((old) => (old?.id == value.id ? undefined : value)),
+    (item: typeof selected) =>
+      setSelected((old) => (old?.id == item?.id ? undefined : item)),
     []
   );
 
@@ -51,13 +59,23 @@ const DeckPage: React.FC = () => {
       </IonHeader>
 
       <IonContent fullscreen>
-        <DeckGrid selected={selected} onSelect={toggle} />
+        <div className="deck-grid">
+          {filtered.items.map((item) => (
+            <GridItem
+              key={item.bookId}
+              id={item.bookId}
+              type={item.id}
+              selected={item.bookId == selected?.bookId}
+              onClick={() => toggle(item)}
+            />
+          ))}
+        </div>
       </IonContent>
 
       {Boolean(selected) && (
         <IonFooter>
-          <CardToolbar cardId={selected!.id} />
-          <CardFlavor cardId={selected!.type} />
+          <CardToolbar bookId={selected!.bookId} />
+          <CardFlavor cardId={selected!.id} />
         </IonFooter>
       )}
     </IonPage>

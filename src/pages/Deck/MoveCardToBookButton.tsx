@@ -4,15 +4,15 @@ import { useCallback } from "react";
 import { moveToBook, selectDeckItemById } from "./deckSlice";
 import { remove } from "ionicons/icons";
 
-const MoveCardToBookButton: React.FC<{ cardId: string }> = ({ cardId }) => {
+const MoveCardToBookButton: React.FC<{ bookId: string }> = ({ bookId }) => {
   const dispatch = useAppDispatch();
-  const card = useAppSelector((state) => selectDeckItemById(state, cardId));
+  const item = useAppSelector((state) => selectDeckItemById(state, bookId));
 
   const handleClick = useCallback(() => {
-    dispatch(moveToBook(card));
-  }, [card]);
+    dispatch(moveToBook(item));
+  }, [item]);
 
-  if (!card) {
+  if (!item) {
     return null;
   }
 
