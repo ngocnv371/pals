@@ -9,6 +9,7 @@ export const gridComponents: GridComponents<any> = {
       style={{
         display: "flex",
         flexWrap: "wrap",
+        justifyContent: "space-evenly",
         ...style,
       }}
     >
@@ -19,7 +20,6 @@ export const gridComponents: GridComponents<any> = {
     <div
       {...props}
       style={{
-        width: "25%",
         display: "flex",
         flex: "none",
         alignContent: "stretch",
