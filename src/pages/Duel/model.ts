@@ -39,6 +39,10 @@ export interface Side {
    */
   reserves: string[];
   /**
+   * dead cards
+   */
+  graveyard: string[];
+  /**
    * first line for offensive/defensive
    */
   forward: Formation;

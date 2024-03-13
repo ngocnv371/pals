@@ -11,7 +11,7 @@ import {
   TargetCell as DeploymentTarget,
 } from "./model";
 import { breedPals, getAllPals, getPalById } from "../pals/service";
-import { DECK_SIZE } from "../Deck/model";
+import { DECK_SIZE, DUMMY_CARD } from "../Deck/model";
 import { getDungeon } from "../Dungeons/service";
 const chance = new Chance();
 
@@ -22,23 +22,20 @@ export function generateTheirDeck() {
   );
 }
 
-export function getDungeonReward(type?: string): string {
-  if (!type) {
-    return "chickenpal";
-  }
-
-  const dungeon = getDungeon(type);
-  if (!dungeon) {
-    return "chickenpal";
-  }
-
-  return chance.pickone(dungeon.bosses);
+/**
+ * get a reward from the graveyard
+ * @param side
+ * @returns
+ */
+export function getReward(side: Side): string {
+  return chance.pickone(side.graveyard) || DUMMY_CARD;
 }
 
 export function initSide(): Side {
   return {
     life: 2000,
     deck: [],
+    graveyard: [],
     reserves: [],
     forward: [null, null, null, null, null],
     support: [null, null, null, null, null],
@@ -345,6 +342,15 @@ export function getBattle(side: Side, otherSide: Side): Battle | undefined {
   };
 }
 
+function destroyPosition(side: Side, index: number) {
+  const cardId = side.forward[index]?.cardId;
+  side.forward[index!] = null;
+  if (cardId) {
+    console.debug("sending to graveyard", cardId);
+    side.graveyard.push(cardId);
+  }
+}
+
 export function endBattle(side: Side, other: Side) {
   const battle = getBattle(side, other)!;
   const { card1, card2, card2Stance } = battle;
@@ -365,7 +371,7 @@ export function endBattle(side: Side, other: Side) {
 
     // destroy target
     if (plan.targetIndex! >= 0) {
-      other.forward[plan.targetIndex!] = null;
+      destroyPosition(other, plan.targetIndex!);
     }
     side.forward[plan.unitIndex!]!.acted = true;
     // attacked unit is always offensive
@@ -378,7 +384,7 @@ export function endBattle(side: Side, other: Side) {
       }
 
       // destroy unit
-      side.forward[plan.unitIndex!] = null;
+      destroyPosition(side, plan.unitIndex!);
     } else {
       side.forward[plan.unitIndex!]!.acted = true;
     }
@@ -386,8 +392,8 @@ export function endBattle(side: Side, other: Side) {
     // tie
     if (card2Stance == CardStance.Offensive) {
       // mutual destruction
-      side.forward[plan.unitIndex!] = null;
-      other.forward[plan.targetIndex!] = null;
+      destroyPosition(side, plan.unitIndex!);
+      destroyPosition(other, plan.targetIndex!);
     } else {
       // attacked unit is always offensive
       side.forward[plan.unitIndex!]!.stance = CardStance.Offensive;

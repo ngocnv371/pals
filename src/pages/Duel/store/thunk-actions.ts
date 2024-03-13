@@ -5,7 +5,7 @@ import {
   calculateBattleAnimationDuration,
   calculateFusionAnimationDuration,
   generateTheirDeck,
-  getDungeonReward as getReward,
+  getReward,
 } from "../service";
 import { delay } from "../utils/delay";
 import { jake } from "./ai/jake";
@@ -55,11 +55,11 @@ export const dungeonStarted =
     dispatch(duelSlice.actions.myCardsDrawed());
   };
 
-export const getDungeonReward =
+export const getDuelReward =
   () => async (dispatch: AppDispatch, getState: () => RootState) => {
     const state = getState();
-    const type = state.duel.dungeon;
-    return getReward(type);
+    const their = state.duel.their;
+    return getReward(their);
   };
 
 export const duelStarted: AppThunkAction = () => async (dispatch, getState) => {

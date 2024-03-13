@@ -4,3 +4,4 @@ export interface BookItem {
 }
 
 export const DECK_SIZE = 40;
+export const DUMMY_CARD = "chickenpal";

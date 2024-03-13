@@ -4,7 +4,7 @@ import "./styles.css";
 import ResultMessage from "./ResultMessage";
 import LootBox from "../../components/LootBox";
 import { useCallback } from "react";
-import { getDungeonReward } from "../Duel/store/thunk-actions";
+import { getDuelReward } from "../Duel/store/thunk-actions";
 import { selectResult } from "../Duel/store/selectors";
 
 const DuelResultPage: React.FC = () => {
@@ -12,7 +12,7 @@ const DuelResultPage: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const handleDrawReward = useCallback(async () => {
-    const reward = await dispatch(getDungeonReward());
+    const reward = await dispatch(getDuelReward());
     return reward;
   }, []);
 
@@ -22,7 +22,7 @@ const DuelResultPage: React.FC = () => {
         <div className="container bg1">
           <ResultMessage result={result} />
           {result == "win" && (
-            <LootBox count={3} drawReward={handleDrawReward} />
+            <LootBox count={5} drawReward={handleDrawReward} />
           )}
         </div>
       </IonContent>

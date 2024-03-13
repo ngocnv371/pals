@@ -212,9 +212,7 @@ export const duelSlice = createSlice({
         state.result = "tie";
       }
 
-      state.stage = DuelStage.Start;
-      state.my = initSide();
-      state.their = initSide();
+      state.stage = DuelStage.End;
     },
   },
 });
