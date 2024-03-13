@@ -6,6 +6,7 @@ import LootBox from "../../components/LootBox";
 import { useCallback } from "react";
 import { getDuelReward } from "../Duel/store/thunk-actions";
 import { selectResult } from "../Duel/store/selectors";
+import FindMatchButton from "../Lobby/FindMatchButton";
 
 const DuelResultPage: React.FC = () => {
   const result = useAppSelector(selectResult);
@@ -24,6 +25,7 @@ const DuelResultPage: React.FC = () => {
           {result == "win" && (
             <LootBox count={5} drawReward={handleDrawReward} />
           )}
+          <FindMatchButton label="Rematch" />
         </div>
       </IonContent>
     </IonPage>

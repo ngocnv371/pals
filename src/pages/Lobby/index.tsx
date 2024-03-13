@@ -1,37 +1,27 @@
 import {
-  IonButton,
   IonButtons,
-  IonCard,
   IonContent,
   IonHeader,
-  IonIcon,
   IonMenuButton,
   IonPage,
   IonProgressBar,
   IonTitle,
   IonToolbar,
-  useIonRouter,
 } from "@ionic/react";
 import MatchSettingsCard from "./MatchSettingsCard";
-import { search } from "ionicons/icons";
-import { useState } from "react";
-import { useAppDispatch } from "../../store/hooks";
-import { duelStarted } from "../Duel/store/thunk-actions";
+import { useCallback, useState } from "react";
+import FindMatchButton from "./FindMatchButton";
 
 const LobbyPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
-  const router = useIonRouter();
-  const dispatch = useAppDispatch();
 
-  const handleFind = () => {
+  const handleFind = useCallback(() => {
     setLoading(true);
-    // fake search
+    // disable for just a bit
     setTimeout(() => {
       setLoading(false);
-      dispatch(duelStarted());
-      router.push("/duel");
     }, 1200);
-  };
+  }, []);
 
   return (
     <IonPage>
@@ -53,10 +43,7 @@ const LobbyPage: React.FC = () => {
         </IonHeader>
         <MatchSettingsCard />
         <div className="ion-padding flex ion-justify-content-center">
-          <IonButton size="large" onClick={handleFind}>
-            <IonIcon slot="start" icon={search} />
-            Find Match
-          </IonButton>
+          <FindMatchButton onClick={handleFind} />
         </div>
       </IonContent>
     </IonPage>
