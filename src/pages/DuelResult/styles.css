@@ -9,7 +9,8 @@
 
   h1 {
     font-size: 300%;
-    text-shadow: 2px 2px 4px aqua;
+    text-shadow: 2px 2px 4px #014949;
+    text-align: center;
   }
 }
 
