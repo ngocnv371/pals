@@ -8,3 +8,4 @@ Run them with `nodejs`.
 
 - `node ./transform-pals.js` -> [pals.json](../src/data/pals.json)
 - `node ./transform-fusion.js` -> [fusion.json](../src/data/fusion.json)
+- `node ./transform-dungeons.js` -> [dungeons.json](../src/data/dungeons.json)
