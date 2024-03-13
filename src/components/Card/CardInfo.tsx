@@ -20,7 +20,7 @@ export const CardInfo: React.FC<
   if (hidden) {
     return (
       <IonCard
-        className={`card-info ${className ?? ""} ${
+        className={`card-info ${className ? className : ""} ${
           defensive ? "defensive" : ""
         }`}
         {...props}
@@ -33,7 +33,11 @@ export const CardInfo: React.FC<
   const longTitle = card.name.length > 10;
 
   return (
-    <IonCard className={`card-info ${defensive ? "defensive" : ""}`}>
+    <IonCard
+      className={`card-info ${className ? className : ""} ${
+        defensive ? "defensive" : ""
+      }`}
+    >
       <IonImg src={`/pals/${card.image}`}></IonImg>
       <p className={`title ${longTitle ? "long" : ""}`}>{card.name}</p>
       <p className="power">

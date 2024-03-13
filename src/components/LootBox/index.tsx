@@ -12,22 +12,31 @@ const Box: React.FC<{
 
 const LootBox: React.FC<{ count: number }> = ({ count }) => {
   const items = useMemo(() => Array.from({ length: count }).fill(0), [count]);
-  const [selected, setSelected] = useState(-1);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const selected = useMemo(() => selectedIndex >= 0, [selectedIndex]);
   const selectedClass = useMemo(
-    () => (selected >= 0 ? `selected-${selected}` : ""),
-    [selected]
+    () => (selected ? `selected-${selectedIndex}` : ""),
+    [selectedIndex, selected]
   );
 
   return (
     <div className={`loot-box ion-padding ${selectedClass}`}>
-      {items.map((_, idx) => (
-        <Box
-          key={idx}
-          disabled={selected >= 0}
-          selected={selected == idx}
-          onClick={() => setSelected(idx)}
-        />
-      ))}
+      {items.map((_, idx) =>
+        idx == selectedIndex ? (
+          <CardInfo
+            key={idx}
+            cardId="anubis"
+            className="animate__animated animate__flipInY"
+          />
+        ) : (
+          <Box
+            key={idx}
+            disabled={selectedIndex >= 0}
+            selected={selectedIndex == idx}
+            onClick={() => setSelectedIndex(idx)}
+          />
+        )
+      )}
     </div>
   );
 };
