@@ -8,7 +8,7 @@ import {
   IonContent,
   IonFooter,
 } from "@ionic/react";
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import CardFlavor from "../../components/Card/CardFlavor";
 import { useAppSelector } from "../../store/hooks";
 import { selectFiltered, selectTotal } from "./bookSlice";
@@ -26,10 +26,11 @@ const defaultFilter = {
 };
 
 const BookPage: React.FC = () => {
-  const total = useAppSelector(selectTotal);
   const [filter, setFilter] = useState<Filter>(defaultFilter);
-  const filtered = useAppSelector(selectFiltered(filter));
   const [selected, setSelected] = useState<(typeof filtered)["items"][0]>();
+  const total = useAppSelector(selectTotal);
+  const filterSelector = React.useMemo(() => selectFiltered(filter), [filter]);
+  const filtered = useAppSelector(filterSelector);
 
   const toggle = useCallback(
     (item: typeof selected) =>

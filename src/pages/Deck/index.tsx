@@ -10,7 +10,7 @@ import {
   IonButton,
   IonIcon,
 } from "@ionic/react";
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import "./styles.css";
 import { DECK_SIZE } from "./model";
 import CardFlavor from "../../components/Card/CardFlavor";
@@ -32,7 +32,8 @@ const DeckPage: React.FC = () => {
   const [filter, setFilter] = useState<Filter>(defaultFilter);
   const [selected, setSelected] = useState<(typeof filtered)["items"][0]>();
   const total = useAppSelector(selectTotal);
-  const filtered = useAppSelector(selectFiltered(filter));
+  const filterSelector = React.useMemo(() => selectFiltered(filter), [filter]);
+  const filtered = useAppSelector(filterSelector);
 
   const toggle = useCallback(
     (item: typeof selected) =>
