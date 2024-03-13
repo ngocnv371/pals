@@ -47,7 +47,9 @@ export const dungeonStarted =
     const state = getState();
     const myDeck = state.deck.ids.map((i) => state.deck.entities[i].cardId);
     const theirDeck = dungeon.wilds.concat(dungeon.bosses);
-    dispatch(duelSlice.actions.started({ myDeck, theirDeck }));
+    dispatch(
+      duelSlice.actions.started({ myDeck, theirDeck, dungeon: dungeon.type })
+    );
     dispatch(duelSlice.actions.myCardsDrawed());
   };
 

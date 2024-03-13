@@ -46,6 +46,7 @@ export interface State {
    * result of the duel
    */
   result: DuelResult;
+  dungeon?: string;
 }
 
 const initialState: State = {
@@ -61,7 +62,11 @@ export const duelSlice = createSlice({
   reducers: {
     started(
       state,
-      action: PayloadAction<{ myDeck: string[]; theirDeck: string[] }>
+      action: PayloadAction<{
+        myDeck: string[];
+        theirDeck: string[];
+        dungeon?: string;
+      }>
     ) {
       state.my = initSide();
       state.my.deck = action.payload.myDeck;
@@ -69,6 +74,7 @@ export const duelSlice = createSlice({
       state.their.deck = action.payload.theirDeck;
       state.stage = DuelStage.Start;
       state.result = "unresolved";
+      state.dungeon = action.payload.dungeon;
     },
     myCardsDrawed(state) {
       refillReserves(state.my);
