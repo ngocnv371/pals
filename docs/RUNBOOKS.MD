@@ -9,3 +9,28 @@ Do it the same.
 # generate new card
 
 TBD.
+
+# get locations
+
+Visit [https://game8.co/games/Palworld/archives/440117] and get it from each table.
+
+```js
+const bag = [];
+$0.querySelectorAll("tr").forEach((tr) => {
+  if (!tr) {
+    return;
+  }
+
+  const first = tr.querySelector("td:nth-child(1)");
+  const second = tr.querySelector("td:nth-child(2)");
+  if (!first || !second) {
+    return;
+  }
+
+  bag.push({
+    name: first.innerText,
+    level: +second.innerText,
+  });
+});
+bag;
+```
