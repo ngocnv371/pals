@@ -10,11 +10,11 @@ import {
   IonLabel,
   IonList,
   IonNote,
-  IonText,
 } from "@ionic/react";
 import { shield } from "ionicons/icons";
 import "./CardFlavor.css";
 import { getPalById } from "../../pages/pals/service";
+import CardTypes from "./CardTypes";
 
 const CardFlavor: React.FC<{ cardId: string }> = ({ cardId }) => {
   const card = useMemo(() => getPalById(cardId), [cardId]);
@@ -22,21 +22,17 @@ const CardFlavor: React.FC<{ cardId: string }> = ({ cardId }) => {
     return null;
   }
 
-  const subtitle = useMemo(() => card.types.join(", "), [card]);
-
   return (
     <>
       <IonCard className="card-flavor ion-no-padding ion-no-margin flex">
         <IonImg src={`/pals/${card.image}`}></IonImg>
         <div>
           <IonCardHeader>
-            <IonCardTitle>
-              {card.name}
-              <IonText color="secondary" className="ion-padding-start">
-                {subtitle}
-              </IonText>
-            </IonCardTitle>
+            <IonCardTitle>{card.name}</IonCardTitle>
           </IonCardHeader>
+          <div className="ion-padding-start">
+            <CardTypes types={card.types} full />
+          </div>
           <IonCardContent>{card.description}</IonCardContent>
         </div>
       </IonCard>

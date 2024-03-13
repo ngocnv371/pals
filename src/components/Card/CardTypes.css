@@ -2,4 +2,7 @@
   ion-img {
     width: 20px;
   }
+  &.full ion-img {
+    width: 80px;
+  }
 }

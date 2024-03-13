@@ -1,11 +1,14 @@
 import { IonImg } from "@ionic/react";
 import "./CardTypes.css";
 
-const CardTypes: React.FC<{ types: string[] }> = ({ types }) => {
+const CardTypes: React.FC<{ types: string[]; full?: boolean }> = ({
+  types,
+  full,
+}) => {
   return (
-    <div className="card-types">
+    <div className={`card-types ${full ? "full" : ""}`}>
       {types.map((t) => (
-        <IonImg key={t} src={`/types/icons/${t}.png`} />
+        <IonImg key={t} src={`/types/${full ? "" : "icons/"}${t}.png`} />
       ))}
     </div>
   );
