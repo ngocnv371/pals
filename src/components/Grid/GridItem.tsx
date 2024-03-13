@@ -19,7 +19,12 @@ export const GridItem: React.FC<{
     >
       <CardInfo cardId={type} />
       {selected && (
-        <IonIcon icon={checkmarkCircle} size="large" color="primary" />
+        <IonIcon
+          className="marker"
+          icon={checkmarkCircle}
+          size="large"
+          color="primary"
+        />
       )}
     </div>
   );

@@ -1,6 +1,6 @@
 .grid-item {
   position: relative;
-  ion-icon {
+  ion-icon.marker {
     position: absolute;
     top: 0;
     right: 0;

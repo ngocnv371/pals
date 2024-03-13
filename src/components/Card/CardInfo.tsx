@@ -1,7 +1,8 @@
-import { IonCard, IonImg } from "@ionic/react";
+import { IonCard, IonIcon, IonImg } from "@ionic/react";
 import React, { useMemo } from "react";
 import "./CardInfo.css";
 import { getPalById } from "../../pages/pals/service";
+import CardTypes from "./CardTypes";
 
 export const CardInfo: React.FC<{
   cardId: string;
@@ -32,6 +33,8 @@ export const CardInfo: React.FC<{
         <span className="atk">{card.attack}</span>/
         <span className="def">{card.defense}</span>
       </p>
+
+      <CardTypes types={card.types} />
     </IonCard>
   );
 };

@@ -22,6 +22,7 @@ export const gridComponents: GridComponents<any> = {
       style={{
         display: "flex",
         flex: "none",
+        padding: "0.3em",
         alignContent: "stretch",
         boxSizing: "border-box",
       }}

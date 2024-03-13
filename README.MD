@@ -44,9 +44,6 @@ see [BATTLEFLOW.MD](docs/BATTLEFLOW.MD)
   - card inspection
   - display card element
   - can skip deployment
-  - improve fusion animation
-  - improve battle animation
-  - explosion effects
 - player progression
   - duel reward
   - how to trigger duel
