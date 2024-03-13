@@ -53,6 +53,8 @@ see [BATTLEFLOW.MD](docs/BATTLEFLOW.MD)
 
 # completed
 
+- ✅ can rematch
+- ✅ draw reward card from graveyard
 - ✅ card backside
 - ✅ add lobby page
 - ✅ display card types
