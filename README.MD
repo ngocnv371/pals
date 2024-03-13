@@ -43,6 +43,7 @@ see [BATTLEFLOW.MD](docs/BATTLEFLOW.MD)
   - use stage banner for guide
   - card inspection
   - can skip deployment
+  - can skip animation
 - player progression
   - duel reward
   - how to trigger duel
@@ -52,6 +53,7 @@ see [BATTLEFLOW.MD](docs/BATTLEFLOW.MD)
 
 # completed
 
+- ✅ add lobby page
 - ✅ display card types
 - ✅ sort deck
 - ✅ book virtual scrolling

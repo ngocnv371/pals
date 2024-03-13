@@ -1,5 +1,6 @@
 import {
   IonContent,
+  IonIcon,
   IonItem,
   IonLabel,
   IonList,
@@ -9,35 +10,34 @@ import {
 } from "@ionic/react";
 
 import "./Menu.css";
+import { bag, book, bug, card, folder, play } from "ionicons/icons";
 
 const Menu: React.FC = () => {
   return (
     <IonMenu contentId="main" type="overlay">
       <IonContent>
         <IonList>
-          <IonListHeader>Hello there</IonListHeader>
+          <IonMenuToggle>
+            <IonItem routerLink="/lobby">
+              <IonIcon slot="start" icon={play} />
+              <IonLabel>Find Match</IonLabel>
+            </IonItem>
+          </IonMenuToggle>
           <IonMenuToggle>
             <IonItem routerLink="/deck">
+              <IonIcon slot="start" icon="/icons/sword.svg" />
               <IonLabel>Deck</IonLabel>
             </IonItem>
           </IonMenuToggle>
           <IonMenuToggle>
             <IonItem routerLink="/book">
+              <IonIcon slot="start" icon={folder} />
               <IonLabel>Collection</IonLabel>
             </IonItem>
           </IonMenuToggle>
           <IonMenuToggle>
-            <IonItem routerLink="/inventory">
-              <IonLabel>Inventory</IonLabel>
-            </IonItem>
-          </IonMenuToggle>
-          <IonMenuToggle>
-            <IonItem routerLink="/duel">
-              <IonLabel>Duel</IonLabel>
-            </IonItem>
-          </IonMenuToggle>
-          <IonMenuToggle>
             <IonItem routerLink="/tests">
+              <IonIcon slot="start" icon={bug} />
               <IonLabel>Tests</IonLabel>
             </IonItem>
           </IonMenuToggle>
