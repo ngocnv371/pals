@@ -42,7 +42,6 @@ see [BATTLEFLOW.MD](docs/BATTLEFLOW.MD)
 - duel
   - use stage banner for guide
   - card inspection
-  - display card element
   - can skip deployment
 - player progression
   - duel reward
@@ -53,6 +52,7 @@ see [BATTLEFLOW.MD](docs/BATTLEFLOW.MD)
 
 # completed
 
+- ✅ display card types
 - ✅ sort deck
 - ✅ book virtual scrolling
 - ✅ book filter

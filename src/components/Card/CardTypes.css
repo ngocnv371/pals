@@ -1,8 +1,12 @@
 .card-types {
+  display: flex;
+
   ion-img {
     width: 20px;
+    margin-right: 2px;
   }
   &.full ion-img {
     width: 80px;
+    margin-right: var(--margin-end);
   }
 }

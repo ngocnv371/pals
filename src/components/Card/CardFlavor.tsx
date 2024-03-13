@@ -27,7 +27,7 @@ const CardFlavor: React.FC<{ cardId: string }> = ({ cardId }) => {
       <IonCard className="card-flavor ion-no-padding ion-no-margin flex">
         <IonImg src={`/pals/${card.image}`}></IonImg>
         <div>
-          <IonCardHeader>
+          <IonCardHeader style={{ paddingBottom: 0 }}>
             <IonCardTitle>{card.name}</IonCardTitle>
           </IonCardHeader>
           <div className="ion-padding-start">
