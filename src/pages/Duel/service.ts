@@ -13,6 +13,8 @@ import {
 import { breedPals, getAllPals, getPalById } from "../pals/service";
 import { DECK_SIZE, DUMMY_CARD } from "../Deck/model";
 import { getDungeon } from "../Dungeons/service";
+import { linearScale } from "../../utils/linearScale";
+import { getConfig } from "../config/service";
 const chance = new Chance();
 
 export function generateTheirDeck() {
@@ -31,9 +33,10 @@ export function getReward(side: Side): string {
   return chance.pickone(side.graveyard) || DUMMY_CARD;
 }
 
-export function initSide(): Side {
+export function initSide(level: number): Side {
   return {
-    life: 2000,
+    level,
+    life: getMaxLife(level),
     deck: [],
     graveyard: [],
     reserves: [],
@@ -42,8 +45,46 @@ export function initSide(): Side {
   };
 }
 
-export function refillReserves(side: Side) {
-  while (side.reserves.length < 5) {
+export function getMaxLife(level: number) {
+  if (level <= 0) {
+    return 1;
+  }
+
+  const config = getConfig().duel.life.scale.byLevel;
+  if (level >= config.level) {
+    return config.linear.to;
+  }
+
+  const scale = linearScale(
+    config.linear.from,
+    config.linear.to,
+    config.level - 1
+  );
+  const value = scale.find((i) => i > level) || 1;
+  return Math.floor(value);
+}
+
+export function getDeckSize(level: number) {
+  if (level <= 0) {
+    return 1;
+  }
+
+  const config = getConfig().deck.size.scale.byLevel;
+  if (level >= config.level) {
+    return config.linear.to;
+  }
+
+  const scale = linearScale(
+    config.linear.from,
+    config.linear.to,
+    config.level - 1
+  );
+  const value = scale.find((i) => i > level) || 1;
+  return Math.floor(value);
+}
+
+export function refillReserves(side: Side, size: number) {
+  while (side.reserves.length < size) {
     const item = side.deck.pop();
     if (!item) {
       console.warn("not enough cards to fill up reserves");

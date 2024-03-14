@@ -39,11 +39,15 @@ see [BATTLEFLOW.MD](docs/BATTLEFLOW.MD)
 # backlog
 
 - responsive css for mobile
+- config service
 - duel
   - use stage banner for guide
   - card inspection
   - can skip deployment
   - can skip animation
+  - 🐞ai stuck in stalemate, no best move
+  - do not allow attacking in first turn
+  - back out from result screen
 - player progression
   - quests?
 - deck

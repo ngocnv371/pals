@@ -14,6 +14,7 @@ import {
   selectTargetForOffensive,
   selectUnitForOffensive,
 } from "../service";
+import { getConfig } from "../../config/service";
 
 export interface State {
   their: Side;
@@ -50,8 +51,8 @@ export interface State {
 }
 
 const initialState: State = {
-  their: initSide(),
-  my: initSide(),
+  their: initSide(1),
+  my: initSide(1),
   stage: DuelStage.Start,
   result: "unresolved",
 };
@@ -63,25 +64,27 @@ export const duelSlice = createSlice({
     started(
       state,
       action: PayloadAction<{
-        myDeck: string[];
-        theirDeck: string[];
+        my: Pick<Side, "deck" | "level">;
+        their: Pick<Side, "deck" | "level">;
         dungeon?: string;
       }>
     ) {
-      state.my = initSide();
-      state.my.deck = action.payload.myDeck;
-      state.their = initSide();
-      state.their.deck = action.payload.theirDeck;
+      state.my = initSide(action.payload.my.level);
+      state.my.deck = action.payload.my.deck;
+
+      state.their = initSide(action.payload.their.level);
+      state.their.deck = action.payload.their.deck;
+
       state.stage = DuelStage.Start;
       state.result = "unresolved";
       state.dungeon = action.payload.dungeon;
     },
     myCardsDrawed(state) {
-      refillReserves(state.my);
+      refillReserves(state.my, getConfig().duel.hand.size);
       state.stage = DuelStage.MyDrawing;
     },
     theirCardsDrawed(state) {
-      refillReserves(state.their);
+      refillReserves(state.their, getConfig().duel.hand.size);
       state.stage = DuelStage.TheirDrawing;
     },
     myReservesSelected(state, action: PayloadAction<number[]>) {
@@ -131,12 +134,14 @@ export const duelSlice = createSlice({
         return;
       }
       deploy(state.my);
+      resetAction(state.my);
     },
     theirPlaced(state) {
       if (state.stage !== DuelStage.TheirFusion) {
         return;
       }
       deploy(state.their);
+      resetAction(state.their);
     },
     myFused(state) {
       if (state.stage !== DuelStage.MyFusion) {
@@ -144,7 +149,6 @@ export const duelSlice = createSlice({
       }
 
       state.fusion = fuseOne(state.my);
-      resetAction(state.my);
     },
     theirFused(state) {
       if (state.stage !== DuelStage.TheirFusion) {
@@ -152,7 +156,6 @@ export const duelSlice = createSlice({
       }
 
       state.fusion = fuseOne(state.their);
-      resetAction(state.their);
     },
     fusionCompleted(state) {
       state.fusion = undefined;

@@ -26,6 +26,7 @@ export interface Battle {
 }
 
 export interface Side {
+  level: number;
   /**
    *  loose when reach 0
    */

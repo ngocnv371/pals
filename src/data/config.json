@@ -1,0 +1,32 @@
+{
+  "deck": {
+    "size": {
+      "scale": {
+        "byLevel": {
+          "linear": {
+            "from": 3,
+            "to": 40
+          },
+          "level": 20
+        }
+      }
+    }
+  },
+  "duel": {
+    "hand": {
+      "size": 5
+    },
+    "life": {
+      "scale": {
+        "byLevel": {
+          "linear": {
+            "from": 50,
+            "to": 500
+          },
+          "level": 20
+        }
+      }
+    }
+  },
+  "progression": {}
+}

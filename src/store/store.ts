@@ -5,6 +5,7 @@ import shopSlice from "./shopSlice";
 import deckSlice from "../pages/Deck/deckSlice";
 import duelSlice from "../pages/Duel/store/duelSlice";
 import bookSlice from "../pages/Book/bookSlice";
+import progressionSlice from "../pages/progression/progressionSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     duel: duelSlice,
     deck: deckSlice,
     book: bookSlice,
+    progression: progressionSlice,
   },
   devTools: process.env.NODE_ENV !== "production",
 });

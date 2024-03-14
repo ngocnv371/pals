@@ -5,6 +5,7 @@ import {
   calculateBattleAnimationDuration,
   calculateFusionAnimationDuration,
   generateTheirDeck,
+  getDeckSize,
   getReward,
 } from "../service";
 import { delay } from "../utils/delay";
@@ -12,6 +13,8 @@ import { jake } from "./ai/jake";
 import { breedPals } from "../../pals/service";
 import { Dungeon } from "../../Dungeons/model";
 import { getDungeon } from "../../Dungeons/service";
+import { getConfig } from "../../config/service";
+import { selectLevel } from "../../progression/progressionSlice";
 
 type SideSelector = (state: State) => Side;
 
@@ -47,10 +50,22 @@ export const dungeonStarted =
   (dungeon: Dungeon) =>
   async (dispatch: AppDispatch, getState: () => RootState) => {
     const state = getState();
-    const myDeck = state.deck.ids.map((i) => state.deck.entities[i].cardId);
-    const theirDeck = dungeon.wilds.concat(dungeon.bosses);
+    const myLevel = selectLevel(state);
+    const myDeck = state.deck.ids
+      .map((i) => state.deck.entities[i].cardId)
+      .splice(0, getDeckSize(myLevel));
+    // 2x wilds + 1x bosses, sorted randomly
+    const mobs = dungeon.wilds
+      .concat(dungeon.wilds)
+      .concat(dungeon.bosses)
+      .sort(Math.random);
+    const theirDeck = mobs.splice(0, getDeckSize(dungeon.level));
     dispatch(
-      duelSlice.actions.started({ myDeck, theirDeck, dungeon: dungeon.type })
+      duelSlice.actions.started({
+        my: { level: myLevel, deck: myDeck },
+        their: { level: dungeon.level, deck: theirDeck },
+        dungeon: dungeon.type,
+      })
     );
     dispatch(duelSlice.actions.myCardsDrawed());
   };
@@ -64,9 +79,23 @@ export const getDuelReward =
 
 export const duelStarted: AppThunkAction = () => async (dispatch, getState) => {
   const state = getState();
-  const myDeck = state.deck.ids.map((i) => state.deck.entities[i].cardId);
-  const theirDeck = generateTheirDeck();
-  dispatch(duelSlice.actions.started({ myDeck, theirDeck }));
+  const myLevel = selectLevel(state);
+  const myCards = state.deck.ids.map((i) => state.deck.entities[i].cardId);
+  const myDeck = myCards
+    .slice()
+    .sort(Math.random)
+    .splice(0, getDeckSize(myLevel));
+
+  const theirDeck = myCards
+    .slice()
+    .sort(Math.random)
+    .splice(0, getDeckSize(myLevel));
+  dispatch(
+    duelSlice.actions.started({
+      my: { level: myLevel, deck: myDeck },
+      their: { level: myLevel, deck: theirDeck },
+    })
+  );
   dispatch(duelSlice.actions.myCardsDrawed());
 };
 
