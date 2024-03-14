@@ -41,6 +41,7 @@ import DuelResultPage from "./pages/DuelResult";
 import BookPage from "./pages/Book";
 import LobbyPage from "./pages/Lobby";
 import DungeonsPage from "./pages/Dungeons";
+import HomePage from "./pages/Home";
 
 setupIonicReact();
 
@@ -53,7 +54,10 @@ const App: React.FC = () => {
             <Menu />
             <IonRouterOutlet id="main">
               <Route path="/" exact={true}>
-                <Redirect to="/deck" />
+                <Redirect to="/home" />
+              </Route>
+              <Route path="/home" exact={true}>
+                <HomePage />
               </Route>
               <Route path="/book" exact={true}>
                 <BookPage />

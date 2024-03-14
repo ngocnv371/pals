@@ -10,13 +10,28 @@ import {
 } from "@ionic/react";
 
 import "./Menu.css";
-import { bag, book, bug, card, folder, location, play } from "ionicons/icons";
+import {
+  bag,
+  book,
+  bug,
+  card,
+  folder,
+  home,
+  location,
+  play,
+} from "ionicons/icons";
 
 const Menu: React.FC = () => {
   return (
     <IonMenu contentId="main" type="overlay">
       <IonContent>
         <IonList>
+          <IonMenuToggle>
+            <IonItem routerLink="/home">
+              <IonIcon slot="start" icon={home} />
+              <IonLabel>Home</IonLabel>
+            </IonItem>
+          </IonMenuToggle>
           <IonMenuToggle>
             <IonItem routerLink="/lobby">
               <IonIcon slot="start" icon={play} />
