@@ -45,14 +45,13 @@ see [BATTLEFLOW.MD](docs/BATTLEFLOW.MD)
   - can skip deployment
   - can skip animation
 - player progression
-  - duel reward
-  - how to trigger duel
   - quests?
 - deck
   - easier card moving
 
 # completed
 
+- ✅ user can skip deployment
 - ✅ can rematch
 - ✅ draw reward card from graveyard
 - ✅ card backside

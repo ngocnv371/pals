@@ -99,7 +99,11 @@ export const duelSlice = createSlice({
       selectReserves(state.their, action.payload);
     },
     myPlacingStarted(state) {
-      state.stage = DuelStage.MyPlacing;
+      if (!state.my.deploymentPlan?.selectedReservesIndices.length) {
+        state.stage = DuelStage.MyAttack;
+      } else {
+        state.stage = DuelStage.MyPlacing;
+      }
     },
     theirPlacingStarted(state) {
       state.stage = DuelStage.TheirPlacing;
