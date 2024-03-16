@@ -49,6 +49,7 @@ export interface State {
    */
   result: DuelResult;
   dungeon?: string;
+  turn: number;
 }
 
 const initialState: State = {
@@ -56,6 +57,7 @@ const initialState: State = {
   my: initSide(1),
   stage: DuelStage.Start,
   result: "unresolved",
+  turn: 0,
 };
 
 export const duelSlice = createSlice({
@@ -79,6 +81,7 @@ export const duelSlice = createSlice({
       state.stage = DuelStage.Start;
       state.result = "unresolved";
       state.dungeon = action.payload.dungeon;
+      state.turn = 0;
     },
     myCardsDrawed(state) {
       refillReserves(state.my, getConfig().duel.hand.size);
@@ -89,6 +92,8 @@ export const duelSlice = createSlice({
       if (state.result !== "unresolved") {
         state.stage = DuelStage.End;
       }
+
+      state.turn++;
     },
     theirCardsDrawed(state) {
       refillReserves(state.their, getConfig().duel.hand.size);
@@ -99,6 +104,8 @@ export const duelSlice = createSlice({
       if (state.result !== "unresolved") {
         state.stage = DuelStage.End;
       }
+
+      state.turn++;
     },
     myReservesSelected(state, action: PayloadAction<number[]>) {
       if (state.stage !== DuelStage.MyDrawing) {

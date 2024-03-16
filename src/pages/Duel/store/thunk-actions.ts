@@ -124,6 +124,12 @@ function battle(
   doneAction: any
 ): AppThunkAction {
   return () => async (dispatch, getState) => {
+    if (getState().duel.turn == 1) {
+      console.debug("can not attack on first turn");
+      dispatch(doneAction);
+      return;
+    }
+
     console.debug("attack!!");
     dispatch(startAction);
     await delay(10);

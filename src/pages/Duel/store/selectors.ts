@@ -38,3 +38,5 @@ export const selectMyFusionQueue = createSelector(
 );
 
 export const selectStage = (state: RootState) => state.duel.stage;
+
+export const selectTurn = (state: RootState) => state.duel.turn;

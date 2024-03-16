@@ -7,10 +7,12 @@ export interface AttackingFormationLineProps {
   formation: Formation;
   onStanceChanged?: (index: number, stance: CardStance) => void;
   onCardClick?: (id: string) => void;
+  disabledAttack?: boolean;
 }
 
 export const AttackingFormationLine: React.FC<AttackingFormationLineProps> = ({
   formation,
+  disabledAttack,
   onStanceChanged,
   onCardClick,
 }) => {
@@ -26,6 +28,8 @@ export const AttackingFormationLine: React.FC<AttackingFormationLineProps> = ({
       {d && !d.acted && (
         <StanceSwitcher
           onClick={(stance) => onStanceChanged && onStanceChanged(idx, stance)}
+          disabledDefense={d.stance == CardStance.Defensive}
+          disabledAttack={disabledAttack}
         />
       )}
     </div>

@@ -44,7 +44,6 @@ see [BATTLEFLOW.MD](docs/BATTLEFLOW.MD)
   - use stage banner for guide
   - card inspection
   - can skip animation
-  - do not allow attacking in first turn
   - back out from result screen
 - player progression
   - quests?
@@ -53,6 +52,7 @@ see [BATTLEFLOW.MD](docs/BATTLEFLOW.MD)
 
 # completed
 
+- ✅ do not allow attacking in first turn
 - ✅ game over when out of cards
 - ✅🐞ai stuck if no cards to draw
 - ✅ user can skip deployment

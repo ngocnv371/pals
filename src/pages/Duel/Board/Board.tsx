@@ -11,6 +11,7 @@ import {
   selectTheirSupports,
   selectMySupports,
   selectStage,
+  selectTurn,
 } from "../store/selectors";
 import { myFuseAndPlace, myBattle } from "../store/thunk-actions";
 import { withFormationSelector } from "./withFormationSelector";
@@ -56,6 +57,8 @@ const TheirTargettingFormation = withFormationSelector(
 
 export const Board: React.FC = () => {
   const stage = useAppSelector(selectStage);
+  const turn = useAppSelector(selectTurn);
+  const disabledAttack = turn == 1;
   const dispatch = useAppDispatch();
 
   return (
@@ -89,6 +92,7 @@ export const Board: React.FC = () => {
                   dispatch(myOffensiveCardSelected({ index }));
                 }
               }}
+              disabledAttack={disabledAttack}
             />
           ) : stage == DuelStage.TheirTargetting ? (
             <MyTargettingFormationLineContainer />
