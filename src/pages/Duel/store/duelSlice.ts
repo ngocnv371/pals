@@ -6,6 +6,7 @@ import {
   endBattle,
   fuseOne,
   initSide,
+  getGameResult,
   prepareDeployment,
   refillReserves,
   resetAction,
@@ -83,11 +84,21 @@ export const duelSlice = createSlice({
       refillReserves(state.my, getConfig().duel.hand.size);
       state.stage = DuelStage.MyDrawing;
       resetAction(state.my);
+
+      state.result = getGameResult(state.my, state.their);
+      if (state.result !== "unresolved") {
+        state.stage = DuelStage.End;
+      }
     },
     theirCardsDrawed(state) {
       refillReserves(state.their, getConfig().duel.hand.size);
       state.stage = DuelStage.TheirDrawing;
       resetAction(state.their);
+
+      state.result = getGameResult(state.my, state.their);
+      if (state.result !== "unresolved") {
+        state.stage = DuelStage.End;
+      }
     },
     myReservesSelected(state, action: PayloadAction<number[]>) {
       if (state.stage !== DuelStage.MyDrawing) {
@@ -211,13 +222,8 @@ export const duelSlice = createSlice({
       state.battle = undefined;
     },
     duelEnded(state) {
-      if (state.my.life <= 0) {
-        state.result = "loose";
-      } else if (state.their.life <= 0) {
-        state.result = "win";
-      } else {
-        state.result = "tie";
-      }
+      const result = getGameResult(state.my, state.their);
+      state.result = result;
 
       state.stage = DuelStage.End;
     },

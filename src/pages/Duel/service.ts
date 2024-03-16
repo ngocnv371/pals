@@ -9,6 +9,7 @@ import {
   BreedingResult,
   ReserveItem,
   TargetCell as DeploymentTarget,
+  DuelResult,
 } from "./model";
 import { breedPals, getAllPals, getPalById } from "../pals/service";
 import { DECK_SIZE, DUMMY_CARD } from "../Deck/model";
@@ -81,6 +82,35 @@ export function getDeckSize(level: number) {
   );
   const value = scale.find((i) => i > level) || 1;
   return Math.floor(value);
+}
+
+function isOutOfCards(side: Side) {
+  return (
+    side.deck.length == 0 &&
+    side.reserves.length == 0 &&
+    !side.forward.some(Boolean)
+  );
+}
+
+export function getGameResult(my: Side, their: Side): DuelResult {
+  if (my.life == their.life && my.life == 0) {
+    return "tie";
+  }
+  if (my.life <= 0) {
+    return "loose";
+  }
+  if (their.life <= 0) {
+    return "win";
+  }
+
+  if (isOutOfCards(my)) {
+    return "loose";
+  }
+  if (isOutOfCards(their)) {
+    return "win";
+  }
+
+  return "unresolved";
 }
 
 export function refillReserves(side: Side, size: number) {

@@ -53,6 +53,7 @@ see [BATTLEFLOW.MD](docs/BATTLEFLOW.MD)
 
 # completed
 
+- ✅ game over when out of cards
 - ✅🐞ai stuck if no cards to draw
 - ✅ user can skip deployment
 - ✅ can rematch

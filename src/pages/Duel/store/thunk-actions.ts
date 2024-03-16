@@ -7,6 +7,7 @@ import {
   generateTheirDeck,
   getDeckSize,
   getReward,
+  getGameResult,
 } from "../service";
 import { delay } from "../utils/delay";
 import { jake } from "./ai/jake";
@@ -141,11 +142,9 @@ function battle(
     await delay(50);
 
     // check endgame
-    const {
-      their: { life: theirLife },
-      my: { life: myLife },
-    } = getState().duel;
-    if (myLife <= 0 || theirLife <= 0) {
+    const { their, my } = getState().duel;
+    const isOver = getGameResult(my, their) !== "unresolved";
+    if (isOver) {
       console.debug(`game over dude`);
       dispatch(duelSlice.actions.duelEnded());
       return;
