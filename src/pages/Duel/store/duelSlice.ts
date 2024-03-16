@@ -228,6 +228,10 @@ export const duelSlice = createSlice({
     battleEnded(state) {
       state.battle = undefined;
     },
+    surrender(state) {
+      state.result = "loose";
+      state.stage = DuelStage.End;
+    },
     duelEnded(state) {
       const result = getGameResult(state.my, state.their);
       state.result = result;
@@ -249,6 +253,7 @@ export const {
   theirCardsDrawed,
   myPlacingStarted,
   duelEnded,
+  surrender,
 } = duelSlice.actions;
 
 export default duelSlice.reducer;

@@ -1,7 +1,7 @@
 import { IonAlert, IonFab, IonFabButton, IonIcon } from "@ionic/react";
 import { exit } from "ionicons/icons";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { duelEnded } from "../store/duelSlice";
+import { surrender } from "../store/duelSlice";
 import { selectIsMyTurn } from "../store/selectors";
 
 const QuitButton: React.FC = () => {
@@ -18,7 +18,7 @@ const QuitButton: React.FC = () => {
           {
             text: "Yes",
             handler() {
-              dispatch(duelEnded());
+              dispatch(surrender());
             },
           },
         ]}
