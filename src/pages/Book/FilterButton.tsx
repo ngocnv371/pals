@@ -15,7 +15,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { settings } from "ionicons/icons";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import Filter from "../../models/filter";
 
 interface FilterProps extends Filter {}
@@ -24,6 +24,7 @@ const FilterButton: React.FC<{
   value: FilterProps;
   onChange: (value: FilterProps) => void;
 }> = ({ value, onChange }) => {
+  const id = useId();
   const ref = useRef<HTMLIonModalElement>();
   const [localValue, setLocalValue] = useState(value);
 
@@ -41,11 +42,11 @@ const FilterButton: React.FC<{
 
   return (
     <>
-      <IonButton id="filter-button">
+      <IonButton id={id}>
         <IonIcon icon={settings} />
       </IonButton>
       <IonModal
-        trigger="filter-button"
+        trigger={id}
         ref={ref as any}
         initialBreakpoint={0.25}
         breakpoints={[0, 0.25, 0.5, 0.75]}

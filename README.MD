@@ -44,7 +44,6 @@ see [BATTLEFLOW.MD](docs/BATTLEFLOW.MD)
   - use stage banner for guide
   - card inspection
   - can skip animation
-  - back out from result screen
 - player progression
   - quests?
 - deck
