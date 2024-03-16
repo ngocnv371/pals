@@ -19,7 +19,7 @@ export function breedPals(id1: string, id2: string) {
   const [i, j] = [id1, id2].sort();
   const c1 = (fusion as any)[i][j];
   console.debug(`${i} + ${j} = ${c1}`);
-  return c1;
+  return c1 as string;
 }
 
 export function breedChain(ids: string[]) {

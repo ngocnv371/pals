@@ -6,6 +6,7 @@ import deckSlice from "../pages/Deck/deckSlice";
 import duelSlice from "../pages/Duel/store/duelSlice";
 import bookSlice from "../pages/Book/bookSlice";
 import progressionSlice from "../pages/progression/progressionSlice";
+import duel2Slice from "../pages/Duel/v2/slice";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     inventory: inventorySlice,
     shop: shopSlice,
     duel: duelSlice,
+    duel2: duel2Slice,
     deck: deckSlice,
     book: bookSlice,
     progression: progressionSlice,

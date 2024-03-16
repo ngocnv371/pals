@@ -24,3 +24,48 @@ Player's turn:
 - `battleEnded`: battle animation ended
 - as long as there are cards which haven't `acted` this turn, move back to `myAttackStarted`
 - `duelEnded`: when one side life reach 0
+
+# Reworked
+
+Duel's actions:
+
+- drawing stage
+  - select units for deployment
+  - end drawing stage
+- deploying stage
+  - select deployment target
+- battle stage
+  - change unit stance
+  - select unit for battle
+  - select target unit
+  - end battle stage
+- surrender
+
+Both the player and the AI will have to actively dispatch these actions to advance their turn. The player will do it via browser's input while the AI will dispatch them via the AI processing.
+
+# Flowchart
+
+Powered by [https://mermaid.live/]
+
+```mermaid
+flowchart TD
+  Start -->Drawing
+  Drawing -->|Draw cards| PresentingHand
+  PresentingHand -->|Select cards for deployment| PresentingDeploymentFormation
+  PresentingDeploymentFormation -->|Select target deployment position| FusionQueue{Check fusion queue}
+  FusionQueue -->|Single card| Placing
+  FusionQueue -->|More than 1| Fusion
+  Fusion --> FusionQueue
+  Placing --> Battle
+  PresentingHand -->|Skip Deployment| Battle
+  Battle --> BattleCheck
+  BattleCheck -->|Still has units| PresentingBattleFormation
+  PresentingBattleFormation -->|Select unit| PresentingTargets
+  PresentingTargets -->|Select target| BattleVisualizer
+  BattleVisualizer -->BattleResultCheck{Check Battle Result}
+  BattleResultCheck -->|Both sides alive| BattleCheck{BattleCheck}
+  BattleResultCheck -->|One side dead| End
+  Battle -->|Skip Battle| NewTurn
+  BattleCheck -->|Out of moves| NewTurn
+  NewTurn --> Drawing
+```
