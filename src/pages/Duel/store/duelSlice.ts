@@ -82,10 +82,12 @@ export const duelSlice = createSlice({
     myCardsDrawed(state) {
       refillReserves(state.my, getConfig().duel.hand.size);
       state.stage = DuelStage.MyDrawing;
+      resetAction(state.my);
     },
     theirCardsDrawed(state) {
       refillReserves(state.their, getConfig().duel.hand.size);
       state.stage = DuelStage.TheirDrawing;
+      resetAction(state.their);
     },
     myReservesSelected(state, action: PayloadAction<number[]>) {
       if (state.stage !== DuelStage.MyDrawing) {
@@ -134,14 +136,12 @@ export const duelSlice = createSlice({
         return;
       }
       deploy(state.my);
-      resetAction(state.my);
     },
     theirPlaced(state) {
       if (state.stage !== DuelStage.TheirFusion) {
         return;
       }
       deploy(state.their);
-      resetAction(state.their);
     },
     myFused(state) {
       if (state.stage !== DuelStage.MyFusion) {
