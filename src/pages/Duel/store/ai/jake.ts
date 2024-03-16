@@ -121,6 +121,14 @@ export const jake: BattleAI = (slice) => {
       plan = plans.reverse()[0];
     }
 
+    if (!plan) {
+      console.debug("no plan");
+      await dispatch(theirFuseAndPlace());
+      await delay(500);
+      dispatch(leadTheirOffensive());
+      return;
+    }
+
     console.debug(`best plan`, plan);
     const indices1 = [plan.indices[0]];
     const indices2 = plan.indices;
