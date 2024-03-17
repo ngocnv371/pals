@@ -6,7 +6,7 @@ import { linearScale } from "../../../utils/linearScale";
 
 const HAND_SIZE = 5;
 
-export function getInitialSide(): Side {
+function getInitialSide(): Side {
   return {
     level: 0,
     life: 0,
@@ -20,7 +20,7 @@ export function getInitialSide(): Side {
   };
 }
 
-export function getInitialState(): State {
+function getInitialState(): State {
   return {
     my: getInitialSide(),
     their: getInitialSide(),
@@ -34,15 +34,15 @@ export function getInitialState(): State {
   };
 }
 
-export function getCurrentSide(state: State) {
+function getCurrentSide(state: State) {
   return [state.my, state.their][state.turn % 2];
 }
 
-export function getOtherSide(state: State) {
+function getOtherSide(state: State) {
   return [state.their, state.my][state.turn % 2];
 }
 
-export function nextTurn(state: State) {
+function nextTurn(state: State) {
   state.turn++;
   console.debug("new turn", state.turn);
   state.battle = null;
@@ -53,7 +53,7 @@ export function nextTurn(state: State) {
   advanceTo(state, Stage.Drawing);
 }
 
-export function getDeckSize(level: number) {
+function getDeckSize(level: number) {
   if (level <= 0) {
     return 1;
   }
@@ -72,7 +72,7 @@ export function getDeckSize(level: number) {
   return Math.floor(value);
 }
 
-export function start(
+function start(
   state: State,
   {
     payload: { my, their },
@@ -96,7 +96,7 @@ export function start(
   advanceTo(state, Stage.Drawing);
 }
 
-export function resetUnitActions(state: State) {
+function resetUnitActions(state: State) {
   getCurrentSide(state).deployed.forEach((d) => d && (d.acted = false));
 }
 
@@ -104,7 +104,7 @@ export function resetUnitActions(state: State) {
  * attempt to fill the hand with cards from deck
  * @returns number of drawn cards
  */
-export function drawCards(state: State) {
+function drawCards(state: State) {
   if (state.stage !== Stage.Drawing) {
     console.error("invalid stage");
     return;
@@ -131,7 +131,7 @@ export function drawCards(state: State) {
   advanceTo(state, Stage.PresentingHand);
 }
 
-export function selectCardsForDeployment(
+function selectCardsForDeployment(
   state: State,
   { payload: { indices } }: PayloadAction<{ indices: number[] }>
 ) {
@@ -151,7 +151,7 @@ export function selectCardsForDeployment(
   };
 }
 
-export function endSelectingCardsForDeployment(state: State) {
+function endSelectingCardsForDeployment(state: State) {
   if (state.stage !== Stage.PresentingHand) {
     console.error("invalid stage");
     return;
@@ -160,7 +160,7 @@ export function endSelectingCardsForDeployment(state: State) {
   advanceTo(state, Stage.PresentingDeploymentFormation);
 }
 
-export function selectTargetDeploymentPosition(
+function selectTargetDeploymentPosition(
   state: State,
   { payload: { index } }: PayloadAction<{ index: number }>
 ) {
@@ -187,7 +187,7 @@ export function selectTargetDeploymentPosition(
   advanceTo(state, Stage.FusionQueue);
 }
 
-export function fuse(state: State) {
+function fuse(state: State) {
   if (state.stage !== Stage.FusionQueue) {
     console.error("invalid stage");
     return;
@@ -221,7 +221,7 @@ export function fuse(state: State) {
   advanceTo(state, Stage.Fusion);
 }
 
-export function skipDeployment(state: State) {
+function skipDeployment(state: State) {
   if (state.stage !== Stage.PresentingHand) {
     console.error("invalid stage");
     return;
@@ -231,7 +231,7 @@ export function skipDeployment(state: State) {
   advanceTo(state, Stage.Battle);
 }
 
-export function selectUnitForBattle(
+function selectUnitForBattle(
   state: State,
   { payload: { index } }: PayloadAction<{ index: number }>
 ) {
@@ -252,7 +252,7 @@ export function selectUnitForBattle(
   advanceTo(state, Stage.PresentingTargets);
 }
 
-export function selectTargetUnitForBattle(
+function selectTargetUnitForBattle(
   state: State,
   { payload: { index } }: PayloadAction<{ index: number }>
 ) {
@@ -277,7 +277,7 @@ export function selectTargetUnitForBattle(
   advanceTo(state, Stage.BattleVisualizer);
 }
 
-export function endBattle(state: State) {
+function endBattle(state: State) {
   if (state.stage !== Stage.Battle) {
     console.error("invalid stage");
     return;
@@ -287,7 +287,7 @@ export function endBattle(state: State) {
   nextTurn(state);
 }
 
-export function switchUnitToDefensive(
+function switchUnitToDefensive(
   state: State,
   { payload: { index } }: PayloadAction<{ index: number }>
 ) {
@@ -307,13 +307,31 @@ export function switchUnitToDefensive(
   unit.stance = Stance.Defensive;
 }
 
-export function surrender(state: State) {
+function surrender(state: State) {
   console.debug("surrendered");
   state.result = Result.Loose;
   advanceTo(state, Stage.Ended);
 }
 
-export function advanceTo(state: State, stage: Stage) {
+function advanceTo(state: State, stage: Stage) {
   console.debug("advancing to", stage);
   state.stage = stage;
 }
+
+export const internalServices = {
+  getInitialState,
+  advanceTo,
+  surrender,
+  switchUnitToDefensive,
+  endBattle,
+  selectCardsForDeployment,
+  selectTargetDeploymentPosition,
+  selectTargetUnitForBattle,
+  skipDeployment,
+  start,
+  selectUnitForBattle,
+  fuse,
+  endSelectingCardsForDeployment,
+  drawCards,
+  getDeckSize,
+};

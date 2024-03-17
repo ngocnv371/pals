@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import "./Hand.css";
 import { getPalById } from "../../pals/service";
 import { selectMyHand, selectMyHandSelectedIndices } from "../v2/selectors";
-import { actions } from "../v2/slice";
+import { selectCardsForDeployment } from "../v2/actions";
 
 export const Hand: React.FC = () => {
   const hand = useAppSelector(selectMyHand);
@@ -12,7 +12,7 @@ export const Hand: React.FC = () => {
   const cards = useMemo(() => hand.map(getPalById), [hand]);
   const selectedCards = useAppSelector(selectMyHandSelectedIndices);
   const setSelectedCards = (indices: number[]) =>
-    dispatch(actions.selectCardsForDeployment({ indices }));
+    dispatch(selectCardsForDeployment(indices));
 
   const handleSelectCard = useCallback(
     (index: number) => {

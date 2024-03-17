@@ -1,5 +1,6 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import {
+import { createSlice } from "@reduxjs/toolkit";
+import { internalServices } from "./service";
+const {
   start,
   drawCards,
   endBattle,
@@ -13,8 +14,7 @@ import {
   skipDeployment,
   surrender,
   switchUnitToDefensive,
-} from "./service";
-import { AppDispatch, RootState } from "../../../store";
+} = internalServices;
 
 const initialState = getInitialState();
 
@@ -22,21 +22,21 @@ export const slice = createSlice({
   name: "duel2",
   initialState,
   reducers: {
-    start,
-    drawCards,
-    selectCardsForDeployment,
-    endSelectingCardsForDeployment,
-    selectTargetDeploymentPosition,
-    fuse,
-    skipDeployment,
-    switchUnitToDefensive,
-    selectUnitForBattle,
-    selectTargetUnitForBattle,
-    endBattle,
-    surrender,
+    started: start,
+    cardsDrawed: drawCards,
+    cardsForDeploymentSelected: selectCardsForDeployment,
+    selectingCardsForDeploymentEnded: endSelectingCardsForDeployment,
+    targetDeploymentPositionSelected: selectTargetDeploymentPosition,
+    fused: fuse,
+    deploymentSkipped: skipDeployment,
+    unitSwitchedToDefensive: switchUnitToDefensive,
+    unitForBattleSelected: selectUnitForBattle,
+    targetUnitForBattleSelected: selectTargetUnitForBattle,
+    battleEnded: endBattle,
+    surrendered: surrender,
   },
 });
 
-export const actions = slice.actions;
+export const internalEvents = slice.actions;
 
 export default slice.reducer;

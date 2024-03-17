@@ -1,15 +1,13 @@
 import { IonFab, IonFabButton, IonIcon } from "@ionic/react";
 import { chevronForward } from "ionicons/icons";
 import { useAppDispatch } from "../../../../store/hooks";
-import { actions } from "../../v2/slice";
+import { endSelectingCardsForDeployment } from "../../v2/actions";
 
 const PlaceCardsButton: React.FC = () => {
   const dispatch = useAppDispatch();
   return (
     <IonFab horizontal="end" vertical="bottom">
-      <IonFabButton
-        onClick={() => dispatch(actions.endSelectingCardsForDeployment())}
-      >
+      <IonFabButton onClick={() => dispatch(endSelectingCardsForDeployment())}>
         <IonIcon icon={chevronForward} />
       </IonFabButton>
     </IonFab>

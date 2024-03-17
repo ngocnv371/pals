@@ -17,7 +17,11 @@ import { AttackingFormationLine } from "./AttackingFormationLine";
 import { TargettingFormationLine } from "./TargettingFormationLine";
 import { MyTargettingFormationLineContainer } from "./MyTargettingFormationLine";
 import { Stage, Stance } from "../v2/model";
-import { actions } from "../v2/slice";
+import {
+  switchUnitToDefensive,
+  selectUnitForBattle,
+  selectTargetDeploymentPosition,
+} from "../v2/actions";
 
 const TheirDeployedFormation = withFormationSelector(
   FormationLine,
@@ -72,9 +76,9 @@ export const Board: React.FC = () => {
             <MyAttackingDeployedFormation
               onStanceChanged={(index, stance) => {
                 if (stance == Stance.Defensive) {
-                  dispatch(actions.switchUnitToDefensive({ index }));
+                  dispatch(switchUnitToDefensive(index));
                 } else {
-                  dispatch(actions.selectUnitForBattle({ index }));
+                  dispatch(selectUnitForBattle(index));
                 }
               }}
               disabledAttack={disabledAttack}
@@ -85,8 +89,7 @@ export const Board: React.FC = () => {
             <MyDeployedFormation
               canSelect={stage == Stage.PresentingDeploymentFormation}
               onSelect={(index) => {
-                dispatch(actions.selectTargetDeploymentPosition({ index }));
-                // dispatch(myFuseAndPlace());
+                dispatch(selectTargetDeploymentPosition(index));
               }}
             />
           )}
