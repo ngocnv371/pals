@@ -2,23 +2,23 @@ import React, { useCallback, useMemo, useState } from "react";
 import { HandCard } from "./HandCard";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import "./Hand.css";
-import { myReservesSelected } from "../store/duelSlice";
-import {
-  selectMyHand,
-  selectSelectedReservesIndices,
-} from "../store/selectors";
 import { getPalById } from "../../pals/service";
+import { selectMyHand, selectMyHandSelectedIndices } from "../v2/selectors";
+import { actions } from "../v2/slice";
 
 export const Hand: React.FC = () => {
   const hand = useAppSelector(selectMyHand);
   const dispatch = useAppDispatch();
   const cards = useMemo(() => hand.map(getPalById), [hand]);
-  const selectedCards = useAppSelector(selectSelectedReservesIndices) || [];
-  const setSelectedCards = (ids: number[]) => dispatch(myReservesSelected(ids));
+  const selectedCards = useAppSelector(selectMyHandSelectedIndices);
+  const setSelectedCards = (indices: number[]) =>
+    dispatch(actions.selectCardsForDeployment({ indices }));
 
   const handleSelectCard = useCallback(
     (index: number) => {
-      if (selectedCards.includes(index)) {
+      if (!selectedCards) {
+        setSelectedCards([index]);
+      } else if (selectedCards.includes(index)) {
         // unselect
         setSelectedCards(selectedCards.filter((i) => i != index));
       } else {
@@ -32,7 +32,7 @@ export const Hand: React.FC = () => {
   return (
     <div className="hand">
       {cards.map((c, cidx) => {
-        const idx = selectedCards.indexOf(cidx);
+        const idx = !selectedCards ? -1 : selectedCards.indexOf(cidx);
         const selected = idx >= 0;
         const index = selected ? idx + 1 : undefined;
         return (

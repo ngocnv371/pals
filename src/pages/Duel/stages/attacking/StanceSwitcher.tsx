@@ -1,12 +1,12 @@
 import { IonButton, IonIcon } from "@ionic/react";
 import { shield } from "ionicons/icons";
-import { CardStance } from "../../model";
+import { Stance } from "../../v2/model";
 import "./StanceSwitcher.css";
 
 interface StanceSwitcherProps {
   disabledAttack?: boolean;
   disabledDefense?: boolean;
-  onClick?: (stance: CardStance) => void;
+  onClick?: (stance: Stance) => void;
 }
 
 const StanceSwitcher: React.FC<StanceSwitcherProps> = ({
@@ -18,7 +18,7 @@ const StanceSwitcher: React.FC<StanceSwitcherProps> = ({
     <div className="stance-switcher">
       <div>
         <IonButton
-          onClick={() => onClick && onClick(CardStance.Offensive)}
+          onClick={() => onClick && onClick(Stance.Offensive)}
           disabled={disabledAttack}
         >
           <IonIcon icon={"/icons/sword.svg"} />
@@ -26,7 +26,7 @@ const StanceSwitcher: React.FC<StanceSwitcherProps> = ({
       </div>
       <div>
         <IonButton
-          onClick={() => onClick && onClick(CardStance.Defensive)}
+          onClick={() => onClick && onClick(Stance.Defensive)}
           disabled={disabledDefense}
         >
           <IonIcon icon={shield} />

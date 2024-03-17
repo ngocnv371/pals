@@ -39,10 +39,10 @@
     }
   }
 }
-.MyDrawing,
-.TheirDrawing,
-.MyFusion,
-.TheirFusion {
+.Drawing,
+.PresentingHand,
+.Fusion,
+.FusionQueue {
   .board {
     transform: rotateX(30deg) translateY(-160px);
     @media (width<800px) {

@@ -1,9 +1,11 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import {
+  start,
   drawCards,
   endBattle,
   fuse,
   getInitialState,
+  endSelectingCardsForDeployment,
   selectCardsForDeployment,
   selectTargetDeploymentPosition,
   selectTargetUnitForBattle,
@@ -20,8 +22,10 @@ export const slice = createSlice({
   name: "duel2",
   initialState,
   reducers: {
+    start,
     drawCards,
     selectCardsForDeployment,
+    endSelectingCardsForDeployment,
     selectTargetDeploymentPosition,
     fuse,
     skipDeployment,

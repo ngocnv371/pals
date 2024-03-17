@@ -29,7 +29,7 @@ export interface Unit {
   acted: boolean;
 }
 
-export type Formation = Unit[];
+export type Formation = (Unit | null)[];
 
 export interface Battle {
   attacker: string;
@@ -59,6 +59,7 @@ export interface Side {
    * first line for offensive/defensive
    */
   deployed: Formation;
+  supports: Formation;
 
   deploymentPlan: {
     /**

@@ -1,6 +1,6 @@
-import { selectStage } from "../store/selectors";
 import { useAppSelector } from "../../../store/hooks";
-import { DuelStage } from "../model";
+import { Stage } from "../v2/model";
+import { selectStage } from "../v2/selectors";
 import "./StageBanner.css";
 
 const StageBanner: React.FC = () => {
@@ -8,12 +8,7 @@ const StageBanner: React.FC = () => {
 
   return (
     <div className="stage-banner ion-padding">
-      {stage == DuelStage.MyDrawing && <h1>Select card(s) to deploy</h1>}
-      {stage == DuelStage.MyPlacing && <h1>Select placement</h1>}
-      {stage == DuelStage.MyFusion && <h1>Fuuusion!!</h1>}
-      {stage == DuelStage.MyAttack && (
-        <h1>Click on a card attack button to begin attack</h1>
-      )}
+      {stage == Stage.Drawing && <h1>Select card(s) to deploy</h1>}
     </div>
   );
 };

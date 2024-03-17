@@ -17,7 +17,7 @@ import { getAllDungeons } from "./service";
 import { play } from "ionicons/icons";
 import { useAppDispatch } from "../../store/hooks";
 import { Dungeon } from "./model";
-import { dungeonStarted } from "../Duel/store/thunk-actions";
+import { startDungeon } from "../Duel/v2/actions";
 
 const DungeonsPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -29,7 +29,7 @@ const DungeonsPage: React.FC = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      dispatch(dungeonStarted(item));
+      dispatch(startDungeon(item));
       router.push("/duel");
     }, 1200);
   };

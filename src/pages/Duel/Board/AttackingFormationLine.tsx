@@ -1,11 +1,11 @@
 import React from "react";
-import { CardStance, Formation } from "../model";
+import { Stance, Formation } from "../v2/model";
 import { DuelingCard } from "../Card/DuelingCard";
 import StanceSwitcher from "../stages/attacking/StanceSwitcher";
 
 export interface AttackingFormationLineProps {
   formation: Formation;
-  onStanceChanged?: (index: number, stance: CardStance) => void;
+  onStanceChanged?: (index: number, stance: Stance) => void;
   onCardClick?: (id: string) => void;
   disabledAttack?: boolean;
 }
@@ -21,14 +21,14 @@ export const AttackingFormationLine: React.FC<AttackingFormationLineProps> = ({
       {d && (
         <DuelingCard
           cardId={d.cardId}
-          defensive={d.stance == CardStance.Defensive}
+          defensive={d.stance == Stance.Defensive}
           onClick={() => onCardClick && onCardClick(d.cardId)}
         />
       )}
       {d && !d.acted && (
         <StanceSwitcher
           onClick={(stance) => onStanceChanged && onStanceChanged(idx, stance)}
-          disabledDefense={d.stance == CardStance.Defensive}
+          disabledDefense={d.stance == Stance.Defensive}
           disabledAttack={disabledAttack}
         />
       )}

@@ -1,6 +1,8 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { breedPals } from "../../pals/service";
 import { Result, Fusion, Side, State, Stage, Stance } from "./model";
+import { getConfig } from "../../config/service";
+import { linearScale } from "../../../utils/linearScale";
 
 const HAND_SIZE = 5;
 
@@ -9,7 +11,8 @@ export function getInitialSide(): Side {
     level: 0,
     life: 0,
     deck: [],
-    deployed: [],
+    deployed: [null, null, null, null, null],
+    supports: [null, null, null, null, null],
     graveyard: [],
     hand: [],
     deploymentPlan: null,
@@ -50,8 +53,51 @@ export function nextTurn(state: State) {
   advanceTo(state, Stage.Drawing);
 }
 
+export function getDeckSize(level: number) {
+  if (level <= 0) {
+    return 1;
+  }
+
+  const config = getConfig().deck.size.scale.byLevel;
+  if (level >= config.level) {
+    return config.linear.to;
+  }
+
+  const scale = linearScale(
+    config.linear.from,
+    config.linear.to,
+    config.level - 1
+  );
+  const value = scale.find((i) => i > level) || 1;
+  return Math.floor(value);
+}
+
+export function start(
+  state: State,
+  {
+    payload: { my, their },
+  }: PayloadAction<{
+    my: Pick<Side, "deck" | "level" | "life">;
+    their: Pick<Side, "deck" | "level" | "life">;
+  }>
+) {
+  const initial = getInitialState();
+  const params = {
+    my: {
+      ...initial.my,
+      ...my,
+    },
+    their: {
+      ...initial.their,
+      ...their,
+    },
+  };
+  Object.assign(state, params);
+  advanceTo(state, Stage.Drawing);
+}
+
 export function resetUnitActions(state: State) {
-  getCurrentSide(state).deployed.forEach((d) => (d.acted = false));
+  getCurrentSide(state).deployed.forEach((d) => d && (d.acted = false));
 }
 
 /**
@@ -103,6 +149,14 @@ export function selectCardsForDeployment(
     queue: [],
     unitIndex: null,
   };
+}
+
+export function endSelectingCardsForDeployment(state: State) {
+  if (state.stage !== Stage.PresentingHand) {
+    console.error("invalid stage");
+    return;
+  }
+
   advanceTo(state, Stage.PresentingDeploymentFormation);
 }
 
@@ -126,7 +180,7 @@ export function selectTargetDeploymentPosition(
   // calculate fusion queue
   plan.queue = plan.handIndices
     .map((idx) => getCurrentSide(state).hand[idx])
-    .concat(getCurrentSide(state).deployed[index].cardId)
+    .concat(getCurrentSide(state).deployed[index]?.cardId || "")
     .filter(Boolean);
   console.debug("fusion queue", plan.queue);
 
@@ -188,7 +242,7 @@ export function selectUnitForBattle(
 
   console.debug(
     "selected unit for battle",
-    getCurrentSide(state).deployed[index].cardId
+    getCurrentSide(state).deployed[index]?.cardId
   );
   getCurrentSide(state).offensivePlan = {
     unitIndex: index,
@@ -215,7 +269,7 @@ export function selectTargetUnitForBattle(
 
   console.debug(
     "selected target unit",
-    getOtherSide(state).deployed[index].cardId
+    getOtherSide(state).deployed[index]?.cardId
   );
 
   plan.targetUnitIndex = index;

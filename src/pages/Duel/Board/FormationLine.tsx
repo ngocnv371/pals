@@ -1,5 +1,5 @@
 import React from "react";
-import { CardStance, Formation } from "../model";
+import { Stance, Formation } from "../v2/model";
 import { DuelingCard } from "../Card/DuelingCard";
 import Spot from "../stages/placing/Spot";
 
@@ -29,7 +29,7 @@ export const FormationLine: React.FC<FormationLineProps> = ({
       {d && (
         <DuelingCard
           cardId={d.cardId}
-          defensive={d.stance == CardStance.Defensive}
+          defensive={d.stance == Stance.Defensive}
           onClick={() => onCardClick && onCardClick(d.cardId)}
         />
       )}

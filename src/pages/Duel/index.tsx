@@ -3,9 +3,9 @@ import React, { useEffect } from "react";
 import "./styles.css";
 import DuelContainer from "./DuelContainer";
 import { useAppSelector } from "../../store/hooks";
-import { selectStage } from "./store/selectors";
-import { DuelStage } from "./model";
 import "./effects.css";
+import { selectStage } from "./v2/selectors";
+import { Stage } from "./v2/model";
 
 const DeckPage: React.FC = () => {
   const stage = useAppSelector(selectStage);
@@ -23,7 +23,7 @@ const DeckPage: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        {stage !== DuelStage.Start && <DuelContainer />}
+        {stage !== Stage.Started && <DuelContainer />}
       </IonContent>
     </IonPage>
   );

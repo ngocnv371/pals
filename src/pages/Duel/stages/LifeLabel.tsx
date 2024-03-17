@@ -9,10 +9,11 @@ import {
 import { useAppSelector } from "../../../store/hooks";
 import "./LifeLabel.css";
 import { heart } from "ionicons/icons";
+import { selectMyLife, selectTheirLife } from "../v2/selectors";
 
 export const LifeLabel: React.FC = () => {
-  const their = useAppSelector((state) => state.duel.their.life);
-  const my = useAppSelector((state) => state.duel.my.life);
+  const their = useAppSelector(selectTheirLife);
+  const my = useAppSelector(selectMyLife);
 
   return (
     <div className="life-label">

@@ -1,4 +1,3 @@
-import { selectStage } from "./store/selectors";
 import { useAppSelector } from "../../store/hooks";
 import { Board } from "./Board/Board";
 import { Hand } from "./Hand/Hand";
@@ -8,9 +7,10 @@ import { BattleVisualizerContainer } from "./Battle/BattleVisualizer";
 import { LifeLabel } from "./stages/LifeLabel";
 import EndTurnButton from "./stages/attacking/EndTurnButton";
 import PlaceCardsButton from "./stages/drawing/PlaceCardsButton";
-import { DuelStage } from "./model";
 import { TheirHand } from "./Hand/TheirHand";
 import QuitButton from "./stages/QuitButton";
+import { selectStage } from "./v2/selectors";
+import { Stage } from "./v2/model";
 
 const DuelContainer: React.FC = () => {
   const stage = useAppSelector(selectStage);
@@ -20,15 +20,9 @@ const DuelContainer: React.FC = () => {
       <LifeLabel />
       <Board />
       <StageBanner />
-      <BattleVisualizerContainer />
-      <FusionVisualizerContainer />
-      <QuitButton />
 
-      {stage == DuelStage.MyDrawing && <Hand />}
-      {stage == DuelStage.MyDrawing && <PlaceCardsButton />}
-
-      {stage == DuelStage.MyAttack && <EndTurnButton />}
-      {stage == DuelStage.TheirDrawing && <TheirHand />}
+      {stage == Stage.PresentingHand && <Hand />}
+      {stage == Stage.PresentingHand && <PlaceCardsButton />}
     </div>
   );
 };

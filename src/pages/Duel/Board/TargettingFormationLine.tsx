@@ -1,5 +1,5 @@
 import React from "react";
-import { CardStance, Formation } from "../model";
+import { Stance, Formation } from "../v2/model";
 import { DuelingCard } from "../Card/DuelingCard";
 import TargetSign from "../stages/attacking/TargetSign";
 
@@ -18,7 +18,7 @@ export const TargettingFormationLine: React.FC<
       {d && (
         <DuelingCard
           cardId={d.cardId}
-          defensive={d.stance == CardStance.Defensive}
+          defensive={d.stance == Stance.Defensive}
         />
       )}
       {d && <TargetSign onClick={() => onSelected && onSelected(idx)} />}

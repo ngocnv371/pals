@@ -3,6 +3,7 @@ import { search } from "ionicons/icons";
 import { useAppDispatch } from "../../store/hooks";
 import { duelStarted } from "../Duel/store/thunk-actions";
 import { useMemo, useState } from "react";
+import { startRandom } from "../Duel/v2/actions";
 
 const FindMatchButton: React.FC<{ onClick?: () => void; label?: string }> = ({
   onClick,
@@ -18,7 +19,7 @@ const FindMatchButton: React.FC<{ onClick?: () => void; label?: string }> = ({
     onClick && onClick();
     setTimeout(() => {
       setLoading(false);
-      dispatch(duelStarted());
+      dispatch(startRandom());
       router.push("/duel");
     }, 1200);
   };

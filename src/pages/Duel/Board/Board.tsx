@@ -1,28 +1,23 @@
 import React from "react";
-import {
-  myStanceChangedToDefensive,
-  myOffensiveCardSelected,
-  myTargetCardSelected,
-  myDeploymentTargetSelected,
-} from "../store/duelSlice";
+
 import {
   selectTheirDeployed,
   selectMyDeployed,
-  selectTheirSupports,
-  selectMySupports,
   selectStage,
   selectTurn,
-} from "../store/selectors";
-import { myFuseAndPlace, myBattle } from "../store/thunk-actions";
+  selectTheirSupports,
+  selectMySupports,
+  selectIsMyTurn,
+} from "../v2/selectors";
 import { withFormationSelector } from "./withFormationSelector";
 import "./Board.css";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { FormationLine } from "./FormationLine";
 import { AttackingFormationLine } from "./AttackingFormationLine";
 import { TargettingFormationLine } from "./TargettingFormationLine";
-import { CardStance, DuelStage } from "../model";
 import { MyTargettingFormationLineContainer } from "./MyTargettingFormationLine";
-import { TheirAttackingFormationLineContainer } from "./TheirAttackingFormationLine";
+import { Stage, Stance } from "../v2/model";
+import { actions } from "../v2/slice";
 
 const TheirDeployedFormation = withFormationSelector(
   FormationLine,
@@ -58,6 +53,7 @@ const TheirTargettingFormation = withFormationSelector(
 export const Board: React.FC = () => {
   const stage = useAppSelector(selectStage);
   const turn = useAppSelector(selectTurn);
+  const isMyTurn = useAppSelector(selectIsMyTurn);
   const disabledAttack = turn == 1;
   const dispatch = useAppDispatch();
 
@@ -68,40 +64,29 @@ export const Board: React.FC = () => {
           <TheirSupportsFormation />
         </div>
         <div className="row their-row">
-          {stage == DuelStage.MyTargetting ? (
-            <TheirTargettingFormation
-              onSelected={(index) => {
-                dispatch(myTargetCardSelected({ index }));
-                dispatch(myBattle());
-              }}
-            />
-          ) : stage == DuelStage.TheirTargetting ? (
-            <TheirAttackingFormationLineContainer />
-          ) : (
-            <TheirDeployedFormation />
-          )}
+          <TheirDeployedFormation />
         </div>
         <div className="row empty"></div>
         <div className="row">
-          {stage == DuelStage.MyAttack ? (
+          {stage == Stage.Battle && isMyTurn ? (
             <MyAttackingDeployedFormation
               onStanceChanged={(index, stance) => {
-                if (stance == CardStance.Defensive) {
-                  dispatch(myStanceChangedToDefensive({ index }));
+                if (stance == Stance.Defensive) {
+                  dispatch(actions.switchUnitToDefensive({ index }));
                 } else {
-                  dispatch(myOffensiveCardSelected({ index }));
+                  dispatch(actions.selectUnitForBattle({ index }));
                 }
               }}
               disabledAttack={disabledAttack}
             />
-          ) : stage == DuelStage.TheirTargetting ? (
+          ) : stage == Stage.PresentingTargets && !isMyTurn ? (
             <MyTargettingFormationLineContainer />
           ) : (
             <MyDeployedFormation
-              canSelect={stage == DuelStage.MyPlacing}
-              onSelect={(idx) => {
-                dispatch(myDeploymentTargetSelected(idx));
-                dispatch(myFuseAndPlace());
+              canSelect={stage == Stage.PresentingDeploymentFormation}
+              onSelect={(index) => {
+                dispatch(actions.selectTargetDeploymentPosition({ index }));
+                // dispatch(myFuseAndPlace());
               }}
             />
           )}
