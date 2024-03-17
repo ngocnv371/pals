@@ -20,6 +20,7 @@ const DuelContainer: React.FC = () => {
       <LifeLabel />
       <Board />
       <StageBanner />
+      <FusionVisualizerContainer />
 
       {stage == Stage.PresentingHand && <Hand />}
       {stage == Stage.PresentingHand && <PlaceCardsButton />}

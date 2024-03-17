@@ -1,10 +1,12 @@
 import { useMemo, useRef } from "react";
-import { useAppSelector } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { useClassSequence } from "../utils/useClassSequence";
 import "./FusionVisualizer.css";
 import { CardInfo } from "../../../components/Card/CardInfo";
 import { calculateFusionAnimationSequence } from "../service";
 import { Fusion } from "../model";
+import { selectFusion } from "../v2/selectors";
+import { endFusion } from "../v2/actions";
 
 export const FusionVisualizer: React.FC<
   Fusion & {
@@ -30,7 +32,8 @@ export const FusionVisualizer: React.FC<
 };
 
 export const FusionVisualizerContainer: React.FC = () => {
-  const data = useAppSelector((state) => state.duel.fusion);
+  const data = useAppSelector(selectFusion);
+  const dispatch = useAppDispatch();
 
   if (!data) {
     return null;
@@ -38,5 +41,12 @@ export const FusionVisualizerContainer: React.FC = () => {
 
   const { card1, card2, result } = data;
 
-  return <FusionVisualizer card1={card1} card2={card2} result={result} />;
+  return (
+    <FusionVisualizer
+      card1={card1}
+      card2={card2}
+      result={result}
+      onCompleted={() => dispatch(endFusion())}
+    />
+  );
 };

@@ -185,6 +185,7 @@ function selectTargetDeploymentPosition(
   console.debug("fusion queue", plan.queue);
 
   advanceTo(state, Stage.FusionQueue);
+  fuse(state);
 }
 
 function fuse(state: State) {
@@ -193,7 +194,8 @@ function fuse(state: State) {
     return;
   }
 
-  const plan = getCurrentSide(state).deploymentPlan;
+  const side = getCurrentSide(state);
+  const plan = side.deploymentPlan;
   if (!plan) {
     console.error("deployment plan missing");
     return;
@@ -206,7 +208,12 @@ function fuse(state: State) {
 
   if (plan.queue.length == 1) {
     console.debug("queue finished");
-    advanceTo(state, Stage.Placing);
+    side.deployed[plan.unitIndex!] = {
+      cardId: plan.queue[0],
+      stance: Stance.Offensive,
+      acted: false,
+    };
+    advanceTo(state, Stage.Battle);
     return;
   }
 
@@ -219,6 +226,27 @@ function fuse(state: State) {
     result,
   };
   advanceTo(state, Stage.Fusion);
+}
+
+function endFusion(state: State) {
+  if (state.stage !== Stage.Fusion) {
+    console.error("invalid stage");
+    return;
+  }
+
+  const { result } = state.fusion!;
+  if (!result) {
+    console.error("fusion result missing");
+    return;
+  }
+
+  console.debug("update queue");
+  const plan = getCurrentSide(state).deploymentPlan!;
+  const [, , ...rest] = plan.queue;
+  plan.queue = [result, ...rest];
+
+  advanceTo(state, Stage.FusionQueue);
+  fuse(state);
 }
 
 function skipDeployment(state: State) {
@@ -334,4 +362,5 @@ export const internalServices = {
   endSelectingCardsForDeployment,
   drawCards,
   getDeckSize,
+  endFusion,
 };
