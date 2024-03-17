@@ -1,37 +1,38 @@
-import { createSlice } from "@reduxjs/toolkit";
-import * as service from "./service";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import {
+  drawCards,
+  endBattle,
+  fuse,
+  getInitialState,
+  selectCardsForDeployment,
+  selectTargetDeploymentPosition,
+  selectTargetUnitForBattle,
+  selectUnitForBattle,
+  skipDeployment,
+  surrender,
+  switchUnitToDefensive,
+} from "./service";
 import { AppDispatch, RootState } from "../../../store";
 
-const initialState = service.getInitialState();
+const initialState = getInitialState();
 
-const slice = createSlice({
+export const slice = createSlice({
   name: "duel2",
   initialState,
-  reducers: {},
+  reducers: {
+    drawCards,
+    selectCardsForDeployment,
+    selectTargetDeploymentPosition,
+    fuse,
+    skipDeployment,
+    switchUnitToDefensive,
+    selectUnitForBattle,
+    selectTargetUnitForBattle,
+    endBattle,
+    surrender,
+  },
 });
 
-export const selectUnitsForDeployment =
-  () => (dispatch: AppDispatch, getState: () => RootState) => {};
-
-export const endDrawingStage =
-  () => (dispatch: AppDispatch, getState: () => RootState) => {};
-
-export const selectDeploymentTarget =
-  () => (dispatch: AppDispatch, getState: () => RootState) => {};
-
-export const changeUnitStance =
-  () => (dispatch: AppDispatch, getState: () => RootState) => {};
-
-export const selectUnitForBattle =
-  () => (dispatch: AppDispatch, getState: () => RootState) => {};
-
-export const selectTargetUnit =
-  () => (dispatch: AppDispatch, getState: () => RootState) => {};
-
-export const endBattleStage =
-  () => (dispatch: AppDispatch, getState: () => RootState) => {};
-
-export const surrender =
-  () => (dispatch: AppDispatch, getState: () => RootState) => {};
+export const actions = slice.actions;
 
 export default slice.reducer;

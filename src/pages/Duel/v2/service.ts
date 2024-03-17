@@ -1,253 +1,265 @@
+import { PayloadAction } from "@reduxjs/toolkit";
 import { breedPals } from "../../pals/service";
 import { Result, Fusion, Side, State, Stage, Stance } from "./model";
 
-export class DuelStateMachine {
-  private readonly HAND_SIZE = 5;
+const HAND_SIZE = 5;
 
-  constructor(private state: State) {}
+export function getInitialSide(): Side {
+  return {
+    level: 0,
+    life: 0,
+    deck: [],
+    deployed: [],
+    graveyard: [],
+    hand: [],
+    deploymentPlan: null,
+    offensivePlan: null,
+  };
+}
 
-  private get side() {
-    return [this.state.my, this.state.their][this.state.turn % 2];
+export function getInitialState(): State {
+  return {
+    my: getInitialSide(),
+    their: getInitialSide(),
+    battle: null,
+    fusion: null,
+    dungeon: null,
+    result: Result.Unresolved,
+    spotlightIndex: null,
+    stage: Stage.Started,
+    turn: 0,
+  };
+}
+
+export function getCurrentSide(state: State) {
+  return [state.my, state.their][state.turn % 2];
+}
+
+export function getOtherSide(state: State) {
+  return [state.their, state.my][state.turn % 2];
+}
+
+export function nextTurn(state: State) {
+  state.turn++;
+  console.debug("new turn", state.turn);
+  state.battle = null;
+  state.fusion = null;
+  state.spotlightIndex = null;
+  resetUnitActions(state);
+
+  advanceTo(state, Stage.Drawing);
+}
+
+export function resetUnitActions(state: State) {
+  getCurrentSide(state).deployed.forEach((d) => (d.acted = false));
+}
+
+/**
+ * attempt to fill the hand with cards from deck
+ * @returns number of drawn cards
+ */
+export function drawCards(state: State) {
+  if (state.stage !== Stage.Drawing) {
+    console.error("invalid stage");
+    return;
   }
 
-  private get otherSide() {
-    return [this.state.their, this.state.my][this.state.turn % 2];
+  console.debug("draw cards");
+  const cardsInDeck = getCurrentSide(state).deck.length;
+  if (cardsInDeck <= 0) {
+    console.debug("out of cards");
+    advanceTo(state, Stage.PresentingHand);
+    return;
   }
 
-  start() {
-    Object.assign(this.state, DuelStateMachine.getInitialState());
+  const neededCards = HAND_SIZE - getCurrentSide(state).hand.length;
+  if (neededCards <= 0) {
+    console.debug("hand is full");
+    advanceTo(state, Stage.PresentingHand);
+    return;
   }
 
-  private static getInitialSide(): Side {
-    return {
-      level: 0,
-      life: 0,
-      deck: [],
-      deployed: [],
-      graveyard: [],
-      hand: [],
-      deploymentPlan: null,
-      offensivePlan: null,
-    };
+  const items = getCurrentSide(state).deck.splice(0, neededCards);
+  getCurrentSide(state).hand = getCurrentSide(state).hand.concat(items);
+  console.debug("drawn", items);
+  advanceTo(state, Stage.PresentingHand);
+}
+
+export function selectCardsForDeployment(
+  state: State,
+  { payload: { indices } }: PayloadAction<{ indices: number[] }>
+) {
+  if (state.stage !== Stage.PresentingHand) {
+    console.error("invalid stage");
+    return;
   }
 
-  private static getInitialState(): State {
-    return {
-      my: DuelStateMachine.getInitialSide(),
-      their: DuelStateMachine.getInitialSide(),
-      battle: null,
-      fusion: null,
-      dungeon: null,
-      result: Result.Unresolved,
-      spotlightIndex: null,
-      stage: Stage.Started,
-      turn: 0,
-    };
+  console.debug(
+    "select cards",
+    indices.map((i) => getCurrentSide(state).hand[i])
+  );
+  getCurrentSide(state).deploymentPlan = {
+    handIndices: indices,
+    queue: [],
+    unitIndex: null,
+  };
+  advanceTo(state, Stage.PresentingDeploymentFormation);
+}
+
+export function selectTargetDeploymentPosition(
+  state: State,
+  { payload: { index } }: PayloadAction<{ index: number }>
+) {
+  if (state.stage !== Stage.PresentingDeploymentFormation) {
+    console.error("invalid stage");
+    return;
   }
 
-  nextTurn() {
-    this.state.turn++;
-    console.debug("new turn", this.state.turn);
-    this.state.battle = null;
-    this.state.fusion = null;
-    this.state.spotlightIndex = null;
-    this.resetUnitActions();
-
-    this.advanceTo(Stage.Drawing);
+  const plan = getCurrentSide(state).deploymentPlan;
+  if (!plan) {
+    console.error("deployment plan missing");
+    return;
   }
 
-  private resetUnitActions() {
-    this.side.deployed.forEach((d) => (d.acted = false));
+  plan.unitIndex = index;
+
+  // calculate fusion queue
+  plan.queue = plan.handIndices
+    .map((idx) => getCurrentSide(state).hand[idx])
+    .concat(getCurrentSide(state).deployed[index].cardId)
+    .filter(Boolean);
+  console.debug("fusion queue", plan.queue);
+
+  advanceTo(state, Stage.FusionQueue);
+}
+
+export function fuse(state: State) {
+  if (state.stage !== Stage.FusionQueue) {
+    console.error("invalid stage");
+    return;
   }
 
-  /**
-   * attempt to fill the hand with cards from deck
-   * @returns number of drawn cards
-   */
-  drawCards() {
-    if (this.state.stage !== Stage.Drawing) {
-      console.error("invalid stage");
-      return 0;
-    }
-
-    console.debug("draw cards");
-    const cardsInDeck = this.side.deck.length;
-    if (cardsInDeck <= 0) {
-      console.debug("out of cards");
-      this.advanceTo(Stage.PresentingHand);
-      return 0;
-    }
-
-    const neededCards = this.HAND_SIZE - this.side.hand.length;
-    if (neededCards <= 0) {
-      console.debug("hand is full");
-      this.advanceTo(Stage.PresentingHand);
-      return 0;
-    }
-
-    const items = this.side.deck.splice(0, neededCards);
-    this.side.hand = this.side.hand.concat(items);
-    console.debug("drawn", items);
-    this.advanceTo(Stage.PresentingHand);
-    return items.length;
+  const plan = getCurrentSide(state).deploymentPlan;
+  if (!plan) {
+    console.error("deployment plan missing");
+    return;
   }
 
-  selectCardsForDeployment(indices: number[]) {
-    if (this.state.stage !== Stage.PresentingHand) {
-      console.error("invalid stage");
-      return;
-    }
-
-    console.debug(
-      "select cards",
-      indices.map((i) => this.side.hand[i])
-    );
-    this.side.deploymentPlan = {
-      handIndices: indices,
-      queue: [],
-      unitIndex: null,
-    };
-    this.advanceTo(Stage.PresentingDeploymentFormation);
+  if (plan.queue.length < 1) {
+    console.error("fusion queue invalid");
+    return;
   }
 
-  selectTargetDeploymentPosition(index: number) {
-    if (this.state.stage !== Stage.PresentingDeploymentFormation) {
-      console.error("invalid stage");
-      return;
-    }
-
-    const plan = this.side.deploymentPlan;
-    if (!plan) {
-      console.error("deployment plan missing");
-      return;
-    }
-
-    plan.unitIndex = index;
-
-    // calculate fusion queue
-    plan.queue = plan.handIndices
-      .map((idx) => this.side.hand[idx])
-      .concat(this.side.deployed[index].cardId)
-      .filter(Boolean);
-    console.debug("fusion queue", plan.queue);
-
-    this.advanceTo(Stage.FusionQueue);
+  if (plan.queue.length == 1) {
+    console.debug("queue finished");
+    advanceTo(state, Stage.Placing);
+    return;
   }
 
-  fuse() {
-    if (this.state.stage !== Stage.FusionQueue) {
-      console.error("invalid stage");
-      return;
-    }
+  const [card1, card2] = plan.queue.splice(0, 2);
+  const result = breedPals(card1, card2);
+  console.debug(`fused ${card1} + ${card2} => ${result}`);
+  state.fusion = {
+    card1,
+    card2,
+    result,
+  };
+  advanceTo(state, Stage.Fusion);
+}
 
-    const plan = this.side.deploymentPlan;
-    if (!plan) {
-      console.error("deployment plan missing");
-      return;
-    }
-
-    if (plan.queue.length < 1) {
-      console.error("fusion queue invalid");
-      return;
-    }
-
-    if (plan.queue.length == 1) {
-      console.debug("queue finished");
-      this.advanceTo(Stage.Placing);
-      return;
-    }
-
-    const [card1, card2] = plan.queue.splice(0, 2);
-    const result = breedPals(card1, card2);
-    console.debug(`fused ${card1} + ${card2} => ${result}`);
-    this.state.fusion = {
-      card1,
-      card2,
-      result,
-    };
-    this.advanceTo(Stage.Fusion);
+export function skipDeployment(state: State) {
+  if (state.stage !== Stage.PresentingHand) {
+    console.error("invalid stage");
+    return;
   }
 
-  skipDeployment() {
-    if (this.state.stage !== Stage.PresentingHand) {
-      console.error("invalid stage");
-      return;
-    }
+  console.debug("skip deployment");
+  advanceTo(state, Stage.Battle);
+}
 
-    console.debug("skip deployment");
-    this.advanceTo(Stage.Battle);
+export function selectUnitForBattle(
+  state: State,
+  { payload: { index } }: PayloadAction<{ index: number }>
+) {
+  if (state.stage !== Stage.PresentingBattleFormation) {
+    console.error("invalid stage");
+    return;
   }
 
-  selectUnitForBattle(index: number) {
-    if (this.state.stage !== Stage.PresentingBattleFormation) {
-      console.error("invalid stage");
-      return;
-    }
+  console.debug(
+    "selected unit for battle",
+    getCurrentSide(state).deployed[index].cardId
+  );
+  getCurrentSide(state).offensivePlan = {
+    unitIndex: index,
+    targetUnitIndex: null,
+  };
 
-    console.debug("selected unit for battle", this.side.deployed[index].cardId);
-    this.side.offensivePlan = {
-      unitIndex: index,
-      targetUnitIndex: null,
-    };
+  advanceTo(state, Stage.PresentingTargets);
+}
 
-    this.advanceTo(Stage.PresentingTargets);
+export function selectTargetUnitForBattle(
+  state: State,
+  { payload: { index } }: PayloadAction<{ index: number }>
+) {
+  if (state.stage !== Stage.PresentingTargets) {
+    console.error("invalid stage");
+    return;
   }
 
-  selectTargetUnit(index: number) {
-    if (this.state.stage !== Stage.PresentingTargets) {
-      console.error("invalid stage");
-      return;
-    }
-
-    if (!this.side.offensivePlan) {
-      console.error("offensive plan missing");
-      return;
-    }
-
-    console.debug(
-      "selected target unit",
-      this.otherSide.deployed[index].cardId
-    );
-    this.side.offensivePlan.targetUnitIndex = index;
-
-    this.advanceTo(Stage.BattleVisualizer);
+  const plan = getCurrentSide(state).offensivePlan;
+  if (!plan) {
+    console.error("offensive plan missing");
+    return;
   }
 
-  skipBattle() {
-    if (this.state.stage !== Stage.Battle) {
-      console.error("invalid stage");
-      return;
-    }
+  console.debug(
+    "selected target unit",
+    getOtherSide(state).deployed[index].cardId
+  );
 
-    console.debug("skip battle");
-    this.nextTurn();
+  plan.targetUnitIndex = index;
+
+  advanceTo(state, Stage.BattleVisualizer);
+}
+
+export function endBattle(state: State) {
+  if (state.stage !== Stage.Battle) {
+    console.error("invalid stage");
+    return;
   }
 
-  changeUnitToDefensive(index: number) {
-    if (this.state.stage !== Stage.Battle) {
-      console.error("invalid stage");
-      return;
-    }
+  console.debug("skip battle");
+  nextTurn(state);
+}
 
-    const unit = this.side.deployed[index];
-    if (!unit || !unit.cardId) {
-      console.error("invalid unit");
-      return;
-    }
-
-    console.debug("change unit to defensive", unit.cardId);
-    unit.acted = true;
-    unit.stance = Stance.Defensive;
+export function switchUnitToDefensive(
+  state: State,
+  { payload: { index } }: PayloadAction<{ index: number }>
+) {
+  if (state.stage !== Stage.Battle) {
+    console.error("invalid stage");
+    return;
   }
 
-  surrender() {
-    console.debug("surrendered");
-    this.state.result = Result.Loose;
-    this.advanceTo(Stage.Ended);
+  const unit = getCurrentSide(state).deployed[index];
+  if (!unit || !unit.cardId) {
+    console.error("invalid unit");
+    return;
   }
 
-  advanceTo(stage: Stage) {
-    console.debug("advancing to", stage);
-    this.state.stage = stage;
-  }
+  console.debug("switch unit to defensive", unit.cardId);
+  unit.acted = true;
+  unit.stance = Stance.Defensive;
+}
+
+export function surrender(state: State) {
+  console.debug("surrendered");
+  state.result = Result.Loose;
+  advanceTo(state, Stage.Ended);
+}
+
+export function advanceTo(state: State, stage: Stage) {
+  console.debug("advancing to", stage);
+  state.stage = stage;
 }

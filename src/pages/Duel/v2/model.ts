@@ -122,3 +122,7 @@ export enum Result {
   Tie,
   Unresolved,
 }
+
+export interface CharacterController {
+  onStageChanged: (stage: Stage) => void;
+}
