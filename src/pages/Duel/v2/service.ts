@@ -30,7 +30,7 @@ function getInitialState(): State {
     result: Result.Unresolved,
     spotlightIndex: null,
     stage: Stage.Started,
-    turn: 0,
+    turn: -1,
   };
 }
 
@@ -51,6 +51,7 @@ function nextTurn(state: State) {
   resetUnitActions(state);
 
   advanceTo(state, Stage.Drawing);
+  drawCards(state);
 }
 
 function getDeckSize(level: number) {
@@ -111,13 +112,16 @@ function drawCards(state: State) {
   }
 
   console.debug("draw cards");
-  const cardsInDeck = getCurrentSide(state).deck.length;
-  if (cardsInDeck <= 0) {
-    console.debug("out of cards");
-    advanceTo(state, Stage.PresentingHand);
-    return;
+  if (state.turn >= 0) {
+    const cardsInDeck = getCurrentSide(state).deck.length;
+    if (cardsInDeck <= 0) {
+      console.debug("out of cards");
+      advanceTo(state, Stage.PresentingHand);
+      return;
+    }
   }
 
+  state.turn++;
   const neededCards = HAND_SIZE - getCurrentSide(state).hand.length;
   if (neededCards <= 0) {
     console.debug("hand is full");
@@ -213,7 +217,7 @@ function fuse(state: State) {
       stance: Stance.Offensive,
       acted: false,
     };
-    advanceTo(state, Stage.Battle);
+    advanceTo(state, Stage.PresentingBattleFormation);
     return;
   }
 
@@ -242,8 +246,7 @@ function endFusion(state: State) {
 
   console.debug("update queue");
   const plan = getCurrentSide(state).deploymentPlan!;
-  const [, , ...rest] = plan.queue;
-  plan.queue = [result, ...rest];
+  plan.queue = [result, ...plan.queue];
 
   advanceTo(state, Stage.FusionQueue);
   fuse(state);
@@ -256,7 +259,7 @@ function skipDeployment(state: State) {
   }
 
   console.debug("skip deployment");
-  advanceTo(state, Stage.Battle);
+  advanceTo(state, Stage.PresentingBattleFormation);
 }
 
 function selectUnitForBattle(
@@ -306,7 +309,7 @@ function selectTargetUnitForBattle(
 }
 
 function endBattle(state: State) {
-  if (state.stage !== Stage.Battle) {
+  if (state.stage !== Stage.PresentingBattleFormation) {
     console.error("invalid stage");
     return;
   }
@@ -319,7 +322,7 @@ function switchUnitToDefensive(
   state: State,
   { payload: { index } }: PayloadAction<{ index: number }>
 ) {
-  if (state.stage !== Stage.Battle) {
+  if (state.stage !== Stage.PresentingBattleFormation) {
     console.error("invalid stage");
     return;
   }

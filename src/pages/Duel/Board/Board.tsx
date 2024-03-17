@@ -72,7 +72,7 @@ export const Board: React.FC = () => {
         </div>
         <div className="row empty"></div>
         <div className="row">
-          {stage == Stage.Battle && isMyTurn ? (
+          {stage == Stage.PresentingBattleFormation && isMyTurn ? (
             <MyAttackingDeployedFormation
               onStanceChanged={(index, stance) => {
                 if (stance == Stance.Defensive) {

@@ -40,6 +40,7 @@ export const selectTargetDeploymentPosition =
   };
 
 export const endFusion = internalEvents.endFusion;
+export const endBattle = internalEvents.endBattle;
 
 export const selectCardsForDeployment =
   (indices: number[]) => (dispatch: AppDispatch, getState: () => RootState) => {

@@ -24,6 +24,7 @@ const DuelContainer: React.FC = () => {
 
       {stage == Stage.PresentingHand && <Hand />}
       {stage == Stage.PresentingHand && <PlaceCardsButton />}
+      {stage == Stage.PresentingBattleFormation && <EndTurnButton />}
     </div>
   );
 };
