@@ -3,7 +3,7 @@
  */
 export interface Pal {
   id: string;
-  types: string[];
+  type: string[];
   name: string;
   description: string;
   attack: number;

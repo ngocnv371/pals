@@ -2,6 +2,7 @@ import { IonCard, IonCardContent, IonImg } from "@ionic/react";
 import { useBeast } from "./useCage";
 import { usePal } from "./useEgg";
 import "./BeastCard.css";
+import CardTypes from "../../components/Card/CardTypes";
 
 type Props = {
   id: string;
@@ -24,6 +25,7 @@ export default function BeastCard({ id }: Props) {
       <p className="beast-name ion-no-margin ion-wrap ion-text-center">
         {beast.name}
       </p>
+      <CardTypes types={pal.type} />
     </IonCard>
   );
 }

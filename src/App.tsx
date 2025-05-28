@@ -45,12 +45,8 @@ const App: React.FC = () => {
       <IonReactRouter>
         <IonTabs>
           <IonRouterOutlet>
-            <Route exact path="/cage">
-              <CagePage />
-            </Route>
-            <Route exact path="/">
-              <Redirect to="/cage" />
-            </Route>
+            <Redirect exact path="/" to="/cage" />
+            <Route exact path="/cage" render={() => <CagePage />} />
           </IonRouterOutlet>
           {show && (
             <IonTabBar slot="bottom">
