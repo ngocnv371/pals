@@ -1,12 +1,15 @@
 import {
   IonApp,
+  IonIcon,
+  IonLabel,
   IonRouterOutlet,
-  IonSplitPane,
+  IonTabBar,
+  IonTabButton,
+  IonTabs,
   setupIonicReact,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, Route } from "react-router-dom";
-import Menu from "./components/Menu";
 import "./theme/main.css";
 
 /* Core CSS required for Ionic components to work properly */
@@ -27,70 +30,39 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
-import "animate.css/animate.css";
 
-import { Provider } from "react-redux";
-import { store } from "./store";
-
-import DeckPage from "./pages/Deck";
-import DuelPage from "./pages/Duel";
-import TestsPage from "./pages/Tests";
-import TestFusionVisualizerPage from "./pages/Tests/TestFusionVisualizer";
-import TestBattleVisualizerPage from "./pages/Tests/TestBattleVisualizer";
-import DuelResultPage from "./pages/DuelResult";
-import BookPage from "./pages/Book";
-import LobbyPage from "./pages/Lobby";
-import DungeonsPage from "./pages/Dungeons";
-import HomePage from "./pages/Home";
+import { useAppTabs } from "./modules/shared/useAppTabs";
+import { home } from "ionicons/icons";
+import CagePage from "./modules/cage";
 
 setupIonicReact();
 
 const App: React.FC = () => {
+  const { show } = useAppTabs();
+
   return (
-    <Provider store={store}>
-      <IonApp>
-        <IonReactRouter>
-          <IonSplitPane contentId="main">
-            <Menu />
-            <IonRouterOutlet id="main">
-              <Route path="/" exact={true}>
-                <Redirect to="/home" />
-              </Route>
-              <Route path="/home" exact={true}>
-                <HomePage />
-              </Route>
-              <Route path="/book" exact={true}>
-                <BookPage />
-              </Route>
-              <Route path="/deck" exact={true}>
-                <DeckPage />
-              </Route>
-              <Route path="/duel" exact={true}>
-                <DuelPage />
-              </Route>
-              <Route path="/lobby" exact={true}>
-                <LobbyPage />
-              </Route>
-              <Route path="/dungeons" exact={true}>
-                <DungeonsPage />
-              </Route>
-              <Route path="/tests" exact={true}>
-                <TestsPage />
-              </Route>
-              <Route path="/duel-result" exact={true}>
-                <DuelResultPage />
-              </Route>
-              <Route path="/tests/fusion-visualizer" exact={true}>
-                <TestFusionVisualizerPage />
-              </Route>
-              <Route path="/tests/battle-visualizer" exact={true}>
-                <TestBattleVisualizerPage />
-              </Route>
-            </IonRouterOutlet>
-          </IonSplitPane>
-        </IonReactRouter>
-      </IonApp>
-    </Provider>
+    <IonApp>
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route exact path="/cage">
+              <CagePage />
+            </Route>
+            <Route exact path="/">
+              <Redirect to="/cage" />
+            </Route>
+          </IonRouterOutlet>
+          {show && (
+            <IonTabBar slot="bottom">
+              <IonTabButton tab="tab1" href="/cage">
+                <IonIcon aria-hidden="true" icon={home} />
+                <IonLabel>Cage</IonLabel>
+              </IonTabButton>
+            </IonTabBar>
+          )}
+        </IonTabs>
+      </IonReactRouter>
+    </IonApp>
   );
 };
 

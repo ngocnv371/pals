@@ -1,0 +1,18 @@
+.grid-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.grid-item {
+  padding: 0.5rem;
+  width: 33%;
+  display: flex;
+  flex: none;
+  align-content: stretch;
+  box-sizing: border-box;
+}
+.grid-item-wrapper {
+  display: flex;
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+}

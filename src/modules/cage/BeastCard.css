@@ -1,0 +1,15 @@
+.beast-card {
+  margin: 2px;
+  width: 7rem;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  transition: all 200ms;
+
+  > ion-img {
+    max-height: 7rem;
+    min-height: 7rem;
+  }
+  .beast-name {
+    line-height: 2rem;
+  }
+}
