@@ -28,15 +28,6 @@ const gridComponents: VirtuosoGridProps<undefined, undefined>["components"] = {
   ),
 };
 
-const ItemWrapper: React.FC<React.PropsWithChildren> = ({
-  children,
-  ...props
-}) => (
-  <div {...props} className="grid-item-wrapper">
-    {children}
-  </div>
-);
-
 export default function CagePage() {
   const { beasts } = useCage();
 
@@ -55,11 +46,7 @@ export default function CagePage() {
           style={{ height: "100%" }}
           totalCount={beasts.length}
           components={gridComponents}
-          itemContent={(index) => (
-            <ItemWrapper>
-              <BeastCard id={beasts[index].id} />
-            </ItemWrapper>
-          )}
+          itemContent={(index) => <BeastCard id={beasts[index].id} />}
         />
       </IonContent>
     </IonPage>

@@ -10,9 +10,3 @@
   align-content: stretch;
   box-sizing: border-box;
 }
-.grid-item-wrapper {
-  display: flex;
-  flex: 1;
-  text-align: center;
-  white-space: nowrap;
-}
