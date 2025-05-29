@@ -15,13 +15,19 @@ import { VirtuosoGrid } from "react-virtuoso";
 import { useCage } from "./useCage";
 import BeastCard from "./BeastCard";
 import { SimpleGridComponents } from "../shared/SimpleGrid";
+import { Beast } from "./types";
 
 interface BeastPickerProps {
   value?: string | null;
   onChange: (id: string) => void;
+  filter?: (beast: Beast) => boolean;
 }
 
-export default function BeastPicker({ value, onChange }: BeastPickerProps) {
+export default function BeastPicker({
+  value,
+  onChange,
+  filter,
+}: BeastPickerProps) {
   const { beasts } = useCage();
   const [showModal, setShowModal] = useState(false);
   const [search, setSearch] = useState("");
@@ -33,23 +39,24 @@ export default function BeastPicker({ value, onChange }: BeastPickerProps) {
   );
 
   const filteredBeasts = useMemo(() => {
-    if (!search) return beasts;
-    return beasts.filter((b) =>
+    let candidates = beasts;
+    if (filter) {
+      candidates = candidates.filter(filter);
+    }
+    if (!search) return candidates;
+    return candidates.filter((b) =>
       (b.name || b.id).toLowerCase().includes(search.toLowerCase())
     );
-  }, [beasts, search]);
+  }, [beasts, search, filter]);
 
   return (
     <>
       {selectedBeast ? (
-        <div onClick={() => setShowModal(true)} style={{ cursor: "pointer" }}>
+        <div onClick={() => setShowModal(true)} className="cursor-pointer">
           <BeastCard id={selectedBeast.id} className="margin-h-auto" />
         </div>
       ) : (
-        <IonCard
-          onClick={() => setShowModal(true)}
-          style={{ cursor: "pointer" }}
-        >
+        <IonCard onClick={() => setShowModal(true)} className="cursor-pointer">
           <IonCardContent>Tap to select</IonCardContent>
         </IonCard>
       )}
@@ -83,7 +90,7 @@ export default function BeastPicker({ value, onChange }: BeastPickerProps) {
                   onChange(filteredBeasts[index].id);
                   setShowModal(false);
                 }}
-                style={{ cursor: "pointer" }}
+                className="cursor-pointer"
               >
                 <BeastCard id={filteredBeasts[index].id} />
               </div>
