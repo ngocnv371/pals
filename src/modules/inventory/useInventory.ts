@@ -16,6 +16,9 @@ export const useInventory = create<InventoryState>((set, get) => ({
     gold: 300,
     stone: 100,
     ingot: 25,
+    arrow: 8,
+    cloth: 87,
+    fiber: 98,
   },
   add: (items) => {
     set((state) => {

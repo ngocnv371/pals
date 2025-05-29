@@ -27,11 +27,14 @@ export default function InventoryPage() {
       </IonHeader>
       <IonContent fullscreen>
         <VirtuosoGrid
+          className="cols-5"
           style={{ height: "100%" }}
           totalCount={keys.length}
           components={SimpleGridComponents}
           itemContent={(index) => (
-            <ItemIcon item={{ id: keys[index], quantity: 9 }} />
+            <ItemIcon
+              item={{ id: keys[index], quantity: inventory[keys[index]] }}
+            />
           )}
         />
       </IonContent>

@@ -10,3 +10,6 @@
   align-content: stretch;
   box-sizing: border-box;
 }
+.cols-5 .simple-grid-item {
+  width: 20%;
+}
