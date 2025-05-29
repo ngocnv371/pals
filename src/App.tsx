@@ -32,9 +32,10 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 
 import { useAppTabs } from "./modules/shared/useAppTabs";
-import { heart, home } from "ionicons/icons";
+import { arrowUpRightBox, heart, home } from "ionicons/icons";
 import CagePage from "./modules/cage";
 import BreedingPage from "./modules/breeding";
+import InventoryPage from "./modules/inventory";
 
 setupIonicReact();
 
@@ -49,6 +50,7 @@ const App: React.FC = () => {
             <Redirect exact path="/" to="/cage" />
             <Route exact path="/cage" render={() => <CagePage />} />
             <Route exact path="/breeding" render={() => <BreedingPage />} />
+            <Route exact path="/inventory" render={() => <InventoryPage />} />
           </IonRouterOutlet>
           {show && (
             <IonTabBar slot="bottom">
@@ -59,6 +61,10 @@ const App: React.FC = () => {
               <IonTabButton tab="breeding" href="/breeding">
                 <IonIcon aria-hidden="true" icon={heart} />
                 <IonLabel>Breeding</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="inventory" href="/inventory">
+                <IonIcon aria-hidden="true" icon={arrowUpRightBox} />
+                <IonLabel>Inventory</IonLabel>
               </IonTabButton>
             </IonTabBar>
           )}

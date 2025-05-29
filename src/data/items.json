@@ -1,0 +1,18 @@
+{
+  "gold": { "name": "Gold" },
+  "stone": { "name": "Stone" },
+  "wood": { "name": "Wood" },
+  "ore": { "name": "Ore" },
+  "charcoal": { "name": "Charcoal" },
+  "ingot": { "name": "Ingot" },
+  "nails": { "name": "Nails" },
+  "bow": { "name": "Bow" },
+  "stone spear": { "name": "Stone Spear" },
+  "common egg": { "name": "Common Egg" },
+  "verdant egg": { "name": "Verdant Egg" },
+  "damp egg": { "name": "Damp Egg" },
+  "rocky egg": { "name": "Rocky Egg" },
+  "electric egg": { "name": "Electric Egg" },
+  "dragon egg": { "name": "Dragon Egg" },
+  "dark egg": { "name": "Dark Egg" }
+}
