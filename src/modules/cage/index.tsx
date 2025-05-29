@@ -9,9 +9,10 @@ import {
 import OpenEggButton from "./OpenEggButton";
 import { useCage } from "./useCage";
 import { VirtuosoGrid, VirtuosoGridProps } from "react-virtuoso";
-import { forwardRef } from "react";
+import { forwardRef, useCallback, useState } from "react";
 import BeastCard from "./BeastCard";
 import "./styles.css";
+import BeastModal from "./BeastModal";
 
 // Ensure that the component definitions are not declared inline in the component function,
 // Otherwise the grid will remount with each render due to new component instances.
@@ -30,6 +31,13 @@ const gridComponents: VirtuosoGridProps<undefined, undefined>["components"] = {
 
 export default function CagePage() {
   const { beasts } = useCage();
+  const [inspectBeastId, setInspectBeastId] = useState("");
+  const [showModal, setShowModal] = useState(false);
+
+  const previewBeast = useCallback((id: string) => {
+    setInspectBeastId(id);
+    setShowModal(true);
+  }, []);
 
   return (
     <IonPage>
@@ -42,11 +50,21 @@ export default function CagePage() {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
+        <BeastModal
+          id={inspectBeastId}
+          isOpen={showModal}
+          onDidDismiss={() => setShowModal(false)}
+        />
         <VirtuosoGrid
           style={{ height: "100%" }}
           totalCount={beasts.length}
           components={gridComponents}
-          itemContent={(index) => <BeastCard id={beasts[index].id} />}
+          itemContent={(index) => (
+            <BeastCard
+              id={beasts[index].id}
+              onClick={() => previewBeast(beasts[index].id)}
+            />
+          )}
         />
       </IonContent>
     </IonPage>
