@@ -8,26 +8,11 @@ import {
 } from "@ionic/react";
 import OpenEggButton from "./OpenEggButton";
 import { useCage } from "./useCage";
-import { VirtuosoGrid, VirtuosoGridProps } from "react-virtuoso";
-import { forwardRef, useCallback, useState } from "react";
+import { VirtuosoGrid } from "react-virtuoso";
+import { useCallback, useState } from "react";
 import BeastCard from "./BeastCard";
-import "./styles.css";
 import BeastModal from "./BeastModal";
-
-// Ensure that the component definitions are not declared inline in the component function,
-// Otherwise the grid will remount with each render due to new component instances.
-const gridComponents: VirtuosoGridProps<undefined, undefined>["components"] = {
-  List: forwardRef(({ style, children, ...props }, ref) => (
-    <div ref={ref} {...props} className="grid-list">
-      {children}
-    </div>
-  )),
-  Item: ({ children, ...props }) => (
-    <div {...props} className="grid-item">
-      {children}
-    </div>
-  ),
-};
+import { SimpleGridComponents } from "../shared/SimpleGrid";
 
 export default function CagePage() {
   const { beasts } = useCage();
@@ -58,7 +43,7 @@ export default function CagePage() {
         <VirtuosoGrid
           style={{ height: "100%" }}
           totalCount={beasts.length}
-          components={gridComponents}
+          components={SimpleGridComponents}
           itemContent={(index) => (
             <BeastCard
               id={beasts[index].id}

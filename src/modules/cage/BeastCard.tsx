@@ -7,8 +7,9 @@ import CardTypes from "../../components/Card/CardTypes";
 type Props = {
   id: string;
   onClick?: () => void;
+  className?: string;
 };
-export default function BeastCard({ id, onClick }: Props) {
+export default function BeastCard({ id, onClick, className }: Props) {
   const beast = useBeast(id);
   const pal = usePal(beast?.pal!);
 
@@ -21,7 +22,7 @@ export default function BeastCard({ id, onClick }: Props) {
   }
 
   return (
-    <IonCard className="beast-card ion-no-margin" onClick={onClick}>
+    <IonCard className={`beast-card ${className || ""}`} onClick={onClick}>
       <IonImg src={`/pals/${pal.image}`}></IonImg>
       <p className="beast-name ion-no-margin ion-wrap ion-text-center">
         {beast.name}

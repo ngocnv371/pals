@@ -1,8 +1,8 @@
-.grid-list {
+.simple-grid-list {
   display: flex;
   flex-wrap: wrap;
 }
-.grid-item {
+.simple-grid-item {
   padding: 0.5rem;
   width: 33%;
   display: flex;
