@@ -19,6 +19,7 @@ export const useInventory = create<InventoryState>((set, get) => ({
     arrow: 8,
     cloth: 87,
     fiber: 98,
+    cake: 5,
   },
   add: (items) => {
     set((state) => {
@@ -53,3 +54,8 @@ export const useInventory = create<InventoryState>((set, get) => ({
   set: (items) => set({ inventory: { ...items } }),
   clear: () => set({ inventory: {} }),
 }));
+
+export function useInventoryItem(id: string) {
+  const quantity = useInventory((x) => x.inventory[id]);
+  return quantity || 0;
+}

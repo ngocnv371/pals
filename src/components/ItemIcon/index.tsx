@@ -1,22 +1,18 @@
 import { IonAvatar, IonBadge, IonImg, IonText } from "@ionic/react";
-import Item from "../../models/item";
 import "./styles.css";
 
 const ItemIcon: React.FC<
-  { item: Item } & React.HtmlHTMLAttributes<HTMLDivElement>
-> = ({ item, ...rest }) => {
+  {
+    id: string;
+    quantity: string | number;
+  } & React.HtmlHTMLAttributes<HTMLDivElement>
+> = ({ id, quantity, ...rest }) => {
   return (
-    <div
-      itemType="item"
-      itemID={item.id.toString()}
-      className="item-icon"
-      style={{ position: "relative" }}
-      {...rest}
-    >
+    <div itemType="item" itemID={id.toString()} className="item-icon" {...rest}>
       <IonAvatar>
-        <IonImg src={`/items/${item.id}.png`} />
+        <IonImg src={`/items/${id}.png`} />
       </IonAvatar>
-      <IonBadge>{item.quantity}</IonBadge>
+      <IonBadge>{quantity}</IonBadge>
     </div>
   );
 };

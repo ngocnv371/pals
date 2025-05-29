@@ -1,22 +1,17 @@
 import {
-  IonButtons,
   IonContent,
   IonHeader,
   IonPage,
   IonTitle,
   IonToolbar,
-  IonList,
-  IonItem,
-  IonLabel,
 } from "@ionic/react";
 import { useInventory } from "./useInventory";
 import { VirtuosoGrid } from "react-virtuoso";
 import { SimpleGridComponents } from "../shared/SimpleGrid";
-import ItemIcon from "../../components/ItemIcon";
+import InventoryItem from "./InventoryItem";
 
 export default function InventoryPage() {
-  const { inventory } = useInventory();
-  const keys = Object.keys(inventory);
+  const keys = useInventory((x) => Object.keys(x.inventory));
 
   return (
     <IonPage>
@@ -31,11 +26,7 @@ export default function InventoryPage() {
           style={{ height: "100%" }}
           totalCount={keys.length}
           components={SimpleGridComponents}
-          itemContent={(index) => (
-            <ItemIcon
-              item={{ id: keys[index], quantity: inventory[keys[index]] }}
-            />
-          )}
+          itemContent={(index) => <InventoryItem id={keys[index]} />}
         />
       </IonContent>
     </IonPage>

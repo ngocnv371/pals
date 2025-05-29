@@ -1,3 +1,6 @@
+.d-flex {
+  display: flex;
+}
 .margin-h-auto {
   margin: 0 auto !important;
 }

@@ -19,6 +19,7 @@ import { heart } from "ionicons/icons";
 import { useBreeder, useEgg } from "../cage/useEgg";
 import { Beast } from "../cage/types";
 import BeastCard from "../cage/BeastCard";
+import PriceItem from "../inventory/PriceItem";
 
 export default function BreedingPage() {
   const { breed } = useBreeder();
@@ -31,6 +32,7 @@ export default function BreedingPage() {
   const canBreed = selectedBeastId1 && selectedBeastId2;
 
   const handleBreed = useCallback(() => {
+    setResult(undefined);
     if (!beast1?.pal) {
       console.warn("beast1 not selected");
       return;
@@ -62,19 +64,24 @@ export default function BreedingPage() {
       <IonContent>
         <IonGrid>
           <IonRow>
-            <IonCol>
+            <IonCol className="d-flex ion-justify-content-center">
               <BeastPicker
                 value={selectedBeastId1}
                 onChange={setSelectedBeastId1}
                 filter={(b) => b.id != selectedBeastId2}
               />
             </IonCol>
-            <IonCol>
+            <IonCol className="d-flex ion-justify-content-center">
               <BeastPicker
                 value={selectedBeastId2}
                 onChange={setSelectedBeastId2}
                 filter={(b) => b.id != selectedBeastId1}
               />
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol className="d-flex ion-justify-content-center">
+              <PriceItem id="cake" quantity={1} />
             </IonCol>
           </IonRow>
           {result && (

@@ -56,8 +56,13 @@ export default function BeastPicker({
           <BeastCard id={selectedBeast.id} className="margin-h-auto" />
         </div>
       ) : (
-        <IonCard onClick={() => setShowModal(true)} className="cursor-pointer">
-          <IonCardContent>Tap to select</IonCardContent>
+        <IonCard
+          onClick={() => setShowModal(true)}
+          className="beast-card cursor-pointer"
+        >
+          <IonCardContent className="ion-text-center">
+            Tap to select
+          </IonCardContent>
         </IonCard>
       )}
 
