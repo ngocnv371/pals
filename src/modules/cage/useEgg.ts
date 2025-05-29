@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useCage } from "./useCage";
-import pals from "../../../raw-data/pals.json";
+import pals from "../../data/pals.json";
 import { Chance } from "chance";
 import { nanoid } from "nanoid";
 import { Beast, Pal } from "./types";
@@ -11,12 +11,12 @@ export function useEgg() {
   const { addBeast } = useCage();
 
   const open = useCallback(() => {
-    const id = nanoid();
-    const pal = chance.pickone(pals);
+    const palId = chance.pickone(pals.ids);
+    const pal = (pals.entities as any)[palId] as Pal;
     const beast: Beast = {
-      id,
+      id: nanoid(),
       pal: pal.id,
-      name: pal.title,
+      name: pal.name,
       level: 1,
     };
 
@@ -30,5 +30,5 @@ export function usePal(id: string): Pal | undefined {
   if (!id) {
     return undefined;
   }
-  return pals.find((p) => p.id == id)?.content as any;
+  return (pals.entities as any)[id] as Pal;
 }

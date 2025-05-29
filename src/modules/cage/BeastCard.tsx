@@ -26,7 +26,7 @@ export default function BeastCard({ id }: Props) {
         {beast.name}
       </p>
       <span className="beast-level">Lv{beast.level}</span>
-      <CardTypes types={pal.type} />
+      <CardTypes types={pal.types} />
     </IonCard>
   );
 }
