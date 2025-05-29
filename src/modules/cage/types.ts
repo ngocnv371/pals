@@ -11,6 +11,7 @@ export interface Pal {
   rarity: number;
   price: number;
   image: string;
+  breedingPower: number;
 }
 
 /**

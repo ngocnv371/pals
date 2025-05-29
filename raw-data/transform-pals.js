@@ -1,5 +1,5 @@
 import fs from "fs";
-import pals from "./pals.json" assert { type: "json" };
+import pals from "./pals.json" with { type: "json" };
 
 console.debug("all pals", pals.length);
 
@@ -17,6 +17,7 @@ const transformed = filtered.map((p) => ({
   price: p.content.price,
   image: p.content.image,
   rarity: p.content.rarity,
+  breedingPower: p.content.combiRank
 }));
 
 console.debug("peek first one", transformed[0]);
