@@ -11,6 +11,7 @@ import {
   IonRow,
   IonTitle,
   IonToolbar,
+  useIonToast,
 } from "@ionic/react";
 import { useBeast, useCage } from "../cage/useCage";
 import { useCallback, useState } from "react";
@@ -30,6 +31,7 @@ export default function BreedingPage() {
   const beast2 = useBeast(selectedBeastId2!);
   const [result, setResult] = useState<Beast>();
   const canBreed = selectedBeastId1 && selectedBeastId2;
+  const [presentToast] = useIonToast();
 
   const handleBreed = useCallback(() => {
     setResult(undefined);
@@ -50,6 +52,11 @@ export default function BreedingPage() {
       setResult(beast);
     } catch (e) {
       console.error("failed to breed", e);
+      presentToast({
+        message: (e as any).message,
+        color: "danger",
+        duration: 3000,
+      });
     }
   }, [beast1?.pal, beast2?.pal]);
 
