@@ -12,7 +12,7 @@ export function buildMapByKey<T extends { [k: string]: any }>(
   arr: T[],
   key: string
 ) {
-  const bag: { [k: string]: T } = {};
+  const bag: Record<string, T> = {};
   arr.forEach((a) => (bag[a[key]] = a));
   return bag;
 }
@@ -46,15 +46,15 @@ export function buildMapByField<T extends { [k: string]: any }>(
  */
 export function buildMapByFieldMany<T extends { [k: string]: any }>(
   arr: T[],
-  getKeys: (v:T) => string[]
+  getKeys: (v: T) => string[]
 ) {
   const bag: { [k: string]: T[] } = {};
   arr.forEach((a) => {
-    const keys = getKeys(a)
-    keys.forEach(key => {
+    const keys = getKeys(a);
+    keys.forEach((key) => {
       const existed = bag[key] || [];
       bag[key] = existed.concat(a);
-    })
+    });
   });
   return bag;
 }

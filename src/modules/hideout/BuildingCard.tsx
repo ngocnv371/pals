@@ -6,6 +6,7 @@ import {
   IonCol,
   IonGrid,
   IonImg,
+  IonProgressBar,
   IonRow,
 } from "@ionic/react";
 import { useBuildingById, useBuildings, useBuildingType } from "./useBuildings";
@@ -19,7 +20,7 @@ type Props = {
   id: string;
 };
 export default function BuildingCard({ id }: Props) {
-  const { assignBeast } = useBuildings();
+  const { assignWorker } = useBuildings();
   const { clearDuty, assignDuty } = useCage();
   const building = useBuildingById(id);
   const type = useBuildingType(building?.type!);
@@ -30,12 +31,12 @@ export default function BuildingCard({ id }: Props) {
         return;
       }
 
-      const currentBeast = building.beasts[idx];
+      const currentBeast = building.workers[idx];
       if (currentBeast) {
         clearDuty(currentBeast);
       }
 
-      assignBeast(building.id, idx, beastId);
+      assignWorker(building.id, idx, beastId);
       assignDuty(beastId, building.id);
     },
     [building]
@@ -51,6 +52,7 @@ export default function BuildingCard({ id }: Props) {
 
   return (
     <IonCard className="building-card">
+      <IonProgressBar value={building.work / 500} />
       <IonImg src={`/facilities/${building.type}.png`} />
       <IonCardHeader>
         <IonCardTitle>{type.name}</IonCardTitle>
@@ -58,7 +60,7 @@ export default function BuildingCard({ id }: Props) {
       <IonCardContent>{type.description}</IonCardContent>
       <IonGrid>
         <IonRow className="size-sm">
-          {building.beasts.map((b, idx) => (
+          {building.workers.map((b, idx) => (
             <IonCol key={idx} className="ion-no-padding">
               <BeastPicker
                 value={b}
