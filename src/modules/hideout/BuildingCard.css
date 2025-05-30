@@ -1,6 +1,6 @@
 .building-card {
   /* height: 19rem; */
-  ion-img {
+  > ion-img {
     position: absolute;
   }
 }
