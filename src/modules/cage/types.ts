@@ -22,4 +22,5 @@ export interface Beast {
   pal: string;
   name: string;
   level: number;
+  building: string;
 }

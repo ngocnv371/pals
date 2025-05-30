@@ -2,17 +2,20 @@
   {
     "id": "logging site",
     "name": "Logging Site",
-    "description": "Where you make lumber"
+    "description": "Where you make lumber",
+    "slots": 2
   },
   {
     "id": "stone pit",
     "name": "Stone Pit",
-    "description": "Where you make stone"
+    "description": "Where you make stone",
+    "slots": 2
   },
   {
     "id": "mine",
     "name": "Mine",
-    "description": "Where you dig ore"
+    "description": "Where you dig ore",
+    "slots": 2
   },
   {
     "id": "smelter",
@@ -21,6 +24,7 @@
     "requirements": {
       "wood": 50,
       "stone": 50
-    }
+    },
+    "slots": 1
   }
 ]

@@ -6,6 +6,8 @@ interface CageState {
   setBeasts: (beasts: Beast[]) => void;
   addBeast: (beast: Beast) => void;
   removeBeast: (id: string) => void;
+  clearDuty: (id: string) => void;
+  assignDuty: (id: string, building: string) => void;
 }
 
 export const useCage = create<CageState>((set) => ({
@@ -15,18 +17,21 @@ export const useCage = create<CageState>((set) => ({
       pal: "horus",
       level: 1,
       name: "Horus",
+      building: "",
     },
     {
       id: "sd4a",
       pal: "berrygoat",
       level: 1,
       name: "Berry Goat",
+      building: "",
     },
     {
       id: "t43sdf",
       pal: "anubis",
       level: 7,
       name: "Anubis",
+      building: "",
     },
   ],
   setBeasts: (beasts) => set({ beasts }),
@@ -37,6 +42,16 @@ export const useCage = create<CageState>((set) => ({
   removeBeast: (id) =>
     set((state) => ({
       beasts: state.beasts.filter((b) => b.id !== id),
+    })),
+  clearDuty: (id) =>
+    set((state) => ({
+      beasts: state.beasts.map((b) =>
+        b.id !== id ? b : { ...b, building: "" }
+      ),
+    })),
+  assignDuty: (id, building) =>
+    set((state) => ({
+      beasts: state.beasts.map((b) => (b.id !== id ? b : { ...b, building })),
     })),
 }));
 

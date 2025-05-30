@@ -6,14 +6,14 @@ import facilities from '../../data/facilities.json' with { type: 'json' }
 type UseBuildingsState = {
   buildings: Building[];
   createBuilding: (typeId: BuildingType["id"]) => Building;
-  assignBeasts: (buildingId: string, beastIds: string[]) => void;
+  assignBeast: (buildingId: string, index: number, beastId: string) => void;
   removeBuilding: (buildingId: string) => void;
 };
 
 export const useBuildings = create<UseBuildingsState>((set, get) => ({
   buildings: [
-    { id: "ase98a0", type: "mine", beasts: [] },
-    { id: "kea78s", type: "logging site", beasts: [] },
+    { id: "ase98a0", type: "mine", beasts: ['', ''] },
+    { id: "kea78s", type: "logging site", beasts: ['', ''] },
   ],
   createBuilding: (typeId) => {
     const newBuilding: Building = {
@@ -26,10 +26,17 @@ export const useBuildings = create<UseBuildingsState>((set, get) => ({
     }));
     return newBuilding;
   },
-  assignBeasts: (buildingId, beastIds) => {
+  assignBeast: (buildingId, index, beastId) => {
     set((state) => ({
       buildings: state.buildings.map((b) =>
-        b.id === buildingId ? { ...b, beasts: beastIds } : b
+      {
+        if (b.id !== buildingId) {
+          return b;
+        }
+        const beasts = b.beasts.slice()
+        beasts[index] = beastId
+        return { ...b, beasts }
+      }
       ),
     }));
   },
