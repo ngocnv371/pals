@@ -9,7 +9,26 @@ interface CageState {
 }
 
 export const useCage = create<CageState>((set) => ({
-  beasts: [],
+  beasts: [
+    {
+      id: "kdea",
+      pal: "horus",
+      level: 1,
+      name: "Horus",
+    },
+    {
+      id: "sd4a",
+      pal: "berrygoat",
+      level: 1,
+      name: "Berry Goat",
+    },
+    {
+      id: "t43sdf",
+      pal: "anubis",
+      level: 7,
+      name: "Anubis",
+    },
+  ],
   setBeasts: (beasts) => set({ beasts }),
   addBeast: (beast) =>
     set((state) => ({

@@ -1,0 +1,6 @@
+.building-card {
+  height: 15rem;
+  img {
+    position: absolute;
+  }
+}

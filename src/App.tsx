@@ -32,10 +32,11 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 
 import { useAppTabs } from "./modules/shared/useAppTabs";
-import { arrowUpRightBox, heart, home } from "ionicons/icons";
+import { arrowUpRightBox, bag, build, heart, home, paw } from "ionicons/icons";
 import CagePage from "./modules/cage";
 import BreedingPage from "./modules/breeding";
 import InventoryPage from "./modules/inventory";
+import HideoutPage from "./modules/hideout";
 
 setupIonicReact();
 
@@ -51,11 +52,12 @@ const App: React.FC = () => {
             <Route exact path="/cage" render={() => <CagePage />} />
             <Route exact path="/breeding" render={() => <BreedingPage />} />
             <Route exact path="/inventory" render={() => <InventoryPage />} />
+            <Route exact path="/hideout" render={() => <HideoutPage />} />
           </IonRouterOutlet>
           {show && (
             <IonTabBar slot="bottom">
               <IonTabButton tab="cage" href="/cage">
-                <IonIcon aria-hidden="true" icon={home} />
+                <IonIcon aria-hidden="true" icon={paw} />
                 <IonLabel>Cage</IonLabel>
               </IonTabButton>
               <IonTabButton tab="breeding" href="/breeding">
@@ -63,8 +65,12 @@ const App: React.FC = () => {
                 <IonLabel>Breeding</IonLabel>
               </IonTabButton>
               <IonTabButton tab="inventory" href="/inventory">
-                <IonIcon aria-hidden="true" icon={arrowUpRightBox} />
+                <IonIcon aria-hidden="true" icon={bag} />
                 <IonLabel>Inventory</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="hideout" href="/hideout">
+                <IonIcon aria-hidden="true" icon={home} />
+                <IonLabel>Hideout</IonLabel>
               </IonTabButton>
             </IonTabBar>
           )}
