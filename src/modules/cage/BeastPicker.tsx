@@ -15,8 +15,8 @@ import { VirtuosoGrid } from "react-virtuoso";
 import { useCage } from "./useCage";
 import BeastCard from "./BeastCard";
 import { SimpleGridComponents } from "../shared/SimpleGrid";
-import { Beast } from "./types";
 import "./BeastPicker.css";
+import { Beast } from "../shared/types";
 
 interface BeastPickerProps {
   value?: string | null;

@@ -13,7 +13,6 @@ import { useBuildingById, useBuildings, useBuildingType } from "./useBuildings";
 import "./BuildingCard.css";
 import BeastPicker from "../cage/BeastPicker";
 import { useCallback } from "react";
-import { Beast } from "../cage/types";
 import { useCage } from "../cage/useCage";
 
 type Props = {

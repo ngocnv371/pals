@@ -1,14 +1,5 @@
 import { create } from "zustand";
-import { Beast } from "./types";
-
-interface CageState {
-  beasts: Beast[];
-  setBeasts: (beasts: Beast[]) => void;
-  addBeast: (beast: Beast) => void;
-  removeBeast: (id: string) => void;
-  clearDuty: (id: string) => void;
-  assignDuty: (id: string, building: string) => void;
-}
+import { Beast, CageState } from "../shared/types";
 
 export const useCage = create<CageState>((set) => ({
   beasts: [

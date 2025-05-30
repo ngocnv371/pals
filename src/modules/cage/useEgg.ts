@@ -3,8 +3,8 @@ import { useCage } from "./useCage";
 import pals from "../../data/pals.json";
 import { Chance } from "chance";
 import { nanoid } from "nanoid";
-import { Beast, Pal } from "./types";
 import { useInventory } from "../inventory/useInventory";
+import { Beast, Pal } from "../shared/types";
 
 const chance = new Chance();
 

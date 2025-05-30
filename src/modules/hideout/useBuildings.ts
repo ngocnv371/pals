@@ -1,20 +1,12 @@
 import { create } from "zustand";
-import { Building, BuildingType } from "./types";
 import { nanoid } from "nanoid";
 import facilities from "../../data/facilities.json";
 import { useInterval } from "../shared/useInterval";
 import { useMemo, useRef } from "react";
 import buildMap from "../../utils/buildMap";
+import { Building, BuildingType, UseBuildingsState } from "../shared/types";
 
 const facilityMap = buildMap(facilities);
-
-type UseBuildingsState = {
-  buildings: Building[];
-  createBuilding: (typeId: BuildingType["id"]) => Building;
-  assignWorker: (buildingId: string, index: number, beastId: string) => void;
-  removeBuilding: (buildingId: string) => void;
-  update: (ms: number) => void;
-};
 
 export const useBuildings = create<UseBuildingsState>((set, get) => ({
   buildings: [

@@ -1,15 +1,5 @@
 import { create } from "zustand";
-
-type Inventory = Record<string, number>;
-
-interface InventoryState {
-  inventory: Inventory;
-  add: (items: Inventory) => void;
-  canRemove: (items: Inventory) => boolean;
-  remove: (items: Inventory) => void;
-  set: (items: Inventory) => void;
-  clear: () => void;
-}
+import { InventoryState } from "../shared/types";
 
 export const useInventory = create<InventoryState>((set, get) => ({
   inventory: {
