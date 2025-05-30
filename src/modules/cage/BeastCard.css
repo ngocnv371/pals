@@ -29,3 +29,19 @@
     color: gold;
   }
 }
+.size-sm {
+  .beast-card {
+    width: 4rem;
+    > ion-img {
+      max-height: 4rem;
+      min-height: 4rem;
+    }
+    .beast-name {
+      line-height: 1rem;
+      font-size: 70%;
+    }
+    .beast-level {
+      font-size: 70%;
+    }
+  }
+}

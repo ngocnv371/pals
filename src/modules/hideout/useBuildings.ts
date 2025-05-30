@@ -12,7 +12,7 @@ type UseBuildingsState = {
 
 export const useBuildings = create<UseBuildingsState>((set, get) => ({
   buildings: [
-    { id: "ase98a0", type: "mine", beasts: ['', ''] },
+    { id: "ase98a0", type: "mine", beasts: ['', '', '', ''] },
     { id: "kea78s", type: "logging site", beasts: ['', ''] },
   ],
   createBuilding: (typeId) => {

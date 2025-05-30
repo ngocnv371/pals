@@ -16,6 +16,7 @@ import { useCage } from "./useCage";
 import BeastCard from "./BeastCard";
 import { SimpleGridComponents } from "../shared/SimpleGrid";
 import { Beast } from "./types";
+import "./BeastPicker.css";
 
 interface BeastPickerProps {
   value?: string | null;
@@ -60,7 +61,7 @@ export default function BeastPicker({
       ) : (
         <IonCard
           onClick={() => setShowModal(true)}
-          className="beast-card cursor-pointer"
+          className="beast-card beast-picker cursor-pointer placeholder d-flex ion-align-items-center"
         >
           <IonCardContent className="ion-text-center">
             {placeholder || "Tap to select"}
