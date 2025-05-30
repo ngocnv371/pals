@@ -64,6 +64,7 @@ export default function BuildingCard({ id }: Props) {
                 value={b}
                 onChange={(beastId) => handleBeastChange(idx, beastId)}
                 filter={(k) => !k.building}
+                placeholder="Select worker"
               />
             </IonCol>
           ))}

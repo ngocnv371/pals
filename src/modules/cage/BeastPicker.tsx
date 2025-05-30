@@ -21,10 +21,12 @@ interface BeastPickerProps {
   value?: string | null;
   onChange: (id: string) => void;
   filter?: (beast: Beast) => boolean;
+  placeholder?: string;
 }
 
 export default function BeastPicker({
   value,
+  placeholder,
   onChange,
   filter,
 }: BeastPickerProps) {
@@ -61,7 +63,7 @@ export default function BeastPicker({
           className="beast-card cursor-pointer"
         >
           <IonCardContent className="ion-text-center">
-            Tap to select
+            {placeholder || "Tap to select"}
           </IonCardContent>
         </IonCard>
       )}
