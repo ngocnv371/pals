@@ -2,12 +2,15 @@ import { create } from "zustand";
 import { Building, BuildingType } from "./types";
 import { nanoid } from "nanoid";
 import facilities from '../../data/facilities.json' with { type: 'json' }
+import { useInterval } from "../shared/useInterval";
+import { useRef } from "react";
 
 type UseBuildingsState = {
   buildings: Building[];
   createBuilding: (typeId: BuildingType["id"]) => Building;
   assignBeast: (buildingId: string, index: number, beastId: string) => void;
   removeBuilding: (buildingId: string) => void;
+  update: (ms: number) => void;
 };
 
 export const useBuildings = create<UseBuildingsState>((set, get) => ({
@@ -45,6 +48,9 @@ export const useBuildings = create<UseBuildingsState>((set, get) => ({
       buildings: state.buildings.filter((b) => b.id !== buildingId),
     }));
   },
+  update: (ms) => {
+    //
+  }
 }));
 
 export const useBuildingById = (id: string) => {
@@ -62,4 +68,17 @@ export const useBuildingType = (type: string): BuildingType | undefined => {
   }
 
   return facilities.find(f => f.id === type)
+}
+
+export function useBuildingsUpdate() {
+  const {update} = useBuildings()
+  const lastUpdateRef = useRef(new Date().getTime())
+
+  useInterval(() => {
+    console.log('update buildings')
+    const now = new Date().getTime();
+    const delta = now - lastUpdateRef.current;
+    update(delta)
+    lastUpdateRef.current = new Date().getTime();
+  }, 1000)
 }

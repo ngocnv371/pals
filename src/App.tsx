@@ -37,10 +37,12 @@ import CagePage from "./modules/cage";
 import BreedingPage from "./modules/breeding";
 import InventoryPage from "./modules/inventory";
 import HideoutPage from "./modules/hideout";
+import { useBuildingsUpdate } from "./modules/hideout/useBuildings";
 
 setupIonicReact();
 
 const App: React.FC = () => {
+  useBuildingsUpdate();
   const { show } = useAppTabs();
 
   return (
