@@ -4,21 +4,30 @@
     "name": "Logging Site",
     "description": "Where you make lumber",
     "work": 400,
-    "slots": 2
+    "slots": 2,
+    "products": {
+      "wood": 1
+    }
   },
   "stone pit": {
     "id": "stone pit",
     "name": "Stone Pit",
     "description": "Where you make stone",
     "work": 500,
-    "slots": 2
+    "slots": 2,
+    "products": {
+      "stone": 1
+    }
   },
   "mine": {
     "id": "mine",
     "name": "Mine",
     "description": "Where you dig ore",
     "work": 600,
-    "slots": 2
+    "slots": 2,
+    "products": {
+      "ore": 1
+    }
   },
   "smelter": {
     "id": "smelter",
@@ -29,6 +38,9 @@
       "wood": 50,
       "stone": 50
     },
-    "slots": 1
+    "slots": 1,
+    "products": {
+      "ingot": 1
+    }
   }
 }

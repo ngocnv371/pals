@@ -5,6 +5,7 @@ import { createCageSlice } from "../cage/slice";
 import { createInventorySlice } from "../inventory/slice";
 import { createHideoutSlice } from "../hideout/slice";
 import { createBreedingSlice } from "../breeding/slice";
+import { createGameLoopSlice } from "../game-loop/slice";
 
 export const useAppStore = create<AppState>()((...a) => ({
   ...createUISlice(...a),
@@ -12,4 +13,5 @@ export const useAppStore = create<AppState>()((...a) => ({
   ...createInventorySlice(...a),
   ...createHideoutSlice(...a),
   ...createBreedingSlice(...a),
+  ...createGameLoopSlice(...a),
 }));

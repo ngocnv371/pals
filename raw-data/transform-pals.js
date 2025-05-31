@@ -14,6 +14,7 @@ const transformed = filtered.map((p) => ({
   defense: p.content.defense,
   types: p.content.type,
   description: p.content.description,
+  workSpeed: p.content.craftSpeed,
   price: p.content.price,
   image: p.content.image,
   rarity: p.content.rarity,

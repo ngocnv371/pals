@@ -7,6 +7,7 @@ export interface BuildingType {
    * */
   work: number;
   slots: number;
+  products: Inventory;
 }
 
 export interface Building {
@@ -37,6 +38,7 @@ export interface Pal {
   types: string[];
   name: string;
   description: string;
+  workSpeed: number;
   attack: number;
   defense: number;
   rarity: number;
@@ -85,13 +87,26 @@ export interface BreedingSlice {
   breed: () => Beast | null;
 }
 
-export type UISlice = {
+export interface UISlice {
   showTabs: boolean;
   setShowTabs: (show: boolean) => void;
-};
+}
+
+export interface GameLoopSlice {
+  /**
+   * not time from `new Date().getTime()`, but the total time accumulated from `deltaMs` when `update`
+   */
+  lastUpdateTime: number;
+  /**
+   * update the app as if `deltaMs` time has ellapsed
+   * @param deltaMs ellapsed milliseconds
+   */
+  update: (deltaMs: number) => void;
+}
 
 export type AppState = HideoutSlice &
   InventorySlice &
   CageSlice &
   BreedingSlice &
+  GameLoopSlice &
   UISlice;

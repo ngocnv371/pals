@@ -38,11 +38,22 @@ import BreedingPage from "./modules/breeding";
 import InventoryPage from "./modules/inventory";
 import HideoutPage from "./modules/hideout";
 import { useAppStore } from "./modules/store/useAppStore";
+import { useInterval } from "./modules/shared/useInterval";
+import { useRef } from "react";
 
 setupIonicReact();
 
 const App: React.FC = () => {
   const showTabs = useAppStore((state) => state.showTabs);
+  const update = useAppStore((s) => s.update);
+  const timeRef = useRef(new Date().getTime());
+
+  useInterval(() => {
+    const now = new Date().getTime();
+    const delta = now - timeRef.current;
+    update(delta);
+    timeRef.current = new Date().getTime();
+  }, 1000);
 
   return (
     <IonApp>
