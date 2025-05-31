@@ -7,15 +7,15 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import OpenEggButton from "./OpenEggButton";
-import { useCage } from "./useCage";
 import { VirtuosoGrid } from "react-virtuoso";
 import { useCallback, useState } from "react";
 import BeastCard from "./BeastCard";
 import BeastModal from "./BeastModal";
 import { SimpleGridComponents } from "../shared/SimpleGrid";
+import { useAppStore } from "../store/useAppStore";
 
 export default function CagePage() {
-  const { beasts } = useCage();
+  const ids = useAppStore((state) => state.beasts.map((b) => b.id));
   const [inspectBeastId, setInspectBeastId] = useState("");
   const [showModal, setShowModal] = useState(false);
 
@@ -42,12 +42,12 @@ export default function CagePage() {
         />
         <VirtuosoGrid
           style={{ height: "100%" }}
-          totalCount={beasts.length}
+          totalCount={ids.length}
           components={SimpleGridComponents}
           itemContent={(index) => (
             <BeastCard
-              id={beasts[index].id}
-              onClick={() => previewBeast(beasts[index].id)}
+              id={ids[index]}
+              onClick={() => previewBeast(ids[index])}
             />
           )}
         />

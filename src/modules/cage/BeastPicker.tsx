@@ -12,11 +12,11 @@ import {
 } from "@ionic/react";
 import { useState, useMemo, useRef } from "react";
 import { VirtuosoGrid } from "react-virtuoso";
-import { useCage } from "./useCage";
 import BeastCard from "./BeastCard";
 import { SimpleGridComponents } from "../shared/SimpleGrid";
 import "./BeastPicker.css";
 import { Beast } from "../shared/types";
+import { useAppStore } from "../store/useAppStore";
 
 interface BeastPickerProps {
   value?: string | null;
@@ -31,7 +31,7 @@ export default function BeastPicker({
   onChange,
   filter,
 }: BeastPickerProps) {
-  const { beasts } = useCage();
+  const beasts = useAppStore((state) => state.beasts);
   const [showModal, setShowModal] = useState(false);
   const [search, setSearch] = useState("");
   const searchInputRef = useRef<HTMLIonSearchbarElement>(null);

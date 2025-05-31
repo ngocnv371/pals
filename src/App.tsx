@@ -37,13 +37,12 @@ import CagePage from "./modules/cage";
 import BreedingPage from "./modules/breeding";
 import InventoryPage from "./modules/inventory";
 import HideoutPage from "./modules/hideout";
-import { useBuildingsUpdate } from "./modules/hideout/useBuildings";
+import { useAppStore } from "./modules/store/useAppStore";
 
 setupIonicReact();
 
 const App: React.FC = () => {
-  useBuildingsUpdate();
-  const { show } = useAppTabs();
+  const showTabs = useAppStore((state) => state.showTabs);
 
   return (
     <IonApp>
@@ -56,7 +55,7 @@ const App: React.FC = () => {
             <Route exact path="/inventory" render={() => <InventoryPage />} />
             <Route exact path="/hideout" render={() => <HideoutPage />} />
           </IonRouterOutlet>
-          {show && (
+          {showTabs && (
             <IonTabBar slot="bottom">
               <IonTabButton tab="cage" href="/cage">
                 <IonIcon aria-hidden="true" icon={paw} />

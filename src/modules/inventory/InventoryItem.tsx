@@ -1,10 +1,10 @@
 import ItemIcon from "../../components/ItemIcon";
-import { useInventoryItem } from "./useInventory";
+import { useInventoryItemQuantity } from "./useInventoryItemQuantity";
 
 type Props = {
   id: string;
 };
 export default function InventoryItem({ id }: Props) {
-  const quantity = useInventoryItem(id);
+  const quantity = useInventoryItemQuantity(id);
   return <ItemIcon id={id} quantity={quantity} />;
 }

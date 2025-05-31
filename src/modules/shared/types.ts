@@ -6,6 +6,7 @@ export interface BuildingType {
    * amount of work needed to produce item
    * */
   work: number;
+  slots: number;
 }
 
 export interface Building {
@@ -55,28 +56,42 @@ export interface Beast {
   building: string;
 }
 
-export interface CageState {
+export interface CageSlice {
   beasts: Beast[];
-  setBeasts: (beasts: Beast[]) => void;
   addBeast: (beast: Beast) => void;
   removeBeast: (id: string) => void;
-  clearDuty: (id: string) => void;
-  assignDuty: (id: string, building: string) => void;
 }
 
-export type UseBuildingsState = {
+export type HideoutSlice = {
   buildings: Building[];
-  createBuilding: (typeId: BuildingType["id"]) => Building;
-  assignWorker: (buildingId: string, index: number, beastId: string) => void;
+  addBuilding: (typeId: BuildingType["id"]) => Building;
   removeBuilding: (buildingId: string) => void;
-  update: (ms: number) => void;
+  assignWorker: (buildingId: string, index: number, workerId: string) => void;
 };
 
-export interface InventoryState {
+export interface InventorySlice {
   inventory: Inventory;
-  add: (items: Inventory) => void;
-  canRemove: (items: Inventory) => boolean;
-  remove: (items: Inventory) => void;
-  set: (items: Inventory) => void;
-  clear: () => void;
+  addItems: (items: Inventory) => void;
+  canRemoveItems: (items: Inventory) => boolean;
+  removeItems: (items: Inventory) => void;
 }
+
+export interface BreedingSlice {
+  maleBeastId: string;
+  femaleBeastId: string;
+  setMale: (beastId: string) => void;
+  setFemale: (beastId: string) => void;
+  canBreed: () => boolean;
+  breed: () => Beast | null;
+}
+
+export type UISlice = {
+  showTabs: boolean;
+  setShowTabs: (show: boolean) => void;
+};
+
+export type AppState = HideoutSlice &
+  InventorySlice &
+  CageSlice &
+  BreedingSlice &
+  UISlice;

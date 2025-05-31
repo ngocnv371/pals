@@ -5,13 +5,13 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { useInventory } from "./useInventory";
 import { VirtuosoGrid } from "react-virtuoso";
 import { SimpleGridComponents } from "../shared/SimpleGrid";
 import InventoryItem from "./InventoryItem";
+import { useAppStore } from "../store/useAppStore";
 
 export default function InventoryPage() {
-  const keys = useInventory((x) => Object.keys(x.inventory));
+  const keys = useAppStore((x) => Object.keys(x.inventory));
 
   return (
     <IonPage>

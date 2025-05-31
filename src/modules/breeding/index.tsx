@@ -13,43 +13,35 @@ import {
   IonToolbar,
   useIonToast,
 } from "@ionic/react";
-import { useBeast, useCage } from "../cage/useCage";
 import { useCallback, useState } from "react";
 import BeastPicker from "../cage/BeastPicker";
 import { heart } from "ionicons/icons";
-import { useBreeder, useEgg } from "../cage/useEgg";
-import { Beast } from "../cage/types";
 import BeastCard from "../cage/BeastCard";
 import PriceItem from "../inventory/PriceItem";
+import { Beast } from "../shared/types";
+import { useAppStore } from "../store/useAppStore";
 
 export default function BreedingPage() {
-  const { breed } = useBreeder();
-  const { hatch } = useEgg();
-  const [selectedBeastId1, setSelectedBeastId1] = useState<string | null>(null);
-  const [selectedBeastId2, setSelectedBeastId2] = useState<string | null>(null);
-  const beast1 = useBeast(selectedBeastId1!);
-  const beast2 = useBeast(selectedBeastId2!);
+  const male = useAppStore((s) => s.maleBeastId);
+  const setMale = useAppStore((s) => s.setMale);
+  const female = useAppStore((s) => s.femaleBeastId);
+  const setFemale = useAppStore((s) => s.setFemale);
+  const canBreed = useAppStore((s) => s.canBreed());
+  const breed = useAppStore((s) => s.breed);
+
   const [result, setResult] = useState<Beast>();
-  const canBreed = selectedBeastId1 && selectedBeastId2;
   const [presentToast] = useIonToast();
 
   const handleBreed = useCallback(() => {
     setResult(undefined);
-    if (!beast1?.pal) {
-      console.warn("beast1 not selected");
-      return;
-    }
-
-    if (!beast2?.pal) {
-      console.warn("beast2 not selected");
-      return;
-    }
-
     try {
-      const result = breed(beast1.pal, beast2.pal);
+      const result = breed();
       console.log("breed result", result);
-      const beast = hatch(result);
-      setResult(beast);
+      if (!result) {
+        throw new Error("Failed to breed");
+      }
+
+      setResult(result);
     } catch (e) {
       console.error("failed to breed", e);
       presentToast({
@@ -58,7 +50,7 @@ export default function BreedingPage() {
         duration: 3000,
       });
     }
-  }, [beast1?.pal, beast2?.pal]);
+  }, [breed]);
 
   return (
     <IonPage>
@@ -73,16 +65,16 @@ export default function BreedingPage() {
           <IonRow>
             <IonCol className="d-flex ion-justify-content-center">
               <BeastPicker
-                value={selectedBeastId1}
-                onChange={setSelectedBeastId1}
-                filter={(b) => b.id != selectedBeastId2}
+                value={male}
+                onChange={setMale}
+                filter={(b) => b.id != female}
               />
             </IonCol>
             <IonCol className="d-flex ion-justify-content-center">
               <BeastPicker
-                value={selectedBeastId2}
-                onChange={setSelectedBeastId2}
-                filter={(b) => b.id != selectedBeastId1}
+                value={female}
+                onChange={setFemale}
+                filter={(b) => b.id != male}
               />
             </IonCol>
           </IonRow>

@@ -1,26 +1,26 @@
-[
-  {
+{
+  "logging site": {
     "id": "logging site",
     "name": "Logging Site",
     "description": "Where you make lumber",
     "work": 400,
     "slots": 2
   },
-  {
+  "stone pit": {
     "id": "stone pit",
     "name": "Stone Pit",
     "description": "Where you make stone",
     "work": 500,
     "slots": 2
   },
-  {
+  "mine": {
     "id": "mine",
     "name": "Mine",
     "description": "Where you dig ore",
     "work": 600,
     "slots": 2
   },
-  {
+  "smelter": {
     "id": "smelter",
     "name": "Smelter",
     "description": "Where you burn stuff down",
@@ -31,4 +31,4 @@
     },
     "slots": 1
   }
-]
+}

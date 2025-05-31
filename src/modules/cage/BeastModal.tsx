@@ -12,8 +12,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import CardTypes from "../../components/Card/CardTypes";
-import { useBeast } from "./useCage";
-import { usePal } from "./useEgg";
+import { useBeast } from "./useBeast";
 
 type Props = {
   id: string;
@@ -22,13 +21,8 @@ type Props = {
 };
 export default function BeastModal({ id, isOpen, onDidDismiss }: Props) {
   const beast = useBeast(id);
-  const pal = usePal(beast?.pal!);
 
   if (!beast) {
-    return null;
-  }
-
-  if (!pal) {
     return null;
   }
 
@@ -46,31 +40,31 @@ export default function BeastModal({ id, isOpen, onDidDismiss }: Props) {
       </IonHeader>
       <IonContent className="ion-padding">
         <IonImg
-          src={`/pals/${pal.image}`}
+          src={`/pals/${beast.image}`}
           style={{ maxWidth: 180, margin: "0 auto" }}
         />
-        {pal.name != beast.name && <h3>Species: {pal.name}</h3>}
+        {beast.name != beast.name && <h3>Species: {beast.name}</h3>}
         <h2>
           Lv{beast.level} {beast.name}
         </h2>
-        <CardTypes types={pal.types} full />
-        <p>{pal.description}</p>
+        <CardTypes types={beast.types} full />
+        <p>{beast.description}</p>
         <IonList>
           <IonItem>
             <IonLabel>Rarity</IonLabel>
-            <IonLabel slot="end">{pal.rarity}</IonLabel>
+            <IonLabel slot="end">{beast.rarity}</IonLabel>
           </IonItem>
           <IonItem>
             <IonLabel>Attack</IonLabel>
-            <IonLabel slot="end">{pal.attack}</IonLabel>
+            <IonLabel slot="end">{beast.attack}</IonLabel>
           </IonItem>
           <IonItem>
             <IonLabel>Defense</IonLabel>
-            <IonLabel slot="end">{pal.defense}</IonLabel>
+            <IonLabel slot="end">{beast.defense}</IonLabel>
           </IonItem>
           <IonItem>
             <IonLabel>Price</IonLabel>
-            <IonLabel slot="end">{pal.price}</IonLabel>
+            <IonLabel slot="end">{beast.price}</IonLabel>
           </IonItem>
         </IonList>
       </IonContent>

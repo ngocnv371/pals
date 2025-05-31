@@ -1,7 +1,12 @@
-import { create } from "zustand";
-import { InventoryState } from "../shared/types";
+import { create, StateCreator } from "zustand";
+import { AppState, InventorySlice } from "../shared/types";
 
-export const useInventory = create<InventoryState>((set, get) => ({
+export const createInventorySlice: StateCreator<
+  AppState,
+  [],
+  [],
+  InventorySlice
+> = (set, get) => ({
   inventory: {
     gold: 300,
     stone: 100,
@@ -11,7 +16,7 @@ export const useInventory = create<InventoryState>((set, get) => ({
     fiber: 98,
     cake: 5,
   },
-  add: (items) => {
+  addItems: (items) => {
     set((state) => {
       const updated = { ...state.inventory };
       for (const key in items) {
@@ -20,7 +25,7 @@ export const useInventory = create<InventoryState>((set, get) => ({
       return { inventory: updated };
     });
   },
-  canRemove: (items) => {
+  canRemoveItems: (items) => {
     const current = get().inventory;
     for (const key in items) {
       if ((current[key] || 0) < items[key]) {
@@ -29,7 +34,7 @@ export const useInventory = create<InventoryState>((set, get) => ({
     }
     return true;
   },
-  remove: (items) => {
+  removeItems: (items) => {
     set((state) => {
       const updated = { ...state.inventory };
       for (const key in items) {
@@ -41,11 +46,4 @@ export const useInventory = create<InventoryState>((set, get) => ({
       return { inventory: updated };
     });
   },
-  set: (items) => set({ inventory: { ...items } }),
-  clear: () => set({ inventory: {} }),
-}));
-
-export function useInventoryItem(id: string) {
-  const quantity = useInventory((x) => x.inventory[id]);
-  return quantity || 0;
-}
+});

@@ -5,11 +5,11 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { useBuildings } from "./useBuildings";
 import BuildingCard from "./BuildingCard";
+import { useAppStore } from "../store/useAppStore";
 
 export default function HideoutPage() {
-  const buildings = useBuildings((s) => s.buildings);
+  const keys = useAppStore((s) => s.buildings.map((b) => b.id));
   return (
     <IonPage>
       <IonHeader>
@@ -18,8 +18,8 @@ export default function HideoutPage() {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        {buildings.map((b) => (
-          <BuildingCard key={b.id} id={b.id} />
+        {keys.map((b) => (
+          <BuildingCard key={b} id={b} />
         ))}
       </IonContent>
     </IonPage>

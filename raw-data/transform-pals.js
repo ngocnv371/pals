@@ -26,7 +26,7 @@ console.debug("peek first one", transformed[0]);
 const ids = transformed.map((t) => t.id);
 const entities = {};
 transformed.forEach((t) => (entities[t.id] = t));
-const state = { ids, entities };
+const state = entities;
 console.debug("all pals ids:", ids.join(", "));
 
 const json = JSON.stringify(state);
