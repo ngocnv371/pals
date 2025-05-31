@@ -39,7 +39,7 @@ export default function BuildingCard({ id }: Props) {
 
   return (
     <IonCard className="building-card">
-      <IonProgressBar value={building.work / 500} />
+      <IonProgressBar value={(building.status?.work || 0) / 500} />
       <IonImg src={`/facilities/${building.type}.png`} />
       <IonCardHeader>
         <IonCardTitle>{building.name}</IonCardTitle>

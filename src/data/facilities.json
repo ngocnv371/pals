@@ -7,7 +7,8 @@
     "slots": 2,
     "products": {
       "wood": 1
-    }
+    },
+    "ingredients": {}
   },
   "stone pit": {
     "id": "stone pit",
@@ -17,7 +18,8 @@
     "slots": 2,
     "products": {
       "stone": 1
-    }
+    },
+    "ingredients": {}
   },
   "mine": {
     "id": "mine",
@@ -27,7 +29,8 @@
     "slots": 2,
     "products": {
       "ore": 1
-    }
+    },
+    "ingredients": {}
   },
   "smelter": {
     "id": "smelter",
@@ -39,6 +42,9 @@
       "stone": 50
     },
     "slots": 1,
+    "ingredients": {
+      "ore": 10
+    },
     "products": {
       "ingot": 1
     }

@@ -8,6 +8,7 @@ export interface BuildingType {
   work: number;
   slots: number;
   products: Inventory;
+  ingredients: Inventory;
 }
 
 export interface Building {
@@ -17,10 +18,19 @@ export interface Building {
    */
   type: string;
   workers: string[];
+  status?: ProductionStatus;
+}
+
+export interface ProductionStatus {
   /**
    * amount of work accumulated from all assigned beasts
    */
   work: number;
+  paused: boolean;
+  /**
+   * the ingredients are satisfied and consumed
+   */
+  paid: boolean;
 }
 
 export interface Item {
