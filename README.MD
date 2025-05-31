@@ -29,8 +29,14 @@ see [RUNBOOKS.MD](docs/RUNBOOKS.MD)
 
 # backlog
 
-- can create buildings
-- can assign beasts to a building
-- a building with assigned beasts will generate resources
-- demolish a building will return the beasts
-- assigned beasts when working at a building will gain exp
+- breeding
+    - [ ] breeding: introduce fatigue, can't breed non-stop
+    - [ ] breeding: traits inheritance
+- production
+    - [ ] production: can pause building
+    - [ ] production: assigned beasts when working at a building will gain exp
+    - [x] a building with assigned beasts will generate resources
+- building
+    - [ ] building: can create
+    - [x] can assign beasts to a building
+    - [ ] building: demolish a building will return the beasts
