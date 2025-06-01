@@ -1,5 +1,6 @@
 import {
   IonContent,
+  IonFab,
   IonHeader,
   IonPage,
   IonTitle,
@@ -7,6 +8,7 @@ import {
 } from "@ionic/react";
 import BuildingCard from "./BuildingCard";
 import { useAppStore } from "../store/useAppStore";
+import AddBuildingFab from "./AddBuildingFab";
 
 export default function HideoutPage() {
   const keys = useAppStore((s) => s.buildings.map((b) => b.id));
@@ -21,6 +23,7 @@ export default function HideoutPage() {
         {keys.map((b) => (
           <BuildingCard key={b} id={b} />
         ))}
+        <AddBuildingFab />
       </IonContent>
     </IonPage>
   );

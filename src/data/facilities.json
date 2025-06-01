@@ -5,6 +5,9 @@
     "description": "Where you make lumber",
     "work": 400,
     "slots": 2,
+    "price": {
+      "wood": 20
+    },
     "products": {
       "wood": 1
     },
@@ -16,6 +19,10 @@
     "description": "Where you make stone",
     "work": 500,
     "slots": 2,
+    "price": {
+      "stone": 20,
+      "wood": 20
+    },
     "products": {
       "stone": 1
     },
@@ -27,6 +34,10 @@
     "description": "Where you dig ore",
     "work": 600,
     "slots": 2,
+    "price": {
+      "stone": 20,
+      "wood": 60
+    },
     "products": {
       "ore": 1
     },
@@ -42,6 +53,10 @@
       "stone": 50
     },
     "slots": 1,
+    "price": {
+      "stone": 20,
+      "wood": 60
+    },
     "ingredients": {
       "ore": 10
     },

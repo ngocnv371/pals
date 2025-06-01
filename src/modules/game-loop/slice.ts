@@ -35,7 +35,7 @@ export const createGameLoopSlice: StateCreator<
           return;
         }
 
-        const meta = getBuildingType(building.type);
+        const meta = getBuildingType(building.blueprintId);
         if (!status.paid) {
           // try to pay
           if (canRemoveInventory(inventory, meta.ingredients)) {

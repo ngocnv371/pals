@@ -1,4 +1,4 @@
-export interface BuildingType {
+export interface Blueprint {
   id: string;
   name: string;
   description: string;
@@ -7,16 +7,23 @@ export interface BuildingType {
    * */
   work: number;
   slots: number;
+  /**
+   * the result of production
+   */
   products: Inventory;
+  /**
+   * items used in production to produce products
+   */
   ingredients: Inventory;
+  /**
+   * items need to pay to construct this building
+   */
+  price: Inventory;
 }
 
 export interface Building {
   id: string;
-  /**
-   * reference to #BuildingType
-   */
-  type: string;
+  blueprintId: string;
   workers: string[];
   status?: ProductionStatus;
 }
@@ -76,7 +83,7 @@ export interface CageSlice {
 
 export type HideoutSlice = {
   buildings: Building[];
-  addBuilding: (typeId: BuildingType["id"]) => Building;
+  addBuilding: (blueprintId: Blueprint["id"]) => Building;
   removeBuilding: (buildingId: string) => void;
   assignWorker: (buildingId: string, index: number, workerId: string) => void;
 };

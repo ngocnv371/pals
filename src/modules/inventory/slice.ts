@@ -10,6 +10,7 @@ export const createInventorySlice: StateCreator<
 > = (set, get) => ({
   inventory: {
     gold: 300,
+    wood: 32,
     stone: 100,
     ingot: 25,
     arrow: 8,
