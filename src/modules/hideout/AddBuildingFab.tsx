@@ -6,7 +6,7 @@ import { add } from "ionicons/icons";
 
 export default function AddBuildingFab() {
   const [modalOpen, setModalOpen] = useState(false);
-  const constructBuilding = useAppStore((s) => s.addBuilding);
+  const constructBuilding = useAppStore((s) => s.constructBuilding);
 
   const handleSelected = useCallback(
     (typeId: string) => {

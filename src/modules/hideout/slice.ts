@@ -1,6 +1,6 @@
 import { StateCreator } from "zustand";
 import { AppState, HideoutSlice } from "../shared/types";
-import { createBuilding } from "./utils";
+import { createBuilding, getBlueprint } from "./utils";
 
 export const createHideoutSlice: StateCreator<
   AppState,
@@ -13,8 +13,14 @@ export const createHideoutSlice: StateCreator<
     { id: "kea78s", blueprintId: "logging site", workers: ["", ""], work: 0 },
     { id: "td99as", blueprintId: "smelter", workers: ["", ""], work: 0 },
   ],
-  addBuilding: (blueprintId) => {
+  canConstructBuilding: (blueprintId) => {
+    const blueprint = getBlueprint(blueprintId);
+    return get().canRemoveItems(blueprint.price);
+  },
+  constructBuilding: (blueprintId) => {
+    const blueprint = getBlueprint(blueprintId);
     const newBuilding = createBuilding(blueprintId);
+    get().removeItems(blueprint.price);
     set((state) => ({
       buildings: [...state.buildings, newBuilding],
     }));

@@ -25,7 +25,7 @@ export default function BlueprintPicker({
   onDidDismiss,
   onChange,
 }: BlueprintPickerProps) {
-  const canBuy = useAppStore((s) => s.canRemoveItems);
+  const canConstruct = useAppStore((s) => s.canConstructBuilding);
   const [search, setSearch] = useState("");
   const searchInputRef = useRef<HTMLIonSearchbarElement>(null);
 
@@ -37,12 +37,12 @@ export default function BlueprintPicker({
       );
     }
     const filtered = candidates.map((c) => ({
-      affordable: canBuy(c.price),
+      affordable: canConstruct(c.id),
       blueprint: c,
     }));
 
     return filtered.sort((a, b) => (a.affordable ? 1 : 0));
-  }, [search, canBuy]);
+  }, [search, canConstruct]);
 
   return (
     <IonModal isOpen={isOpen} onDidDismiss={onDidDismiss}>

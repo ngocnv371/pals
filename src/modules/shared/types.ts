@@ -83,7 +83,8 @@ export interface CageSlice {
 
 export type HideoutSlice = {
   buildings: Building[];
-  addBuilding: (blueprintId: Blueprint["id"]) => Building;
+  canConstructBuilding: (blueprintId: Blueprint["id"]) => boolean;
+  constructBuilding: (blueprintId: Blueprint["id"]) => Building;
   removeBuilding: (buildingId: string) => void;
   assignWorker: (buildingId: string, index: number, workerId: string) => void;
 };

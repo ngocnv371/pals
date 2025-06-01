@@ -20,6 +20,10 @@ export function getBuildingInfo(
   return { ...type, ...building };
 }
 
+export function getBlueprint(id: string) {
+  return typedFacilities[id];
+}
+
 export function createBuilding(typeId: string) {
   const type = typedFacilities[typeId];
   return {
