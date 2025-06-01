@@ -46,9 +46,9 @@ export default function BuildingCard({ id }: Props) {
       </IonCardHeader>
       <IonCardContent>{building.description}</IonCardContent>
       <IonGrid>
-        <IonRow className="size-sm">
+        <IonRow className="size-sm ion-justify-content-end">
           {building.workers.map((b, idx) => (
-            <IonCol key={idx} className="ion-no-padding">
+            <IonCol key={idx} className="ion-no-padding" size="auto">
               <BeastPicker
                 value={b}
                 onChange={(beastId) => handleBeastChange(idx, beastId)}

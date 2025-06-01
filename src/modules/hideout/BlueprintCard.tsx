@@ -45,9 +45,9 @@ export default function BlueprintCard({ id, disabled, onClick }: Props) {
       </IonCardHeader>
       <IonCardContent>{blueprint.description}</IonCardContent>
       <IonGrid>
-        <IonRow>
+        <IonRow className="ion-justify-content-end">
           {Object.keys(blueprint.price).map((item) => (
-            <IonCol key={item} className="d-flex">
+            <IonCol key={item} className="d-flex" size="auto">
               <PriceItem id={item} quantity={blueprint.price[item]} />
             </IonCol>
           ))}
