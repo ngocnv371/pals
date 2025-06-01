@@ -25,10 +25,14 @@ export default function BlueprintPicker({
   onDidDismiss,
   onChange,
 }: BlueprintPickerProps) {
+  const inventory = useAppStore((s) => s.inventory);
   const canConstruct = useAppStore((s) => s.canConstructBuilding);
   const [search, setSearch] = useState("");
   const searchInputRef = useRef<HTMLIonSearchbarElement>(null);
 
+  // BUG: inventory changes will influence which can be constructed,
+  // but tying this memo to [inventory] causes too many updates.
+  // not tying it will causes it to not update when inventory change.
   const filteredFacilities = useMemo(() => {
     let candidates = Object.values(typedFacilities);
     if (search && search.trim()) {
@@ -42,7 +46,7 @@ export default function BlueprintPicker({
     }));
 
     return filtered.sort((a, b) => (a.affordable ? 1 : 0));
-  }, [search, canConstruct]);
+  }, [search, canConstruct, inventory]);
 
   return (
     <IonModal isOpen={isOpen} onDidDismiss={onDidDismiss}>
