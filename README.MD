@@ -30,13 +30,18 @@ see [RUNBOOKS.MD](docs/RUNBOOKS.MD)
 # backlog
 
 - breeding
-    - [ ] breeding: introduce fatigue, can't breed non-stop
-    - [ ] breeding: traits inheritance
+    - [ ] introduce fatigue, can't breed non-stop
+    - [ ] breed an egg not a beast
+    - [ ] introduce hatching
+    - [ ] traits inheritance
 - production
-    - [ ] production: can pause building
-    - [ ] production: assigned beasts when working at a building will gain exp
+    - [ ] can pause building
+    - [ ] assigned beasts when working at a building will gain exp
     - [x] a building with assigned beasts will generate resources
+    - [ ] can switch beast
 - building
-    - [ ] building: can create
+    - [x] can construct new building
+      - [ ] optimize re-render
     - [x] can assign beasts to a building
-    - [ ] building: demolish a building will return the beasts
+    - [ ] demolish a building will return the beasts
+    - [ ] create building banners

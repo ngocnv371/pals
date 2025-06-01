@@ -41,7 +41,6 @@ export const createGameLoopSlice: StateCreator<
           if (canRemoveInventory(inventory, meta.ingredients)) {
             removeItems(meta.ingredients);
             status.paid = true;
-            console.log("paid");
           } else {
             // no ingredients, no work
             return;
