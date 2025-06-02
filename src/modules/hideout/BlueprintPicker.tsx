@@ -30,10 +30,12 @@ export default function BlueprintPicker({
   const [search, setSearch] = useState("");
   const searchInputRef = useRef<HTMLIonSearchbarElement>(null);
 
-  // BUG: inventory changes will influence which can be constructed,
-  // but tying this memo to [inventory] causes too many updates.
-  // not tying it will causes it to not update when inventory change.
   const filteredFacilities = useMemo(() => {
+    // if the modal is not open, then there's no need to calculate anything
+    if (!isOpen) {
+      return [];
+    }
+
     let candidates = Object.values(typedFacilities);
     if (search && search.trim()) {
       candidates = candidates.filter((b) =>
@@ -46,7 +48,7 @@ export default function BlueprintPicker({
     }));
 
     return filtered.sort((a, b) => (a.affordable ? 1 : 0));
-  }, [search, canConstruct, inventory]);
+  }, [search, canConstruct, inventory, isOpen]);
 
   return (
     <IonModal isOpen={isOpen} onDidDismiss={onDidDismiss}>
