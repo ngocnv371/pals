@@ -72,7 +72,6 @@ export interface Beast {
   pal: string;
   name: string;
   level: number;
-  building: string;
 }
 
 export interface CageSlice {
@@ -86,6 +85,7 @@ export type HideoutSlice = {
   canConstructBuilding: (blueprintId: Blueprint["id"]) => boolean;
   constructBuilding: (blueprintId: Blueprint["id"]) => Building;
   removeBuilding: (buildingId: string) => void;
+  getIsBeastAvailable: (id: string) => boolean;
   assignWorker: (buildingId: string, index: number, workerId: string) => void;
 };
 

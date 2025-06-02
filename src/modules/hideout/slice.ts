@@ -31,6 +31,11 @@ export const createHideoutSlice: StateCreator<
       buildings: state.buildings.filter((b) => b.id !== buildingId),
     }));
   },
+  getIsBeastAvailable: (id: string) => {
+    const { buildings } = get();
+    const assignedWorkers = buildings.flatMap((b) => b.workers).filter(Boolean);
+    return !assignedWorkers.includes(id);
+  },
   assignWorker: (buildingId, index, workerId) => {
     set((state) => ({
       buildings: state.buildings.map((b) => {

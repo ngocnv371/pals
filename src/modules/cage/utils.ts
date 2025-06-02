@@ -43,7 +43,6 @@ export function createBeast(palId: string): Beast {
     pal: pal.id,
     name: pal.name,
     level: 1,
-    building: "",
   } as Beast;
 }
 

@@ -20,6 +20,7 @@ type Props = {
 };
 export default function BuildingCard({ id }: Props) {
   const assignWorker = useAppStore((s) => s.assignWorker);
+  const isAvailable = useAppStore((s) => s.getIsBeastAvailable);
   const building = useBuilding(id);
 
   const handleBeastChange = useCallback(
@@ -52,7 +53,7 @@ export default function BuildingCard({ id }: Props) {
               <BeastPicker
                 value={b}
                 onChange={(beastId) => handleBeastChange(idx, beastId)}
-                filter={(k) => !k.building}
+                filter={(k) => isAvailable(k.id)}
                 placeholder="Select worker"
               />
             </IonCol>
