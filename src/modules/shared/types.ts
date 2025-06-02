@@ -19,6 +19,10 @@ export interface Blueprint {
    * items need to pay to construct this building
    */
   price: Inventory;
+  /**
+   * skills required to work at this building
+   */
+  skills: WorkSkillSet;
 }
 
 export interface Building {
@@ -45,7 +49,22 @@ export interface Item {
   name: string;
 }
 
+export type SkillType =
+  | "cooling"
+  | "farming"
+  | "gathering"
+  | "generatingElectricity"
+  | "handiwork"
+  | "kindling"
+  | "lumbering"
+  | "medicineProduction"
+  | "mining"
+  | "planting"
+  | "transporting"
+  | "watering";
+
 export type Inventory = Record<string, number>;
+export type WorkSkillSet = Record<string, number>;
 
 /**
  * define the base data of the specie
@@ -62,6 +81,7 @@ export interface Pal {
   price: number;
   image: string;
   breedingPower: number;
+  workSkills: WorkSkillSet;
 }
 
 /**

@@ -1,4 +1,4 @@
-import { Beast, Pal } from "../shared/types";
+import { Beast, Pal, WorkSkillSet, SkillType } from "../shared/types";
 import pals from "../../data/pals.json";
 import { nanoid } from "nanoid";
 import { Chance } from "chance";
@@ -50,4 +50,25 @@ const chance = new Chance();
 export function createRandomBeast(): Beast {
   const pal = chance.pickone(Object.keys(typedPals));
   return createBeast(pal);
+}
+
+/**
+ * check if the provided skills can satisfy the requirements
+ * @param skills the skills to check
+ * @param requiredSkills must all greater than these
+ * @returns true if satisfied
+ */
+export function isSatisfied(
+  skills: WorkSkillSet,
+  requiredSkills: WorkSkillSet
+) {
+  for (const key in requiredSkills) {
+    const skillKey = key as SkillType;
+    const requiredLevel = requiredSkills[skillKey];
+    const level = skills[skillKey];
+    if (!level || level < requiredLevel) {
+      return false;
+    }
+  }
+  return true;
 }

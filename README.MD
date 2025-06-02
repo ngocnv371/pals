@@ -39,6 +39,8 @@ see [RUNBOOKS.MD](docs/RUNBOOKS.MD)
     - [ ] assigned beasts when working at a building will gain exp
     - [x] a building with assigned beasts will generate resources
     - [ ] can switch beast
+    - [ ] work suitability
+    - [ ] work skill level influence work speed
 - building
     - [x] can construct new building
       - [ ] optimize re-render

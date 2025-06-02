@@ -23,6 +23,12 @@ export const createCageSlice: StateCreator<AppState, [], [], CageSlice> = (
       level: 7,
       name: "Anubis",
     },
+    {
+      id: "jk54",
+      pal: "monkey",
+      level: 4,
+      name: "Tanzee",
+    },
   ],
   addBeast: (beast) =>
     set((state) => ({

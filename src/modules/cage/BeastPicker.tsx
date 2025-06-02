@@ -15,13 +15,14 @@ import { VirtuosoGrid } from "react-virtuoso";
 import BeastCard from "./BeastCard";
 import { SimpleGridComponents } from "../shared/SimpleGrid";
 import "./BeastPicker.css";
-import { Beast } from "../shared/types";
+import { Beast, Pal } from "../shared/types";
 import { useAppStore } from "../store/useAppStore";
+import { getBeastInfo } from "./utils";
 
 interface BeastPickerProps {
   value?: string | null;
   onChange: (id: string) => void;
-  filter?: (beast: Beast) => boolean;
+  filter?: (beast: Beast & Pal) => boolean;
   placeholder?: string;
 }
 
@@ -42,7 +43,9 @@ export default function BeastPicker({
   );
 
   const filteredBeasts = useMemo(() => {
-    let candidates = beasts;
+    let candidates: (Beast & Pal)[] = beasts.map((b) =>
+      getBeastInfo(beasts, b.id)
+    ) as any;
     if (filter) {
       candidates = candidates.filter(filter);
     }

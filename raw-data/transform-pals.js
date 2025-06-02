@@ -18,7 +18,8 @@ const transformed = filtered.map((p) => ({
   price: p.content.price,
   image: p.content.image,
   rarity: p.content.rarity,
-  breedingPower: p.content.combiRank
+  breedingPower: p.content.combiRank,
+  workSkills: p.content.workSkills
 }));
 
 console.debug("peek first one", transformed[0]);

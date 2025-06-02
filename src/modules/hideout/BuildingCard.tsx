@@ -14,6 +14,7 @@ import BeastPicker from "../cage/BeastPicker";
 import { useCallback } from "react";
 import { useAppStore } from "../store/useAppStore";
 import { useBuilding } from "./useBuilding";
+import { isSatisfied } from "../cage/utils";
 
 type Props = {
   id: string;
@@ -53,7 +54,10 @@ export default function BuildingCard({ id }: Props) {
               <BeastPicker
                 value={b}
                 onChange={(beastId) => handleBeastChange(idx, beastId)}
-                filter={(k) => isAvailable(k.id)}
+                filter={(k) =>
+                  isAvailable(k.id) &&
+                  isSatisfied(k.workSkills, building.skills)
+                }
                 placeholder="Select worker"
               />
             </IonCol>
