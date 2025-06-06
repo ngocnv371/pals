@@ -75,5 +75,42 @@
     "products": {
       "ingot": 1
     }
+  },
+  "farm": {
+    "id": "farm",
+    "name": "Farm",
+    "description": "Plant some wheat",
+    "work": 700,
+    "slots": 2,
+    "price": {
+      "stone": 5,
+      "wood": 5
+    },
+    "skills": {
+      "farming": 1
+    },
+    "products": {
+      "flour": 1
+    }
+  },
+  "bakery": {
+    "id": "bakery",
+    "name": "Bakery",
+    "description": "Bake some cakes",
+    "work": 700,
+    "slots": 2,
+    "price": {
+      "stone": 5,
+      "wood": 5
+    },
+    "skills": {
+      "kindling": 1
+    },
+    "ingredients": {
+      "flour": 2
+    },
+    "products": {
+      "cake": 1
+    }
   }
 }
