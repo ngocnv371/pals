@@ -63,7 +63,21 @@ export type SkillType =
   | "transporting"
   | "watering";
 
-export type Inventory = Record<string, number>;
+export interface ItemInfo {
+  name: string;
+  description?: string;
+  [key: string]: any;
+}
+
+export type InventoryItem =
+  | number
+  | {
+      type: string;
+      quantity: number;
+      [key: string]: any; // for extra properties like eggType, etc.
+    };
+
+export type Inventory = Record<string, InventoryItem>;
 export type WorkSkillSet = Record<string, number>;
 
 /**
@@ -148,3 +162,23 @@ export type AppState = HideoutSlice &
   BreedingSlice &
   GameLoopSlice &
   UISlice;
+
+export interface UniqueItem {
+  id: string;
+  /**
+   * indicates what this is, ex: Egg
+   */
+  type: string;
+}
+
+export interface Egg extends UniqueItem {
+  /**
+   * indicates which beasts can be hatched from this egg
+   */
+  element: string;
+  breedingPower: number;
+  /**
+   * the pool of possible traits from the parents
+   */
+  heritableTraits: string[];
+}

@@ -1,6 +1,15 @@
 import { useAppStore } from "../store/useAppStore";
 
 export function useInventoryItemQuantity(id: string) {
-  const quantity = useAppStore((x) => x.inventory[id]);
-  return quantity || 0;
+  const item = useInventoryItem(id);
+  if (!item) {
+    return 0;
+  }
+
+  return typeof item === "number" ? item : item.quantity;
+}
+
+export function useInventoryItem(id: string) {
+  const item = useAppStore((x) => x.inventory[id]);
+  return item;
 }

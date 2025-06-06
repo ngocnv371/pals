@@ -1,4 +1,5 @@
 .beast-card {
+  flex: 1;
   margin: 2px;
   width: 7rem;
   height: auto;

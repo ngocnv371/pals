@@ -18,6 +18,13 @@ export const createInventorySlice: StateCreator<
     fiber: 98,
     cake: 5,
     ore: 25,
+    ["generated-nanoid-123"]: {
+      type: "frozen egg",
+      quantity: 1,
+      eggTypes: ["ice"],
+      heritableTraits: ["genius", "musclehead"],
+      breedingPower: 123,
+    },
   },
   addItems: (items) => {
     set((state) => {

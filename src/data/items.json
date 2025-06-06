@@ -14,5 +14,12 @@
   "rocky egg": { "name": "Rocky Egg" },
   "electric egg": { "name": "Electric Egg" },
   "dragon egg": { "name": "Dragon Egg" },
-  "dark egg": { "name": "Dark Egg" }
+  "dark egg": { "name": "Dark Egg" },
+  "egg": {
+    "name": "Egg",
+    "eggTypes": ["fire"],
+    "breedingPower": 500,
+    "maxStack": 1,
+    "heritableTraits": ["hardworking", "musclehead"]
+  }
 }
