@@ -1,10 +1,18 @@
 import { StateCreator } from "zustand";
-import { AppState, BreedingSlice, Inventory } from "../shared/types";
+import {
+  AppState,
+  BreedingSlice,
+  Egg,
+  Inventory,
+  InventoryItem,
+  ItemInfo,
+} from "../shared/types";
 import {
   createBeast,
   getBeastInfo,
   getPalByBreedingPower,
 } from "../cage/utils";
+import { nanoid } from "nanoid";
 
 const BreedingRequirements: Inventory = { cake: 1 };
 
@@ -34,7 +42,7 @@ export const createBreedingSlice: StateCreator<
       return null;
     }
 
-    const { beasts, femaleBeastId, maleBeastId, removeItems, addBeast } = get();
+    const { beasts, femaleBeastId, maleBeastId, removeItems, addItems } = get();
     removeItems(BreedingRequirements);
 
     const female = getBeastInfo(beasts, femaleBeastId);
@@ -48,9 +56,16 @@ export const createBreedingSlice: StateCreator<
     }
 
     const median = (female.breedingPower + male.breedingPower) / 2;
-    const pal = getPalByBreedingPower(median);
-    const beast = createBeast(pal.id);
-    addBeast(beast);
-    return beast;
+    const egg: Egg = {
+      type: "scorching egg",
+      name: "Mystery Egg",
+      quantity: 1,
+      element: "fire",
+      breedingPower: median,
+      heritableTraits: [],
+    };
+    const id = nanoid();
+    addItems({ [id]: egg });
+    return id;
   },
 });

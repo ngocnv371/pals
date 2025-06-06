@@ -13,3 +13,14 @@ ion-badge {
   top: 0;
   right: 0;
 }
+
+.size-xl {
+  .item-icon {
+    width: 7em;
+    height: 7em;
+    ion-img {
+      width: 7em;
+      height: 7em;
+    }
+  }
+}

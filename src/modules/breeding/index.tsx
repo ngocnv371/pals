@@ -18,8 +18,9 @@ import BeastPicker from "../cage/BeastPicker";
 import { heart } from "ionicons/icons";
 import BeastCard from "../cage/BeastCard";
 import PriceItem from "../inventory/PriceItem";
-import { Beast } from "../shared/types";
+import { Beast, Egg, InventoryItem } from "../shared/types";
 import { useAppStore } from "../store/useAppStore";
+import ItemView from "../inventory/InventoryItem";
 
 export default function BreedingPage() {
   const male = useAppStore((s) => s.maleBeastId);
@@ -29,7 +30,7 @@ export default function BreedingPage() {
   const canBreed = useAppStore((s) => s.canBreed());
   const breed = useAppStore((s) => s.breed);
 
-  const [result, setResult] = useState<Beast>();
+  const [result, setResult] = useState<string>();
   const [presentToast] = useIonToast();
 
   const handleBreed = useCallback(() => {
@@ -86,8 +87,8 @@ export default function BreedingPage() {
           {result && (
             <IonRow>
               <IonCol></IonCol>
-              <IonCol>
-                <BeastCard id={result.id} />
+              <IonCol className="d-flex ion-justify-content-center size-xl">
+                <ItemView id={result} />
               </IonCol>
               <IonCol></IonCol>
             </IonRow>

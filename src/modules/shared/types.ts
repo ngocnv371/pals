@@ -69,13 +69,7 @@ export interface ItemInfo {
   [key: string]: any;
 }
 
-export type InventoryItem =
-  | number
-  | {
-      type: string;
-      quantity: number;
-      [key: string]: any; // for extra properties like eggType, etc.
-    };
+export type InventoryItem = number | UniqueItem;
 
 export type Inventory = Record<string, InventoryItem>;
 export type WorkSkillSet = Record<string, number>;
@@ -136,7 +130,7 @@ export interface BreedingSlice {
   setMale: (beastId: string) => void;
   setFemale: (beastId: string) => void;
   canBreed: () => boolean;
-  breed: () => Beast | null;
+  breed: () => string | null;
 }
 
 export interface UISlice {
@@ -164,11 +158,12 @@ export type AppState = HideoutSlice &
   UISlice;
 
 export interface UniqueItem {
-  id: string;
+  name: string;
   /**
    * indicates what this is, ex: Egg
    */
   type: string;
+  quantity: number;
 }
 
 export interface Egg extends UniqueItem {
