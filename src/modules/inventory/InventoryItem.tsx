@@ -3,8 +3,9 @@ import { useInventoryItem } from "./useInventoryItemQuantity";
 
 type Props = {
   id: string;
+  onClick?: () => void;
 };
-export default function InventoryItem({ id }: Props) {
+export default function InventoryItem({ id, onClick }: Props) {
   const item = useInventoryItem(id);
   if (!item) {
     return null;
@@ -12,8 +13,10 @@ export default function InventoryItem({ id }: Props) {
 
   const isStackable = typeof item === "number";
   if (isStackable) {
-    return <ItemIcon type={id} quantity={item} />;
+    return <ItemIcon type={id} quantity={item} onClick={onClick} />;
   }
 
-  return <ItemIcon type={item.type} quantity={item.quantity} />;
+  return (
+    <ItemIcon type={item.type} quantity={item.quantity} onClick={onClick} />
+  );
 }

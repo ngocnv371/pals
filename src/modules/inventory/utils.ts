@@ -1,4 +1,5 @@
-import { Inventory } from "../shared/types";
+import { Inventory, ItemInfo } from "../shared/types";
+import itemTypes from "../../data/items.json";
 
 export function addInventory(inventory: Inventory, items: Inventory) {
   const updated = { ...inventory };
@@ -44,4 +45,27 @@ export function removeInventory(inventory: Inventory, items: Inventory) {
     }
   }
   return updated;
+}
+
+export function getItemInfo(inventory: Inventory, id: string) {
+  const item = inventory[id];
+  if (!item) {
+    return null; // item not found
+  }
+
+  if (typeof item === "number") {
+    const info = (itemTypes as any)[id] as ItemInfo; // return item info for stackable items
+    return {
+      ...info,
+      id,
+      quantity: item,
+    } as ItemInfo;
+  }
+
+  const info = (itemTypes as any)[item.type] as ItemInfo;
+  return {
+    ...info,
+    ...item,
+    id,
+  };
 }

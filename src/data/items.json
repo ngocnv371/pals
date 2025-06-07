@@ -1,25 +1,88 @@
 {
-  "gold": { "name": "Gold" },
-  "stone": { "name": "Stone" },
-  "wood": { "name": "Wood" },
-  "ore": { "name": "Ore" },
-  "charcoal": { "name": "Charcoal" },
-  "ingot": { "name": "Ingot" },
-  "nails": { "name": "Nails" },
-  "bow": { "name": "Bow" },
-  "stone spear": { "name": "Stone Spear" },
-  "common egg": { "name": "Common Egg" },
-  "verdant egg": { "name": "Verdant Egg" },
-  "damp egg": { "name": "Damp Egg" },
-  "rocky egg": { "name": "Rocky Egg" },
-  "electric egg": { "name": "Electric Egg" },
-  "dragon egg": { "name": "Dragon Egg" },
-  "dark egg": { "name": "Dark Egg" },
-  "egg": {
-    "name": "Egg",
-    "eggTypes": ["fire"],
-    "breedingPower": 500,
+  "gold": {
+    "name": "Gold",
+    "description": "Shiny, valuable, and totally irresistible to goblins."
+  },
+  "stone": {
+    "name": "Stone",
+    "description": "Hard, heavy, and perfect for stubbing your toe."
+  },
+  "wood": {
+    "name": "Wood",
+    "description": "Nature’s original building block. Smells like adventure."
+  },
+  "ore": {
+    "name": "Ore",
+    "description": "A rock with dreams of becoming something more."
+  },
+  "charcoal": {
+    "name": "Charcoal",
+    "description": "Burnt wood, but make it useful."
+  },
+  "ingot": { "name": "Ingot", "description": "Metal’s glow-up moment." },
+  "nails": {
+    "name": "Nails",
+    "description": "Tiny metal spikes with a point to prove."
+  },
+  "bow": {
+    "name": "Bow",
+    "description": "For when you want to poke things from a distance."
+  },
+  "fiber": {
+    "name": "Fiber",
+    "description": "A versatile material used in crafting and building. Also, not edible."
+  },
+  "cloth": {
+    "name": "Cloth",
+    "description": "Soft, comfy, and perfect for making things that are not armor."
+  },
+  "cake": {
+    "name": "Cake",
+    "description": "A delicious treat that brings joy and a bit of frosting to your day. Essential for breeding."
+  },
+  "stone spear": {
+    "name": "Stone Spear",
     "maxStack": 1,
-    "heritableTraits": ["hardworking", "musclehead"]
+    "description": "Pointy rock on a stick. Classic."
+  },
+  "common egg": {
+    "name": "Common Egg",
+    "maxStack": 1,
+    "description": "Egg-cellent for breakfast or surprises."
+  },
+  "verdant egg": {
+    "name": "Verdant Egg",
+    "maxStack": 1,
+    "description": "Green and mysterious. May hatch a salad."
+  },
+  "damp egg": {
+    "name": "Damp Egg",
+    "maxStack": 1,
+    "description": "Moist to the touch. Smells like rain."
+  },
+  "rocky egg": {
+    "name": "Rocky Egg",
+    "maxStack": 1,
+    "description": "Hard-boiled by nature itself."
+  },
+  "electric egg": {
+    "name": "Electric Egg",
+    "maxStack": 1,
+    "description": "Crack it open for a shocking surprise."
+  },
+  "dragon egg": {
+    "name": "Dragon Egg",
+    "maxStack": 1,
+    "description": "Handle with oven mitts. Seriously."
+  },
+  "dark egg": {
+    "name": "Dark Egg",
+    "maxStack": 1,
+    "description": "Mysterious and brooding. Probably listens to metal."
+  },
+  "scorching egg": {
+    "name": "Scorching Egg",
+    "maxStack": 1,
+    "description": "Too hot to handle. Literally."
   }
 }
