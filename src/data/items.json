@@ -50,6 +50,11 @@
     "maxStack": 1,
     "description": "Egg-cellent for breakfast or surprises."
   },
+  "frozen egg": {
+    "name": "Frozen Egg",
+    "maxStack": 1,
+    "description": "An egg with frosty ambitions. Handle with care."
+  },
   "verdant egg": {
     "name": "Verdant Egg",
     "maxStack": 1,
